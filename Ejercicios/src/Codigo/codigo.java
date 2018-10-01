@@ -15,7 +15,7 @@ public class codigo {
 	public static void introduccionEj1 () {
 	
 		try {
-			String str = JOptionPane.showInputDialog("Introduzca un numero entero: ");
+			String str = JOptionPane.showInputDialog("Introduzca un numero 2 entero: ");
 			int var1 = Integer.parseInt(str);
 	
 			String str2 = JOptionPane.showInputDialog("Introduzca un numero flotante: ");
