@@ -204,7 +204,7 @@ public class codigo {
 	 */
 		
 	public static void introduccionEj7 () {
-			
+	
 	}
 	
 	/*Ejercicio 8: Realiza un programa que pida al usuario tres n�meros enteros, y 
@@ -636,8 +636,14 @@ public class codigo {
 	 */
 	
 	public static void condicionalesEj7 () {
+
+		/* String str = JOptionPane.showInputDialog("Introduzca un numero");
+		int num = Integer.parseInt(str);
 		
-	}
+		if ((num & 1) == 0) {
+			System.out.println("El numero " + num " es par");
+		} else */
+		} 
 	
 	/* Ejercicio 8: Realiza un ejercicio que acumule cinco n�meros introducidos por el usuario, es decir,
 	 * que sume las cantidades introducidas, pero realizando cuatro categor�as: n�meros negativos, n�meros bajos
@@ -675,72 +681,72 @@ public class codigo {
 		}
 		// n1
 		if (n1 < 0) {
-			sumaNeg = sumaNeg + n1;		
+			sumaNeg += n1;		// "+=" es lo mismo que escribir "sumaNeg = SumaNeg + n1"
 		}
-		else if (n1  >= 0 && n1 <= 25) {
-			sumaPeq = sumaPeq + n1;
-		}
-		else if (n1 >=26 && n1 <=250) {
-			sumaMed = sumaMed + n1;
-		}
-		else {
-			sumaGra = sumaGra + n1;
+			else if (n1 <= 25) {
+				sumaPeq += n1;
+			}
+				else if (n1 <=250) {
+					sumaMed += n1;
+				}
+					else {
+						sumaGra += n1;
 		}
 		//n2
 		if (n2 < 0) {
 			sumaNeg = sumaNeg + n2;		
 		}
-		else if (n2  >= 0 && n2 <= 25) {
-			sumaPeq = sumaPeq + n2;
-		}
-		else if (n2 >=26 && n2 <=250) {
-			sumaMed = sumaMed + n2;
-		}
-		else {
-			sumaGra = sumaGra + n2;
-		}
+			else if (n2 <= 25) {
+				sumaPeq = sumaPeq + n2;
+			}
+				else if (n2 <=250) {
+					sumaMed = sumaMed + n2;
+				}
+					else {
+						sumaGra = sumaGra + n2;
+					}
 		//n3
 		if (n3 < 0) {
 			sumaNeg = sumaNeg + n3;		
 		}
-		else if (n3  >= 0 && n3 <= 25) {
-			sumaPeq = sumaPeq + n3;
-		}
-		else if (n3 >=26 && n3 <=250) {
-			sumaMed = sumaMed + n3;
-		}
-		else {
-			sumaGra = sumaGra + n3;
+			else if (n3 <= 25) {
+				sumaPeq = sumaPeq + n3;
+			}
+				else if (n3 <=250) {
+					sumaMed = sumaMed + n3;
+				}
+					else {
+						sumaGra = sumaGra + n3;
 		}
 		//n4
 		if (n4 < 0) {
 			sumaNeg = sumaNeg + n4;		
 		}
-		else if (n4  >= 0 && n4 <= 25) {
-			sumaPeq = sumaPeq + n4;
-		}
-		else if (n4 >=26 && n4 <=250) {
-			sumaMed = sumaMed + n4;
-		}
-		else {
-			sumaGra = sumaGra + n4;
-		}
+			else if (n4 <= 25) {
+				sumaPeq = sumaPeq + n4;
+			}
+				else if (n4 <=250) {
+					sumaMed = sumaMed + n4;
+				}
+					else {
+						sumaGra = sumaGra + n4;
+					}
 		//n5
 		if (n5 < 0) {
 			sumaNeg = sumaNeg + n5;		
 		}
-		else if (n5  >= 0 && n5 <= 25) {
-			sumaPeq = sumaPeq + n5;
-		}
-		else if (n5 >=26 && n5 <=250) {
-			sumaMed = sumaMed + n5;
-		}
-		else {
-			sumaGra = sumaGra + n5;
-		}
+			else if (n5 <= 25) {
+				sumaPeq = sumaPeq + n5;
+			}
+				else if (n5 <=250) {
+					sumaMed = sumaMed + n5;
+				}
+					else {
+						sumaGra = sumaGra + n5;
+					}
 		
 		System.out.println("La suma de los numeros negativos es: " + sumaNeg );
-		System.out.println("La suma de los numeros peque�os es: " + sumaPeq );
+		System.out.println("La suma de los numeros pequeños es: " + sumaPeq );
 		System.out.println("La suma de los numeros medianos es: " + sumaMed );
 		System.out.println("La suma de los numeros grandes es: " + sumaGra );
 	}
@@ -767,15 +773,15 @@ public class codigo {
 			if (n1 < 0) {
 				sumaNeg = sumaNeg + n1;		
 			}
-			else if (n1  >= 0 && n1 <= 25) {
-				sumaPeq = sumaPeq + n1;
-			}
-			else if (n1 >=26 && n1 <=250) {
-				sumaMed = sumaMed + n1;
-			}
-			else {
-				sumaGra = sumaGra + n1;
-			}
+				else if (n1 <= 25) {
+					sumaPeq = sumaPeq + n1;
+				}
+					else if (n1 <=250) {
+						sumaMed = sumaMed + n1;
+					}
+						else {
+							sumaGra = sumaGra + n1;
+						}
 		}
 		
 		System.out.println("La suma de los numeros negativos es: " + sumaNeg );
@@ -784,7 +790,7 @@ public class codigo {
 		System.out.println("La suma de los numeros grandes es: " + sumaGra );
 	}
 	
-	public static void condicionalesEj8C () {
+	/* public static void condicionalesEj8C () {
 		
 		float n1 =0;
 		float n2 =0;
@@ -838,7 +844,7 @@ public class codigo {
 		else {
 			sumaGra = sumaGra + num;
 		}
-	}	
+	} */	
 	
 	 /*	Ejercicio 9: Realiza un ejercicio igual al anterior, pero con las dos siguientes diferencias: no 
 	  * existe la categor�a de n�meros negativos, por tanto si el usuario introduce un negativo, 
@@ -881,10 +887,10 @@ public class codigo {
 			if (n1 < 0) {
 				i = 5;		
 			}
-			else if (n1  >= 0 && n1 <= 25) {
+			else if (n1 <= 25) {
 				contPeq++; //suma siempre 1
 			}
-			else if (n1 >=26 && n1 <=250) {
+			else if (n1 <=250) {
 				contMed++;
 			}
 			else {
