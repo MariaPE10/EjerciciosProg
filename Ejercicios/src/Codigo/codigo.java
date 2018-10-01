@@ -15,7 +15,7 @@ public class codigo {
 	public static void introduccionEj1 () {
 	
 		try {
-			String str = JOptionPane.showInputDialog("Introduzca un numero 2 entero: ");
+			String str = JOptionPane.showInputDialog("Introduzca un numero entero: ");
 			int var1 = Integer.parseInt(str);
 	
 			String str2 = JOptionPane.showInputDialog("Introduzca un numero flotante: ");
@@ -630,22 +630,24 @@ public class codigo {
 		System.out.println("El numero " + n1 + " es " + resultado);
 	}
 	
-	/* Ejercicio 7: Utiliza la operaciï¿½n AND y el operador "if", para tratar de averiguar si un nï¿½mero
+	/* Ejercicio 7: Utiliza la operacion AND y el operador "if", para tratar de averiguar si un nï¿½mero
 	 * introducido por el usuario es par o impar. Serï¿½a recomendable que estudiases el cï¿½digo de la clase 
-	 * "OperadoresANivelDeBits" del capï¿½tulo 1 de este tutorial.
+	 * "OperadoresANivelDeBits" del capitulo 1 de este tutorial.
 	 */
 	
 	public static void condicionalesEj7 () {
 
-		/* String str = JOptionPane.showInputDialog("Introduzca un numero");
+		String str = JOptionPane.showInputDialog("Introduzca un numero");
 		int num = Integer.parseInt(str);
 		
 		if ((num & 1) == 0) {
-			System.out.println("El numero " + num " es par");
-		} else */
+			System.out.println("El numero " + num + " es impar");
 		} 
-	
-	/* Ejercicio 8: Realiza un ejercicio que acumule cinco nï¿½meros introducidos por el usuario, es decir,
+		else {	
+			System.out.println("El número " + num + " es par");
+		}
+	}
+		/* Ejercicio 8: Realiza un ejercicio que acumule cinco nï¿½meros introducidos por el usuario, es decir,
 	 * que sume las cantidades introducidas, pero realizando cuatro categorï¿½as: nï¿½meros negativos, nï¿½meros bajos
 	 * (entre 0 y 25, ambos inclusive), nï¿½meros medios (entre 26 y 250, ambos inclusive) y nï¿½meros grandes (mayores de 250).
 	 * Al finalizar el programa, se debe mostrar el total de las sumas de los nï¿½meros introducidos en cada una de las categorï¿½as. 
