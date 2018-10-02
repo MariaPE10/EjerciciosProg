@@ -1,10 +1,10 @@
 package Ejercicios;
 
-import Codigo.codigo;
+import Codigo.codigo01;
 
 public class Condicionales {
 
 	public static void main(String [] args) {
-		codigo.condicionalesEj8();
+		codigo01.condicionalesEj11();
 	}
 }

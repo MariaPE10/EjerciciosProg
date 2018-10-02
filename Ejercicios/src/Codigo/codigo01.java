@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-public class codigo {
+public class codigo01 {
 
 	/* Ejercicio 1: Realiza un programa que pida al usuario tres numeros:
 	 * uno de tipo entero, otro de tipo flotante y otro de tipo doble.
@@ -644,7 +644,7 @@ public class codigo {
 			System.out.println("El numero " + num + " es impar");
 		} 
 		else {	
-			System.out.println("El n�mero " + num + " es par");
+			System.out.println("El n�mero " + num + " es par");
 		}
 	}
 		/* Ejercicio 8: Realiza un ejercicio que acumule cinco n�meros introducidos por el usuario, es decir,
@@ -887,7 +887,7 @@ public class codigo {
 			}	
 			
 			if (n1 < 0) {
-				i = 5;		
+				i = 5;	// System.exit(0); Acaba con la ejecucion del programa.	
 			}
 			else if (n1 <= 25) {
 				contPeq++; //suma siempre 1
@@ -905,6 +905,87 @@ public class codigo {
 		System.out.println("La suma de los numeros grandes es: " + contGra );
 	}
 	
+	/*Ejercicio 10: Realiza un ejercicio que califique la nota obtenida por un alumno/a en un examen. 
+	 * El ejercicio pedirá al usuario la nota numérica, y se imprimirá en pantalla su traducción 
+	 * a nota de texto: muy deficiente, insuficiente, suficiente, bien, notable y sobresaliente.
+	 * Debes realizar el ejercicio a través de una sentencia switch, no de if anidados. 
+	 */
+	
+	public static void condicionalesEj10 () {
+		
+		String texto = "Introduce una nota";
+		String mensaje ="";
+		int num = Integer.parseInt(JOptionPane.showInputDialog(texto));
+				
+		switch (num) {
+		case 0:
+		case 1:
+		case 2:
+			mensaje = "Muy deficiente";
+			break;
+		case 3:
+		case 4:
+			mensaje = "Insuficiente";
+			break;
+		case 5:
+			mensaje = "Suficiente";
+			break;
+		case 6:
+			mensaje = "Bien";
+			break;
+		case 7:
+		case 8:
+			mensaje = "Notable";
+			break;
+		case 9:
+		case 10:
+			mensaje = "Sobresaliente";
+			break;
+		}
+		JOptionPane.showMessageDialog(null, "Nota: " + mensaje);	
+	}
+	/* Ejercicio 11: Realiza una calculadora avanzada, pero con la particularidad 
+	 * de que las operaciones deben ser raices, potencias y el módulo de la división.
+	 */
+	
+	public static void condicionalesEj11 () {
+		String menu = "MENU\n"
+				+ "1.- Suma de dos numeros\n"
+				+ "2.- Resta de dos numeros\n"
+				+ "3.- Raíz de un numero\n"
+				+ "4.- Potencia de un numero\n"
+				+ "5.- Modulo de una division";
+		
+		int num1, num2;
+		float resultadoR =0f;
+		int opcion = 0;
+		double resultadoP =0d;
+		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+		
+		switch (opcion) {
+		case 1: //suma de dos numeros
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 + num2));
+			break;
+		case 2: //resta de dos numeros
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 - num2));
+			break;
+		case 3: //raiz de un numero
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el un numero"));
+			resultadoR = (float) Math.sqrt(num1);
+			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoR);
+			break;
+		case 4:
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero base"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el exponente"));
+			resultadoP = Math.pow(num1, num2);
+			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoP);
+			break;
+		}
+	}
 }
 
 
