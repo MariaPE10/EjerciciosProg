@@ -952,9 +952,11 @@ public class codigo01 {
 		String menu = "MENU\n"
 				+ "1.- Suma de dos numeros\n"
 				+ "2.- Resta de dos numeros\n"
-				+ "3.- RaÃ­z de un numero\n"
-				+ "4.- Potencia de un numero\n"
-				+ "5.- Modulo de una division";
+				+ "3.- Multiplicacion de dos numeros\n"
+				+ "4.- Division de dos numeros\n"
+				+ "5.- Raiz de un numero\n"
+				+ "6.- Potencia de un numero\n"
+				+ "7.- Modulo de una division";
 		
 		int num1, num2;
 		float resultadoR =0f;
@@ -973,20 +975,108 @@ public class codigo01 {
 			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
 			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 - num2));
 			break;
-		case 3: //raiz de un numero
+		case 3: //multiplicacion de dos numeros
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 * num2));
+			break;
+		case 4: //division de dos numeros
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 / num2));
+			break;
+		case 5: //raiz de un numero
 			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el un numero"));
 			resultadoR = (float) Math.sqrt(num1);
 			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoR);
 			break;
-		case 4:
+		case 6: //potencia de un numero
 			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero base"));
 			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el exponente"));
 			resultadoP = Math.pow(num1, num2);
 			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoP);
 			break;
+		case 7: //Modulo de una division
+			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+			JOptionPane.showMessageDialog(null, "Resultado: " + (num1 % num2));
+			break;
+		}
+	}
+	/* Ejercicio 12: Realiza un programa que resuelva lo siguientes puntos:
+       a.- Que muestre un menú en pantalla con opciones para: 
+           1. Cálculo de la hipotenusa de un triángulo.
+           2. Cálculo de la superficie de una circunferencia.
+           3. Cálculo del perímetro de una circunferencia.
+           4. Cálculo del área de un rectángulo.
+           5. Cálculo del área de un triángulo.
+           0. Salir de la aplicación.
+       b.- En la opción "1" debe pedir dos datos, correspondientes a las longitudes de los dos catetos de un triángulo. 
+       Se debe imprimir la longitud de la hipotenusa. Recuerda que Hipotenusa al cuadrado = cateto1 al cuadrado + cateto2 al cuadrado.
+       c.- En la opción "2" debe pedir la longitud del radio de una circunferencia e imprimir la superficie de la misma. 
+       Recuerda que el área es igual a PI por el radio al cuadrado. Recuerda también que PI es igual a 3,1416.
+       d.- En la opción "3" debe pedir la longitud del radio de una circunferencia e imprimir la longitud del perímetro de la misma.
+       Recuerda que la longitud de la circunferencia = 2 por PI por el radio.
+       e.- En la opción "4" debe pedir las longitudes de la base y la altura de un rectángulo, e imprimir el área de dicho rectángulo.
+       Recuerda que el área del rectángulo es igual a la base por la altura. 
+       f.- En la opción "5" debe pedir la base y la altura de un tríangulo e imprimir el área del mismo. 
+       Recuerda que el área del triángulo es la mitad del área del rectángulo de igual base y altura. 
+       g.- Tras mostrar el resultado de cada opción, el programa debe hacer una pausa (para poder observar el resultado), y volver a pintar el menú.
+       Esto se repetirá siempre que la opción no sea "0", en cuyo caso el programa acabará.
+       h.- Si la opción no fuese "0", "1", "2", "3", "4" o "5", el programa deberá dar el mensaje de "opción incorrecta" y volverá a mostrar el menú.*/
+	
+	public static void condicionalesEj12 () {
+		String menu = "MENU\n"
+				+ "1.- Cálculo de la hipotenusa de un triángulo.\n"
+				+ "2.- Cálculo de la superficie de una circunferencia.\n"
+				+ "3.- Cálculo del perímetro de una circunferencia.\n"
+				+ "4.- Cálculo del área de un rectángulo.\n"
+				+ "5.- Cálculo del área de un triángulo.\n"
+				+ "0.- Salir de la aplicación.";
+		
+		int n1, n2;
+		int opcion =0;
+		double resultado = 0d;
+		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+		
+		switch (opcion) {
+		case 0:
+			System.exit(0); // Acaba radicalmente con la ejecución
+			break;
+		case 1: //Hipotenusa
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud del cateto numero 1"));
+			n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud del cateto numero 2"));
+			resultado = Math.pow(n1, 2) + Math.pow(n2, 2); // n1 y n2 elevados a 2
+			resultado = Math.sqrt(resultado); //Raiz cuadrada del resultado
+			JOptionPane.showMessageDialog(null, "Hipotenusa: " + resultado);
+			break;
+		case 2: // superficie
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el radio de la circunferencia"));
+			resultado = Math.pow(n1, 2);
+			resultado = resultado * 3.1416;
+			JOptionPane.showMessageDialog(null, "Superficie de la circunferencia: " + resultado);
+			break;
+		case 3: //Perimetro
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el radio de la circunferencia"));
+			resultado = 2*3.1416*n1;
+			JOptionPane.showMessageDialog(null, "Perimetro: " + resultado);
+			break;
+		case 4: //Area Rectagulo
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud de la base del rectangulo"));
+			n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la altura del rectangulo"));
+			resultado = n1*n2;
+			JOptionPane.showMessageDialog(null, "Area del rectangulo: " + resultado);
+			break;
+		case 5: //Area Triangulo
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud de la base del triangulo"));
+			n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la altura del triangulo"));
+			resultado = (n1*n2)/2;
+			JOptionPane.showMessageDialog(null, "Area del triangulo: " + resultado);
+			break;
 		}
 	}
 }
+	
 
 
 	
