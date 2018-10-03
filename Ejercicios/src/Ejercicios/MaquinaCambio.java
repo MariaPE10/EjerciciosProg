@@ -72,10 +72,12 @@ public class MaquinaCambio {
 			if (cambio >= valor2e) {
 				cambio = cambio - valor2e;
 				cont2e++;
-			} else if(cambio >= valor1e) {
+			} else 
+				if(cambio >= valor1e) {
 				cambio = cambio - valor1e;
 				cont1e++;
-			} else if(cambio >= valor50c) {
+			} 	else
+			 if(cambio >= valor50c) {
 				cambio = cambio - valor50c;
 				cont50c++;
 			} else if(cambio >= valor20c) {
