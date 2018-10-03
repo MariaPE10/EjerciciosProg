@@ -959,9 +959,8 @@ public class codigo01 {
 				+ "7.- Modulo de una division";
 		
 		int num1, num2;
-		float resultadoR =0f;
 		int opcion = 0;
-		double resultadoP =0d;
+		double resultado =0d;
 		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 		
 		switch (opcion) {
@@ -987,14 +986,14 @@ public class codigo01 {
 			break;
 		case 5: //raiz de un numero
 			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el un numero"));
-			resultadoR = (float) Math.sqrt(num1);
-			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoR);
+			resultado = (float) Math.sqrt(num1);
+			JOptionPane.showMessageDialog(null, "Resultado: " + resultado);
 			break;
 		case 6: //potencia de un numero
 			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero base"));
 			num2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el exponente"));
-			resultadoP = Math.pow(num1, num2);
-			JOptionPane.showMessageDialog(null, "Resultado: " + resultadoP);
+			resultado = Math.pow(num1, num2);
+			JOptionPane.showMessageDialog(null, "Resultado: " + resultado);
 			break;
 		case 7: //Modulo de una division
 			num1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
@@ -1004,35 +1003,35 @@ public class codigo01 {
 		}
 	}
 	/* Ejercicio 12: Realiza un programa que resuelva lo siguientes puntos:
-       a.- Que muestre un menú en pantalla con opciones para: 
-           1. Cálculo de la hipotenusa de un triángulo.
-           2. Cálculo de la superficie de una circunferencia.
-           3. Cálculo del perímetro de una circunferencia.
-           4. Cálculo del área de un rectángulo.
-           5. Cálculo del área de un triángulo.
-           0. Salir de la aplicación.
-       b.- En la opción "1" debe pedir dos datos, correspondientes a las longitudes de los dos catetos de un triángulo. 
+       a.- Que muestre un menï¿½ en pantalla con opciones para: 
+           1. Cï¿½lculo de la hipotenusa de un triï¿½ngulo.
+           2. Cï¿½lculo de la superficie de una circunferencia.
+           3. Cï¿½lculo del perï¿½metro de una circunferencia.
+           4. Cï¿½lculo del ï¿½rea de un rectï¿½ngulo.
+           5. Cï¿½lculo del ï¿½rea de un triï¿½ngulo.
+           0. Salir de la aplicaciï¿½n.
+       b.- En la opciï¿½n "1" debe pedir dos datos, correspondientes a las longitudes de los dos catetos de un triï¿½ngulo. 
        Se debe imprimir la longitud de la hipotenusa. Recuerda que Hipotenusa al cuadrado = cateto1 al cuadrado + cateto2 al cuadrado.
-       c.- En la opción "2" debe pedir la longitud del radio de una circunferencia e imprimir la superficie de la misma. 
-       Recuerda que el área es igual a PI por el radio al cuadrado. Recuerda también que PI es igual a 3,1416.
-       d.- En la opción "3" debe pedir la longitud del radio de una circunferencia e imprimir la longitud del perímetro de la misma.
+       c.- En la opciï¿½n "2" debe pedir la longitud del radio de una circunferencia e imprimir la superficie de la misma. 
+       Recuerda que el ï¿½rea es igual a PI por el radio al cuadrado. Recuerda tambiï¿½n que PI es igual a 3,1416.
+       d.- En la opciï¿½n "3" debe pedir la longitud del radio de una circunferencia e imprimir la longitud del perï¿½metro de la misma.
        Recuerda que la longitud de la circunferencia = 2 por PI por el radio.
-       e.- En la opción "4" debe pedir las longitudes de la base y la altura de un rectángulo, e imprimir el área de dicho rectángulo.
-       Recuerda que el área del rectángulo es igual a la base por la altura. 
-       f.- En la opción "5" debe pedir la base y la altura de un tríangulo e imprimir el área del mismo. 
-       Recuerda que el área del triángulo es la mitad del área del rectángulo de igual base y altura. 
-       g.- Tras mostrar el resultado de cada opción, el programa debe hacer una pausa (para poder observar el resultado), y volver a pintar el menú.
-       Esto se repetirá siempre que la opción no sea "0", en cuyo caso el programa acabará.
-       h.- Si la opción no fuese "0", "1", "2", "3", "4" o "5", el programa deberá dar el mensaje de "opción incorrecta" y volverá a mostrar el menú.*/
+       e.- En la opciï¿½n "4" debe pedir las longitudes de la base y la altura de un rectï¿½ngulo, e imprimir el ï¿½rea de dicho rectï¿½ngulo.
+       Recuerda que el ï¿½rea del rectï¿½ngulo es igual a la base por la altura. 
+       f.- En la opciï¿½n "5" debe pedir la base y la altura de un trï¿½angulo e imprimir el ï¿½rea del mismo. 
+       Recuerda que el ï¿½rea del triï¿½ngulo es la mitad del ï¿½rea del rectï¿½ngulo de igual base y altura. 
+       g.- Tras mostrar el resultado de cada opciï¿½n, el programa debe hacer una pausa (para poder observar el resultado), y volver a pintar el menï¿½.
+       Esto se repetirï¿½ siempre que la opciï¿½n no sea "0", en cuyo caso el programa acabarï¿½.
+       h.- Si la opciï¿½n no fuese "0", "1", "2", "3", "4" o "5", el programa deberï¿½ dar el mensaje de "opciï¿½n incorrecta" y volverï¿½ a mostrar el menï¿½.*/
 	
 	public static void condicionalesEj12 () {
 		String menu = "MENU\n"
-				+ "1.- Cálculo de la hipotenusa de un triángulo.\n"
-				+ "2.- Cálculo de la superficie de una circunferencia.\n"
-				+ "3.- Cálculo del perímetro de una circunferencia.\n"
-				+ "4.- Cálculo del área de un rectángulo.\n"
-				+ "5.- Cálculo del área de un triángulo.\n"
-				+ "0.- Salir de la aplicación.";
+				+ "1.- Calculo de la hipotenusa de un triangulo.\n"
+				+ "2.- Calculo de la superficie de una circunferencia.\n"
+				+ "3.- Calculo del perimetro de una circunferencia.\n"
+				+ "4.- Calculo del area de un rectangulo.\n"
+				+ "5.- Calculo del area de un triangulo.\n"
+				+ "0.- Salir de la aplicacion.";
 		
 		int n1, n2;
 		int opcion =0;
@@ -1041,7 +1040,7 @@ public class codigo01 {
 		
 		switch (opcion) {
 		case 0:
-			System.exit(0); // Acaba radicalmente con la ejecución
+			System.exit(0); // Acaba radicalmente con la ejecuciï¿½n
 			break;
 		case 1: //Hipotenusa
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud del cateto numero 1"));
