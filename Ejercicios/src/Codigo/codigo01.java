@@ -1076,7 +1076,7 @@ public class codigo01 {
 	public static void condicionalesEj12 () {
 		String menu = "MENU\n"
 				+ "1.- Calculo de la hipotenusa de un triangulo.\n"
-				+ "2.- Calculo de la superficie de una circunferencia.\n"
+				+ "2.- Calculo de la superficie de una circulo.\n"
 				+ "3.- Calculo del perimetro de una circunferencia.\n"
 				+ "4.- Calculo del area de un rectangulo.\n"
 				+ "5.- Calculo del area de un triangulo.\n"
@@ -1087,10 +1087,10 @@ public class codigo01 {
 		double resultado = 0d;
 		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 		
-		if (opcion <0 || opcion >5)	{
+		/* if (opcion <0 || opcion >5)	{
 			JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
 		} 
-		else {	
+		else {	*/
 			switch (opcion) {
 			case 0:
 				System.exit(0); // Acaba radicalmente con la ejecuci�n
@@ -1125,10 +1125,11 @@ public class codigo01 {
 				resultado = (n1*n2)/2;
 				JOptionPane.showMessageDialog(null, "Area del triangulo: " + resultado);
 				break;
+			default:
+				JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
 			}
 		}
-	}	
-}
+}	
 	
 
 

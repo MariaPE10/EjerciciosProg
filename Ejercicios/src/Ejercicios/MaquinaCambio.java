@@ -8,7 +8,7 @@ public class MaquinaCambio {
   */
 	public static void main (String [] args ) {
 		int cantPagada = 0;
-		int precioProducto = 220;
+		int precioProducto = 0;
 		
 		int cambio = 0;
 		
@@ -31,6 +31,9 @@ public class MaquinaCambio {
 		int cont1c = 0;
 							
 		try {
+			String str2 = JOptionPane.showInputDialog("Introduzca el precio: ");
+			precioProducto = Integer.parseInt(str2);
+			precioProducto = precioProducto*100;
 			String str1 = JOptionPane.showInputDialog("Introduzca un importe: ");
 			cantPagada = Integer.parseInt(str1);
 			cantPagada = cantPagada*100;
@@ -76,36 +79,41 @@ public class MaquinaCambio {
 				if(cambio >= valor1e) {
 				cambio = cambio - valor1e;
 				cont1e++;
-			} 	else
-			 if(cambio >= valor50c) {
-				cambio = cambio - valor50c;
-				cont50c++;
-			} else if(cambio >= valor20c) {
-				cambio = cambio - valor20c;
-				cont20c++;
-			} else if(cambio >= valor10c) {
-				cambio = cambio - valor10c;
-				cont10c++;
-			} else if(cambio >= valor5c) {
-				cambio = cambio - valor5c;
-				cont5c++;
-			}  else if(cambio >= valor2c) {
-				cambio = cambio - valor2c;
-				cont2c++;
-			}  else if(cambio >= valor1c) {
-				cambio = cambio - valor1c;
-				cont1c++;
-			}
+				} else
+			 		if(cambio >= valor50c) {
+					cambio = cambio - valor50c;
+					cont50c++;
+					} else 
+						if(cambio >= valor20c) {
+						cambio = cambio - valor20c;
+						cont20c++;
+						} else 
+							if(cambio >= valor10c) {
+							cambio = cambio - valor10c;
+							cont10c++;
+							} else 
+								if(cambio >= valor5c) {
+								cambio = cambio - valor5c;
+								cont5c++;
+								}  else 
+									if(cambio >= valor2c) {
+									cambio = cambio - valor2c;
+									cont2c++;
+									}  else 
+										if(cambio >= valor1c) {
+										cambio = cambio - valor1c;
+										cont1c++;
+										}
 		}*/
 		
 		
-		System.out.println("Numero de monedas de 2e: " + cont2e);
-		System.out.println("Numero de monedas de 1e: " + cont1e);
-		System.out.println("Numero de monedas de 0.50c: " + cont50c);
-		System.out.println("Numero de monedas de 0.20c: " + cont20c);
-		System.out.println("Numero de monedas de 0.10c: " + cont10c);
-		System.out.println("Numero de monedas de 0.05c: " + cont5c);
-		System.out.println("Numero de monedas de 0.02c: " + cont2c);
-		System.out.println("Numero de monedas de 0.01c: " + cont1c);
+		System.out.println("Cantidad de monedas de 2e: " + cont2e);
+		System.out.println("Cantidad de monedas de 1e: " + cont1e);
+		System.out.println("Cantidad de monedas de 0.50c: " + cont50c);
+		System.out.println("Cantidad de monedas de 0.20c: " + cont20c);
+		System.out.println("Cantidad de monedas de 0.10c: " + cont10c);
+		System.out.println("Cantidad de monedas de 0.05c: " + cont5c);
+		System.out.println("Cantidad de monedas de 0.02c: " + cont2c);
+		System.out.println("Cantidad de monedas de 0.01c: " + cont1c);
 	}
 }
