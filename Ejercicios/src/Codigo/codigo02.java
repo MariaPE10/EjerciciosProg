@@ -12,10 +12,9 @@ public class codigo02 {
 		
 	public static void BuclesB1Ej1 () {
 		int n1;
-		int i;
 		double suma=0d;
 		
-		for (i = 1; i < 5; i++) {
+		for (int i = 1; i < 5; i++) {
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero: " + i));
 			if (n1 > 10) {
 				suma += n1;
@@ -29,12 +28,12 @@ public class codigo02 {
 	 */
 	
 	public static void BuclesB1Ej2 () {
-		int n1, i, cantidadNumeros;
+		int n1, cantidadNumeros;
 		double suma=0d;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		
-		for (i = 0; i < cantidadNumeros; i++) {
+		for (int i = 0; i < cantidadNumeros; i++) {
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+1)));
 			if (n1 > 10) {
 				suma = suma + n1;
@@ -43,18 +42,18 @@ public class codigo02 {
 		JOptionPane.showMessageDialog(null, "La suma de los numeros mayores de 10 es: " + suma);
 	}
 	
-	/* Ejercicio 3: Realiza un ejercicio que pida números al usuario, tantos como indique el usuario. al final
-	 * debe aparecer cuantos números positivos y negativos se han introducido.
+	/* Ejercicio 3: Realiza un ejercicio que pida nï¿½meros al usuario, tantos como indique el usuario. al final
+	 * debe aparecer cuantos nï¿½meros positivos y negativos se han introducido.
 	 */
 	
 	public static void BuclesB1Ej3 () {
-		int n1, i, cantidadNumeros;
+		int n1, cantidadNumeros;
 		double contPos=0d;
 		double contNeg=0d;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		
-		for (i = 0; i < cantidadNumeros; i++) {
+		for (int i = 0; i < cantidadNumeros; i++) {
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+1)));
 			if (n1 >= 0) {
 				contPos++;
@@ -116,38 +115,57 @@ public class codigo02 {
 	 */
 	
 	public static void BuclesB2Ej2 () {
-		int n1 =0, i, cantidadNumeros, menor, mayor;
+		int n1 =0, cantidadNumeros, menor, mayor;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero 1"));
 		mayor = n1;
 		menor = n1;
 		
-		for (i = 0; i < (cantidadNumeros-1); i++) { //cantidad de numeros -1 xq ya ha pedido un numero antes del bucle.
+		for (int i = 0; i < (cantidadNumeros-1); i++) { //cantidad de numeros -1 xq ya ha pedido un numero antes del bucle.
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+2)));
 			mayor = (n1 > mayor)? n1 : mayor;
 			menor = (n1 < menor)? n1 : menor;
 		}
 		JOptionPane.showMessageDialog(null,"El numero MAYOR es: " + mayor + "\n El numero MENOR es: " + menor);
 	}
-
-	/*Ejercicio 3: Ejercicio que obtenga todos los múltiplos de un número introducido por el usuario.
-	 * Se imprimirán todos los múltiplos menores de 100, este será el límite.
+	
+	public static void BuclesB2Ej2B () {
+		int numero = 1, mayor = 0, menor =0;
+		String mensaje = "Introduzca nï¿½mero (0 -> Terminar)";
+		
+		for (int i = 0; numero != 0; i++) {
+			if (i == 0) { // Primera iteraciï¿½n
+				mayor = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+				menor = mayor;
+				numero = mayor;
+			}
+			else { // Resto de iteraciones
+				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+				if (numero > mayor && numero != 0) {
+					mayor = numero;
+				} 
+				if (numero < menor && numero != 0) {
+					menor = numero; 
+				}
+			}	
+		}
+		
+		JOptionPane.showMessageDialog(null, "Mayor: " + mayor + " - Menor: " + menor);
+	}
+	
+	/*Ejercicio 3: Ejercicio que obtenga todos los mï¿½ltiplos de un nï¿½mero introducido por el usuario.
+	 * Se imprimirï¿½n todos los mï¿½ltiplos menores de 100, este serï¿½ el lï¿½mite.
 	 */
 	public static void BuclesB2Ej3 () {
-		int num, contador = 1;
-		int resultado;
+		int num;
 			
 		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero"));
-		resultado = num;
-		System.out.println(num + " x " + contador + " = " + resultado);
 		
-		while (resultado < 100) { //se repetira mientras que lo que hay dentro del parentesis sea verdadero.
-			contador++;
-			resultado = num*contador;
-			System.out.println(num + " x " + contador + " = " + resultado);
-			}
+		for (int contador = 1; (num * contador) < 100; contador++) {
+			System.out.println(num + " x " + contador + " = " + (num * contador));
 		}
+	}
 
 }
 
