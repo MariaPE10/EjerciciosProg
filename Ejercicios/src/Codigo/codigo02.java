@@ -12,7 +12,7 @@ public class codigo02 {
 		
 	public static void BuclesB1Ej1 () {
 		int n1;
-		double suma=0d;
+		float suma=0f;
 		
 		for (int i = 1; i < 5; i++) {
 			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero: " + i));
@@ -29,7 +29,7 @@ public class codigo02 {
 	
 	public static void BuclesB1Ej2 () {
 		int n1, cantidadNumeros;
-		double suma=0d;
+		float suma=0f;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		
@@ -48,8 +48,7 @@ public class codigo02 {
 	
 	public static void BuclesB1Ej3 () {
 		int n1, cantidadNumeros;
-		double contPos=0d;
-		double contNeg=0d;
+		int contPos=0, contNeg=0;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		
@@ -61,6 +60,7 @@ public class codigo02 {
 				contNeg++;
 			}
 		}
+		
 		JOptionPane.showMessageDialog(null, "Cantidad de numeros positivos introducidos: " + contPos 
 				+ "\nCantidad de numeros negativos introducidos: " + contNeg);
 	}
@@ -70,33 +70,30 @@ public class codigo02 {
 	 * tantos como este haya indicado. Al final se debe imprimir la media. 
 	 */
 	public static void BuclesB2Ej1 () {
-		int n1, acumulado; 
+		int cantidadNum, num; 
 		int suma =0;
-		double resultado =0d;
+		float media =0f;
 		
 		// Peticion de numero de veces que se repetir� el bucle
-		n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
+		cantidadNum =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
 		
-		for (int i = 0; i < n1; i++ ) { 
-			 acumulado = Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero"));
-			 suma = suma + acumulado;
+		for (int i = 0; i < cantidadNum; i++ ) { 
+			 num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero" + (i+1)));
+			 suma = suma + num;
 		 }
-		 resultado = suma/n1;
-		JOptionPane.showMessageDialog(null, "La media de los numeros es: " + resultado);
+		 
+		media = (float) suma/cantidadNum;
+		JOptionPane.showMessageDialog(null, "La media de los numeros es: " + media);
 	}
 	
 	/* Hacer lo mismo que en el anterior pero con un while. Se debe repetir hasta que el numero
 	 * introducido sea 0.
 	 */
 	public static void BuclesB2Ej1B () {
-		int num = 0;
+		int num = 1;
 		int suma =0;
 		int contador =0;
-		double resultado =0d;
-		
-		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero"));
-		suma = suma + num;
-		contador++;
+		float media =0f;
 		
 		while (num != 0) { //se repetira mientras que lo que hay dentro del parentesis sea verdadero.
 			num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero"));
@@ -105,8 +102,8 @@ public class codigo02 {
 				contador++;
 			}
 		}
-		resultado = suma/contador;
-		JOptionPane.showMessageDialog(null, "La media de los numeros es: " + resultado);
+		media = (float)suma/contador;
+		JOptionPane.showMessageDialog(null, "La media de los numeros es: " + media);
 	}
 
 	/*Ejercicio 2: Mayor y menor de una cantidad de números dada por el usuario. El usuario introducirá una cantidad de números,
@@ -115,18 +112,21 @@ public class codigo02 {
 	 */
 	
 	public static void BuclesB2Ej2 () {
-		int n1 =0, cantidadNumeros, menor, mayor;
+		int n1 =0, cantidadNumeros, menor=0, mayor=0;
 		
 		cantidadNumeros =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de numeros"));
-		n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero 1"));
-		mayor = n1;
-		menor = n1;
 		
-		for (int i = 0; i < (cantidadNumeros-1); i++) { //cantidad de numeros -1 xq ya ha pedido un numero antes del bucle.
-			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+2)));
-			mayor = (n1 > mayor)? n1 : mayor;
-			menor = (n1 < menor)? n1 : menor;
-		}
+		if (cantidadNumeros >0) {
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero 1"));
+			mayor = n1;
+			menor = n1;
+			
+			for (int i = 0; i < (cantidadNumeros-1); i++) { //cantidad de numeros -1 xq ya ha pedido un numero antes del bucle.
+				n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+2)));
+				mayor = (n1 > mayor)? n1 : mayor;
+				menor = (n1 < menor)? n1 : menor;
+			}
+		} 
 		JOptionPane.showMessageDialog(null,"El numero MAYOR es: " + mayor + "\n El numero MENOR es: " + menor);
 	}
 	
@@ -150,7 +150,6 @@ public class codigo02 {
 				}
 			}	
 		}
-		
 		JOptionPane.showMessageDialog(null, "Mayor: " + mayor + " - Menor: " + menor);
 	}
 	
@@ -181,6 +180,7 @@ public class codigo02 {
 			num =Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 			suma= suma +num;
 		}
+		
 		JOptionPane.showMessageDialog(null,"La suma de los numeros es: " + suma);
 	}
 	
@@ -190,7 +190,7 @@ public class codigo02 {
 	
 	public static void WhileB3Ej2 () {
 		int num=1, suma=0, contador=0;
-		double media=0d;
+		float media=0f;
 		String mensaje = "Introduzca n�mero (0 -> Terminar)";
 		
 		while (num != 0) {
@@ -198,7 +198,8 @@ public class codigo02 {
 			suma= suma +num;
 			contador++;
 		}
-		media = (double)suma/(contador-1);
+		
+		media = (float)suma/(contador-1);
 		JOptionPane.showMessageDialog(null,"La media de los numeros es: " + media);
 	}
 	
@@ -220,6 +221,7 @@ public class codigo02 {
 			}
 		num =Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 		}
+		
 		JOptionPane.showMessageDialog(null,"El numero mayor es: " + mayor);
 	}
 	
@@ -237,6 +239,7 @@ public class codigo02 {
 			num =Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 			suma= suma +num;
 		} while (num != 0);
+		
 		JOptionPane.showMessageDialog(null,"La suma de los numeros es: " + suma);
 	}
 	
@@ -246,7 +249,7 @@ public class codigo02 {
 	
 	public static void DoWhileB3Ej2 () {
 		int num=1, suma=0, contador=0;
-		double media=0d;
+		float media=0f;
 		String mensaje = "Introduzca n�mero (0 -> Terminar)";
 		
 		do {
@@ -254,7 +257,8 @@ public class codigo02 {
 			suma= suma +num;
 			contador++;
 		} while (num != 0);
-		media = (double)suma/(contador-1);
+		
+		media = (float)suma/(contador-1);
 		JOptionPane.showMessageDialog(null,"La media de los numeros es: " + media);
 	}
 	
@@ -276,6 +280,7 @@ public class codigo02 {
 			}
 		num =Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 		} while (num != 0);
+		
 		JOptionPane.showMessageDialog(null,"El numero mayor es: " + mayor);
 	}
 	
