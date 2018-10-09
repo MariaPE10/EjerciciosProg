@@ -166,7 +166,7 @@ public class codigo02 {
 		}
 	}
 	
-	// Ejercicio 4: Reforma el ejercicio anterior, para que el límite sea también introducido por el usuario.
+	// Ejercicio 4: Reforma el ejercicio anterior, para que el lï¿½mite sea tambiï¿½n introducido por el usuario.
 	
 	public static void BuclesB2Ej4 () {
 		int num, cantidadNumeros;
@@ -180,25 +180,19 @@ public class codigo02 {
 		}
 	}
 	
-	/* BLOQUE 3 Ejercicio1: Realiza un ejercicio que pida números al usuario. El programa debe detenerse cuando 
-	 * el usuario introduzca el número 0 (cero), que no debe tenerse en cuenta para ninguna operación aritmética,
-	 * simplemente para salir de la aplicación. Cuando el programa haya terminado, se debe sacar en pantalla el valor 
-	 * de la suma de todos los números.
+	/* BLOQUE 3 Ejercicio1: Realiza un ejercicio que pida nï¿½meros al usuario. El programa debe detenerse cuando 
+	 * el usuario introduzca el nï¿½mero 0 (cero), que no debe tenerse en cuenta para ninguna operaciï¿½n aritmï¿½tica,
+	 * simplemente para salir de la aplicaciï¿½n. Cuando el programa haya terminado, se debe sacar en pantalla el valor 
+	 * de la suma de todos los nï¿½meros.
 	 */
 	
 	public static void BuclesB3Ej1 () {
 		int numero =1, suma=0;
 		String mensaje = "Introduzca numero (0 -> Terminar)";
 		
-		for (int i = 0; numero != 0; i++) {
-			if (i == 0) { // Primera iteracion
-				suma = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				numero = suma;
-			}
-			else { // Resto de iteraciones
-				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				suma += numero;
-			}	
+		for (; numero != 0;) {
+			numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+			suma += numero;	
 		}
 		JOptionPane.showMessageDialog(null, "La suma de los numeros introducidos es: " + suma);
 	}
@@ -208,23 +202,18 @@ public class codigo02 {
 	 */
 	
 	public static void BuclesB3Ej2 () {
-		int numero =1, suma=0, i=0;
+		int numero =1, suma=0, i;
 		String mensaje = "Introduzca numero (0 -> Terminar)";
 		
 		for ( i = 0; numero != 0; i++) {
-			if (i == 0) { // Primera iteracion
-				suma = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				numero = suma;
-			}
-			else { // Resto de iteraciones
-				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				suma += numero;
-			}	
+			numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+			suma += numero;
 		}
-		JOptionPane.showMessageDialog(null, "La media de los numeros introducidos es: " + suma/(i-1));
+	
+		JOptionPane.showMessageDialog(null, "La media de los numeros introducidos es: " + ((float) suma/(i-1)));
 	}	
 	
-	/* Ejercicio 3: Realiza un ejercicio que pida números al usuario hasta que este introduzca el 0 (cero).
+	/* Ejercicio 3: Realiza un ejercicio que pida nï¿½meros al usuario hasta que este introduzca el 0 (cero).
 	 * Al finalizar el ejercicio se debe imprimir en pantalla el valor mayor introducido. El valor 0 (cero)
 	 * no debe tenerse en cuenta.
 	 */
@@ -236,7 +225,7 @@ public class codigo02 {
 		for (int i = 0; numero != 0; i++) {
 			if (i == 0) { // Primera iteracion
 				mayor = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				numero = mayor;
+
 			}
 			else { // Resto de iteraciones
 				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
@@ -259,7 +248,7 @@ public class codigo02 {
 		for (int i = 0; numero != 0; i++) {
 			if (i == 0) { // Primera iteracion
 				menor = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				numero = menor;
+
 			}
 			else { // Resto de iteraciones
 				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
@@ -271,7 +260,7 @@ public class codigo02 {
 		JOptionPane.showMessageDialog(null, "El numero Menor es: " + menor);
 	}
 	
-	/* Ejercicio 5: Realiza un ejercicio parecido a los dos anteriores, dónde se imprima el mayor
+	/* Ejercicio 5: Realiza un ejercicio parecido a los dos anteriores, dï¿½nde se imprima el mayor
 	 * valor y el menor de todos los introducidos.
 	 */
 	
@@ -283,50 +272,40 @@ public class codigo02 {
 			if (i == 0) { // Primera iteracion
 				mayor = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 				menor = mayor;
-				numero = mayor;
 			}
 			else { // Resto de iteraciones
 				numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 				if (numero > mayor && numero != 0) {
 					mayor = numero;
-				} else {
-					if (numero < menor && numero != 0) {
-						menor = numero; 
-					}
+				}
+				if (numero < menor && numero != 0) {
+					menor = numero; 
 				}
 			}	
 		}
 		JOptionPane.showMessageDialog(null, "Mayor: " + mayor + "\nMenor: " + menor);
 	}	
 	
-	/* Ejercicio 6: Realiza un ejercicio que pida números al usuario, hasta que uno de ellos sea 0 (cero).
-	 * Para cada número introducido se debe mostrar en pantalla su tabla de multiplicar, desde el 0 
+	/* Ejercicio 6: Realiza un ejercicio que pida nï¿½meros al usuario, hasta que uno de ellos sea 0 (cero).
+	 * Para cada nï¿½mero introducido se debe mostrar en pantalla su tabla de multiplicar, desde el 0 
 	 * (cero) hasta el 10. 
 	 */
 
 	public static void BuclesB3Ej6 () {
-		int num;
+		int num=1;
 		String mensaje = "Introduzca numero (0 -> Terminar)";
 		
-		num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-		
-		for (int i = 0; num != 0; i++) {
-			if (i == 0) { // Primera iteraciï¿½n
-				for (int contador = 0; contador <= 10; contador++) {
-				System.out.println(num + " x " + contador + " = " + (num*contador));	
-				}
-			} else {
-				num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-				if (num!=0) {
-					for (int contador2 = 0; contador2 <= 10; contador2++) {
-						System.out.println(num + " x " + contador2 + " = " + (num*contador2));	
-					}
+		for (; num != 0;) {
+			num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+			if (num!=0) {
+				for (int i = 0; i <= 10; i++) {
+					System.out.println(num + " x " + i + " = " + (num*i));	
 				}
 			}
 		}
 	}
 	
-	/*Ejercicio 7: Realiza un ejercicio que pida números al usuario, hasta que uno de ellos sea 0 (cero).
+	/*Ejercicio 7: Realiza un ejercicio que pida nï¿½meros al usuario, hasta que uno de ellos sea 0 (cero).
 	 * Al finalizar se debe imprimir en pantalla cuantos son positivos y cuantos negativos.
 	 * No debes tener en cuenta el 0 (cero).
 	 */
