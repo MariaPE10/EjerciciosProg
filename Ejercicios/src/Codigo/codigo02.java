@@ -316,11 +316,11 @@ public class codigo02 {
 		int contNeg=0;
 		
 		for (int i = 0; n1 !=0; i++) {
-			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca un numero " + (i+1)));
-			if (n1 >= 0 && n1!=0) {
+			n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero " + (i+1)));
+			if (n1 > 0 ) {
 				contPos++;
 			} else {
-				if (n1!=0) {
+				if (n1 < 0) {
 				contNeg++;
 				}
 			}
@@ -388,6 +388,25 @@ public class codigo02 {
 		JOptionPane.showMessageDialog(null,"El numero mayor es: " + mayor);
 	}
 	
+	/* Ejercicio 4: Realiza un ejercicio igual al anterior, con la particularidad de que debe imprimir en
+	 *  pantalla el menor, no el mayor.
+	 */
+	public static void WhileB3Ej4 () {
+		int numero, menor;
+		String mensaje = "Introduzca numero (0 -> Terminar)";
+		
+		numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+		menor = numero;
+		
+		while (numero != 0) {
+			numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+			if (numero < menor) {
+				menor = numero;
+			} 	
+		}
+		JOptionPane.showMessageDialog(null, "El numero Menor es: " + menor);
+	}
+	
 	/* BLOQUE EJERCICIOS 3 HECHO CON DO WHILE
 	 * Ejercicio 1: Realiza un ejercicio que pida números al usuario. El programa debe detenerse cuando el usuario introduzca
 	 * el número 0 (cero), que no debe tenerse en cuenta para ninguna operación aritmética, simplemente para salir
@@ -447,11 +466,23 @@ public class codigo02 {
 		JOptionPane.showMessageDialog(null,"El numero mayor es: " + mayor);
 	}
 	
-	
-	
-	
-	
-	
-	
+	/* Ejercicio 4: Realiza un ejercicio igual al anterior, con la particularidad de que debe imprimir en
+	 *  pantalla el menor, no el mayor.
+	 */
+	public static void DoWhileB3Ej4 () {
+		int numero, menor;
+		String mensaje = "Introduzca numero (0 -> Terminar)";
+		
+		numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+		menor = numero;
+		
+		do {
+			numero = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+			if (numero < menor && numero != 0) {
+				menor = numero;
+			}
+		} while (numero != 0);
+		JOptionPane.showMessageDialog(null, "El numero Menor es: " + menor);
+	}
 }
 
