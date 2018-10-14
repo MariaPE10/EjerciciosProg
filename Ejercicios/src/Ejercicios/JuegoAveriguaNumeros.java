@@ -10,17 +10,17 @@ public class JuegoAveriguaNumeros {
 	
 		
 		do { //Pedimos numero
-			numeroIntroducido=Integer.parseInt(JOptionPane.showInputDialog("Adivina el número de 0 a 100"));
+			numeroIntroducido=Integer.parseInt(JOptionPane.showInputDialog("Adivina el numero de 0 a 100"));
 			//Interactuamos con el usuario
 			if(numeroIntroducido > numeroPensado) {
-				JOptionPane.showMessageDialog(null, "El número es inferior a " + numeroIntroducido);
+				JOptionPane.showMessageDialog(null, "El numero es inferior a " + numeroIntroducido);
 			}
 			else {
 				if (numeroIntroducido < numeroPensado){
-				JOptionPane.showMessageDialog(null, "El número es superior a " + numeroIntroducido);				
+				JOptionPane.showMessageDialog(null, "El numero es superior a " + numeroIntroducido);				
 				}
 				else  {
-				JOptionPane.showMessageDialog(null, "¡¡¡ENHORABUENA LO HAS CONSEGUIDO!!!");
+				JOptionPane.showMessageDialog(null, "���ENHORABUENA LO HAS CONSEGUIDO!!!");
 				}
 			}	
 		} while (numeroIntroducido != numeroPensado);

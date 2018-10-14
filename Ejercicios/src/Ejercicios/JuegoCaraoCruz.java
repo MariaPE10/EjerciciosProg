@@ -23,10 +23,10 @@ public class JuegoCaraoCruz {
 			}
 		}
 		if (ContIA==3) {
-			JOptionPane.showMessageDialog(null,"Â¡Â¡HAS PERDIDO!! Soy una maquina inteligente!!");
+			JOptionPane.showMessageDialog(null,"¡¡HAS PERDIDO!! Soy una maquina inteligente!!");
 		}
 		else {
-			JOptionPane.showMessageDialog(null,"Â¡Â¡HAS GANADO!! La proxima te reviento payaso!!");
+			JOptionPane.showMessageDialog(null,"¡¡HAS GANADO!! La proxima te reviento payaso!!");
 		}
 	}
 }

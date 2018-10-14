@@ -12,13 +12,13 @@ public class JuegoCartaAlta {
 		 */
 		int CartaJ1, CartaIA, PaloIA, PaloJ1;
 		
-		JOptionPane.showMessageDialog(null, "Â¡Vamos a jugar!");
+		JOptionPane.showMessageDialog(null, "¡Vamos a jugar!");
 		
-		CartaJ1=  (int) (Math.random() * 13)+1;
-		CartaIA=  (int) (Math.random() * 13)+1;
-		PaloJ1=  (int) (Math.random() * 4);
-		PaloIA=  (int) (Math.random() * 4);
-		
+		CartaJ1=  (int) (Math.random() * 13)+2;
+		CartaIA=  (int) (Math.random() * 13)+2;
+		PaloJ1=  (int) (Math.random() * 4)+1;
+		PaloIA=  (int) (Math.random() * 4)+1;
+		System.out.println(CartaIA + " "+ PaloIA+ " "+ CartaJ1+" "+ PaloJ1);
 		if(CartaJ1 > CartaIA) {
 			JOptionPane.showMessageDialog(null,
 					"Has ganado la ronda!!\nTu carta: " + CartaJ1 + "\nCarta de la IA: "+ CartaIA);
@@ -42,9 +42,10 @@ public class JuegoCartaAlta {
 									"\nCarta de la IA: "+ CartaIA + " y Palo: "+ PaloIA);
 						}
 						else {
-							JOptionPane.showMessageDialog(null,
-									"Empate!!\nTu carta: " + CartaJ1 + "y Palo: " + PaloJ1 +
-									"\nCarta de la IA: "+ CartaIA + " y Palo: "+ PaloIA);
+							do {
+								PaloJ1=  (int) (Math.random() * 4)+1;
+								PaloIA=  (int) (Math.random() * 4)+1;
+							} while (PaloJ1 == PaloIA);
 						}
 					}
 				}
