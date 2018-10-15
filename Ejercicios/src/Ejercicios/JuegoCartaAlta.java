@@ -12,7 +12,7 @@ public class JuegoCartaAlta {
 		 */
 		int CartaJ1, CartaIA, PaloIA, PaloJ1;
 		
-		JOptionPane.showMessageDialog(null, "¡Vamos a jugar!");
+		JOptionPane.showMessageDialog(null, "Vamos a jugar!!");
 		
 		CartaJ1=  (int) (Math.random() * 13)+2;
 		CartaIA=  (int) (Math.random() * 13)+2;
@@ -32,13 +32,13 @@ public class JuegoCartaAlta {
 				if (CartaJ1==CartaIA) {
 					if (PaloJ1>PaloIA) {
 						JOptionPane.showMessageDialog(null,
-								"Has ganado la ronda!!\nTu carta: " + CartaJ1 + "y Palo: " + PaloJ1 +
+								"Has ganado la ronda!!\nTu carta: " + CartaJ1 + " y Palo: " + PaloJ1 +
 								"\nCarta de la IA: "+ CartaIA + " y Palo: "+ PaloIA);
 					}
 					else {
 						if (PaloJ1<PaloIA) {
 							JOptionPane.showMessageDialog(null,
-									"Has perdido la ronda!!\nTu carta: " + CartaJ1 + "y Palo: " + PaloJ1 +
+									"Has perdido la ronda!!\nTu carta: " + CartaJ1 + " y Palo: " + PaloJ1 +
 									"\nCarta de la IA: "+ CartaIA + " y Palo: "+ PaloIA);
 						}
 						else {
