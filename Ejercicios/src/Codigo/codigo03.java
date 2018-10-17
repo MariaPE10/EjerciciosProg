@@ -229,6 +229,7 @@ public class codigo03 {
 	public static void ArrayB2Ej4() {
 		int array[]= new int [5];
 		
+		// 12 > 1 > 4 > 21 > 56
 		
 		System.out.println("ARRAY");
 		for (int i = 0; i<array.length; i++) {
@@ -237,14 +238,34 @@ public class codigo03 {
 		}
 		System.out.println("\nARRAY CIRCULAR\n");
 		
-		int aux=array[array.length-1];
-		for (int i = (array.length-1); i>0; i--) {
-			array[i]=array[i-1];
+		// aux = el valor que hay en la posicion 4 del array
+		int aux = array[array.length-1];
+		
+		/*// i = 4
+		for (int i = (array.length-1); i > 0; i--) {
+			array[i]= array[i-1];
 		}
-		array[0]=aux;
-		for (int i = 0; i<array.length; i++) {
+		array[0]= aux;
+		for (int i = 0; i< array.length; i++) {
 			System.out.println(array[i]);
+		}		
+		*/
+		
+		int arrayAux[] = new int[5];
+		// 12 > 1 > 4 > 21 > 56
+		// 56 > 12 > 1 > 4 > 21
+		for(int i = 0; i < array.length; i++) {			
+			if(i == array.length - 1) {
+				arrayAux[0] = array[array.length -1];
+			} else {
+				arrayAux[i + 1] = array[i];
+			}			
 		}
+		
+		for (int i = 0; i<arrayAux.length; i++) {
+			System.out.println(arrayAux[i]);
+		}	
+		
 	}
 	
 	/* Ejercicio 5:  Realiza un ejercicio igual al anterior, pero en el que el usuario pueda indicar la cantidad de
@@ -255,7 +276,7 @@ public class codigo03 {
 		int array[]= new int [5];
 		int num;
 		
-		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de posiciones desplazadas"));
+		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de posiciones desplazadas"));
 		
 		
 		System.out.println("ARRAY");
@@ -264,9 +285,12 @@ public class codigo03 {
 			System.out.println(array[i]);
 		}
 		
+		// num = 3
 		for (int j=0;j<num;j++) {
 			System.out.println("\nARRAY CIRCULAR "+ (j+1));
-			int aux=array[array.length-1];
+			
+			// aux = array[4]
+			int aux= array[array.length-1];
 			
 			for (int i = (array.length-1); i>0; i--) {
 				array[i]=array[i-1];
@@ -275,7 +299,7 @@ public class codigo03 {
 			for (int i = 0; i<array.length; i++) {
 				System.out.println(array[i]);
 			}
-		}
+		}		
 	}
 	
 	/* Ejercicio 6: Realiza un ejercicio igual al anterior, en el que el usuario también pueda deteminar la dirección 
