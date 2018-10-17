@@ -230,10 +230,10 @@ public class codigo03 {
 		int array[]= new int [5];
 		
 		
-		System.out.println("ARRAY\n");
+		System.out.println("ARRAY");
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*100);
-			System.out.println(array[i] + " ");
+			System.out.println(array[i]);
 		}
 		System.out.println("\nARRAY CIRCULAR\n");
 		
@@ -243,7 +243,7 @@ public class codigo03 {
 		}
 		array[0]=aux;
 		for (int i = 0; i<array.length; i++) {
-			System.out.println(array[i] + " ");
+			System.out.println(array[i]);
 		}
 	}
 	
@@ -258,10 +258,10 @@ public class codigo03 {
 		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de posiciones desplazadas"));
 		
 		
-		System.out.println("ARRAY\n");
+		System.out.println("ARRAY");
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*100);
-			System.out.println(array[i] + " ");
+			System.out.println(array[i]);
 		}
 		
 		for (int j=0;j<num;j++) {
@@ -273,14 +273,70 @@ public class codigo03 {
 			}
 			array[0]=aux;
 			for (int i = 0; i<array.length; i++) {
-				System.out.println(array[i] + " ");
+				System.out.println(array[i]);
 			}
 		}
 	}
 	
+	/* Ejercicio 6: Realiza un ejercicio igual al anterior, en el que el usuario también pueda deteminar la dirección 
+	 * del movimiento.
+	 */
 	
+	public static void ArrayB2Ej6() {
+		int array[]= new int [5];
+		int num, sentido;
+		
+		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de posiciones desplazadas"));
+		sentido =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el sentido:\n 0 Abajo\n 1 Arriba"));
+		
+		System.out.println("ARRAY");
+		for (int i = 0; i<array.length; i++) {
+			array[i]= (int) Math.round(Math.random()*100);
+			System.out.println(array[i]);
+		}
+		if (sentido ==0) {
+			for (int j=0;j<num;j++) {
+				System.out.println("\nARRAY CIRCULAR "+ (j+1));
+				int aux=array[array.length-1];
+				
+				for (int i = (array.length-1); i>0; i--) {
+					array[i]=array[i-1];
+				}
+				array[0]=aux;
+				for (int i = 0; i<array.length; i++) {
+					System.out.println(array[i]);
+				}
+			}
+		}
+		else {
+			for (int j=0;j<num;j++) {
+				System.out.println("\nARRAY CIRCULAR "+ (j+1));
+				int aux=array[0];
+				
+				for (int i = 0; i<array.length-1; i++) {
+					array[i]=array[i+1];
+				}
+				array[4]=aux;
+				for (int i = 0; i<array.length; i++) {
+					System.out.println(array[i]);
+				}
+			}
+		}
+	}
 	
+	/* BLOQUE 3. Ejercicio 1: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 
+	 * 0 y 1.000. Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenación llamado 
+	 * "Burbuja", con el objetivo de ordenar el array completamente.
+	 */
 	
+	public static void ArrayB2Ej7() {
+		int array[] = new int [150];
+		
+		for (int i = 0; i<array.length; i++) {
+			array[i]= (int) Math.round(Math.random()*1000);
+			System.out.println(array[i]);
+		}
+	}
 	
 	
 	
