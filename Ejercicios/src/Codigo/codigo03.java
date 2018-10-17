@@ -221,21 +221,78 @@ public class codigo03 {
 	}
 	
 	/* Ejercicio 4: Realiza un ejercicio en que inicialice un array de 5 elementos enteros al azar entre 0 y 100.
-	 * Debes conseguir que se desplacen los números un lugar a su derecha, de manera que el desplazamiento sea circular,
-	 * si un número sale por la derecha volverá a entrar por la izquierda. Ejemplo: 1 2 3 4 5 pasa a ser 5 1 2 3 4 que
+	 * Debes conseguir que se desplacen los nï¿½meros un lugar a su derecha, de manera que el desplazamiento sea circular,
+	 * si un nï¿½mero sale por la derecha volverï¿½ a entrar por la izquierda. Ejemplo: 1 2 3 4 5 pasa a ser 5 1 2 3 4 que
 	 * pasa a ser 4 5 1 2 3.
 	 */
 	
 	public static void ArrayB2Ej4() {
 		int array[]= new int [5];
 		
+		
 		System.out.println("ARRAY\n");
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*100);
-			System.out.print(array[i] + " ");
+			System.out.println(array[i] + " ");
+		}
+		System.out.println("\nARRAY CIRCULAR\n");
+		
+		int aux=array[array.length-1];
+		for (int i = (array.length-1); i>0; i--) {
+			array[i]=array[i-1];
+		}
+		array[0]=aux;
+		for (int i = 0; i<array.length; i++) {
+			System.out.println(array[i] + " ");
+		}
+	}
+	
+	/* Ejercicio 5:  Realiza un ejercicio igual al anterior, pero en el que el usuario pueda indicar la cantidad de
+	 * posiciones que deseamos desplazar.
+	 */
+	
+	public static void ArrayB2Ej5() {
+		int array[]= new int [5];
+		int num;
+		
+		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cantidad de posiciones desplazadas"));
+		
+		
+		System.out.println("ARRAY\n");
+		for (int i = 0; i<array.length; i++) {
+			array[i]= (int) Math.round(Math.random()*100);
+			System.out.println(array[i] + " ");
 		}
 		
+		for (int j=0;j<num;j++) {
+			System.out.println("\nARRAY CIRCULAR "+ (j+1));
+			int aux=array[array.length-1];
+			
+			for (int i = (array.length-1); i>0; i--) {
+				array[i]=array[i-1];
+			}
+			array[0]=aux;
+			for (int i = 0; i<array.length; i++) {
+				System.out.println(array[i] + " ");
+			}
+		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
