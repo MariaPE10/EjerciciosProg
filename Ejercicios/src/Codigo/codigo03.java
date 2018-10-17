@@ -332,9 +332,10 @@ public class codigo03 {
 	public static void ArrayB2Ej7() {
 		int array[] = new int [150];
 		
+		System.out.println("ARRAY");
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*1000);
-			System.out.println(array[i]);
+			System.out.print(array[i]+ " ");
 		}
 	}
 	
