@@ -1,5 +1,8 @@
 package Codigo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 public class codigo03 {
@@ -345,7 +348,7 @@ public class codigo03 {
 				for (int i = 0; i<array.length-1; i++) {
 					array[i]=array[i+1];
 				}
-				array[4]=aux;
+				array[array.length-1]=aux;
 				for (int i = 0; i<array.length; i++) {
 					System.out.println(array[i]);
 				}
@@ -358,19 +361,56 @@ public class codigo03 {
 	 * "Burbuja", con el objetivo de ordenar el array completamente.
 	 */
 	
-	public static void ArrayB2Ej7() {
+	public static void ArrayB3Ej1() {
 		int array[] = new int [150];
+		int aux;
 		
 		System.out.println("ARRAY");
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*1000);
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random() * 1000);
+			System.out.print(array[i]+ " ");
+		}
+		
+		for (int j = array.length -1; j > 0 ; j--) {
+			for (int i = 0; i < array.length -1 ; i++) {
+				if (array[i] > array[i+1]) {
+					aux = array[i];
+					array[i]=array [i+1];
+					array[i+1]=aux;
+				}
+			}
+		}
+		System.out.print("\nARRAY ORDENADO\n");
+
+		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i]+ " ");
 		}
 	}
 	
+	/* Ejercicio 2: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000.
+	 * Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenación llamado "Inserción directa",
+	 * con el objetivo de ordenar el array completamente.
+	 */
 	
-	
-	
+	public static void ArrayB3Ej2() {
+		int array[] = new int [10];
+		int aux;
+		
+		System.out.println("ARRAY");
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random() * 1000);
+			System.out.print(array[i]+ " ");
+		}
+		
+		for (int i = 0; i < array.length-1; i++) {
+			
+		}
+		System.out.print("\nARRAY ORDENADO\n");
+
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i]+ " ");
+		}
+	}
 	
 	
 	
