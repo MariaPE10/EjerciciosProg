@@ -10,36 +10,35 @@ public class codigo03 {
 	 */
 
 	public static void ArrayB1Ej0() {
-		int array[]= new int [10];
-		int suma=0; 
+		int array[] = new int [150];
+		int suma = 0, mayor, menor; 
 		float media;
 		
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*10);
-		}
-		
-		int  mayor=array[0], menor=array[0];
-		
-		for (int i = 0; i<array.length; i++) {
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random()*100);
 			System.out.println("Numero[" + i + "]: " + array[i]);
 		}
 		
-		for (int i = 0; i<array.length; i++) {
-			suma=suma+array[i];
-			if (array[i]>mayor) {
-				mayor=array[i];
+		mayor = array[0];
+		menor = array[0];
+		suma = array[0];
+		
+		for (int i = 1; i<array.length; i++) {
+			suma+=array[i];
+			if (array[i] > mayor) {
+				mayor = array[i];
 			}
-			if (array[i]<menor) {
-				menor=array[i];
+			if (array[i] < menor) {
+				menor = array[i];
 			}
 		}
 		
 		media=((float) suma / array.length);
 		
-		System.out.println("Suma: "+suma);
-		System.out.println("Media: "+media);
-		System.out.println("Mayor: "+mayor);
-		System.out.println("Menor: "+menor);
+		System.out.println("Suma: " + suma);
+		System.out.println("Media: " + media);
+		System.out.println("Mayor: " + mayor);
+		System.out.println("Menor: " + menor);
 	}
 	
 	/* Ejercicio 1: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar
@@ -48,19 +47,19 @@ public class codigo03 {
 	 */
 	
 	public static void ArrayB1Ej1() {	
-		int array[]= new int [150];
+		int array[] = new int [150];
 		int max, min;
 		
 		min=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el limite inferior:"));
 		max=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el limite superior:"));
 		
-		for (int i = 0; i<array.length; i++) {
-			array[i]= ((int) Math.round(Math.random() * (max-min)))+min;
+		for (int i = 0; i < array.length; i++) {
+			array[i] = ((int) Math.round(Math.random() * (max-min)))+min;
 			System.out.println("Numero[" + i + "]: " + array[i]);
 		}
 		
-		System.out.println("LÃ­mite superior: "+max);
-		System.out.println("LÃ­mite inferior: "+min);
+		System.out.println("LÃ­mite superior: " + max);
+		System.out.println("LÃ­mite inferior: " + min);
 		
 	}
 	
@@ -69,13 +68,13 @@ public class codigo03 {
 	 */
 	
 	public static void ArrayB1Ej2() {	
-		int array[]= new int [150];
+		int array[] = new int [150];
 		
 		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
+			array[i] = (int) Math.round(Math.random()*100);
 		}
 		
-		for (int i = 149; i>=0; i--) {
+		for (int i = 149; i > -1; i--) {
 			System.out.println("Numero[" + i + "]: " + array[i]);
 		}
 	}
@@ -89,17 +88,19 @@ public class codigo03 {
 	public static void ArrayB1Ej3() {	
 		int array[]= new int [150];
 		int num;
+		boolean numEncontrado = false;
 		
 		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el valor buscado (0 a 100)"));
 		
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*100);
 			if (num==array[i]) {
-				System.out.println("El numero " + num + " Se encuentra en la posicion [" + i + "]: " + array[i]);
+				System.out.println("El numero " + num + " Se encuentra en la posicion " + i);
+				numEncontrado = true;
 			}
-			else {
-				System.out.println("El numero que ha introducido no ha sido encontrado");
-			}
+		}
+		if (!numEncontrado){
+			System.out.println("El numero que ha introducido no ha sido encontrado" + num);
 		}
 	}
 	
@@ -108,21 +109,21 @@ public class codigo03 {
 	 */
 	
 	public static void ArrayB1Ej4() {	
-		int array[]= new int [150];
-		int sumaPar=0, sumaImpar=0;
+		int array[] = new int [150];
+		int sumaPar = 0, sumaImpar = 0;
 		
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
-			if (array[i]%2==0) { //es par
-				sumaPar = sumaPar+array[i];
+		for (int i = 0; i< array.length; i++) {
+			array[i] = (int) Math.round(Math.random()*100);
+			if (array[i] % 2 == 0) { //es par
+				sumaPar += array[i];
 			}
 			else { //es impar
-				sumaImpar = sumaImpar+ array[i];
+				sumaImpar += array[i];
 			}
 		}
 		
-		System.out.println("La suma de los numeros pares es: "+ sumaPar);
-		System.out.println("La suma de los numeros impares es: "+ sumaImpar);
+		System.out.println("La suma de los numeros pares es: " + sumaPar);
+		System.out.println("La suma de los numeros impares es: " + sumaImpar);
 	}
 	
 	/* Ejercicio 5: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 100,
@@ -134,9 +135,9 @@ public class codigo03 {
 		int suma=0;
 		
 		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
-			if (i%2==0) { // es par
-				suma=suma+array[i];
+			array[i] = (int) Math.round(Math.random()*100);
+			if (i % 2 == 0) { // es par
+				suma += array[i];
 			}
 		}
 		System.out.println("La suma de los numeros con indice par es: " + suma);
@@ -152,9 +153,14 @@ public class codigo03 {
 		
 		for (int i = 0; i<array.length; i++) {
 			array[i]= (int) Math.round(Math.random()*200)-100;
-			System.out.println("Numero[" + i + "]: " + array[i]);
-			array[i]=array[i]*-1;
-			System.out.println("Numero[" + i + "]: " + array[i]);
+			System.out.print( array[i] + " ");
+			if (array[i] % 2 == 0) {
+				array[i]=array[i]*-1;
+			}
+		}
+		System.out.println("Array con signos cambiados\n");
+		for (int i = 0; i<array.length; i++) {
+		System.out.print(array[i] + " ");
 		}
 	}
 	
@@ -165,13 +171,14 @@ public class codigo03 {
 	 */
 	
 	public static void ArrayB2Ej2() {
-		int array1[]= new int [150];
-		int array2[]= new int [150];
-		int array3[]= new int [150];
+		int longitud =150;
+		int array1[]= new int [longitud];
+		int array2[]= new int [longitud];
+		int array3[]= new int [longitud];
 		
 		System.out.println("ARRAY NUMERO 1\n");
-		for (int i = 0; i<array1.length; i++) {
-			array1[i]= (int) Math.round(Math.random()*100);
+		for (int i = 0; i < array1.length; i++) {
+			array1[i] = (int) Math.round(Math.random()*100);
 			System.out.print("["+i+"]" + " ");
 			System.out.print(array1[i] + " ");
 		}
@@ -182,15 +189,14 @@ public class codigo03 {
 			System.out.print(array2[i] + " ");
 		}
 		System.out.println("\nARRAY NUMERO 3\n");
-		for (int i = 0; i<array3.length; i++) {
-			array3[i]= (int) Math.round(Math.random()*100);	
-			if (i%2==0) { //es par
-				array3[i]=array1[i];
+		for (int i = 0; i < array3.length; i++) {	
+			if (i % 2 == 0) { //es par
+				array3[i] = array2[i];
 			}
 			else {
-				array3[i]=array2[i];
+				array3[i] = array1[i];
 			}
-			System.out.print("["+i+"]" + " ");
+			System.out.print("[" + i + "]" + " ");
 			System.out.print(array3[i] + " ");
 		}
 	}
@@ -207,15 +213,15 @@ public class codigo03 {
 		num=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el multiplicador"));
 		
 		System.out.println("ARRAY\n");
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
-			System.out.print("["+i+"]" + " ");
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random()*100);
+			System.out.print("[" + i + "]" + " ");
 			System.out.print(array[i] + " ");
 		}
 		System.out.println("\nARRAY MULTIPLICADO POR: " + num);
-		for (int i = 0; i<array.length; i++) {
-			array[i]= array[i]*num;
-			System.out.print("["+i+"]" + " ");
+		for (int i = 0; i < array.length; i++) {
+			array[i] = array[i] * num;
+			System.out.print("[" + i + "]" + " ");
 			System.out.print(array[i] + " ");
 		}
 	}
@@ -232,23 +238,23 @@ public class codigo03 {
 		// 12 > 1 > 4 > 21 > 56
 		
 		System.out.println("ARRAY");
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random()*100);
 			System.out.println(array[i]);
 		}
 		System.out.println("\nARRAY CIRCULAR\n");
 		
 		// aux = el valor que hay en la posicion 4 del array
-		int aux = array[array.length-1];
+		// int aux = array[array.length-1];
 		
 		/*// i = 4
 		for (int i = (array.length-1); i > 0; i--) {
-			array[i]= array[i-1];
+			array[i] = array[i-1];
 		}
 		array[0]= aux;
-		for (int i = 0; i< array.length; i++) {
+		for (int i = 0; i < array.length; i++) {
 			System.out.println(array[i]);
-		}		
+		}
 		*/
 		
 		int arrayAux[] = new int[5];
@@ -259,13 +265,12 @@ public class codigo03 {
 				arrayAux[0] = array[array.length -1];
 			} else {
 				arrayAux[i + 1] = array[i];
-			}			
+			}	
 		}
 		
 		for (int i = 0; i<arrayAux.length; i++) {
 			System.out.println(arrayAux[i]);
-		}	
-		
+		}
 	}
 	
 	/* Ejercicio 5:  Realiza un ejercicio igual al anterior, pero en el que el usuario pueda indicar la cantidad de
@@ -280,29 +285,29 @@ public class codigo03 {
 		
 		
 		System.out.println("ARRAY");
-		for (int i = 0; i<array.length; i++) {
-			array[i]= (int) Math.round(Math.random()*100);
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random()*100);
 			System.out.println(array[i]);
 		}
 		
 		// num = 3
-		for (int j=0;j<num;j++) {
+		for (int j = 0;j < num;j++) {
 			System.out.println("\nARRAY CIRCULAR "+ (j+1));
 			
 			// aux = array[4]
-			int aux= array[array.length-1];
+			int aux = array[array.length-1];
 			
-			for (int i = (array.length-1); i>0; i--) {
-				array[i]=array[i-1];
+			for (int i = (array.length-1); i > 0; i--) {
+				array[i] = array[i-1];
 			}
-			array[0]=aux;
-			for (int i = 0; i<array.length; i++) {
+			array[0] = aux;
+			for (int i = 0; i < array.length; i++) {
 				System.out.println(array[i]);
 			}
 		}		
 	}
 	
-	/* Ejercicio 6: Realiza un ejercicio igual al anterior, en el que el usuario también pueda deteminar la dirección 
+	/* Ejercicio 6: Realiza un ejercicio igual al anterior, en el que el usuario tambiï¿½n pueda deteminar la direcciï¿½n 
 	 * del movimiento.
 	 */
 	
@@ -349,7 +354,7 @@ public class codigo03 {
 	}
 	
 	/* BLOQUE 3. Ejercicio 1: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 
-	 * 0 y 1.000. Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenación llamado 
+	 * 0 y 1.000. Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenaciï¿½n llamado 
 	 * "Burbuja", con el objetivo de ordenar el array completamente.
 	 */
 	
