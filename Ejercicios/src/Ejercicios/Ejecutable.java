@@ -7,7 +7,7 @@ import Codigo.codigo03;
 public class Ejecutable {
 
 	public static void main(String[] args) {
-		codigo03.ArrayB3Ej2();
+		codigo03.ArrayB3Ej1();
 
 	}
 

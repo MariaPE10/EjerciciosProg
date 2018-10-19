@@ -362,7 +362,7 @@ public class codigo03 {
 	 */
 	
 	public static void ArrayB3Ej1() {
-		int array[] = new int [150];
+		int array[] = new int [10];
 		int aux;
 		
 		System.out.println("ARRAY");
@@ -372,7 +372,7 @@ public class codigo03 {
 		}
 		
 		for (int j = array.length -1; j > 0 ; j--) {
-			for (int i = 0; i < array.length -1 ; i++) {
+			for (int i = 0; i < j ; i++) {
 				if (array[i] > array[i+1]) {
 					aux = array[i];
 					array[i]=array [i+1];
@@ -388,7 +388,7 @@ public class codigo03 {
 	}
 	
 	/* Ejercicio 2: Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000.
-	 * Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenación llamado "Inserción directa",
+	 * Una vez que lo hayas conseguido debes realizar implementar el algoritmo de ordenaciï¿½n llamado "Inserciï¿½n directa",
 	 * con el objetivo de ordenar el array completamente.
 	 */
 	
