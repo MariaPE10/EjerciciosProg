@@ -154,9 +154,9 @@ public class codigo01 {
 	 */
 	
 	/**
-	 * Esta funci�n es maravillosa
+	 * Esta funcion es maravillosa
 	 *
-	 * @author Mar�a P�rez
+	 * @author Maria Perez
 	 * 
 	 */
 	public static void introduccionEj6 () {
