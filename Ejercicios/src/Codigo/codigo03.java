@@ -1,6 +1,7 @@
 package Codigo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -417,5 +418,208 @@ public class codigo03 {
 			System.out.print(array[i]+ " ");
 		}
 	}
+	
+	public static void ArrayB3Ej2B() {
+		int array [] = new int[150];
 		
+		// Inicialización del array
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random() * 1000);
+		}
+		
+		// Impresión del array antes de la ordenación
+		System.out.println();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		long millisAntes = new Date().getTime();
+		
+		// Ordenación por el método de la inserción directa
+		for(int i = 1; i < array.length; i++) { 
+			int j = i; 
+			int aux = array[j]; 
+			while( j > 0 && aux < array[j-1]) { 
+				array[j] = array[j-1]; 
+				j--; 
+			} 
+			array[j] = aux; 
+		}
+	
+		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		long millisDespues = new Date().getTime();		
+		
+		// Impresión del array después de la ordenación
+		System.out.println();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Impresión del tiempo transcurrido
+		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
+	}
+	
+	/* Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000. Una vez que lo hayas 
+	 * conseguido debes realizar implementar el algoritmo de ordenación llamado "Shell", con el objetivo de ordenar el array 
+	 * completamente. 
+	 */
+	
+	public static void ArrayB3Ej3() {
+		int array [] = new int[150];
+			
+		// Inicialización del array
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random() * 1000);
+		}
+		
+		// Impresión del array antes de la ordenación
+		System.out.println();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		long millisAntes = new Date().getTime();
+		
+		// Ordenación por el método Shell
+		int salto, aux, i;
+		boolean cambios;
+		for(salto=array.length/2; salto!=0; salto/=2){
+			cambios=true;
+			while(cambios){ // Mientras se intercambie algún elemento
+				cambios=false;
+				for(i=salto; i< array.length; i++) { // se da una pasada
+					if(array[i-salto]>array[i]) { // y si están desordenados
+						aux=array[i]; // se reordenan
+						array[i]=array[i-salto];
+						array[i-salto]=aux;
+						cambios=true; // y se marca como cambio.
+					}
+				}
+			}
+	    }
+
+		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		long millisDespues = new Date().getTime();		
+		
+		// Impresión del array después de la ordenación
+		System.out.println();
+		for (i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Impresión del tiempo transcurrido
+		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
+	}
+	
+	/* Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000. Una vez que lo hayas
+	 * conseguido debes realizar implementar el algoritmo de ordenación llamado "Selección", con el objetivo de ordenar
+	 * el array completamente.
+	 */
+	
+	public static void ArrayB3Ej4() {
+		int array [] = new int[150];
+		
+		// Inicialización del array
+		for (int i = 0; i < array.length; i++) {
+			array[i] = (int) Math.round(Math.random() * 1000);
+		}
+		
+		// Impresión del array antes de la ordenación
+		System.out.println();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		long millisAntes = new Date().getTime();
+		
+		// Ordenación por el método QuickSort
+		int minimo, swap;
+	  	
+		for (int i = 0 ; i < array.length-1 ; i++) {
+	    	minimo=i;
+	    	for(int j = i+1 ; j < array.length ; j++) {
+	        	if (array[minimo] > array[j]) 
+	           		minimo=j;
+	        }
+	     	swap=array[minimo];
+	     	array[minimo] = array[i];
+	     	array[i] = swap;
+	  	}
+
+
+		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		long millisDespues = new Date().getTime();		
+		
+		// Impresión del array después de la ordenación
+		System.out.println();
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+		
+		// Impresión del tiempo transcurrido
+		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
+	}
+	
+	// Menu para una aplicacion
+	public static void Menu () {
+		String menu = "MENU\n"
+				+ "1.- Calculo de la hipotenusa de un triangulo.\n"
+				+ "2.- Calculo de la superficie de una circulo.\n"
+				+ "3.- Calculo del perimetro de una circunferencia.\n"
+				+ "4.- Calculo del area de un rectangulo.\n"
+				+ "5.- Calculo del area de un triangulo.\n"
+				+ "0.- Salir de la aplicacion.";
+		int opcion = -1,n1, n2;
+		double resultado;
+		
+		do {
+			try {
+				opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+				switch (opcion) {
+				case 0:
+					System.exit(0); // Acaba radicalmente con la ejecuciï¿½n
+					break;
+				case 1: //Hipotenusa
+					n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud del cateto numero 1"));
+					n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud del cateto numero 2"));
+					resultado = Math.pow(n1, 2) + Math.pow(n2, 2); // n1 y n2 elevados a 2
+					resultado = Math.sqrt(resultado); //Raiz cuadrada del resultado
+					JOptionPane.showMessageDialog(null, "Hipotenusa: " + resultado);
+					break;
+				case 2: // superficie
+					n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el radio de la circunferencia"));
+					resultado = Math.pow(n1, 2);
+					resultado = resultado * Math.PI;
+					JOptionPane.showMessageDialog(null, "Superficie de la circunferencia: " + resultado);
+					break;
+				case 3: //Perimetro
+					n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca el radio de la circunferencia"));
+					resultado = 2*Math.PI*n1;
+					JOptionPane.showMessageDialog(null, "Perimetro: " + resultado);
+					break;
+				case 4: //Area Rectagulo
+					n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud de la base del rectangulo"));
+					n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la altura del rectangulo"));
+					resultado = n1*n2;
+					JOptionPane.showMessageDialog(null, "Area del rectangulo: " + resultado);
+					break;
+				case 5: //Area Triangulo
+					n1 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la longitud de la base del triangulo"));
+					n2 =Integer.parseInt(JOptionPane.showInputDialog("Introduzca la altura del triangulo"));
+					resultado = (n1*n2)/2;
+					JOptionPane.showMessageDialog(null, "Area del triangulo: " + resultado);
+					break;
+				default:
+					JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
+				}		
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
+			}
+					
+		} while (opcion!=0);
+	}
+	
 }

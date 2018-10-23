@@ -1083,7 +1083,7 @@ public class codigo01 {
 				+ "0.- Salir de la aplicacion.";
 		
 		int n1, n2;
-		int opcion =0;
+		int opcion;
 		double resultado = 0d;
 		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
 		
