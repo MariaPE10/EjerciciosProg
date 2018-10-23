@@ -51,11 +51,11 @@ public class Utils {
 		int numeroPedido3 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el tercer numero"));
 		float numeroPedido4 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el cuarto numero"));
 		
-		Utils objetoMedia = new Utils();
-		objetoMedia.sumaEnteros();
+		Utils Media = new Utils();
+		Media.sumaEnteros(numeroPedido1,numeroPedido2, numeroPedido3 );
 		
-		System.out.println("Suma total: " + objetoMedia.sumaTotal());
-		System.out.println("Media total: " + objetoMedia.mediaTotal());
+		System.out.println("Suma total: " + Media.sumaTotal(numeroPedido4, numeroPedido3, numeroPedido3, numeroPedido3));
+		System.out.println("Media total: " + Media.mediaTotal(numeroPedido4, numeroPedido3, numeroPedido3, numeroPedido3));
 	}
 	
 }
