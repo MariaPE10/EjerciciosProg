@@ -35,7 +35,7 @@ public class Utils {
 		
 		return mediaEnteros;
 	}
-	
+	//Media de 4 numeros (hace falta crear el objeto par ausarlo)
 	public float mediaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {
 		
 		float mediaTotal = 0;
@@ -44,6 +44,12 @@ public class Utils {
 		
 		return mediaTotal;
 	}
+	//media de 4 numeros
+	public static float media4Valores (int num1, int num2, int num3, float num4) {
+		float media = (num1 + num2 + num3 + num4) / 4;
+		return media;
+	}
+	
 	//Pide un numero entero 
 	public static int pideNumeroEntero() {
 		
@@ -61,6 +67,34 @@ public class Utils {
 		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
 		
 		return num;
+	}
+	//Pide un numero Entero entre dos límites
+	public static int pideNumeroEntero (int limInf, int limSup) {
+		
+		int num;
+		do {
+			num = Integer.parseInt(JOptionPane.showInputDialog(
+					"Introduzca número: "));
+		} while (num < limInf || num > limSup);
+		
+		return num;
+	}
+	//Averigua el mayor de dos numeros introducidos.
+	public static int mayor (int num1, int num2) {
+		if (num1 > num2) {
+			return num1;
+		}
+		else {
+			return num2;
+		}
+	}
+	//Pide dos numeros y averigua el mayor de ellos
+	public static int peticion2NumerosYMayor () {
+		int pepe = pideNumeroEntero(0, 10);
+		int juan = pideNumeroEntero(0, 10);
+		
+		int mayor = mayor (pepe, juan);
+		return mayor;
 	}
 	
 	public static void main(String[] args) {

@@ -58,12 +58,12 @@ public class codigo03 {
 		max=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el limite superior:"));
 		
 		for (int i = 0; i < array.length; i++) {
-			array[i] = ((int) Math.round(Math.random() * (max-min)))+min;
+			array[i] = ((int) Math.round(Math.random() * (max-min)))+min; //Genera un numero aleatorio entre un maximo y un minimo
 			System.out.println("Numero[" + i + "]: " + array[i]);
 		}
 		
-		System.out.println("Límite superior: " + max);
-		System.out.println("Límite inferior: " + min);
+		System.out.println("Limite superior: " + max);
+		System.out.println("Limite inferior: " + min);
 		
 	}
 	
@@ -103,6 +103,7 @@ public class codigo03 {
 				numEncontrado = true;
 			}
 		}
+		// Si al acabar de recorrer el array no hemos encontrado el valor buscado, debemos informar
 		if (!numEncontrado){
 			System.out.println("El numero que ha introducido no ha sido encontrado" + num);
 		}
@@ -514,7 +515,7 @@ public class codigo03 {
 	}
 	
 	/* Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000. Una vez que lo hayas
-	 * conseguido debes realizar implementar el algoritmo de ordenaci�n llamado "Selecci�n", con el objetivo de ordenar
+	 * conseguido debes realizar implementar el algoritmo de ordenaci�n llamado "Seleccion", con el objetivo de ordenar
 	 * el array completamente.
 	 */
 	
@@ -572,7 +573,7 @@ public class codigo03 {
 				+ "4.- Calculo del area de un rectangulo.\n"
 				+ "5.- Calculo del area de un triangulo.\n"
 				+ "0.- Salir de la aplicacion.";
-		int opcion = -1,n1, n2, prueba;
+		int opcion = -1,n1, n2;
 		double resultado;
 		
 		do {
