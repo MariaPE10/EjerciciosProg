@@ -4,9 +4,9 @@ import javax.swing.JOptionPane;
 
 public class Utils {
 
-/* Ejercicio 1: Realiza un método que reciba como parámetros de entrada tres valores enteros y uno flotante.
-  * El método debe devolver la media aritmética de los cuatro valores, un valor flotante.
-  * "main" debe usar a esta función creada por ti, e imprimir el valor de la media en la consola de salida.
+/* Ejercicio 1: Realiza un mï¿½todo que reciba como parï¿½metros de entrada tres valores enteros y uno flotante.
+  * El mï¿½todo debe devolver la media aritmï¿½tica de los cuatro valores, un valor flotante.
+  * "main" debe usar a esta funciï¿½n creada por ti, e imprimir el valor de la media en la consola de salida.
   */
 	
 	public int sumaEnteros(int num1, int num2, int num3) {
@@ -44,12 +44,30 @@ public class Utils {
 		
 		return mediaTotal;
 	}
+	//Pide un numero entero 
+	public static int pideNumeroEntero() {
+		
+		int num;
+		
+		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
+		
+		return num;
+	}
+	//Pide un numero float
+	public static float pideNumeroFloat() {
+		
+		float num;
+		
+		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
+		
+		return num;
+	}
 	
 	public static void main(String[] args) {
-		int numeroPedido1 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
-		int numeroPedido2 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
-		int numeroPedido3 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el tercer numero"));
-		float numeroPedido4 = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el cuarto numero"));
+		int numeroPedido1 = pideNumeroEntero();
+		int numeroPedido2 = pideNumeroEntero();
+		int numeroPedido3 = pideNumeroEntero();
+		float numeroPedido4 = pideNumeroFloat();
 		
 		Utils Media = new Utils();
 		Media.sumaEnteros(numeroPedido1,numeroPedido2, numeroPedido3 );

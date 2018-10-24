@@ -422,21 +422,21 @@ public class codigo03 {
 	public static void ArrayB3Ej2B() {
 		int array [] = new int[150];
 		
-		// Inicialización del array
+		// Inicializaciï¿½n del array
 		for (int i = 0; i < array.length; i++) {
 			array[i] = (int) Math.round(Math.random() * 1000);
 		}
 		
-		// Impresión del array antes de la ordenación
+		// Impresiï¿½n del array antes de la ordenaciï¿½n
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenaciï¿½n
 		long millisAntes = new Date().getTime();
 		
-		// Ordenación por el método de la inserción directa
+		// Ordenaciï¿½n por el mï¿½todo de la inserciï¿½n directa
 		for(int i = 1; i < array.length; i++) { 
 			int j = i; 
 			int aux = array[j]; 
@@ -447,50 +447,50 @@ public class codigo03 {
 			array[j] = aux; 
 		}
 	
-		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		// Toma del tiempo (en milisegundos) despuï¿½s de terminar la ordenaciï¿½n
 		long millisDespues = new Date().getTime();		
 		
-		// Impresión del array después de la ordenación
+		// Impresiï¿½n del array despuï¿½s de la ordenaciï¿½n
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Impresión del tiempo transcurrido
+		// Impresiï¿½n del tiempo transcurrido
 		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
 	}
 	
 	/* Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000. Una vez que lo hayas 
-	 * conseguido debes realizar implementar el algoritmo de ordenación llamado "Shell", con el objetivo de ordenar el array 
+	 * conseguido debes realizar implementar el algoritmo de ordenaciï¿½n llamado "Shell", con el objetivo de ordenar el array 
 	 * completamente. 
 	 */
 	
 	public static void ArrayB3Ej3() {
 		int array [] = new int[150];
 			
-		// Inicialización del array
+		// Inicializaciï¿½n del array
 		for (int i = 0; i < array.length; i++) {
 			array[i] = (int) Math.round(Math.random() * 1000);
 		}
 		
-		// Impresión del array antes de la ordenación
+		// Impresiï¿½n del array antes de la ordenaciï¿½n
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenaciï¿½n
 		long millisAntes = new Date().getTime();
 		
-		// Ordenación por el método Shell
+		// Ordenaciï¿½n por el mï¿½todo Shell
 		int salto, aux, i;
 		boolean cambios;
 		for(salto=array.length/2; salto!=0; salto/=2){
 			cambios=true;
-			while(cambios){ // Mientras se intercambie algún elemento
+			while(cambios){ // Mientras se intercambie algï¿½n elemento
 				cambios=false;
 				for(i=salto; i< array.length; i++) { // se da una pasada
-					if(array[i-salto]>array[i]) { // y si están desordenados
+					if(array[i-salto]>array[i]) { // y si estï¿½n desordenados
 						aux=array[i]; // se reordenan
 						array[i]=array[i-salto];
 						array[i-salto]=aux;
@@ -500,42 +500,42 @@ public class codigo03 {
 			}
 	    }
 
-		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		// Toma del tiempo (en milisegundos) despuï¿½s de terminar la ordenaciï¿½n
 		long millisDespues = new Date().getTime();		
 		
-		// Impresión del array después de la ordenación
+		// Impresiï¿½n del array despuï¿½s de la ordenaciï¿½n
 		System.out.println();
 		for (i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Impresión del tiempo transcurrido
+		// Impresiï¿½n del tiempo transcurrido
 		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
 	}
 	
 	/* Realiza un ejercicio que inicialice un array de 150 elementos enteros al azar entre 0 y 1.000. Una vez que lo hayas
-	 * conseguido debes realizar implementar el algoritmo de ordenación llamado "Selección", con el objetivo de ordenar
+	 * conseguido debes realizar implementar el algoritmo de ordenaciï¿½n llamado "Selecciï¿½n", con el objetivo de ordenar
 	 * el array completamente.
 	 */
 	
 	public static void ArrayB3Ej4() {
 		int array [] = new int[150];
 		
-		// Inicialización del array
+		// Inicializaciï¿½n del array
 		for (int i = 0; i < array.length; i++) {
 			array[i] = (int) Math.round(Math.random() * 1000);
 		}
 		
-		// Impresión del array antes de la ordenación
+		// Impresiï¿½n del array antes de la ordenaciï¿½n
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Toma del tiempo (en milisegundos) antes de comenzar la ordenación
+		// Toma del tiempo (en milisegundos) antes de comenzar la ordenaciï¿½n
 		long millisAntes = new Date().getTime();
 		
-		// Ordenación por el método QuickSort
+		// Ordenaciï¿½n por el mï¿½todo QuickSort
 		int minimo, swap;
 	  	
 		for (int i = 0 ; i < array.length-1 ; i++) {
@@ -550,16 +550,16 @@ public class codigo03 {
 	  	}
 
 
-		// Toma del tiempo (en milisegundos) después de terminar la ordenación
+		// Toma del tiempo (en milisegundos) despuï¿½s de terminar la ordenaciï¿½n
 		long millisDespues = new Date().getTime();		
 		
-		// Impresión del array después de la ordenación
+		// Impresiï¿½n del array despuï¿½s de la ordenaciï¿½n
 		System.out.println();
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
 		
-		// Impresión del tiempo transcurrido
+		// Impresiï¿½n del tiempo transcurrido
 		System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 ));
 	}
 	
@@ -572,7 +572,7 @@ public class codigo03 {
 				+ "4.- Calculo del area de un rectangulo.\n"
 				+ "5.- Calculo del area de un triangulo.\n"
 				+ "0.- Salir de la aplicacion.";
-		int opcion = -1,n1, n2;
+		int opcion = -1,n1, n2, prueba;
 		double resultado;
 		
 		do {
