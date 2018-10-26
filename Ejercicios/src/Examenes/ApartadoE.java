@@ -1,4 +1,4 @@
-
+package Examenes;
 public class ApartadoE {
 
 	/*Crea una clase con un método “main” que cree un array de 20 posiciones 

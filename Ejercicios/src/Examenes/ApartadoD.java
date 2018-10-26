@@ -1,4 +1,4 @@
-
+package Examenes;
 public class ApartadoD {
 	/* Crea una clase con un método “main” que cree un array de 5 posiciones con
 	 * números generados al azar entre 0 y 100. Muestra el array. Crea un nuevo array de 5 

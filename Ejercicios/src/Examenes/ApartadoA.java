@@ -1,3 +1,5 @@
+package Examenes;
+
 
 public class ApartadoA {
  /* Crea una clase con un método “main” que cree un array con 100 elementos de 
