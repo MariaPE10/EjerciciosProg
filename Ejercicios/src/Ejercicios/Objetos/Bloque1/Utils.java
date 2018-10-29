@@ -9,8 +9,9 @@ public class Utils {
   * "main" debe usar a esta funciï¿½n creada por ti, e imprimir el valor de la media en la consola de salida.
   */
 	
+	//metodo que suma tres numeros enteros.
+	// Lo que estÃ¡ entre parentesis son los argumentos de entrada
 	public int sumaEnteros(int num1, int num2, int num3) {
-		
 		int acumulado = 0;
 		
 		acumulado += num1;
@@ -22,27 +23,25 @@ public class Utils {
 	
 	public float sumaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {		
 		
-		float sumaTotal = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3) + numeroFloat;
+		float resultado = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3) + numeroFloat;
 		
-		return sumaTotal;		
+		return resultado;		
 	}
 
 	public float mediaEnteros(int numeroEntero1, int numeroEntero2, int numeroEntero3) {
+		float resultado = 0;
 		
-		float mediaEnteros = 0;
+		resultado = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3)/3;
 		
-		mediaEnteros = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3)/3;
-		
-		return mediaEnteros;
+		return resultado;
 	}
 	//Media de 4 numeros (hace falta crear el objeto par ausarlo)
 	public float mediaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {
+		float resultado = 0;
 		
-		float mediaTotal = 0;
+		resultado = sumaTotal(numeroFloat, numeroEntero1, numeroEntero2, numeroEntero3)/4;
 		
-		mediaTotal = sumaTotal(numeroFloat, numeroEntero1, numeroEntero2, numeroEntero3)/4;
-		
-		return mediaTotal;
+		return resultado;
 	}
 	//media de 4 numeros
 	public static float media4Valores (int num1, int num2, int num3, float num4) {
@@ -52,7 +51,6 @@ public class Utils {
 	
 	//Pide un numero entero 
 	public static int pideNumeroEntero() {
-		
 		int num;
 		
 		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
@@ -61,26 +59,26 @@ public class Utils {
 	}
 	//Pide un numero float
 	public static float pideNumeroFloat() {
-		
 		float num;
 		
 		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
 		
 		return num;
 	}
-	//Pide un numero Entero entre dos límites
+	//Pide un numero Entero entre dos lï¿½mites
 	public static int pideNumeroEntero (int limInf, int limSup) {
-		
 		int num;
+		
 		do {
 			num = Integer.parseInt(JOptionPane.showInputDialog(
-					"Introduzca número: "));
+					"Introduzca nï¿½mero: "));
 		} while (num < limInf || num > limSup);
 		
 		return num;
 	}
 	//Averigua el mayor de dos numeros introducidos.
 	public static int mayor (int num1, int num2) {
+		
 		if (num1 > num2) {
 			return num1;
 		}
@@ -92,7 +90,7 @@ public class Utils {
 	public static int peticion2NumerosYMayor () {
 		int pepe = pideNumeroEntero(0, 10);
 		int juan = pideNumeroEntero(0, 10);
-		
+	
 		int mayor = mayor (pepe, juan);
 		return mayor;
 	}

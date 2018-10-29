@@ -2,7 +2,7 @@ package Examenes;
 
 import javax.swing.JOptionPane;
 
-public class repasoArrays {
+public class RepasoArrays {
 
 	public static void main(String[] args) {
 		Ejercicio04();
@@ -81,7 +81,7 @@ public class repasoArrays {
 			
 		}
 		
-		//meter un salto de línea
+		//meter un salto de lï¿½nea
 		System.out.println();
 		
 		// ejemplo declarar valores al inicializar el array int auxiliar[] = {1,2,3,4}; 
@@ -116,7 +116,7 @@ public class repasoArrays {
 		return encontrado;
 	}
 	
-	// Ejercicio 5: Encuentra el minimo y el máximo valor en un array aleatorio como el primero.
+	// Ejercicio 5: Encuentra el minimo y el mï¿½ximo valor en un array aleatorio como el primero.
 	
 	public static void Ejercicio05 () {
 		int longitudArray, menor, mayor;
@@ -172,11 +172,11 @@ public class repasoArrays {
 		System.out.println("El segundo menor es: " + segundoMenor);
 	}
 	
-	// Ejercicio 7: Realiza un programa que inicialmente cree un array con valores aleatorios comprendidos entre el 1 y el 3 incluidos, de tamaño 10.
-	//Tras mostrarlo por pantalla, adelanta el array tantas veces como indique el elemento en la posición 8 (0 a 9).
+	// Ejercicio 7: Realiza un programa que inicialmente cree un array con valores aleatorios comprendidos entre el 1 y el 3 incluidos, de tamaï¿½o 10.
+	//Tras mostrarlo por pantalla, adelanta el array tantas veces como indique el elemento en la posiciï¿½n 8 (0 a 9).
 	
 	
-	// Ejercicio 8: Realiza un programa que compruebe si dos arrays contienen los mismos valores aunque estén desordenados 
+	// Ejercicio 8: Realiza un programa que compruebe si dos arrays contienen los mismos valores aunque estï¿½n desordenados 
 	// [1,4,3,6,8] > [2,3,8,4,1]
 	// [2,5,4,1] > [5,4,2,1]
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.swing.JOptionPane;
 
-public class ex2017 {
+public class Ex2017 {
 
 	public static void main(String[] args) {
 		Ejercicio03();
@@ -85,7 +85,7 @@ public class ex2017 {
 			num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 			acumulado = 0;
 			if (num!=0) { //Sirve para que en caso de que el numero sea 0 no imprima nada
-				// Toma del tiempo (en milisegundos) antes de comenzar la ordenación HAY QUE HACER UN IMPORT!!
+				// Toma del tiempo (en milisegundos) antes de comenzar la ordenaciï¿½n HAY QUE HACER UN IMPORT!!
 				long millisAntes = new Date().getTime();
 						
 				//Divisores de un numero
@@ -95,9 +95,9 @@ public class ex2017 {
 						acumulado++;
 					}	
 				}
-				// Toma del tiempo (en milisegundos) después de terminar la ordenación
+				// Toma del tiempo (en milisegundos) despuï¿½s de terminar la ordenaciï¿½n
 				long millisDespues = new Date().getTime();	
-				// Impresión del tiempo transcurrido
+				// Impresiï¿½n del tiempo transcurrido
 				System.out.print("\nTiempo transcurrido (en segundos): " + ((float) (millisDespues - millisAntes) / 1000 )+ "\nResultados encontrados: " + acumulado);
 			}
 		}

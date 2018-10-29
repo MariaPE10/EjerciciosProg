@@ -2,18 +2,18 @@ package Ejercicios.Objetos.Bloque1;
 
 import javax.swing.JOptionPane;
 
-/* Ejercicio 1: Realiza un método que reciba como parámetros de entrada tres valores enteros y uno flotante.
-  * El método debe devolver la media aritmética de los cuatro valores, un valor flotante.
-  * "main" debe usar a esta función creada por ti, e imprimir el valor de la media en la consola de salida.
+/* Ejercicio 1: Realiza un mï¿½todo que reciba como parï¿½metros de entrada tres valores enteros y uno flotante.
+  * El mï¿½todo debe devolver la media aritmï¿½tica de los cuatro valores, un valor flotante.
+  * "main" debe usar a esta funciï¿½n creada por ti, e imprimir el valor de la media en la consola de salida.
   */
 public class Media {
-	
+	//Declaracion de propiedades de la clase.
 	public int numeroEntero;
 	public int numeroEntero2;
 	public int numeroEntero3;
 	public float numeroFloat;
 	
-	//Constructor, es un método que construye tu objeto
+	//Constructor, es un metodo que construye tu objeto
 	public Media(int num1, int num2, int num3, float bollo) {
 		this.numeroEntero = num1;
 		this.numeroEntero2 = num2;
@@ -21,6 +21,7 @@ public class Media {
 		this.numeroFloat = bollo;
 	}
 	
+	//Constructor, es un metodo que construye tu objeto
 	public Media() {
 		this.numeroEntero = 0;
 		this.numeroEntero2 = 0;
@@ -28,6 +29,7 @@ public class Media {
 		this.numeroFloat = 0;
 	}
 	
+	//Constructor, es un metodo que construye tu objeto.
 	public Media(int num1) {
 		this.numeroEntero = num1;
 		this.numeroEntero2 = 0;
@@ -35,8 +37,8 @@ public class Media {
 		this.numeroFloat = 0;
 	}
 	
+	//metodo que suma tres numeros enteros.
 	public int sumaEnteros() {
-		
 		int acumulado = 0;
 		
 		acumulado = sumar(acumulado,this.numeroEntero);
@@ -48,9 +50,9 @@ public class Media {
 	
 	public float sumaTotal() {		
 		
-		float sumaTotal = sumaEnteros() + this.numeroFloat;	
+		float resultado = sumaEnteros() + this.numeroFloat;	
 		
-		return sumaTotal;		
+		return resultado;	
 	}
 	
 	// metodo para encapsular funcionalidad repetida que en este caso es
@@ -61,21 +63,19 @@ public class Media {
 	}
 
 	public float mediaEnteros() {
+		float resultado = 0;
 		
-		float mediaEnteros = 0;
+		resultado = sumaEnteros()/3;
 		
-		mediaEnteros = sumaEnteros()/3;
-		
-		return mediaEnteros;
+		return resultado;
 	}
 	
 	public float mediaTotal() {
+		float resultado = 0;
 		
-		float mediaTotal = 0;
+		resultado = sumaTotal()/4;
 		
-		mediaTotal = sumaTotal()/4;
-		
-		return mediaTotal;
+		return resultado;
 	}
 	
 	public static void main(String[] args) {
