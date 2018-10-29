@@ -11,7 +11,8 @@ public class Utils {
 	
 	//metodo que suma tres numeros enteros.
 	// Lo que está entre parentesis son los argumentos de entrada
-	public int sumaEnteros(int num1, int num2, int num3) {
+	public static int sumaEnteros(int num1, int num2, int num3) {
+		
 		int acumulado = 0;
 		
 		acumulado += num1;
@@ -21,14 +22,14 @@ public class Utils {
 		return acumulado;
 	}
 	
-	public float sumaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {		
+	public static float sumaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {		
 		
 		float resultado = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3) + numeroFloat;
 		
 		return resultado;		
 	}
 
-	public float mediaEnteros(int numeroEntero1, int numeroEntero2, int numeroEntero3) {
+	public static float mediaEnteros(int numeroEntero1, int numeroEntero2, int numeroEntero3) {
 		float resultado = 0;
 		
 		resultado = sumaEnteros(numeroEntero1,numeroEntero2,numeroEntero3)/3;
@@ -36,7 +37,7 @@ public class Utils {
 		return resultado;
 	}
 	//Media de 4 numeros (hace falta crear el objeto par ausarlo)
-	public float mediaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {
+	public static float mediaTotal(float numeroFloat, int numeroEntero1, int numeroEntero2, int numeroEntero3) {
 		float resultado = 0;
 		
 		resultado = sumaTotal(numeroFloat, numeroEntero1, numeroEntero2, numeroEntero3)/4;
@@ -49,19 +50,27 @@ public class Utils {
 		return media;
 	}
 	
-	//Pide un numero entero 
-	public static int pideNumeroEntero() {
+	/**
+	 * Pide un numero entero al usuario, con un mensaje.
+	 * @param mensaje
+	 * @return devuelve un numero entero pedido al usuario.
+	 */
+	public static int pideNumeroEntero(String mensaje) {
 		int num;
 		
-		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
+		num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 		
 		return num;
 	}
-	//Pide un numero float
-	public static float pideNumeroFloat() {
+	/**
+	 * Pide un numero entero al usuario, con un mensaje.
+	 * @param mensaje
+	 * @return devuelve un numero flotante dado por el usuario.
+	 */
+	public static float pideNumeroFloat(String mensaje) {
 		float num;
 		
-		num = Integer.parseInt(JOptionPane.showInputDialog("Introduzca numero entero"));
+		num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
 		
 		return num;
 	}
@@ -96,16 +105,13 @@ public class Utils {
 	}
 	
 	public static void main(String[] args) {
-		int numeroPedido1 = pideNumeroEntero();
-		int numeroPedido2 = pideNumeroEntero();
-		int numeroPedido3 = pideNumeroEntero();
-		float numeroPedido4 = pideNumeroFloat();
+		int numeroPedido1 = pideNumeroEntero("Introduzca numero entero");
+		int numeroPedido2 = pideNumeroEntero("Introduzca numero entero");
+		int numeroPedido3 = pideNumeroEntero("Introduzca numero entero");
+		float numeroPedido4 = pideNumeroFloat("Introduzca numero flotante");
 		
-		Utils Media = new Utils();
-		Media.sumaEnteros(numeroPedido1,numeroPedido2, numeroPedido3 );
-		
-		System.out.println("Suma total: " + Media.sumaTotal(numeroPedido4, numeroPedido3, numeroPedido3, numeroPedido3));
-		System.out.println("Media total: " + Media.mediaTotal(numeroPedido4, numeroPedido3, numeroPedido3, numeroPedido3));
+		System.out.println("Suma total: " + Utils.sumaTotal(numeroPedido4, numeroPedido1, numeroPedido2, numeroPedido3));
+		System.out.println("Media total: " + Utils.mediaTotal(numeroPedido4, numeroPedido1, numeroPedido2, numeroPedido3));
 	}
 	
 }
