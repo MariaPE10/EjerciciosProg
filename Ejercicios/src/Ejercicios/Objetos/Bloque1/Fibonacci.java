@@ -2,11 +2,11 @@ package Ejercicios.Objetos.Bloque1;
 
 import javax.swing.JOptionPane;
 
-/* Ejercicio 4: La serie de Fibonacci es una serie numérica que comienza en los números 1, 1 y continua de forma infinita,
+/* Ejercicio 4: La serie de Fibonacci es una serie numï¿½rica que comienza en los nï¿½meros 1, 1 y continua de forma infinita,
   * calculando cada mienbro de la serie como la suma de los dos anteriores. De esta manera, la serie de Fibonacci
-  * comienza 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.......... Debes crear un método llamado "fibonacci". El método
-  * recibirá dos argumentos de entrada, de tipo entero. Los dos argumentos deben ser miembros de la serie de Fibonacci.
-  * El método debe imprimir en pantalla los siguientes 5 términos de la serie de Fibonacci.
+  * comienza 1, 1, 2, 3, 5, 8, 13, 21, 34, 55.......... Debes crear un mï¿½todo llamado "fibonacci". El mï¿½todo
+  * recibirï¿½ dos argumentos de entrada, de tipo entero. Los dos argumentos deben ser miembros de la serie de Fibonacci.
+  * El mï¿½todo debe imprimir en pantalla los siguientes 5 tï¿½rminos de la serie de Fibonacci.
   */
 public class Fibonacci {
 	/**
@@ -23,7 +23,7 @@ public class Fibonacci {
 	}
 			
 	/**
-	 * Este método recibe dos parametros: El primero determina el valor de la primera posición en el array, el segundo la segunda posicion.
+	 * Este metodo recibe dos parametros: El primero determina el valor de la primera posicion en el array, el segundo la segunda posicion.
 	 */
 	public static void fibonacci(int primeraPosicion, int segundaPosicion) {
 		int array[] = new int [7];
