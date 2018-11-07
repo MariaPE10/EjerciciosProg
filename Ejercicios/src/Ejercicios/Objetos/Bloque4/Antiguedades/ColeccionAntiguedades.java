@@ -2,15 +2,15 @@ package Ejercicios.Objetos.Bloque4.Antiguedades;
 
 import javax.swing.JOptionPane;
 
-/*Crear un programa que use la herencia para gestionar una colección de antigüedades.
- * Todas las antigüedades tienen datos en común, como año de fabricación, el origen y el
- * precio de venta, pero cada tipo particular de antigüedad tiene datos específicos. Por ejemplo,
- * las joyas tienen un material de fabricación. Los libros tienen un autor y título, etc... El
- * programa podrá crear y gestionar antigüedades  de 4 tipos diferentes. Deberás crear las clases
- * necesarias, con sus variables de instancia, métodos para actualizar y consultar las variables,
- * constructores, y métodos para imprimir en pantalla el objeto. Para probar las clases, deberás crear
- * una clase llamada "ColeccionAntiguedades", que pida los datos sobre una antigüedad (el tipo, datos comunes,
- * datos específicos), cree el objeto de la clase correspondiente, y posteriormente lo imprima en pantalla. 
+/*Crear un programa que use la herencia para gestionar una colecciï¿½n de antigï¿½edades.
+ * Todas las antigï¿½edades tienen datos en comï¿½n, como aï¿½o de fabricaciï¿½n, el origen y el
+ * precio de venta, pero cada tipo particular de antigï¿½edad tiene datos especï¿½ficos. Por ejemplo,
+ * las joyas tienen un material de fabricaciï¿½n. Los libros tienen un autor y tï¿½tulo, etc... El
+ * programa podrï¿½ crear y gestionar antigï¿½edades  de 4 tipos diferentes. Deberï¿½s crear las clases
+ * necesarias, con sus variables de instancia, mï¿½todos para actualizar y consultar las variables,
+ * constructores, y mï¿½todos para imprimir en pantalla el objeto. Para probar las clases, deberï¿½s crear
+ * una clase llamada "ColeccionAntiguedades", que pida los datos sobre una antigï¿½edad (el tipo, datos comunes,
+ * datos especï¿½ficos), cree el objeto de la clase correspondiente, y posteriormente lo imprima en pantalla. 
  */
 public class ColeccionAntiguedades {
 
@@ -20,20 +20,24 @@ public class ColeccionAntiguedades {
 		String origen;
 		float precio;
 		
-		anioFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el año de fabricación de la antigüedad"));
-		origen = String.valueOf(JOptionPane.showInputDialog("Introduzca el origen de la antigüedad"));
-		precio = Float.parseFloat(JOptionPane.showInputDialog("Introduzca el precio de la antigüedad"));
+		anioFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el anio de fabricacion de la antiguedad"));
+		origen = String.valueOf(JOptionPane.showInputDialog("Introduzca el origen de la antiguedad"));
+		precio = Float.parseFloat(JOptionPane.showInputDialog("Introduzca el precio de la antiguedad"));
 		
 		int opcion;
-		String menu = "¿Qué tipo de Antigüedad es?\n"
-				+ "1.- Es solo una Antigüedad\n"
+		String menu = "Que tipo de Antiguedad es?\n"
+				+ "1.- Es solo una Antiguedad\n"
 				+ "2.- Crea una Joya\n"
-				+ "3.- Crea una Libro\n"
-				+ "4.- Crea una Jarron\n"
-				+ "5.- Crea una Cuadros\n"
+				+ "3.- Crea un Libro\n"
+				+ "4.- Crea un Jarron\n"
+				+ "5.- Crea un Cuadro\n"
 				+ "0.- Salir de la aplicacion.";
 		
 		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+		
+		//Crear los toString de cada clase hija.
+		//Crear el constructor por defecto e inicializa el atributo especifico de la clase en el constructor por defecto.
+		//Crear un constructor que inicialice los atributos de la clase padre y tambien el atributo especifico de la clase hija.
 		switch (opcion) {
 		case 0:
 			System.exit(0); // Acaba radicalmente con la ejecuciï¿½n
@@ -42,21 +46,28 @@ public class ColeccionAntiguedades {
 			Antiguedad antiguedad01 = new Antiguedad(anioFabricacion, origen, precio);
 			JOptionPane.showMessageDialog(null, antiguedad01.toString());
 			break;
-		case 2: // Joyas
-			String materialFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el material de fabricación de la joya"));
-			Joyas joya01 = new Joyas(anioFabricacion, origen, precio, materialFabricacion);
+		case 2: // Joya
+			String materialFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el material de fabricacion de la joya"));
+			Joya joya01 = new Joya(anioFabricacion, origen, precio, materialFabricacion);
 			JOptionPane.showMessageDialog(null, joya01.toString());
 			break;
-		case 3: //Libros
-			// Crear los toString de cada clase hija.
-			//Crear el constructor por defecto e inicializa el atributo especifico de la clase en el constructor por defecto.
-			//Crear un constructor que inicialice los atributos de la clase padre y tambien el atributo especifico de la clase hija.
+		case 3: //Libro
+			String autor = String.valueOf(JOptionPane.showInputDialog("Introduzca el autor del libro"));
+			String titulo = String.valueOf(JOptionPane.showInputDialog("Introduzca el titulo del libro"));
+			Libro libro01 = new Libro (anioFabricacion, origen, precio, autor, titulo);
+			JOptionPane.showMessageDialog(null, libro01.toString());
 			break;
-		case 4: //Jarrones
-			
+		case 4: //Jarron
+			String material = String.valueOf(JOptionPane.showInputDialog("Introduzca el material del jarron"));
+			String estilo = String.valueOf(JOptionPane.showInputDialog("Introduzca el estilo del jarron"));
+			Jarron jarron01 = new Jarron (anioFabricacion, origen, precio, material, estilo);
+			JOptionPane.showMessageDialog(null, jarron01.toString());
 			break;
-		case 5: // Cuadros
-		
+		case 5: // Cuadro
+			String pintor = String.valueOf(JOptionPane.showInputDialog("Introduzca el Nombre del pintor del cuadro"));
+			String nombre = String.valueOf(JOptionPane.showInputDialog("Introduzca el Nombre del cuadro"));
+			Cuadro cuadro01 = new Cuadro (anioFabricacion, origen, precio, pintor, nombre);
+			JOptionPane.showMessageDialog(null, cuadro01.toString());
 			break;
 		default:
 			JOptionPane.showMessageDialog(null, "Opcion Incorrecta");

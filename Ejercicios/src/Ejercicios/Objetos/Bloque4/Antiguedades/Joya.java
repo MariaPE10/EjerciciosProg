@@ -1,13 +1,13 @@
 package Ejercicios.Objetos.Bloque4.Antiguedades;
 
-public class Joyas extends Antiguedad {
+public class Joya extends Antiguedad {
 
 	private String materialFabricacion;
 	
 	/**
-	 * 
+	 * Crear el constructor por defecto e inicializa el atributo especifico de la clase.
 	 */
-	public Joyas() {
+	public Joya() {
 		super();
 		materialFabricacion = "";
 	}
@@ -16,7 +16,7 @@ public class Joyas extends Antiguedad {
 	 * 
 	 * @param materialFabricacion
 	 */
-	public Joyas(String materialFabricacion) {
+	public Joya(String materialFabricacion) {
 		super();
 		this.materialFabricacion = materialFabricacion;
 	}
@@ -28,7 +28,7 @@ public class Joyas extends Antiguedad {
 	 * @param precio
 	 * @param materialFacricacion
 	 */
-	public Joyas(String anioFabricacion, String origen, float precio, String materialFacricacion) {
+	public Joya(String anioFabricacion, String origen, float precio, String materialFacricacion) {
 		super(anioFabricacion, origen, precio);
 		this.materialFabricacion = materialFacricacion;
 	}
@@ -47,7 +47,7 @@ public class Joyas extends Antiguedad {
 	@Override
 	public String toString() {
 		String toStringSuper = super.toString();
-		return "Joya \nMaterial Fabricacion: " + materialFabricacion + "\n" + toStringSuper;
+		return "JOYA \nMaterial Fabricacion: " + materialFabricacion + "\n" + toStringSuper;
 	}
 	
 	

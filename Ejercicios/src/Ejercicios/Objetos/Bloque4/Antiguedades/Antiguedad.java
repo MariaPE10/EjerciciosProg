@@ -8,7 +8,7 @@ public class Antiguedad {
 	
 	
 	/**
-	 * 
+	 * Constructor por defecto, inicializa todos los atributos.
 	 */
 	public Antiguedad() {
 		super();
@@ -18,7 +18,7 @@ public class Antiguedad {
 	}
 
 	/**
-	 * 
+	 * Constructor que inicialza los atributos de la clase padre.
 	 * @param anioFabricacion
 	 * @param origen
 	 * @param precio
@@ -55,7 +55,7 @@ public class Antiguedad {
 
 	@Override
 	public String toString() {
-		return "Antiguedad \nAño Fabricacion: " + anioFabricacion + "\nOrigen: " + origen + "\nPrecio: " + precio;
+		return "\nAnio Fabricacion: " + anioFabricacion + "\nOrigen: " + origen + "\nPrecio: " + precio;
 	}
 	
 }
