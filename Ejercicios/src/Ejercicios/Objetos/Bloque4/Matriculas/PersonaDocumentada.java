@@ -31,5 +31,9 @@ public class PersonaDocumentada extends Persona {
 		this.dni = dni;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ALUMNO \nDNI: " + dni + "\nNombre: " + getNombre() + "\nApellidos: " + getApellidos()
+				+ "\nFecha de Nacimiento: " + getFechaNacimiento();
+	}
 }

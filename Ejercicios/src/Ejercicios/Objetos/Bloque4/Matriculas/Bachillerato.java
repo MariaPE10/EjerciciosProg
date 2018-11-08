@@ -31,5 +31,11 @@ public class Bachillerato extends Matricula {
 		this.modalidad = modalidad;
 	}
 
+	@Override
+	public String toString() {
+		return "\nMATRICULA BACHILLERATO \nModalidad: " + modalidad + "\nFecha de Matricula: " + getFechaMatricula()
+				+ "\nCodigo: " + getCodigo();
+	}
+
 	
 }

@@ -31,5 +31,17 @@ public class ESO extends Matricula {
 		this.pmar = pmar;
 	}
 
+	@Override
+	public String toString() {
+		String respuestaPmar = " ";
+		if (pmar == true) {
+			respuestaPmar = "Si";
+		} else {
+			respuestaPmar = "No";
+		}
+		return "\nMATRICULA DE ESO \nPmar: " + respuestaPmar + "\nFecha de Matricula: " + getFechaMatricula() 
+				+ "\nCodigo: " + getCodigo();
+	}
+
 	
 }

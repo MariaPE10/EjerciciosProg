@@ -30,5 +30,11 @@ public class PersonaNoDocumentada extends Persona {
 		this.descripcion = descripcion;
 	}
 
+	@Override
+	public String toString() {
+		return "ALUMNO \nDescripcion: " + descripcion + "\nNombre: " + getNombre() + "\nApellidos: " + getApellidos()
+		+ "\nFecha de Nacimiento: " + getFechaNacimiento();
+	}
+
 	
 }

@@ -31,5 +31,17 @@ public class FP extends Matricula {
 		this.dual = dual;
 	}
 
+	@Override
+	public String toString() {
+		String respuestaDual = " ";
+		if (dual == true) {
+			respuestaDual = "Si";
+		} else {
+			respuestaDual = "No";
+		}
+		return "\nMATRICULA DE FORMACION PROFESIONAL \nDual: " + respuestaDual + "\nFecha de Matricula: " + getFechaMatricula() 
+				+ "\nCodigo: " + getCodigo();
+	}
+
 	
 }
