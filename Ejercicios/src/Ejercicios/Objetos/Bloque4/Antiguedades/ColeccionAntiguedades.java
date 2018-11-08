@@ -2,7 +2,7 @@ package Ejercicios.Objetos.Bloque4.Antiguedades;
 
 import javax.swing.JOptionPane;
 
-/*Crear un programa que use la herencia para gestionar una colecci�n de antig�edades.
+/* Crear un programa que use la herencia para gestionar una colecci�n de antig�edades.
  * Todas las antig�edades tienen datos en com�n, como a�o de fabricaci�n, el origen y el
  * precio de venta, pero cada tipo particular de antig�edad tiene datos espec�ficos. Por ejemplo,
  * las joyas tienen un material de fabricaci�n. Los libros tienen un autor y t�tulo, etc... El
@@ -15,13 +15,13 @@ import javax.swing.JOptionPane;
 public class ColeccionAntiguedades {
 
 	public static void main(String[] args) {
-		
-		String anioFabricacion;
+		//las variables son punteros que apuntan a una direccion de la memoria
+		int anioFabricacion;
 		String origen;
 		float precio;
 		
-		anioFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el anio de fabricacion de la antiguedad"));
-		origen = String.valueOf(JOptionPane.showInputDialog("Introduzca el origen de la antiguedad"));
+		anioFabricacion = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el anio de fabricacion de la antiguedad"));
+		origen = JOptionPane.showInputDialog("Introduzca el origen de la antiguedad");
 		precio = Float.parseFloat(JOptionPane.showInputDialog("Introduzca el precio de la antiguedad"));
 		
 		int opcion;
@@ -33,46 +33,45 @@ public class ColeccionAntiguedades {
 				+ "5.- Crea un Cuadro\n"
 				+ "0.- Salir de la aplicacion.";
 		
-		opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
-		
-		//Crear los toString de cada clase hija.
-		//Crear el constructor por defecto e inicializa el atributo especifico de la clase en el constructor por defecto.
-		//Crear un constructor que inicialice los atributos de la clase padre y tambien el atributo especifico de la clase hija.
-		switch (opcion) {
-		case 0:
-			System.exit(0); // Acaba radicalmente con la ejecuci�n
-			break;
-		case 1: //Antiguedad
-			Antiguedad antiguedad01 = new Antiguedad(anioFabricacion, origen, precio);
-			JOptionPane.showMessageDialog(null, antiguedad01.toString());
-			break;
-		case 2: // Joya
-			String materialFabricacion = String.valueOf(JOptionPane.showInputDialog("Introduzca el material de fabricacion de la joya"));
-			Joya joya01 = new Joya(anioFabricacion, origen, precio, materialFabricacion);
-			JOptionPane.showMessageDialog(null, joya01.toString());
-			break;
-		case 3: //Libro
-			String autor = String.valueOf(JOptionPane.showInputDialog("Introduzca el autor del libro"));
-			String titulo = String.valueOf(JOptionPane.showInputDialog("Introduzca el titulo del libro"));
-			Libro libro01 = new Libro (anioFabricacion, origen, precio, autor, titulo);
-			JOptionPane.showMessageDialog(null, libro01.toString());
-			break;
-		case 4: //Jarron
-			String material = String.valueOf(JOptionPane.showInputDialog("Introduzca el material del jarron"));
-			String estilo = String.valueOf(JOptionPane.showInputDialog("Introduzca el estilo del jarron"));
-			Jarron jarron01 = new Jarron (anioFabricacion, origen, precio, material, estilo);
-			JOptionPane.showMessageDialog(null, jarron01.toString());
-			break;
-		case 5: // Cuadro
-			String pintor = String.valueOf(JOptionPane.showInputDialog("Introduzca el Nombre del pintor del cuadro"));
-			String nombre = String.valueOf(JOptionPane.showInputDialog("Introduzca el Nombre del cuadro"));
-			Cuadro cuadro01 = new Cuadro (anioFabricacion, origen, precio, pintor, nombre);
-			JOptionPane.showMessageDialog(null, cuadro01.toString());
-			break;
-		default:
-			JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
-		}
-
+		do {
+			opcion = Integer.parseInt(JOptionPane.showInputDialog(menu));
+			//Crear los toString de cada clase hija.
+			//Crear el constructor por defecto e inicializa el atributo especifico de la clase en el constructor por defecto.
+			//Crear un constructor que inicialice los atributos de la clase padre y tambien el atributo especifico de la clase hija.
+			switch (opcion) {
+			case 0:
+				System.exit(0); // Acaba radicalmente con la ejecucion
+				break;
+			case 1: //Antiguedad
+				Antiguedad antiguedad01 = new Antiguedad(anioFabricacion, origen, precio);
+				JOptionPane.showMessageDialog(null, antiguedad01.toString());
+				break;
+			case 2: // Joya
+				String materialFabricacion = JOptionPane.showInputDialog("Introduzca el material de fabricacion de la joya");
+				Joya joya01 = new Joya(anioFabricacion, origen, precio, materialFabricacion);
+				JOptionPane.showMessageDialog(null, joya01); //Se puede omitir el .toString()
+				break;
+			case 3: //Libro
+				String autor = JOptionPane.showInputDialog("Introduzca el autor del libro");
+				String titulo = JOptionPane.showInputDialog("Introduzca el titulo del libro");
+				Libro libro01 = new Libro (anioFabricacion, origen, precio, autor, titulo);
+				JOptionPane.showMessageDialog(null, libro01.toString());
+				break;
+			case 4: //Jarron
+				String material = JOptionPane.showInputDialog("Introduzca el material del jarron");
+				String estilo = JOptionPane.showInputDialog("Introduzca el estilo del jarron");
+				Jarron jarron01 = new Jarron (anioFabricacion, origen, precio, material, estilo);
+				JOptionPane.showMessageDialog(null, jarron01.toString());
+				break;
+			case 5: // Cuadro
+				String pintor = JOptionPane.showInputDialog("Introduzca el Nombre del pintor del cuadro");
+				String nombre = JOptionPane.showInputDialog("Introduzca el Nombre del cuadro");
+				Cuadro cuadro01 = new Cuadro (anioFabricacion, origen, precio, pintor, nombre);
+				JOptionPane.showMessageDialog(null, cuadro01.toString());
+				break;
+			default:
+				JOptionPane.showMessageDialog(null, "Opcion Incorrecta");
+			}
+		} while (opcion > 6 || opcion < 0);
 	}
-
 }

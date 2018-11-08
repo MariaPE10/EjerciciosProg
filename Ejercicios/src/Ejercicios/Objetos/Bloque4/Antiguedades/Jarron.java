@@ -6,12 +6,12 @@ public class Jarron extends Antiguedad {
 	private String estilo;
 	
 	/**
-	 * 
+	 * Crear el constructor por defecto e inicializa el atributo especifico de la clase.
 	 */
 	public Jarron() {
 		super();
-		material ="";
-		estilo ="";
+		material ="Sin especificar";
+		estilo ="Sin especificar";
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class Jarron extends Antiguedad {
 	 * @param material
 	 * @param estilo
 	 */
-	public Jarron(String anioFabricacion, String origen, float precio, String material, String estilo) {
+	public Jarron(int anioFabricacion, String origen, float precio, String material, String estilo) {
 		super(anioFabricacion, origen, precio);
 		this.material = material;
 		this.estilo = estilo;

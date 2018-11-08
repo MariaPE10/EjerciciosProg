@@ -2,18 +2,18 @@ package Ejercicios.Objetos.Bloque4.Antiguedades;
 
 public class Antiguedad {
 	
-	private String anioFabricacion;
+	private int anioFabricacion;
 	private String origen;
 	private float precio;
 	
 	
 	/**
-	 * Constructor por defecto, inicializa todos los atributos.
+	 * Constructor por defecto, inicializa todos los atributos a 0 o sin especificar.
 	 */
 	public Antiguedad() {
 		super();
-		anioFabricacion = "";
-		origen = "";
+		anioFabricacion = 0;
+		origen = "Sin especificar";
 		precio = 0f;
 	}
 
@@ -23,17 +23,17 @@ public class Antiguedad {
 	 * @param origen
 	 * @param precio
 	 */
-	public Antiguedad(String anioFabricacion, String origen, float precio) {
+	public Antiguedad(int anioFabricacion, String origen, float precio) {
 		super();
 		this.anioFabricacion = anioFabricacion;
 		this.origen = origen;
 		this.precio = precio;
 	}
 
-	public String getAnioFabricacion() {
+	public int getAnioFabricacion() {
 		return anioFabricacion;
 	}
-	public void setAnioFabricacion(String anioFabricacion) {
+	public void setAnioFabricacion(int anioFabricacion) {
 		this.anioFabricacion = anioFabricacion;
 	}
 
@@ -55,7 +55,7 @@ public class Antiguedad {
 
 	@Override
 	public String toString() {
-		return "\nAnio Fabricacion: " + anioFabricacion + "\nOrigen: " + origen + "\nPrecio: " + precio;
+		return "Anio Fabricacion: " + anioFabricacion + "\nOrigen: " + origen + "\nPrecio: " + precio + "€";
 	}
 	
 }

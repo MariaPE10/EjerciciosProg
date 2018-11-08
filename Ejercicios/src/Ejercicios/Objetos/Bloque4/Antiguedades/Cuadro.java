@@ -10,8 +10,8 @@ public class Cuadro extends Antiguedad {
 	 */
 	public Cuadro() {
 		super();
-		pintor = "";
-		nombre = "";
+		pintor = "Sin especificar";
+		nombre = "Sin especificar";
 	}
 	
 	/**
@@ -22,7 +22,7 @@ public class Cuadro extends Antiguedad {
 	 * @param pintor
 	 * @param nombre
 	 */
-	public Cuadro(String anioFabricacion, String origen, float precio, String pintor, String nombre) {
+	public Cuadro(int anioFabricacion, String origen, float precio, String pintor, String nombre) {
 		super(anioFabricacion, origen, precio);
 		this.pintor = pintor;
 		this.nombre = nombre;

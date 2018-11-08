@@ -10,8 +10,8 @@ public class Libro extends Antiguedad {
 	 */
 	public Libro() {
 		super();
-		autor ="";
-		titulo = "";
+		autor ="Sin especificar";
+		titulo = "Sin especificar";
 	}
 
 	/**
@@ -22,7 +22,7 @@ public class Libro extends Antiguedad {
 	 * @param autor
 	 * @param titulo
 	 */
-	public Libro(String anioFabricacion, String origen, float precio, String autor, String titulo) {
+	public Libro(int anioFabricacion, String origen, float precio, String autor, String titulo) {
 		super(anioFabricacion, origen, precio);
 		this.autor = autor;
 		this.titulo = titulo;

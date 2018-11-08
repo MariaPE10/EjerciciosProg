@@ -9,7 +9,7 @@ public class Joya extends Antiguedad {
 	 */
 	public Joya() {
 		super();
-		materialFabricacion = "";
+		materialFabricacion = "Sin especificar";
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class Joya extends Antiguedad {
 	 * @param precio
 	 * @param materialFacricacion
 	 */
-	public Joya(String anioFabricacion, String origen, float precio, String materialFacricacion) {
+	public Joya(int anioFabricacion, String origen, float precio, String materialFacricacion) {
 		super(anioFabricacion, origen, precio);
 		this.materialFabricacion = materialFacricacion;
 	}
