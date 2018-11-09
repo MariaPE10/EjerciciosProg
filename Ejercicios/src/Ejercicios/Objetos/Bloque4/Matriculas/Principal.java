@@ -8,10 +8,7 @@ public class Principal {
 		
 		int respuesta3;
 		int opcion, opcion2;
-		String menuPersona = "Que tipo de persona eres?\n"
-				+ "1.- Documentada\n"
-				+ "2.- No documentada\n"
-				+ "0.- Salir de la aplicacion.";
+		
 		String menuMatricula = "Que tipo de matricula deseas?\n"
 				+ "1.- ESO\n"
 				+ "2.- Bachillerato\n"
@@ -22,10 +19,13 @@ public class Principal {
 				+ "2.- Artes\n"
 				+ "3.- Tecnologia\n"
 				+ "4.- Sociales";
-		//Se crea un objeto de tipo Persona y se declara null, para guardar el hueco en la memoria (evita el error) 
+		
+		//Se "crea" un objeto de tipo Persona y se declara null (vacio), para guardar el hueco en la memoria (sin crear un objeto
+		// que ocupe un espacio en la memoria y posteriormente no usaremos para nada, ya que la variable persona es un 
+		// puntero que apunta a una direccion de memora en la que se encuentra dicho objeto).
 		Persona persona = null;
 		
-		opcion = JOptionPane.showConfirmDialog(null,"-DNI","Tiene documentacion?", JOptionPane.YES_NO_OPTION);
+		opcion = JOptionPane.showConfirmDialog(null,"-DNI Requerido","Tiene documentacion?", JOptionPane.YES_NO_OPTION);
 		
 		if (opcion == JOptionPane.YES_OPTION) { //Persona documentada
 			persona = new PersonaDocumentada();
@@ -36,6 +36,11 @@ public class Principal {
 		}
 		
 		/* ################################FORMA DE HACERLO CON UN SWITCH########################################
+		 
+	   	String menuPersona = "Que tipo de persona eres?\n"
+			+ "1.- Documentada\n"
+			+ "2.- No documentada\n"
+			+ "0.- Salir de la aplicacion.";
 		do {
 			opcion = Integer.parseInt(JOptionPane.showInputDialog(menuPersona));
 			
@@ -61,6 +66,7 @@ public class Principal {
 		persona.setApellidos(JOptionPane.showInputDialog("Introduzca sus apellidos"));
 		persona.setFechaNacimiento(JOptionPane.showInputDialog("Introduzca su fecha de nacimiento"));
 		
+		//Se crea un objeto de tipo Matricula y se declara null, para guardar el hueco en la memoria (evita error)
 		Matricula matricula = null;
 		do {
 			opcion2 = Integer.parseInt(JOptionPane.showInputDialog(menuMatricula));
@@ -71,7 +77,7 @@ public class Principal {
 				break;
 			case 1: //ESO
 				matricula = new ESO();
-				int respuesta = JOptionPane.showConfirmDialog(null,"Programa de mejora de aprendizaje y rendimiento","Opcion PMAR?", JOptionPane.YES_NO_OPTION);
+				int respuesta = JOptionPane.showConfirmDialog(null,"Pmar\nPrograma de mejora de aprendizaje y rendimiento","Desea opcion PMAR?", JOptionPane.YES_NO_OPTION);
 				if (respuesta == JOptionPane.YES_OPTION) {
 					((ESO)matricula).setPmar(true);
 				} else {
@@ -98,7 +104,7 @@ public class Principal {
 				break;
 			case 3: //FP
 				matricula = new FP();
-				int respuesta2 = JOptionPane.showConfirmDialog(null,"alternancia entre el centro educativo y la empresa","Opcio DUAL?", JOptionPane.YES_NO_OPTION);
+				int respuesta2 = JOptionPane.showConfirmDialog(null,"Dual\nAlternancia entre el centro educativo y la empresa","Opcio DUAL?", JOptionPane.YES_NO_OPTION);
 				if (respuesta2 == JOptionPane.YES_OPTION) {
 					((FP)matricula).setDual(true);
 				} else {
@@ -114,19 +120,7 @@ public class Principal {
 		matricula.setFechaMatricula(JOptionPane.showInputDialog("Introduzca la fecha de la matricula"));
 		
 		//##############################IMPRESION DE DATOS##############################
-		//PERSONA DOCUMENTADA
-		if (persona instanceof PersonaDocumentada && matricula instanceof ESO) {
-			JOptionPane.showMessageDialog(null, ((PersonaDocumentada)persona).toString() + ((ESO)matricula).toString());
-		} else if (persona instanceof PersonaDocumentada && matricula instanceof Bachillerato){
-			JOptionPane.showMessageDialog(null, ((PersonaDocumentada)persona).toString() + ((Bachillerato)matricula).toString());
-		} else if (persona instanceof PersonaDocumentada && matricula instanceof FP) {
-			JOptionPane.showMessageDialog(null, ((PersonaDocumentada)persona).toString() + ((FP)matricula).toString());
-		} else if (persona instanceof PersonaNoDocumentada && matricula instanceof ESO) { //PERSONA NO DOCUMENTADA
-			JOptionPane.showMessageDialog(null, ((PersonaNoDocumentada)persona).toString() + ((ESO)matricula).toString());
-		} else if (persona instanceof PersonaNoDocumentada && matricula instanceof Bachillerato) {
-			JOptionPane.showMessageDialog(null, ((PersonaNoDocumentada)persona).toString() + ((Bachillerato)matricula).toString());
-		} else {
-			JOptionPane.showMessageDialog(null, ((PersonaNoDocumentada)persona).toString() + ((FP)matricula).toString());
-		}
+		
+		JOptionPane.showMessageDialog(null, persona.toString() + matricula.toString());
 	}
 }

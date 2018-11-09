@@ -19,6 +19,16 @@ public class ESO extends Matricula {
 		super();
 		this.pmar = pmar;
 	}
+	
+	/**
+	 * @param fechaMatricula
+	 * @param codigo
+	 * @param pmar
+	 */
+	public ESO(String fechaMatricula, String codigo, boolean pmar) {
+		super(fechaMatricula, codigo);
+		this.pmar = pmar;
+	}
 
 	/**
 	 * 
@@ -39,7 +49,7 @@ public class ESO extends Matricula {
 		} else {
 			respuestaPmar = "No";
 		}
-		return "\nMATRICULA DE ESO \nPmar: " + respuestaPmar + "\nFecha de Matricula: " + getFechaMatricula() 
+		return "\n\nMATRICULA DE ESO \nPmar: " + respuestaPmar + "\nFecha de Matricula: " + getFechaMatricula() 
 				+ "\nCodigo: " + getCodigo();
 	}
 

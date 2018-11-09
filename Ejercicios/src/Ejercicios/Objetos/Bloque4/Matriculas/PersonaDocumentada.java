@@ -21,6 +21,17 @@ public class PersonaDocumentada extends Persona {
 	}
 
 	/**
+	 * @param nombre
+	 * @param apellidos
+	 * @param fechaNacimiento
+	 * @param dni
+	 */
+	public PersonaDocumentada(String nombre, String apellidos, String fechaNacimiento, String dni) {
+		super(nombre, apellidos, fechaNacimiento);
+		this.dni = dni;
+	}
+
+	/**
 	 * 
 	 * @return
 	 */

@@ -19,6 +19,16 @@ public class Bachillerato extends Matricula {
 		super();
 		this.modalidad = modalidad;
 	}
+	
+	/**
+	 * @param fechaMatricula
+	 * @param codigo
+	 * @param modalidad
+	 */
+	public Bachillerato(String fechaMatricula, String codigo, String modalidad) {
+		super(fechaMatricula, codigo);
+		this.modalidad = modalidad;
+	}
 
 	/**
 	 * 
@@ -33,7 +43,7 @@ public class Bachillerato extends Matricula {
 
 	@Override
 	public String toString() {
-		return "\nMATRICULA BACHILLERATO \nModalidad: " + modalidad + "\nFecha de Matricula: " + getFechaMatricula()
+		return "\n\nMATRICULA BACHILLERATO \nModalidad: " + modalidad + "\nFecha de Matricula: " + getFechaMatricula()
 				+ "\nCodigo: " + getCodigo();
 	}
 

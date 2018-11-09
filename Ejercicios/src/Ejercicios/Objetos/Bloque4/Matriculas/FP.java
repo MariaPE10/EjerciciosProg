@@ -19,6 +19,16 @@ public class FP extends Matricula {
 		super();
 		this.dual = dual;
 	}
+	
+	/**
+	 * @param fechaMatricula
+	 * @param codigo
+	 * @param dual
+	 */
+	public FP(String fechaMatricula, String codigo, boolean dual) {
+		super(fechaMatricula, codigo);
+		this.dual = dual;
+	}
 
 	/**
 	 * 
@@ -39,7 +49,7 @@ public class FP extends Matricula {
 		} else {
 			respuestaDual = "No";
 		}
-		return "\nMATRICULA DE FORMACION PROFESIONAL \nDual: " + respuestaDual + "\nFecha de Matricula: " + getFechaMatricula() 
+		return "\n\nMATRICULA DE FORMACION PROFESIONAL \nDual: " + respuestaDual + "\nFecha de Matricula: " + getFechaMatricula() 
 				+ "\nCodigo: " + getCodigo();
 	}
 

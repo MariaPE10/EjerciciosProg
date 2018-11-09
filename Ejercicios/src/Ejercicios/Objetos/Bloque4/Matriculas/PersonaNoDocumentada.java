@@ -20,6 +20,17 @@ public class PersonaNoDocumentada extends Persona {
 	}
 
 	/**
+	 * @param nombre
+	 * @param apellidos
+	 * @param fechaNacimiento
+	 * @param descripcion
+	 */
+	public PersonaNoDocumentada(String nombre, String apellidos, String fechaNacimiento, String descripcion) {
+		super(nombre, apellidos, fechaNacimiento);
+		this.descripcion = descripcion;
+	}
+
+	/**
 	 * 
 	 * @return
 	 */
