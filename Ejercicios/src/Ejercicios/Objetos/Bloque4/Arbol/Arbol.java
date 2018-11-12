@@ -9,14 +9,16 @@ public class Arbol {
 	 * el árbol.
 	 */
 	public static void main(String[] args) {
-		Rama tronco = new Rama();
-		Rama rama01 = new Rama();
+		Rama tronco = new Rama("Tronco");
+		Rama rama01 = new Rama("Rama 01");
+		
 		tronco.setExtension1(rama01);
-		tronco.setExtension2(new Fruto());
-		tronco.setExtension3(new Hoja());
+		tronco.setExtension2(new Fruto("Fruto 01"));
+		tronco.setExtension3(new Hoja("Hoja 01"));
 
-		rama01.setExtension1(new Fruto());
-		rama01.setExtension2(new Rama());
+		Rama rama02 = new Rama("Rama 02");
+		rama01.setExtension1(new Fruto("Fruto 02"));
+		rama01.setExtension2(rama02);
 	}
 
 }

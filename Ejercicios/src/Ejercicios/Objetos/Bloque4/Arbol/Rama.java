@@ -9,8 +9,8 @@ public class Rama extends ComponenteDeArbol {
 	/**
 	 * 
 	 */
-	public Rama() {
-		super();
+	public Rama(String nombre) {
+		super(nombre);
 	}
 
 	/**
