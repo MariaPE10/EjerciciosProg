@@ -4,7 +4,6 @@ public class Jugador {
 
 	private int posicion = 0;
 	private String nombre;
-	private Tablero tablero;
 	
 	/**
 	 * 
@@ -16,10 +15,9 @@ public class Jugador {
 	/**
 	 * @param nombre
 	 */
-	public Jugador(String nombre, Tablero tablero) {
+	public Jugador(String nombre) {
 		super();
 		this.nombre = nombre;
-		this.tablero = tablero;
 	}
 
 	/**
@@ -54,12 +52,27 @@ public class Jugador {
 		dado = (int)Math.round(Math.random()*(6-1)+1);
 		System.out.println("Dado: " + dado);
 		this.posicion += dado;
-		if (this.posicion > tablero.getTablero().length) {
-			this.posicion = tablero.getTablero().length - (this.posicion - tablero.getTablero().length);
+		//Calculo del posible rebote
+		if (this.posicion > Tablero.getTablero().getCasillas().length) {
+			this.posicion = Tablero.getTablero().getCasillas().length - (this.posicion - Tablero.getTablero().getCasillas().length);
+		}
+		
+		Casilla casillaActual = Tablero.getTablero().getCasillas()[this.posicion];
+		
+		//Comprobamos si es una casilla especial
+		if (casillaActual.getDestino() != null) {
+			System.out.println("Casilla especial: " + casillaActual.getMensajeEspecial());
+			Casilla casillaDestino = casillaActual.getDestino();
+			//Actualizacion de la posicion del jugador
+			this.posicion = casillaDestino.getOrden()-1;
+			dado = (int)Math.round(Math.random()*(6-1)+1);
+			System.out.println("Dado: " + dado);
+			this.posicion += dado;
 		}
 	}
 	
 	public void imprimirJugador () {
 		System.out.println(this.nombre + " - pos: " + this.posicion);
 	}
+	
 }

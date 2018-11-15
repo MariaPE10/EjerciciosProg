@@ -4,7 +4,7 @@ public class Casilla {
 
 	private int orden;
 	private String nombre;
-	Casilla destino;
+	private Casilla destino;
 	private int turnos;
 	private String mensajeEspecial;
 	
@@ -64,7 +64,6 @@ public class Casilla {
 	public String getNombre() {
 		return nombre;
 	}
-
 	/**
 	 * @param nombre the nombre to set
 	 */
@@ -78,7 +77,6 @@ public class Casilla {
 	public Casilla getDestino() {
 		return destino;
 	}
-
 	/**
 	 * @param destino the destino to set
 	 */
@@ -92,7 +90,6 @@ public class Casilla {
 	public int getTurnos() {
 		return turnos;
 	}
-
 	/**
 	 * @param turnos the turnos to set
 	 */
@@ -106,7 +103,6 @@ public class Casilla {
 	public String getMensajeEspecial() {
 		return mensajeEspecial;
 	}
-
 	/**
 	 * @param mensajeEspecial the mensajeEspecial to set
 	 */
