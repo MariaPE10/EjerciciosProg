@@ -52,22 +52,22 @@ public class Jugador {
 		dado = (int)Math.round(Math.random()*(6-1)+1);
 		System.out.println("Dado: " + dado);
 		this.posicion += dado;
+		int indiceCasillaMeta = (Tablero.getTablero().getCasillas().length - 1);
 		//Calculo del posible rebote
-		if (this.posicion > Tablero.getTablero().getCasillas().length) {
-			this.posicion = Tablero.getTablero().getCasillas().length - (this.posicion - Tablero.getTablero().getCasillas().length);
+		if (this.posicion > indiceCasillaMeta) {
+			this.posicion = indiceCasillaMeta - (this.posicion - indiceCasillaMeta);
 		}
 		
 		Casilla casillaActual = Tablero.getTablero().getCasillas()[this.posicion];
 		
 		//Comprobamos si es una casilla especial
 		if (casillaActual.getDestino() != null) {
-			System.out.println("Casilla especial: " + casillaActual.getMensajeEspecial());
+			System.out.println(this.nombre + " - pos: " + this.posicion + "\nCasilla especial: " + casillaActual.getMensajeEspecial());
 			Casilla casillaDestino = casillaActual.getDestino();
+			
 			//Actualizacion de la posicion del jugador
 			this.posicion = casillaDestino.getOrden()-1;
-			dado = (int)Math.round(Math.random()*(6-1)+1);
-			System.out.println("Dado: " + dado);
-			this.posicion += dado;
+			System.out.println(this.nombre + " - pos: " + this.posicion);
 		}
 	}
 	
