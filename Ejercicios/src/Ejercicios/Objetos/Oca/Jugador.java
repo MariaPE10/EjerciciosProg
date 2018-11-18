@@ -1,9 +1,11 @@
 package Ejercicios.Objetos.Oca;
 
+
 public class Jugador {
 
-	private int posicion = 0;
+	private Casilla casilla;
 	private String nombre;
+
 	
 	/**
 	 * 
@@ -18,8 +20,37 @@ public class Jugador {
 	public Jugador(String nombre) {
 		super();
 		this.nombre = nombre;
+		this.casilla = Tablero.getPrimeraCasillaEnTablero();
+	}
+	
+	/**
+	 * 
+	 */
+	public void tirarDado () {
+		// Imprimo en la consola la casilla, antes del movimiento		
+		System.out.println(this.casilla);
+
+		// Utilizamos el azar para conseguir un dado virtual
+		int dado = (int) Math.round(Math.random()*(6-1)+1);
+		System.out.println("\tDado: " + dado); 
+
+		this.casilla = Tablero.getCasillaDestino(this.casilla, dado);
+		
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isTerminado () {
+		if (this.casilla.equals(Tablero.getUltimaCasillaEnTablero())) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	
 	/**
 	 * @return the nombre
 	 */
@@ -32,47 +63,18 @@ public class Jugador {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	/**
-	 * @return the posicion
-	 */
-	public int getPosicion() {
-		return posicion;
-	}
-	/**
-	 * @param posicion the posicion to set
-	 */
-	public void setPosicion(int posicion) {
-		this.posicion = posicion;
-	}
 	
-	public void tirarDado () {
-		int dado;
-		
-		dado = (int)Math.round(Math.random()*(6-1)+1);
-		System.out.println("Dado: " + dado);
-		this.posicion += dado;
-		int indiceCasillaMeta = (Tablero.getTablero().getCasillas().length - 1);
-		//Calculo del posible rebote
-		if (this.posicion > indiceCasillaMeta) {
-			this.posicion = indiceCasillaMeta - (this.posicion - indiceCasillaMeta);
-		}
-		
-		Casilla casillaActual = Tablero.getTablero().getCasillas()[this.posicion];
-		
-		//Comprobamos si es una casilla especial
-		if (casillaActual.getDestino() != null) {
-			System.out.println(this.nombre + " - pos: " + this.posicion + "\nCasilla especial: " + casillaActual.getMensajeEspecial());
-			Casilla casillaDestino = casillaActual.getDestino();
-			
-			//Actualizacion de la posicion del jugador
-			this.posicion = casillaDestino.getOrden()-1;
-			System.out.println(this.nombre + " - pos: " + this.posicion);
-		}
+	/**
+	 * @return the casilla
+	 */
+	public Casilla getCasilla() {
+		return casilla;
 	}
-	
-	public void imprimirJugador () {
-		System.out.println(this.nombre + " - pos: " + this.posicion);
+	/**
+	 * @param casilla the casilla to set
+	 */
+	public void setCasilla(Casilla casilla) {
+		this.casilla = casilla;
 	}
 	
 }

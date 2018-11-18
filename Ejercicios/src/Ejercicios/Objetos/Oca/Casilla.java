@@ -31,7 +31,6 @@ public class Casilla {
 		this.turnos = turnos;
 		this.mensajeEspecial = mensajeEspecial;
 	}
-
 	
 	/**
 	 * Constructor de las casillas normales
@@ -44,6 +43,16 @@ public class Casilla {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	public String toString() {
+		return "Casilla [" + orden + " - " + nombre + "]";
+	}
+	
+	
+	
 	/**
 	 * @return the orden
 	 */

@@ -19,6 +19,11 @@ public class Tablero {
 		inicializaTablero();
 	}
 	
+	/**
+	 * Utilizamos el patron de diseÃ±o "Singleton" que soluciona el problema de poder
+	 * acceder a una variable desde muchos puntos, sin crear mas de una variable.
+	 * @return
+	 */
 	public static Tablero getTablero () {
 		if (tablero == null) {
 			tablero = new Tablero ();
@@ -128,6 +133,90 @@ public class Tablero {
 				casillas[58].setDestino(casillas[62]); //Oca
 	}
 
+	/**
+	 * 
+	 * @param posicion
+	 * @param dado
+	 * @return
+	 */
+	public static Casilla getCasillaDestino (Casilla casilla, int dado) {
+		// Sumo el dado a la posición actual
+		int posicion = Tablero.getPosicion(casilla); 
+		
+		posicion += dado; 
+
+		// Cálculo del posible rebote
+		posicion = getNuevaPosicionPorRebote(posicion);
+		// Comprobamos si estamos en una casilla especial
+		posicion = getNuevaPosicionPorCasillaEspecial(posicion);
+		
+		return Tablero.getTablero().getCasillas()[posicion];
+	}
+	
+	/**
+	 * 
+	 * @param posicion
+	 * @return
+	 */
+	private static int getNuevaPosicionPorRebote (int posicion) {
+		int indiceCasillaMeta = Tablero.getTablero().getCasillas().length-1;
+		if (posicion > indiceCasillaMeta) {
+			posicion = 2 * indiceCasillaMeta - posicion;
+		}
+		return posicion;
+	}
+	
+	/**
+	 * 
+	 * @param posicion
+	 * @return
+	 */
+	private static int getNuevaPosicionPorCasillaEspecial (int posicion) {
+		// Puntero a la casilla correspondiente del array
+		Casilla casillaActual = Tablero.getTablero().getCasillas()[posicion];		
+		// Busco un destino de la casilla actual
+		if (casillaActual.getDestino() != null) { // Hay un destino
+			// Puntero a la casilla de destino, después de la tirada
+			Casilla casillaDestino = casillaActual.getDestino();
+			// Imprimo el mensaje especial de la casilla de destino
+			System.out.println("\t" + casillaActual.getMensajeEspecial());
+			// Actualizar la posición del jugador, teniendo en cuenta que ha
+			// caído en una casilla con destino, una casilla especial
+			posicion = casillaDestino.getOrden() - 1;
+		}
+		return posicion;
+	}
+	
+	/**
+	 * 
+	 * @param casilla
+	 * @return
+	 */
+	private static int getPosicion (Casilla casilla) {
+		for (int i = 0; i < Tablero.getTablero().getCasillas().length; i++) {
+			if (Tablero.getTablero().getCasillas()[i].equals(casilla)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static Casilla getUltimaCasillaEnTablero () {
+		return Tablero.getTablero().getCasillas()[Tablero.getTablero().getCasillas().length-1];
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static Casilla getPrimeraCasillaEnTablero () {
+		return Tablero.getTablero().getCasillas()[0];
+	}
+	
 	/**
 	 * @return the casillas
 	 */
