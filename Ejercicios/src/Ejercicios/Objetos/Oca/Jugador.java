@@ -5,6 +5,7 @@ public class Jugador {
 
 	private Casilla casilla;
 	private String nombre;
+	int podium;
 
 	
 	/**
@@ -21,6 +22,7 @@ public class Jugador {
 		super();
 		this.nombre = nombre;
 		this.casilla = Tablero.getPrimeraCasillaEnTablero();
+		this.podium = 0;
 	}
 	
 	/**
@@ -28,7 +30,7 @@ public class Jugador {
 	 */
 	public void tirarDado () {
 		// Imprimo en la consola la casilla, antes del movimiento		
-		System.out.println(this.casilla);
+		System.out.println("\t" + this.casilla);
 
 		// Utilizamos el azar para conseguir un dado virtual
 		int dado = (int) Math.round(Math.random()*(6-1)+1);
@@ -50,7 +52,14 @@ public class Jugador {
 	}
 	
 	
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "\nJugador: " + nombre + ", podium: " + podium;
+	}
+
 	/**
 	 * @return the nombre
 	 */
@@ -76,5 +85,20 @@ public class Jugador {
 	public void setCasilla(Casilla casilla) {
 		this.casilla = casilla;
 	}
+
+	/**
+	 * @return the podium
+	 */
+	public int getPodium() {
+		return podium;
+	}
+
+	/**
+	 * @param podium the podium to set
+	 */
+	public void setPodium(int podium) {
+		this.podium = podium;
+	}
+	
 	
 }
