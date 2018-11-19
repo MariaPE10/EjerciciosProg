@@ -19,19 +19,21 @@ public class Principal {
 			jugador[i] = new Jugador("0" + (i+1));
 		}
 		
-		int contadorPodio = 1;
 		do {
-			
 			for (int i = 0; i < numeroJugadores; i++) {
 				if (!jugador[i].isTerminado()) {
-//					do {
-						System.out.println("Jugador - " + jugador[i].getNombre());
-						jugador[i].tirarDado();
-						if (jugador[i].isTerminado()) {
-							System.out.println("\n\n\tHAS TERMINADO EL JUEGO DE LA OCA");
-							jugador[i].setPodium(getMayorPodio(jugador) + 1);
-						}
-//					} while (jugador[i].getCasilla().getTurnos() == 1);	
+					if (jugador[i].getTurno() < 0) {
+						jugador[i].setTurno(jugador[i].getTurno() + 1);
+					} else {
+//						do {
+							System.out.println("Jugador - " + jugador[i].getNombre());
+							jugador[i].tirarDado();
+							if (jugador[i].isTerminado()) {
+								System.out.println("\n\n\tHAS TERMINADO EL JUEGO DE LA OCA");
+								jugador[i].setPodium(getMayorPodio(jugador) + 1);
+							}
+//						} while (jugador[i].getTurno() > 0);
+					}
 				}
 			}
 		} while(!estaJuegoTerminado(jugador) );

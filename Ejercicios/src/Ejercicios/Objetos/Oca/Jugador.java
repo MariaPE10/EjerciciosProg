@@ -6,6 +6,7 @@ public class Jugador {
 	private Casilla casilla;
 	private String nombre;
 	int podium;
+	int turno;
 
 	
 	/**
@@ -23,6 +24,7 @@ public class Jugador {
 		this.nombre = nombre;
 		this.casilla = Tablero.getPrimeraCasillaEnTablero();
 		this.podium = 0;
+		this.turno = 0;
 	}
 	
 	/**
@@ -35,9 +37,14 @@ public class Jugador {
 		// Utilizamos el azar para conseguir un dado virtual
 		int dado = (int) Math.round(Math.random()*(6-1)+1);
 		System.out.println("\tDado: " + dado); 
-
+		
+		//Actualizacion de la posicion del jugador
 		this.casilla = Tablero.getCasillaDestino(this.casilla, dado);
 		
+		//Actualiza los turnos del jugador
+		if (this.casilla.getTurnos() != 0) {
+			this.turno = this.casilla.getTurnos();
+		}
 	}
 
 	/**
@@ -99,6 +106,21 @@ public class Jugador {
 	public void setPodium(int podium) {
 		this.podium = podium;
 	}
+
+	/**
+	 * @return the turno
+	 */
+	public int getTurno() {
+		return turno;
+	}
+
+	/**
+	 * @param turno the turno to set
+	 */
+	public void setTurno(int turno) {
+		this.turno = turno;
+	}
+	
 	
 	
 }
