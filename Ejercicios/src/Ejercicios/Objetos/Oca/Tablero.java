@@ -140,13 +140,14 @@ public class Tablero {
 	 * @return
 	 */
 	public static Casilla getCasillaDestino (Casilla casilla, int dado) {
-		// Sumo el dado a la posición actual
+		// Sumo el dado a la posiciï¿½n actual
 		int posicion = Tablero.getPosicion(casilla); 
 		
 		posicion += dado; 
 
-		// Cálculo del posible rebote
+		// Cï¿½lculo del posible rebote
 		posicion = getNuevaPosicionPorRebote(posicion);
+		
 		// Comprobamos si estamos en una casilla especial
 		posicion = getNuevaPosicionPorCasillaEspecial(posicion);
 		
@@ -158,7 +159,7 @@ public class Tablero {
 	 * @param posicion
 	 * @return
 	 */
-	private static int getNuevaPosicionPorRebote (int posicion) {
+	public static int getNuevaPosicionPorRebote (int posicion) {
 		int indiceCasillaMeta = Tablero.getTablero().getCasillas().length-1;
 		if (posicion > indiceCasillaMeta) {
 			posicion = 2 * indiceCasillaMeta - posicion;
@@ -171,17 +172,17 @@ public class Tablero {
 	 * @param posicion
 	 * @return
 	 */
-	private static int getNuevaPosicionPorCasillaEspecial (int posicion) {
+	public static int getNuevaPosicionPorCasillaEspecial (int posicion) {
 		// Puntero a la casilla correspondiente del array
 		Casilla casillaActual = Tablero.getTablero().getCasillas()[posicion];		
 		// Busco un destino de la casilla actual
 		if (casillaActual.getDestino() != null) { // Hay un destino
-			// Puntero a la casilla de destino, después de la tirada
+			// Puntero a la casilla de destino, despuï¿½s de la tirada
 			Casilla casillaDestino = casillaActual.getDestino();
 			// Imprimo el mensaje especial de la casilla de destino
 			System.out.println("\t" + casillaActual.getMensajeEspecial());
-			// Actualizar la posición del jugador, teniendo en cuenta que ha
-			// caído en una casilla con destino, una casilla especial
+			// Actualizar la posiciï¿½n del jugador, teniendo en cuenta que ha
+			// caï¿½do en una casilla con destino, una casilla especial
 			posicion = casillaDestino.getOrden() - 1;
 		}
 		return posicion;
@@ -192,7 +193,7 @@ public class Tablero {
 	 * @param casilla
 	 * @return
 	 */
-	private static int getPosicion (Casilla casilla) {
+	public static int getPosicion (Casilla casilla) {
 		for (int i = 0; i < Tablero.getTablero().getCasillas().length; i++) {
 			if (Tablero.getTablero().getCasillas()[i].equals(casilla)) {
 				return i;

@@ -5,8 +5,8 @@ public class Jugador {
 
 	private Casilla casilla;
 	private String nombre;
-	int podium;
-	int turno;
+	private int podium;
+	private int turno;
 
 	
 	/**
@@ -34,17 +34,50 @@ public class Jugador {
 		// Imprimo en la consola la casilla, antes del movimiento		
 		System.out.println("\t" + this.casilla);
 
-		// Utilizamos el azar para conseguir un dado virtual
-		int dado = (int) Math.round(Math.random()*(6-1)+1);
-		System.out.println("\tDado: " + dado); 
+		// Comprobamos si el jugador tiene que jugar o no
+		if (this.turno < 0) {
+			System.out.println("No puedes tirar!! " + this.turno + ": turnos sin tirar");
+			this.turno ++;
+		} else {
+			// Utilizamos el azar para conseguir un dado virtual
+			int dado = (int) Math.round(Math.random()*(6-1)+1);
+			System.out.println("\tDado: " + dado);
+			
+			// Actualizacion de la posicion del jugador. Conozco la primera
+			// casilla de destino, tras haber lanzado y sumado el dado
+			int posicionActual = Tablero.getPosicion(this.casilla);
+			int nuevaPosicion = posicionActual + dado;
+			
+			// Calculo de la posicion por rebote
+			nuevaPosicion = Tablero.getNuevaPosicionPorRebote(nuevaPosicion);
+			// Actualizacion de la casilla despues de caer en casilla rebote
+			this.casilla = Tablero.getTablero().getCasillas()[nuevaPosicion];
+			//Actualiza los turnos del jugador
+			if (this.casilla.getTurnos() != 0) {
+				this.turno = this.casilla.getTurnos();
+			}
+			
+			// Calculo la nueva posicion por posibilidad de casilla especial
+			int nuevaPosicionPorCasillaEspecial= Tablero.getNuevaPosicionPorCasillaEspecial(nuevaPosicion);
+			// Actualizacion de la casilla despues de caer en casilla especial
+			this.casilla = Tablero.getTablero().getCasillas()[nuevaPosicionPorCasillaEspecial];
+						
+			// Si corresponde, el  jugador vuelve a tirar
+			if (this.turno > 0 && !this.isTerminado()) { // El jugador debe volver a tirar
+				this.turno --;
+				this.tirarDado();
+			}
 		
-		//Actualizacion de la posicion del jugador
-		this.casilla = Tablero.getCasillaDestino(this.casilla, dado);
-		
-		//Actualiza los turnos del jugador
-		if (this.casilla.getTurnos() != 0) {
-			this.turno = this.casilla.getTurnos();
 		}
+		
+		
+	
+//		//Actualizacion de la posicion del jugador
+//		this.casilla = Tablero.getCasillaDestino(this.casilla, dado);
+
+		// Imprimo en la consola la casilla, despues del movimiento		
+		System.out.println("\t" + this.casilla);
+				
 	}
 
 	/**

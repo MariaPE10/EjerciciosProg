@@ -22,17 +22,11 @@ public class Principal {
 		do {
 			for (int i = 0; i < numeroJugadores; i++) {
 				if (!jugador[i].isTerminado()) {
-					if (jugador[i].getTurno() < 0) {
-						jugador[i].setTurno(jugador[i].getTurno() + 1);
-					} else {
-//						do {
-							System.out.println("Jugador - " + jugador[i].getNombre());
-							jugador[i].tirarDado();
-							if (jugador[i].isTerminado()) {
-								System.out.println("\n\n\tHAS TERMINADO EL JUEGO DE LA OCA");
-								jugador[i].setPodium(getMayorPodio(jugador) + 1);
-							}
-//						} while (jugador[i].getTurno() > 0);
+					System.out.println("Jugador - " + jugador[i].getNombre());
+					jugador[i].tirarDado();
+					if (jugador[i].isTerminado()) {
+						System.out.println("\n\n\tHAS TERMINADO EL JUEGO DE LA OCA");
+						jugador[i].setPodium(getMayorPodio(jugador) + 1);
 					}
 				}
 			}
@@ -40,6 +34,7 @@ public class Principal {
 		
 		// Impresion del array de jugadores ordenados previamente
 		ordenaJugadoresPorPodio(jugador);
+		
 		for (int i = 0; i < jugador.length; i++) {
 			System.out.print(jugador[i].toString());
 		}
