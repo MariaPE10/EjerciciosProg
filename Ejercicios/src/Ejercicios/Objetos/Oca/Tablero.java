@@ -47,7 +47,7 @@ public class Tablero {
 	 */
 	public void inicializaTablero () {
 		//Estructura basica del tablero
-				casillas[0] = new Casilla(1, "Inicio");
+				casillas[0] = new Casilla(1, "Inicio", null, 0, "Comienza el juego!!");
 				casillas[1] = new Casilla(2, "Caballo");
 				casillas[2] = new Casilla(3, "Pez");
 				casillas[3] = new Casilla(4, "Payaso");
@@ -77,7 +77,7 @@ public class Tablero {
 				casillas[27] = new Casilla(28, "Bicicleta");
 				casillas[28] = new Casilla(29, "Delfin");
 				casillas[29] = new Casilla(30, "Dragon");
-				casillas[30] = new Casilla(31, "Pozo", null, -3, "POZO: tres turnos sin tirar");
+				casillas[30] = new Casilla(31, "Pozo", null, -3, "");
 				casillas[31] = new Casilla(32, "Oca", null, 1, msgOca);
 				casillas[32] = new Casilla(33, "Mariposa");
 				casillas[33] = new Casilla(34, "Moto");
@@ -105,7 +105,7 @@ public class Tablero {
 				casillas[55] = new Casilla(56, "Tiburon");
 				casillas[56] = new Casilla(57, "Perro");
 				casillas[57] = new Casilla(58, "Muerte", null, 0, "Has muerto!! Vuelves a la casilla de inicio");
-				casillas[58] = new Casilla(59, "Oca", null, 1, msgOca);
+				casillas[58] = new Casilla(59, "Oca", null, 1, "De oca a oca y tiro porque me toca \n\t\tMovido a: Casilla [63 - Meta]");
 				casillas[59] = new Casilla(60, "Mariposa");
 				casillas[60] = new Casilla(61, "Gato");
 				casillas[61] = new Casilla(62, "Regadera");
@@ -179,8 +179,10 @@ public class Tablero {
 		if (casillaActual.getDestino() != null) { // Hay un destino
 			// Puntero a la casilla de destino, despu�s de la tirada
 			Casilla casillaDestino = casillaActual.getDestino();
+			
 			// Imprimo el mensaje especial de la casilla de destino
-			System.out.println("\t" + casillaActual.getMensajeEspecial());
+			System.out.println("\t\t\t" + casillaActual.getMensajeEspecial());
+			
 			// Actualizar la posici�n del jugador, teniendo en cuenta que ha
 			// ca�do en una casilla con destino, una casilla especial
 			posicion = casillaDestino.getOrden() - 1;

@@ -32,16 +32,16 @@ public class Jugador {
 	 */
 	public void tirarDado () {
 		// Imprimo en la consola la casilla, antes del movimiento		
-		System.out.println("\t" + this.casilla);
+		System.out.println("\tEstas en: " + this.casilla);
 
 		// Comprobamos si el jugador tiene que jugar o no
 		if (this.turno < 0) {
-			System.out.println("No puedes tirar!! " + this.turno + ": turnos sin tirar");
+			System.out.println("\tNo puedes tirar!! " + (this.turno*(-1)) + ": turnos sin tirar");
 			this.turno ++;
 		} else {
 			// Utilizamos el azar para conseguir un dado virtual
 			int dado = (int) Math.round(Math.random()*(6-1)+1);
-			System.out.println("\tDado: " + dado);
+			System.out.println("\t\tDado: " + dado);
 			
 			// Actualizacion de la posicion del jugador. Conozco la primera
 			// casilla de destino, tras haber lanzado y sumado el dado
@@ -52,6 +52,10 @@ public class Jugador {
 			nuevaPosicion = Tablero.getNuevaPosicionPorRebote(nuevaPosicion);
 			// Actualizacion de la casilla despues de caer en casilla rebote
 			this.casilla = Tablero.getTablero().getCasillas()[nuevaPosicion];
+			
+			// Imprimo la casilla despues de mover al jugador
+			System.out.println("\t\tMovido a: " + this.casilla);
+						
 			//Actualiza los turnos del jugador
 			if (this.casilla.getTurnos() != 0) {
 				this.turno = this.casilla.getTurnos();
@@ -61,7 +65,12 @@ public class Jugador {
 			int nuevaPosicionPorCasillaEspecial= Tablero.getNuevaPosicionPorCasillaEspecial(nuevaPosicion);
 			// Actualizacion de la casilla despues de caer en casilla especial
 			this.casilla = Tablero.getTablero().getCasillas()[nuevaPosicionPorCasillaEspecial];
-						
+			
+			if (this.casilla.getDestino() != null) {
+				// Imprimo la casilla despues de mover al jugador por una casilla especial
+				System.out.println("\t\tEnviado a: " + this.casilla);	
+			}
+			
 			// Si corresponde, el  jugador vuelve a tirar
 			if (this.turno > 0 && !this.isTerminado()) { // El jugador debe volver a tirar
 				this.turno --;
@@ -69,14 +78,6 @@ public class Jugador {
 			}
 		
 		}
-		
-		
-	
-//		//Actualizacion de la posicion del jugador
-//		this.casilla = Tablero.getCasillaDestino(this.casilla, dado);
-
-		// Imprimo en la consola la casilla, despues del movimiento		
-		System.out.println("\t" + this.casilla);
 				
 	}
 

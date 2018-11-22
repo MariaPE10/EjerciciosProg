@@ -11,6 +11,7 @@ public class Principal {
 		int numeroJugadores = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el numero de jugadores"));
 		Jugador jugador[] = new Jugador[numeroJugadores];
 		
+		// Introduccion del nombre del jugador por el usuario
 //		for (int i = 0; i < numeroJugadores; i++) {
 //			jugador[i] = new Jugador(JOptionPane.showInputDialog("Nombre del jugador"));
 //		}
@@ -86,5 +87,6 @@ public class Principal {
 			}
 		}
 	}
+	
 	
 }
