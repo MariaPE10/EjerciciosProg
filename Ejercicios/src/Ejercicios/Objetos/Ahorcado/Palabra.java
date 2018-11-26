@@ -11,7 +11,7 @@ public class Palabra {
 //					coincidencias[i].replace(palabraAleatoria.charAt(i), caracterUsuario);
 //				} else {
 //					coincidencias[i] = "_ ";
-//				}
+//				} 
 //			}
 //		}
 //		ImprimePalabraOculta(coincidencias);
