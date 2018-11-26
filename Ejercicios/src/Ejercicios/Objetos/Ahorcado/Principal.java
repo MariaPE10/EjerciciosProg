@@ -23,8 +23,8 @@ public class Principal {
 		
 		//Pide al usuario la palabra
 		String palabraUsuario = String.valueOf(JOptionPane.showInputDialog(null, "Introduzca el caracter o la palabra buscada"));
-		Palabra.ComparaCaracteres(palabraUsuario, palabraAleatoria, coincidencias);
-		
+//		Palabra.ComparaCaracteres(palabraUsuario, palabraAleatoria, coincidencias);
+//		
 	}
 
 }

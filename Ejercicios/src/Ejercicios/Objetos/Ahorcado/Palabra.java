@@ -15,7 +15,7 @@ public class Palabra {
 //			}
 //		}
 //		ImprimePalabraOculta(coincidencias);
-//	}	
+//	}	 
 //	
 	/**
 	 * Devuelve true cuando el usuario introduce un caracter y false si introduce una palabra
