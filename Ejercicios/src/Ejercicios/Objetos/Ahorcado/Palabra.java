@@ -1,7 +1,7 @@
 package Ejercicios.Objetos.Ahorcado;
 
 public class Palabra {
-
+ 
 	
 //	
 //	public static void ComparaCaracteres(String caracterUsuario, String palabraAleatoria, String coincidencias[]){
