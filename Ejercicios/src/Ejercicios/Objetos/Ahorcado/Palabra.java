@@ -34,9 +34,9 @@ public class Palabra {
 	/**
 	 * 
 	 */
-	public static void ImprimePalabraOculta(String coincidencias[]) {
+	public static void InicializaPalabraOculta(String coincidencias[]) {
 		for (int i = 0; i < coincidencias.length; i++) {
-			System.out.print("_ ");
+			coincidencias[i] = "_";
 		}
 	}
 
