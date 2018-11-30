@@ -1,5 +1,7 @@
 package Ejercicios.Objetos.Ahorcado;
 
+import java.nio.channels.ShutdownChannelGroupException;
+
 import javax.swing.JOptionPane;
 
 public class Juego {
@@ -13,7 +15,8 @@ public class Juego {
 	private static int fallosUsuario = 0;
 	private static int fallosMaximos = 10;
 	private static Juego juego = null;
-	
+	//Creacion de un array auxiliar para mostrar los fallos del usuario
+	private static String auxFallos[]= new String [fallosMaximos];
 	/**
 	 * 
 	 */
@@ -38,20 +41,26 @@ public class Juego {
 	public static int getFallosUsuario() {
 		return fallosUsuario;
 	}
+
 	/**
-	 * @param fallosUsuario the fallosUsuario to set
+	 * @return the auxFallos
 	 */
-	public static void setFallosUsuario(int fallosUsuario) {
-		Juego.fallosUsuario = fallosUsuario;
+	public static String[] getAuxFallos() {
+		return auxFallos;
+	}
+
+	/**
+	 * @return the coincidencias
+	 */
+	public static String[] getCoincidencias() {
+		return coincidencias;
 	}
 
 	/**
 	 * 
 	 */
 	public static void empezar () {
-		//Creacion de un array auxiliar para mostrar los fallos del usuario
-		String auxFallos[]= new String [fallosMaximos];
-		
+
 		//Inicializacion del array de nuestra palabra oculta
 		inicializaEImprimePalabra(coincidencias);
 		//Inicializacion e impresion del array auxiliar de fallos
@@ -63,7 +72,7 @@ public class Juego {
 			//Pide al usuario la palabra o letra
 			palabraUsuario = JOptionPane.showInputDialog(null, "Introduzca la letra o palabra buscada");
 			if (palabraUsuario.equals(palabraAleatoria)) {
-				System.out.println("\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
+				JOptionPane.showMessageDialog(null,"\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
 			} else {
 				boolean encontrado = false;
 				if (palabraUsuario.length() == 1) {
@@ -79,12 +88,14 @@ public class Juego {
 					System.out.println();
 					System.out.println(palabraUsuario + " no esta en la palabra buscada");
 					for (int i = 0; i < auxFallos.length; i++) {
-						if (auxFallos[i] == "-") {
+						if (auxFallos[i] == "_") {
 							auxFallos[i] = palabraUsuario;
 							break;
 						}
 					}
 				}
+				Ventana.getVentana().repaint();
+
 				// Impresion de los arrays despues de cada jugada
 				System.out.println();
 				imprimeArray(coincidencias);
@@ -96,9 +107,9 @@ public class Juego {
 		} while (!(fallosUsuario>=fallosMaximos || isTerminado(coincidencias) || palabraUsuario.equals(palabraAleatoria)));
 		
 		if (fallosUsuario>=fallosMaximos) {
-			System.out.println("\n\t\t\tLASTIMA TE HAS MUERTO!! La palabra ocultas era: " + palabraAleatoria);
+			JOptionPane.showMessageDialog(null,"\n\t\t\tLASTIMA TE HAS MUERTO!! La palabra ocultas era: " + palabraAleatoria);
 		} else if (isTerminado(coincidencias)){
-			System.out.println("\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
+			JOptionPane.showMessageDialog(null,"\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
 		}
 		
 	}
@@ -130,7 +141,7 @@ public class Juego {
 	private static void inicializaAux (String auxFallos[]) {
 		System.out.println();
 		for (int i = 0; i < auxFallos.length; i++) {
-			auxFallos[i] = "-";
+			auxFallos[i] = "_";
 		}
 	}
 	

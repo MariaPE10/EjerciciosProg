@@ -5,7 +5,7 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		// Pintamos una ventana en pantalla
-		Ventana ventana = new Ventana();
+		Ventana.getVentana();
 //		System.out.println("Palabra oculta: " + palabras[indicePalabraAleatoria]);
 		Juego.getJuego().empezar();
 
