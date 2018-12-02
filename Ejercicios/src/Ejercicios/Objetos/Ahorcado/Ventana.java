@@ -2,6 +2,7 @@ package Ejercicios.Objetos.Ahorcado;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ public class Ventana extends Canvas {
 	public static final int HEIGHT = 480;
 	private static int fallos = 0;
 	private static Ventana ventana = null;
+	private static Font monoFont = new Font("Calibri", Font.BOLD, 20);
 	
 	/**
 	 * 
@@ -60,10 +62,13 @@ public class Ventana extends Canvas {
 	 */
 	@Override
 	public void paint(Graphics g) {
+		String cara = "o _ o";
 		fallos = Juego.getJuego().getFallosUsuario();
+		// Pintamos la imagen del tablero sobre la pantalla
+		g.drawImage(CacheImagenes.getCache().getImagenFondo(), 0, 0, this);
 		
 		//Seleccion del color
-		g.setColor(Color.orange);
+		g.setColor(Color.decode("#873600"));
 		if (fallos > 0) {
 			//Pintando de la base
 			g.fillRect(70, 400, 400, 25);
@@ -78,35 +83,68 @@ public class Ventana extends Canvas {
 		}
 		if (fallos > 3) {
 			// Pintando la cuerda
-			g.fillRect(385, 50, 1, 50);
+			g.fillRect(385, 50, 2, 50);
 		}
 		if (fallos > 4) {
 			// Pintando de la cabeza
 			g.setColor(Color.black);
-			g.drawOval(350, 100, 70, 70);
+			g.drawOval(349, 99, 72, 72);
+			g.setColor(Color.decode("#FAE5D3"));
+			g.fillOval(350, 100, 70, 70);
+			if (fallos <= 9) {
+				g.setColor(Color.black);
+				g.setFont(monoFont);
+				g.drawString(cara, 364, 135);
+				g.drawString("__", 375, 150);
+			}
 		}
 		if (fallos > 5) {
 			//Pintado del cuerpo
-			g.drawRect(360, 170, 50, 130);
+			g.setColor(Color.black);
+			g.drawRect(359, 169, 51, 112);
+			g.setColor(Color.decode("#FAD7A0"));
+			g.fillRect(360, 170, 50, 110);
 		}
 		if (fallos > 6) {
 			//Pintado de la mano1
-			g.drawRect(335, 170, 25, 80);
+			g.setColor(Color.black);
+			g.drawRect(334, 169, 26, 82);
+			g.setColor(Color.decode("#FAE5D3"));
+			g.fillRect(335, 170, 25, 80);
+			g.setColor(Color.decode("#FAD7A0"));
+			g.fillRect(335, 170, 25, 70);
 		}
 		if (fallos > 7) {
 			//Pintado de la mano2
-			g.drawRect(410, 170, 25, 80);
+			g.setColor(Color.black);
+			g.drawRect(409, 169, 26, 82);
+			g.setColor(Color.decode("#FAE5D3"));
+			g.fillRect(410, 170, 25, 80);
+			g.setColor(Color.decode("#FAD7A0"));
+			g.fillRect(410, 170, 25, 70);
 		}
 		if (fallos > 8) {
 			//Pintado de la pierna1
-			g.drawRect(360, 300, 25, 90);
+			g.setColor(Color.black);
+			g.drawRect(359, 281, 26, 89);
+			g.setColor(Color.decode("#6E2C00"));
+			g.fillRect(360, 280, 25, 90);
 		}
 		if (fallos > 9) {
+			cara = "X _ X";
 			//Pintado de la pierna2
-			g.drawRect(385, 300, 25, 90);
+			g.setColor(Color.black);
+			g.drawRect(384, 281, 26, 89);
+			g.setColor(Color.decode("#6E2C00"));
+			g.fillRect(385, 280, 25, 90);
+			g.setColor(Color.black);
+			g.setFont(monoFont);
+			g.drawString(cara, 364, 135);
+			g.drawString("__", 375, 150);
 		}
 		
-		g.setColor(Color.BLACK);
+		g.setFont(monoFont);
+		g.setColor(Color.decode("#F9E79F"));
 		String strFallos = "";
 		for (int i = 0; i < Juego.getJuego().getAuxFallos().length; i++) {
 			strFallos += Juego.getJuego().getAuxFallos()[i];
@@ -119,6 +157,7 @@ public class Ventana extends Canvas {
 		for (int i = 0; i < Juego.getJuego().getCoincidencias().length; i++) {
 			strPalabra += Juego.getJuego().getCoincidencias()[i] + " ";
 		}
-		g.drawString("Palabra: " + strPalabra, 450, 100);
+		g.setColor(Color.black);
+		g.drawString("Palabra: " + strPalabra, 390, 85);
 	}
 }

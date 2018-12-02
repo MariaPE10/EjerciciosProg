@@ -1,22 +1,21 @@
 package Ejercicios.Objetos.Ahorcado;
 
-import java.nio.channels.ShutdownChannelGroupException;
-
 import javax.swing.JOptionPane;
 
 public class Juego {
 	//Array de palabras posibles
-	private static String palabras[] = new String[] {"cosplay", "jaula", "olas", "articulacion", "negativo", "inflacion", "barro", "ahri", "akali", "zinogre"};
+	private String palabras[] = new String[] {"cosplay", "jaula", "olas", "articulacion", "negativo", "inflacion", "barro", "ahri", "akali", "zinogre"};
 	//Genera un numero aleatorio que sera mi palabra aleatoria
-	private static int indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
+	private int indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
 	//Creacion de un array con la longitud de nuestra palabra aleatoria
-	private static String palabraAleatoria = palabras[indicePalabraAleatoria];
-	private static String coincidencias[]= new String [palabraAleatoria.length()];
-	private static int fallosUsuario = 0;
-	private static int fallosMaximos = 10;
+	private String palabraAleatoria = palabras[indicePalabraAleatoria];
+	private String coincidencias[]= new String [palabraAleatoria.length()];
+	private int fallosUsuario = 0;
+	private int fallosMaximos = 10;
 	private static Juego juego = null;
 	//Creacion de un array auxiliar para mostrar los fallos del usuario
-	private static String auxFallos[]= new String [fallosMaximos];
+	private String auxFallos[]= new String [fallosMaximos];
+	
 	/**
 	 * 
 	 */
@@ -38,28 +37,28 @@ public class Juego {
 	/**
 	 * @return the fallosUsuario
 	 */
-	public static int getFallosUsuario() {
+	public int getFallosUsuario() {
 		return fallosUsuario;
 	}
 
 	/**
 	 * @return the auxFallos
 	 */
-	public static String[] getAuxFallos() {
+	public String[] getAuxFallos() {
 		return auxFallos;
 	}
 
 	/**
 	 * @return the coincidencias
 	 */
-	public static String[] getCoincidencias() {
+	public String[] getCoincidencias() {
 		return coincidencias;
 	}
 
 	/**
 	 * 
 	 */
-	public static void empezar () {
+	public void empezar () {
 
 		//Inicializacion del array de nuestra palabra oculta
 		inicializaEImprimePalabra(coincidencias);
@@ -72,30 +71,19 @@ public class Juego {
 			//Pide al usuario la palabra o letra
 			palabraUsuario = JOptionPane.showInputDialog(null, "Introduzca la letra o palabra buscada");
 			if (palabraUsuario.equals(palabraAleatoria)) {
+				for (int i = 0; i < coincidencias.length; i++) {
+					coincidencias[i] = String.valueOf(palabraUsuario.charAt(i));
+				}
 				JOptionPane.showMessageDialog(null,"\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
 			} else {
 				boolean encontrado = false;
 				if (palabraUsuario.length() == 1) {
-					char charUsuario = palabraUsuario.charAt(0);
-					for (int i = 0; i < coincidencias.length; i++) {
-						if (palabraAleatoria.charAt(i) == charUsuario) {
-							coincidencias[i] = palabraUsuario;
-							encontrado = true;
-						}
-					}
+					encontrado = palabraUsuarioEsUnaLetra (encontrado, palabraUsuario);
 				}if (!encontrado && !(palabraUsuario.equals(palabraAleatoria))) {
-					fallosUsuario++;
-					System.out.println();
-					System.out.println(palabraUsuario + " no esta en la palabra buscada");
-					for (int i = 0; i < auxFallos.length; i++) {
-						if (auxFallos[i] == "_") {
-							auxFallos[i] = palabraUsuario;
-							break;
-						}
-					}
+					jugadaConFallo(palabraUsuario);
 				}
+				
 				Ventana.getVentana().repaint();
-
 				// Impresion de los arrays despues de cada jugada
 				System.out.println();
 				imprimeArray(coincidencias);
@@ -116,9 +104,40 @@ public class Juego {
 	
 	/**
 	 * 
+	 * @param encontrado
+	 * @param palabraUsuario
+	 * @return
+	 */
+	private boolean palabraUsuarioEsUnaLetra (boolean encontrado, String palabraUsuario) {
+		char charUsuario = palabraUsuario.charAt(0);
+		for (int i = 0; i < coincidencias.length; i++) {
+			if (palabraAleatoria.charAt(i) == charUsuario) {
+				coincidencias[i] = palabraUsuario;
+				encontrado = true;
+			}
+		}
+		return encontrado;
+	}
+	/**
+	 * 
+	 * @param palabraUsuario
+	 */
+	private void jugadaConFallo (String palabraUsuario) {
+		fallosUsuario++;
+		System.out.println();
+		System.out.println(palabraUsuario + " no esta en la palabra buscada");
+		for (int i = 0; i < auxFallos.length; i++) {
+			if (auxFallos[i] == "_") {
+				auxFallos[i] = palabraUsuario;
+				break;
+			}
+		}
+	}
+	/**
+	 * 
 	 * @param array
 	 */
-	private static void imprimeArray (String array[]) {
+	private void imprimeArray (String array[]) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + " ");
 		}
@@ -127,7 +146,7 @@ public class Juego {
 	 * 
 	 * @param coincidencias
 	 */
-	private static void inicializaEImprimePalabra(String coincidencias[]) {
+	private void inicializaEImprimePalabra(String coincidencias[]) {
 		 for (int i = 0; i < coincidencias.length; i++) {
 				coincidencias[i] = "_";
 				System.out.print(coincidencias[i] + " ");
@@ -138,7 +157,7 @@ public class Juego {
 	 * 
 	 * @param auxFallos
 	 */
-	private static void inicializaAux (String auxFallos[]) {
+	private void inicializaAux (String auxFallos[]) {
 		System.out.println();
 		for (int i = 0; i < auxFallos.length; i++) {
 			auxFallos[i] = "_";
@@ -150,7 +169,7 @@ public class Juego {
 	 * @param coincidencias
 	 * @return
 	 */
-	private static boolean isTerminado( String coincidencias[]) {
+	private boolean isTerminado( String coincidencias[]) {
 		for (int i = 0; i < coincidencias.length; i++) {
 			if (coincidencias[i] == "_") {
 				return false;
