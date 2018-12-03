@@ -7,10 +7,10 @@ import javax.imageio.ImageIO;
 
 public class CacheImagenes {
 	
-	// Patrón Singleton
+	// Patrï¿½n Singleton
 	private static CacheImagenes cache= null;
 	
-	// Variables con imágenes almacenadas
+	// Variables con imï¿½genes almacenadas
 	private BufferedImage imagenTablero = null;
 	private BufferedImage iconoAhorcado = null;
 	
@@ -23,7 +23,7 @@ public class CacheImagenes {
 	}
 	
 	/**
-	 * Getter del patrón Singleton
+	 * Getter del patrï¿½n Singleton
 	 * @return
 	 */
 	public static CacheImagenes getCache() {
@@ -35,10 +35,10 @@ public class CacheImagenes {
 	
 	
 	/**
-	 * Método que permite obtener una imagen del sistema de ficheros. No es necesario que 
-	 * en este momento de tu aprendizaje entiendas el 100% del siguiente método. Es 
-	 * demasiado complejo. Sólo tienes que entender que esté método te devuelve un objeto
-	 * de tipo BufferedImage, que podrás utilizar para poder pintar un archivo de imagen
+	 * Mï¿½todo que permite obtener una imagen del sistema de ficheros. No es necesario que 
+	 * en este momento de tu aprendizaje entiendas el 100% del siguiente mï¿½todo. Es 
+	 * demasiado complejo. Sï¿½lo tienes que entender que estï¿½ mï¿½todo te devuelve un objeto
+	 * de tipo BufferedImage, que podrï¿½s utilizar para poder pintar un archivo de imagen
 	 * sobre tu ventana.
 	 * @param nombre
 	 * @return
@@ -59,7 +59,7 @@ public class CacheImagenes {
 	/**
 	 * @return the imagenFondo
 	 */
-	public BufferedImage getImagenFondo() {
+	public BufferedImage getImagenFondoAhorcado() {
 		if (imagenTablero == null) {
 			imagenTablero = getCache().getImagen("fondoAhorcado.jpg");
 		}
@@ -76,4 +76,5 @@ public class CacheImagenes {
 		}
 		return iconoAhorcado;
 	}
+	
 }

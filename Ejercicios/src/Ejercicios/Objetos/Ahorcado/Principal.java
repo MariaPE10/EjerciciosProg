@@ -8,9 +8,6 @@ public class Principal {
 		Ventana.getVentana();
 //		System.out.println("Palabra oculta: " + palabras[indicePalabraAleatoria]);
 		Juego.getJuego().empezar();
-
-		
-	
 	}
 
 	
