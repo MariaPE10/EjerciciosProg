@@ -68,6 +68,24 @@ public class CacheImagenes {
 	}
 	
 	/**
+	 * @return the imagenFondo
+	 */
+	public BufferedImage getImagenFondoNavidad() {
+		imagenTablero = getCache().getImagen("fondoNavidad.jpg");
+		
+		return imagenTablero;
+	}
+	
+	/**
+	 * @return the imagenFondo
+	 */
+	public BufferedImage getImagenFondoHalloween() {
+		imagenTablero = getCache().getImagen("fondoHalloween.jpg");
+		
+		return imagenTablero;
+	}
+	
+	/**
 	 * @return the iconoAhorcado
 	 */
 	public BufferedImage getIconoAhorcado() {

@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +24,8 @@ public class Ventana extends Canvas {
 	private String colorCamiseta = "#FAD7A0";
 	private String colorHorca = "#873600";
 	private String colorLetras = "#F9E79F";
+	private String colorPalabra = "#000000";
+	private BufferedImage imagenFondo = CacheImagenes.getCache().getImagenFondoAhorcado();
 	
 	/**
 	 * 
@@ -35,7 +38,48 @@ public class Ventana extends Canvas {
 		return ventana;
 	}
 	
-	
+	/**
+	 * @param imagenFondo the imagenFondo to set
+	 */
+	public void setImagenFondo(BufferedImage imagenFondo) {
+		this.imagenFondo = imagenFondo;
+	}
+
+	/**
+	 * @param colorPantalon the colorPantalon to set
+	 */
+	public void setColorPantalon(String colorPantalon) {
+		this.colorPantalon = colorPantalon;
+	}
+
+	/**
+	 * @param colorCamiseta the colorCamiseta to set
+	 */
+	public void setColorCamiseta(String colorCamiseta) {
+		this.colorCamiseta = colorCamiseta;
+	}
+
+	/**
+	 * @param colorHorca the colorHorca to set
+	 */
+	public void setColorHorca(String colorHorca) {
+		this.colorHorca = colorHorca;
+	}
+
+	/**
+	 * @param colorLetras the colorLetras to set
+	 */
+	public void setColorLetras(String colorLetras) {
+		this.colorLetras = colorLetras;
+	}
+
+	/**
+	 * @param colorPalabra the colorPalabra to set
+	 */
+	public void setColorPalabra(String colorPalabra) {
+		this.colorPalabra = colorPalabra;
+	}
+
 	public Ventana () {
 		// La clase JFrame nos permite mostrar una ventana en pantalla
 		JFrame ventana = new JFrame("El Ahorcado");
@@ -71,7 +115,7 @@ public class Ventana extends Canvas {
 		String cara = "o _ o";
 		fallos = Juego.getJuego().getFallosUsuario();
 		// Pintamos la imagen del tablero sobre la pantalla
-		g.drawImage(CacheImagenes.getCache().getImagenFondoAhorcado(), 0, 0, this);
+		g.drawImage(imagenFondo, 0, 0, this);
 		
 		//Seleccion del color
 		g.setColor(Color.decode(colorHorca));
@@ -173,7 +217,7 @@ public class Ventana extends Canvas {
 		for (int i = 0; i < Juego.getJuego().getCoincidencias().length; i++) {
 			strPalabra += Juego.getJuego().getCoincidencias()[i] + " ";
 		}
-		g.setColor(Color.black);
+		g.setColor(Color.decode(colorPalabra));
 		g.drawString("Palabra: " + strPalabra, 390, 85);
 	}
 }

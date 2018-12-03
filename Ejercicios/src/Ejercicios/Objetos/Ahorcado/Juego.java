@@ -20,9 +20,9 @@ public class Juego {
 	private boolean pistaUsada = false;
 	private String inmortal = "inmortal";
 	private boolean modoInmortal = false;
-	private String navidad = "Navidad";
-	private String halloween = "Halloween";
-	private String nier = "Nier";
+	private String navidad = "navidad";
+	private String halloween = "halloween";
+	private String nier = "nier";
 	
 	/**
 	 * 
@@ -94,9 +94,18 @@ public class Juego {
 				modoInmortal = true;
 				JOptionPane.showMessageDialog(null, "Has entrado en modo inmortal!");
 			}
-			if (palabraUsuario.equals(navidad)) { //|| palabraUsuario.equals(nier) || palabraUsuario.equals(halloween)) {
-				//AQUI ES DONDE TENGO QUE SEGUIR CURRANDO
-			}
+			if (palabraUsuario.equals(navidad) || palabraUsuario.equals(halloween) || palabraUsuario.equals(nier)) { 
+				if (palabraUsuario.equals(navidad)){
+					JOptionPane.showMessageDialog(null, "Modo Navidad!!");
+					palabraAleatoria = modoNavidad();
+				} else if (palabraUsuario.equals(halloween)) {
+					JOptionPane.showMessageDialog(null, "Modo Halloween!!");
+					palabraAleatoria = modoHalloween();
+				} else {
+					
+				}
+				
+			} else
 			if (palabraUsuario.equals(palabraAleatoria)) { //La palabra del usuario es la misma que la oculta
 				for (int i = 0; i < coincidencias.length; i++) {
 					coincidencias[i] = String.valueOf(palabraUsuario.charAt(i));
@@ -128,6 +137,58 @@ public class Juego {
 		
 	}
 	
+	/**
+	 * Metodo muy chulo que cambia la interfaz y todo el juego del oeste por un ambiente navidenio
+	 * @return
+	 */
+	private String modoNavidad() {
+		String palabras[] = new String[] {"caramelo", "galletas", "jengibre", "mantecados", "mazapan", "turron", "polvorones", "reyes", "santa", "roscon", "nieve", "regalos", "arbol", "elfos", "belen", "luces", "estrella", "duendes", "angeles", "velas", "adornos", "guirnaldas", "campanas", "carbon", "rudolf", "pino", "reno", "trineo", "chimenea", "hielo", "calcetines", "bufanda", "guantes", "gorro", "invierno", "nochebuena", "nochevieja", "cabalgatas"};
+		int indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
+		palabraAleatoria = palabras[indicePalabraAleatoria];
+		coincidencias = new String [palabraAleatoria.length()];
+		String rojo = "#A9001C";
+		String verde = "#007731";
+		Ventana.getVentana().setColorPantalon(rojo);
+		Ventana.getVentana().setColorCamiseta(rojo);
+		Ventana.getVentana().setColorHorca(verde);
+		Ventana.getVentana().setColorPalabra("#FFFFFF");
+		Ventana.getVentana().setColorLetras(verde);
+		Ventana.getVentana().setImagenFondo(CacheImagenes.getCache().getImagenFondoNavidad());
+		fallosUsuario = 0;
+		//Inicializacion del array de nuestra palabra oculta
+		inicializaEImprimePalabra(coincidencias);
+		//Inicializacion e impresion del array auxiliar de fallos
+		inicializaAux(auxFallos);
+		Ventana.getVentana().repaint();
+		return palabraAleatoria;
+	}
+	
+	/**
+	 * Metodo muy chulo que cambia la interfaz y todo el juego del oeste por un ambiente navidenio
+	 * @return
+	 */
+	private String modoHalloween() {
+		String palabras[] = new String[] {"calabaza"};//####################################################################################################
+		int indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
+		palabraAleatoria = palabras[indicePalabraAleatoria];
+		coincidencias = new String [palabraAleatoria.length()];
+		String naranja = "#FFBE2A";
+		String morado = "#7E0092";
+		Ventana.getVentana().setColorPantalon(morado);
+		Ventana.getVentana().setColorCamiseta(naranja);
+		Ventana.getVentana().setColorHorca(morado);
+		Ventana.getVentana().setColorPalabra("#FF8B00");
+		Ventana.getVentana().setColorLetras(naranja);
+		Ventana.getVentana().setImagenFondo(CacheImagenes.getCache().getImagenFondoHalloween());
+		fallosUsuario = 0;
+		//Inicializacion del array de nuestra palabra oculta
+		inicializaEImprimePalabra(coincidencias);
+		//Inicializacion e impresion del array auxiliar de fallos
+		inicializaAux(auxFallos);
+		Ventana.getVentana().repaint();
+		return palabraAleatoria;
+	}
+
 	/**
 	 * 
 	 */
