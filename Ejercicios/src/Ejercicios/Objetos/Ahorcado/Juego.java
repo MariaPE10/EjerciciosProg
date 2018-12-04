@@ -168,7 +168,7 @@ public class Juego {
 	 * @return
 	 */
 	private String modoHalloween() {
-		String palabras[] = new String[] {"calabaza"};//####################################################################################################
+		String palabras[] = new String[] {"calabaza", "caramelos", "esqueleto", "mascara", "sangre", "ojos", "gusanos", "chuches", "truco", "octubre", "galletas", "vampiro", "murcielago", "bruja", "gato", "tumba", "cementerio", "araña", "telaraña", "calavera", "zombie", "susto", "miedo", "fantasma", "momia", "demonio", "diablo", "encantada", "escoba", "velas", "magia", "monstruo", "luna", "hechizo", "escalofriante", "espeluznante", "sobrenatural", "almas", "errante", "siniestro", "grito", "monstruo", "lobo", "macabro", "maldicion", "caldero", "linterna", "candelabro"};
 		int indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
 		palabraAleatoria = palabras[indicePalabraAleatoria];
 		coincidencias = new String [palabraAleatoria.length()];
