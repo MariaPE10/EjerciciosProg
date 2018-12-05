@@ -17,7 +17,7 @@ public class Ventana extends Canvas {
 	public static final int HEIGHT = 480;
 	private static int fallos = 0;
 	private static Ventana ventana = null;
-	private static Font monoFont = new Font("Calibri", Font.BOLD, 16);
+	private static Font monoFont = new Font("Calibri", Font.BOLD, 17);
 	
 	private String colorCarne = "#FAE5D3";
 	private String colorPantalon = "#6E2C00";
@@ -25,6 +25,9 @@ public class Ventana extends Canvas {
 	private String colorHorca = "#873600";
 	private String colorLetras = "#F9E79F";
 	private String colorPalabra = "#000000";
+	private String colorBotones = "#873600";
+	private String colorZapatos = "#441a01";
+	private String colorMangas = "#873600";
 	private BufferedImage imagenFondo = CacheImagenes.getCache().getImagenFondoAhorcado();
 	
 	/**
@@ -43,6 +46,27 @@ public class Ventana extends Canvas {
 	 */
 	public void setImagenFondo(BufferedImage imagenFondo) {
 		this.imagenFondo = imagenFondo;
+	}
+
+	/**
+	 * @param colorZapatos the colorZapatos to set
+	 */
+	public void setColorZapatos(String colorZapatos) {
+		this.colorZapatos = colorZapatos;
+	}
+
+	/**
+	 * @param colorMangas the colorMangas to set
+	 */
+	public void setColorMangas(String colorMangas) {
+		this.colorMangas = colorMangas;
+	}
+
+	/**
+	 * @param colorBotones the colorBotones to set
+	 */
+	public void setColorBotones(String colorBotones) {
+		this.colorBotones = colorBotones;
 	}
 
 	/**
@@ -151,9 +175,15 @@ public class Ventana extends Canvas {
 		if (fallos > 5) {
 			//Pintado del cuerpo
 			g.setColor(Color.black);
-			g.drawRect(359, 169, 51, 111);
+			g.drawRect(359, 169, 51, 101);
 			g.setColor(Color.decode(colorCamiseta));
-			g.fillRect(360, 170, 50, 110);
+			g.fillRect(360, 170, 50, 100);
+			g.setColor(Color.decode(colorBotones));
+			g.fillRect(383, 180, 4, 4);
+			g.fillRect(383, 200, 4, 4);
+			g.fillRect(383, 220, 4, 4);
+			g.fillRect(383, 240, 4, 4);
+			g.fillRect(360, 250, 50, 20);
 		}
 		if (fallos > 6) {
 			//Pintado de la mano1
@@ -163,6 +193,8 @@ public class Ventana extends Canvas {
 			g.fillRect(335, 170, 25, 80);
 			g.setColor(Color.decode(colorCamiseta));
 			g.fillRect(335, 170, 25, 70);
+			g.setColor(Color.decode(colorMangas));
+			g.fillRect(335, 235, 25, 5);
 		}
 		if (fallos > 7) {
 			//Pintado de la mano2
@@ -172,21 +204,27 @@ public class Ventana extends Canvas {
 			g.fillRect(410, 170, 25, 80);
 			g.setColor(Color.decode(colorCamiseta));
 			g.fillRect(410, 170, 25, 70);
+			g.setColor(Color.decode(colorMangas));
+			g.fillRect(410, 235, 25, 5);
 		}
 		if (fallos > 8) {
 			//Pintado de la pierna1
 			g.setColor(Color.black);
-			g.drawRect(359, 281, 26, 89);
+			g.drawRect(359, 271, 26, 89);
 			g.setColor(Color.decode(colorPantalon));
-			g.fillRect(360, 280, 25, 90);
+			g.fillRect(360, 270, 25, 90);
+			g.setColor(Color.decode(colorZapatos));
+			g.fillRect(360, 340, 25, 20);
 		}
 		if (fallos > 9) {
 			cara = "X _ X";
 			//Pintado de la pierna2
 			g.setColor(Color.black);
-			g.drawRect(384, 281, 26, 89);
+			g.drawRect(384, 271, 26, 89);
 			g.setColor(Color.decode(colorPantalon));
-			g.fillRect(385, 280, 25, 90);
+			g.fillRect(385, 270, 25, 90);
+			g.setColor(Color.decode(colorZapatos));
+			g.fillRect(385, 340, 25, 20);
 			//Cara
 			g.setColor(Color.black);
 			g.setFont(monoFont);
@@ -218,6 +256,6 @@ public class Ventana extends Canvas {
 			strPalabra += Juego.getJuego().getCoincidencias()[i] + " ";
 		}
 		g.setColor(Color.decode(colorPalabra));
-		g.drawString("Palabra: " + strPalabra, 390, 85);
+		g.drawString("Palabra: " + strPalabra, 386, 85);
 	}
 }
