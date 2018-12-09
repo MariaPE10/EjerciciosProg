@@ -17,12 +17,11 @@ public class Juego {
 	//Creacion de un array auxiliar para mostrar los fallos del usuario
 	private String auxFallos[]= new String [fallosMaximos];
 	private String pista = "pista";
-	private boolean pistaUsada = false;
+	private boolean isPistaUsada = false;
 	private String inmortal = "inmortal";
-	private boolean modoInmortal = false;
+	private boolean isModoInmortal = false;
 	private String navidad = "navidad";
 	private String halloween = "halloween";
-	private String nier = "nier";
 	
 	/**
 	 * 
@@ -67,7 +66,7 @@ public class Juego {
 	 * @return the modoInmortal
 	 */
 	public boolean isModoInmortal() {
-		return modoInmortal;
+		return isModoInmortal;
 	}
 
 	/**
@@ -85,19 +84,23 @@ public class Juego {
 		do {
 			//Pide al usuario la palabra o letra
 			palabraUsuario = JOptionPane.showInputDialog(null, "Introduzca la letra o palabra buscada");
-			if (palabraUsuario.equals(pista) && !pistaUsada) { //Uso del cheat "PISTA"
+			if (palabraUsuario.equals(pista) && !isPistaUsada) { //Uso del cheat "PISTA"
 				usarPista();
 				JOptionPane.showMessageDialog(null, "Has usado una pista!");
 			}
 			if (palabraUsuario.equals(inmortal)) { //Modo Inmortal
-				modoInmortal = true;
+				isModoInmortal = true;
 				JOptionPane.showMessageDialog(null, "Has entrado en modo inmortal!");
 			}
 			if (palabraUsuario.equals(navidad) || palabraUsuario.equals(halloween)) {  //Modo Navidad		
 				if (palabraUsuario.equals(navidad)) {
+					isModoInmortal = false;
+					isPistaUsada = false;
 					JOptionPane.showMessageDialog(null, "Modo Navidad!!");
 					palabraAleatoria = modoNavidad();
 				} else if (palabraUsuario.equals(halloween)) {//Modo  Halloween
+					isModoInmortal = false;
+					isPistaUsada = false;
 					JOptionPane.showMessageDialog(null, "Modo Halloween!!");
 					palabraAleatoria = modoHalloween();
 				}
@@ -109,8 +112,8 @@ public class Juego {
 			} else {
 				boolean encontrado = false;
 				if (palabraUsuario.length() == 1) { //La palabra del usuario es una letra
-					encontrado = palabraUsuarioEsUnaLetra (encontrado, palabraUsuario);
-				}if (!encontrado && !(palabraUsuario.equals(palabraAleatoria)) && !modoInmortal ) {
+					encontrado = isPalabraUsuarioEsUnaLetra (encontrado, palabraUsuario);
+				}if (!encontrado && !(palabraUsuario.equals(palabraAleatoria)) && !isModoInmortal ) {
 					jugadaConFallo(palabraUsuario);
 				}
 				//Pinta la ventana despues de cada jugada
@@ -131,15 +134,6 @@ public class Juego {
 			JOptionPane.showMessageDialog(null,"\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
 		}
 		
-		int opcion = JOptionPane.showConfirmDialog(null, "Volver a jugar?", "El Ahorcado", JOptionPane.YES_NO_OPTION);
-		if (opcion == JOptionPane.YES_OPTION) { 
-			fallosUsuario = 0;
-			indicePalabraAleatoria = (int) Math.round(Math.random()*(palabras.length-1));
-			palabraAleatoria = palabras[indicePalabraAleatoria];
-			Ventana.getVentana().repaint();
-			empezar();
-			
-		}
 	}
 	
 	/**
@@ -207,7 +201,7 @@ public class Juego {
 	 * 
 	 */
 	private void usarPista() {
-		pistaUsada = true;
+		isPistaUsada = true;
 		boolean cambio = false;
 		do {
 			int charAleatorio = (int) Math.round(Math.random()*(palabraAleatoria.length()-1));
@@ -226,7 +220,7 @@ public class Juego {
 	 * @param palabraUsuario
 	 * @return
 	 */
-	private boolean palabraUsuarioEsUnaLetra (boolean encontrado, String palabraUsuario) {
+	private boolean isPalabraUsuarioEsUnaLetra (boolean encontrado, String palabraUsuario) {
 		char charUsuario = palabraUsuario.charAt(0);
 		for (int i = 0; i < coincidencias.length; i++) {
 			if (palabraAleatoria.charAt(i) == charUsuario) {
