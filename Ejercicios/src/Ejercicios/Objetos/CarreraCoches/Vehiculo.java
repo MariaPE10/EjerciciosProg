@@ -5,6 +5,8 @@ public abstract class Vehiculo {
 	protected String nombre;
 	protected int posicion;
 	protected String color;
+	private Pista pista;
+	private static final int META = 500;
 	
 	/**
 	 * @param nombre
@@ -23,5 +25,28 @@ public abstract class Vehiculo {
 		
 		return this.posicion += posicionesAvanzadas;
 	}
-	public abstract String paint();
+	
+	public abstract void paint();
+
+	/**
+	 * @return the posicion
+	 */
+	public int getPosicion() {
+		return posicion;
+	}
+
+	/**
+	 * @param posicion the posicion to set
+	 */
+	public void setPosicion(int posicion) {
+		this.posicion = posicion;
+	}
+
+	/**
+	 * @return the meta
+	 */
+	public static int getMeta() {
+		return META;
+	}
+	
 }

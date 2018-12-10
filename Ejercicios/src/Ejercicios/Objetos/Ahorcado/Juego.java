@@ -78,7 +78,7 @@ public class Juego {
 		inicializaEImprimePalabra(coincidencias);
 		//Inicializacion e impresion del array auxiliar de fallos
 		inicializaAux(auxFallos);
-		
+		//gSystem.out.println(palabraAleatoria);
 		String palabraUsuario = "";
 		
 		do {

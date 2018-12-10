@@ -11,8 +11,8 @@ public class Coche extends Vehiculo {
 	}
 
 	@Override
-	public String paint() {
-		return "Coche -> Conductor/a:" + nombre + ", posicion:" + posicion;
+	public void paint() {
+		System.out.println("Coche -> Conductor/a:" + nombre + ", posicion:" + posicion);
 	}
 	
 }
