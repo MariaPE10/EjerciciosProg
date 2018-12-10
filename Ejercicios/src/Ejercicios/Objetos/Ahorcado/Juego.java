@@ -225,7 +225,7 @@ public class Juego {
 		char charUsuario = palabraUsuario.toLowerCase().charAt(0);
 		for (int i = 0; i < coincidencias.length; i++) {
 			if (palabraAleatoria.charAt(i) == charUsuario) {
-				coincidencias[i] = palabraUsuario;
+				coincidencias[i] = palabraUsuario.toLowerCase();
 				encontrado = true;
 			}
 		}
