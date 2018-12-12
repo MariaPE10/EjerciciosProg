@@ -133,7 +133,7 @@ public class Juego {
 		} else if (isTerminado(coincidencias) || palabraUsuario.equalsIgnoreCase(palabraAleatoria)){
 			JOptionPane.showMessageDialog(null,"\n\t\t\tFELICIDADES!! La palabra ocultas era: " + palabraAleatoria);
 		}
-		
+		System.exit(0);
 	}
 	
 	/**
