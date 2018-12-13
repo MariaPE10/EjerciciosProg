@@ -1,4 +1,4 @@
-package tutorialJava.capitulo05.bloque01.ejercicio04;
+package Ejercicios.Objetos.Bloque3.bloque01.ejercicio04;
 
 import java.util.Arrays;
 

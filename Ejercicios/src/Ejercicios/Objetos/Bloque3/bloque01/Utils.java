@@ -1,4 +1,4 @@
-package tutorialJava;
+package Ejercicios.Objetos.Bloque3.bloque01;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

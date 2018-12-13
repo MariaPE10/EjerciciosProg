@@ -1,4 +1,4 @@
-package tutorialJava.capitulo05.bloque01.ejercicio06;
+package Ejercicios.Objetos.Bloque3.bloque01.ejercicio06;
 
 public class Cromo {
 	

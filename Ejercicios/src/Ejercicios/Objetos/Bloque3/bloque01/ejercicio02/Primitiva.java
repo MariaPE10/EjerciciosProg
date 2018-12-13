@@ -1,8 +1,8 @@
-package tutorialJava.capitulo05.bloque01.ejercicio02;
+package Ejercicios.Objetos.Bloque3.bloque01.ejercicio02;
 
 import java.util.Arrays;
 
-import tutorialJava.Utils;
+import Ejercicios.Objetos.Bloque3.bloque01.Utils;
 
 public class Primitiva {
 	

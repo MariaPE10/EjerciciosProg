@@ -1,4 +1,4 @@
-package tutorialJava.capitulo05.bloque01.ejercicio02;
+package Ejercicios.Objetos.Bloque3.bloque01.ejercicio02;
 
 public class Main {
 

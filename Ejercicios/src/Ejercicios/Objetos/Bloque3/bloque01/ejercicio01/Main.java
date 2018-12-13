@@ -1,9 +1,9 @@
-package tutorialJava.capitulo05.bloque01.ejercicio01;
+package Ejercicios.Objetos.Bloque3.bloque01.ejercicio01;
 
 import java.io.IOException;
 import java.util.List;
 
-import tutorialJava.Utils;
+import Ejercicios.Objetos.Bloque3.bloque01.Utils;
 
 public class Main {
 
