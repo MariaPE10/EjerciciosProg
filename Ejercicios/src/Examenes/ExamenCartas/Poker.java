@@ -4,7 +4,7 @@ public class Poker {
 
 	Jugador jugadores[] = new Jugador[5];
 	public static Poker poker = null; 
-	
+	 
 	/**
 	 * 
 	 */
