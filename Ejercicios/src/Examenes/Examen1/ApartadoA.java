@@ -1,4 +1,4 @@
-package Examenes;
+package Examenes.Examen1;
 
 
 public class ApartadoA {

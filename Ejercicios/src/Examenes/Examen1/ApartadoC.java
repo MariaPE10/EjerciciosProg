@@ -1,4 +1,4 @@
-package Examenes;
+package Examenes.Examen1;
 public class ApartadoC {
 	/* Crea una clase con un método “main” que cree un array de 20 posiciones al azar
 	 * con números generados al azar, pares, mayores de 25 y menores de 100.

@@ -6,7 +6,7 @@ public class Principal {
 		
 		Baraja.getBaraja().barajar();
 		Baraja.getBaraja().ordenarBaraja();
-		
+//		Baraja.getBaraja().movimientoCiclicoIzquierda();
 
 		
 		Poker.getPoker().reparteCartas();

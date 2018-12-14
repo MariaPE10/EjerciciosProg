@@ -1,4 +1,4 @@
-package Examenes;
+package Examenes.Examen1;
 import javax.swing.JOptionPane;
 
 public class ApartadoB {
