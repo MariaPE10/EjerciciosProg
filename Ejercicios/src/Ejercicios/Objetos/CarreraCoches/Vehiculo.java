@@ -43,10 +43,31 @@ public abstract class Vehiculo {
 	}
 
 	/**
+	 * @return the pista
+	 */
+	public Pista getPista() {
+		return pista;
+	}
+
+	/**
+	 * @param pista the pista to set
+	 */
+	public void setPista(Pista pista) {
+		this.pista = pista;
+	}
+
+	/**
 	 * @return the meta
 	 */
 	public static int getMeta() {
 		return META;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
 	}
 	
 }
