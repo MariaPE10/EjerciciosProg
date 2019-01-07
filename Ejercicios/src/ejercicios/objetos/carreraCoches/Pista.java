@@ -8,7 +8,7 @@ public class Pista {
 
 	Obstaculo obstaculos[] = new Obstaculo[4];
 	public static final int META = 500;
-	 private int posicionY;
+	private int posicionY;
 	
 	
 	/**

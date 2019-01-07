@@ -8,9 +8,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 
 
@@ -21,6 +23,8 @@ public class Ventana extends Canvas {
 	public static final int WIDTH = 550;
 	public static final int HEIGHT = 300;
 	public static Ventana ventana = null;
+	private BufferedImage imagenFondo = CacheImagenes.getCache().getImagenFondoPodio();
+
 	
 	/**
 	 * Patrón Singleton
@@ -34,14 +38,21 @@ public class Ventana extends Canvas {
 	}
 
 	/**
+	 * @param imagenFondo the imagenFondo to set
+	 */
+	public void setImagenFondo(BufferedImage imagenFondo) {
+		this.imagenFondo = imagenFondo;
+	}
+	
+	/**
 	 * 
 	 */
-	public Ventana () {
+	public Ventana() {
 		JFrame ventana = new JFrame("Carrera");
 		ventana.setBounds(0,0,WIDTH,HEIGHT);
 		
 		JPanel panel = (JPanel)ventana.getContentPane();
-
+		
 		panel.add(this);
 		this.setBounds(0,0,WIDTH,HEIGHT);
 		ventana.setVisible(true);
@@ -49,7 +60,61 @@ public class Ventana extends Canvas {
 		ventana.setResizable(false);
 		
 	}
+
+//	/**
+//	 * @return 
+//	 * 
+//	 */
+//	public void VentanaPodio() {
+//		JFrame ventana = new JFrame("Podio");
+//		ventana.setBounds(0,0,WIDTH-50,HEIGHT);
+//		
+//		this.panel = (JPanel)ventana.getContentPane();
+//
+//		this.panel.add(this);
+//		this.setBounds(0,0,WIDTH-50,HEIGHT);
+//		ventana.setVisible(true);
+//		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		ventana.setResizable(false);
+//		
+//	}
 	
+	
+	/**
+	 * Sobrescribimos el mï¿½todo "paint" que tienen todos los componentes grï¿½ficos en AWT-SWING
+	 */
+	@Override
+	public void paint(Graphics g) {
+		Vehiculo vehiculos[] = Carrera.getVehiculos();
+		
+		if (!Carrera.isCarreraTerminada(vehiculos)) {
+			for (int j = 0; j < vehiculos.length; j++) {
+				vehiculos[j].getPista().paint(g);
+				vehiculos[j].paint(g, vehiculos[j].getPista().getPosicionY());
+			}
+		} else {
+			g.drawImage(imagenFondo, 0, 0, this);
+			for (int i = 0; i < vehiculos.length; i++) {
+				if (vehiculos[i].getPodium() == 1) {
+					vehiculos[i].paint(g, 195, 20);
+				}
+				if (vehiculos[i].getPodium() == 2) {
+					vehiculos[i].paint(g, 70, 75);
+				}
+				if (vehiculos[i].getPodium() == 3) {
+					vehiculos[i].paint(g, 315, 115);
+				}
+				if (vehiculos[i].getPodium() == 4) {
+					vehiculos[i].paint(g, 425, 245);
+				}
+				if (vehiculos[i].getPodium() == 5) {
+					vehiculos[i].paint(g, 475, 245);
+				}
+			}
+			
+		}
+		
+	}
 
 
 }

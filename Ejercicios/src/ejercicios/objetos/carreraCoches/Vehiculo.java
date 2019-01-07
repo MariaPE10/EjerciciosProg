@@ -27,6 +27,13 @@ public abstract class Vehiculo {
 	}
 
 	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
 	 * @param nombre
 	 * @param posicion
 	 * @param color
@@ -52,6 +59,13 @@ public abstract class Vehiculo {
 		posicionFinal = avancePorObstaculo (posicionFinal);
 		if (posicionFinal > 500) {
 			posicionFinal = 500;
+		}
+		if (this instanceof Coche) {
+			this.mensaje = this.mensaje.concat("\n"  + nombre + " (Coche), posicion final: " + posicionFinal);
+			System.out.println( nombre + " (Coche), posicion final: " + posicionFinal);
+		} else {
+			this.mensaje = this.mensaje.concat("\n"  + nombre + " (Moto), posicion final: " + posicionFinal);
+			System.out.println( nombre + " (Moto), posicion final: " + posicionFinal);
 		}
 		return this.posicion = posicionFinal;
 	}
@@ -100,6 +114,7 @@ public abstract class Vehiculo {
 	 * 
 	 */
 	public abstract void paint(Graphics g, int posicionY);
+	public abstract void paint(Graphics g,int posicionX, int posicionY);
 
 	/**
 	 * @return the posicion

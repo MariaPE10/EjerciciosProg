@@ -11,9 +11,10 @@ public class CacheImagenes {
 	private static CacheImagenes cache= null;
 	
 	// Variables con im�genes almacenadas
-//	private BufferedImage imagenTablero = null;
+	private BufferedImage imagenTablero = null;
 	private BufferedImage iconoCarrera = null;
 	private BufferedImage iconoPodio = null;
+
 	
 	/**
 	 * El constructor busca los archivos en el sistema y los carga en memoria
@@ -56,16 +57,16 @@ public class CacheImagenes {
 		}
 	}
 
-//	/**
-//	 * @return the imagenFondo
-//	 */
-//	public BufferedImage getImagenFondoAhorcado() {
-//		if (imagenTablero == null) {
-//			imagenTablero = getCache().getImagen("fondoAhorcado.jpg");
-//		}
-//		
-//		return imagenTablero;
-//	}
+	/**
+	 * @return the imagenFondo
+	 */
+	public BufferedImage getImagenFondoPodio() {
+		if (imagenTablero == null) {
+			imagenTablero = getCache().getImagen("podio.png");
+		}
+		
+		return imagenTablero;
+	}
 //	
 //	/**
 //	 * @return the imagenFondo

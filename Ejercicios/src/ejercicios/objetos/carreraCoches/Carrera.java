@@ -4,15 +4,17 @@ import javax.swing.ImageIcon;
 
 public class Carrera {
 
-public static void main(String[] args) {
+	public static Vehiculo vehiculos[] = new Vehiculo[5];
+	public static void main(String[] args) {
 	
 		ImageIcon icono =  new ImageIcon(CacheImagenes.getCache().getIconoCarrera());
 		ImageIcon iconoPodio =  new ImageIcon(CacheImagenes.getCache().getIconoPodio());
 		Ventana ventana = new Ventana();
-		Vehiculo vehiculos[] = new Vehiculo[5];
+		
+		
 		vehiculos[0] = new Coche ("Ruben", "#ff0000"); //Rojo
 		vehiculos[1] = new Coche ("Maria", "#87006e"); //Morado
-		vehiculos[2] = new Coche ("Sandra", "#89ff0c"); //Verde
+		vehiculos[2] = new Coche ("Sandra", "#57e5a7"); //Verde
 		vehiculos[3] = new Moto ("Isa", "#0c96ff"); //Azul
 		vehiculos[4] = new Moto ("Juan", "#faff0c"); //Amarillo
 		
@@ -25,16 +27,13 @@ public static void main(String[] args) {
 		
 		for (int i = 0; i < pistas.length; i++) {
 			pistas[i].paint(ventana.getGraphics());
-			
 		}
 		
 		do {
 			for (int i = 0; i < vehiculos.length; i++) {
 				if (vehiculos[i].getPosicion() < Pista.META) {
 					vehiculos[i].avanza();
-					vehiculos[i].getPista().paint(ventana.getGraphics());
-					vehiculos[i].paint(ventana.getGraphics(), vehiculos[i].getPista().getPosicionY());
-					VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
+					//VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
 					vehiculos[i].setMensaje(vehiculos[i].getNombre() + " posicion inicial: " + vehiculos[i].getPosicion());
 					if (vehiculos[i].getPosicion() >= Pista.META) {
 						vehiculos[i].setPosicion(Pista.META);
@@ -43,14 +42,16 @@ public static void main(String[] args) {
 						vehiculos[i].setPodium(getMayorPodio(vehiculos) + 1);
 					}
 				}
+				ventana.repaint();
 			}
 		} while (!isCarreraTerminada(vehiculos));
 		
 		ordenaVehiculosPorPodio(vehiculos);
-		String mensaje = vehiculos[0].getNombre() + " podium: " + vehiculos[0].getPodium();
+		String mensaje = vehiculos[0].getNombre() + " podio: " + vehiculos[0].getPodium();
+		System.out.println(vehiculos[0].getNombre() + " podio: " + vehiculos[0].getPodium());
 		for (int i = 1; i < vehiculos.length; i++) {
-			mensaje = mensaje.concat( "\n" + vehiculos[i].getNombre() + " podium: " + vehiculos[i].getPodium());
-			System.out.println(vehiculos[i].getNombre() + " podium: " + vehiculos[i].getPodium());
+			mensaje = mensaje.concat( "\n" + vehiculos[i].getNombre() + " podio: " + vehiculos[i].getPodium());
+			System.out.println(vehiculos[i].getNombre() + " podio: " + vehiculos[i].getPodium());
 		}
 		
 		VentanaEmergente.muestraVentanaEmergente(mensaje, iconoPodio);
@@ -61,7 +62,7 @@ public static void main(String[] args) {
 	 * @param vehiculos
 	 * @return
 	 */
-	private static boolean isCarreraTerminada(Vehiculo vehiculos[]) {
+	public static boolean isCarreraTerminada(Vehiculo vehiculos[]) {
 		for (int i = 0; i < vehiculos.length; i++) {
 			if (vehiculos[i].getPosicion() < Pista.META) {
 				return false;
@@ -102,6 +103,14 @@ public static void main(String[] args) {
 				}
 			}
 		}
-	}	
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static Vehiculo[] getVehiculos() {
+		return vehiculos;
+	}
 	
 }
