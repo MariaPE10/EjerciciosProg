@@ -33,7 +33,7 @@ public class Carrera {
 			for (int i = 0; i < vehiculos.length; i++) {
 				if (vehiculos[i].getPosicion() < Pista.META) {
 					vehiculos[i].avanza();
-					//VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
+					VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
 					vehiculos[i].setMensaje(vehiculos[i].getNombre() + " posicion inicial: " + vehiculos[i].getPosicion());
 					if (vehiculos[i].getPosicion() >= Pista.META) {
 						vehiculos[i].setPosicion(Pista.META);
