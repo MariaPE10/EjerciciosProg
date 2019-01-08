@@ -1,21 +1,26 @@
 package ejercicios.objetos.carreraCoches;
 
+
 import javax.swing.ImageIcon;
 
 public class Carrera {
 
 	public static Vehiculo vehiculos[] = new Vehiculo[5];
+	public static SoundCache sonidoFondo;
+	
 	public static void main(String[] args) {
 	
 		ImageIcon icono =  new ImageIcon(CacheImagenes.getCache().getIconoCarrera());
 		ImageIcon iconoPodio =  new ImageIcon(CacheImagenes.getCache().getIconoPodio());
 		Ventana ventana = new Ventana();
 		
+		sonidoFondo = new SoundCache();
 		vehiculos[0] = new Coche ("Ruben", "#ff0000"); //Rojo
 		vehiculos[1] = new Coche ("Maria", "#87006e"); //Morado
 		vehiculos[2] = new Coche ("Sandra", "#57e5a7"); //Verde
 		vehiculos[3] = new Moto ("Isa", "#0c96ff"); //Azul
 		vehiculos[4] = new Moto ("Juan", "#faff0c"); //Amarillo
+		sonidoFondo.loopSound("motor.wav");
 		
 		Pista pistas[] = Pista.generatePistas();
 		
@@ -32,7 +37,7 @@ public class Carrera {
 			for (int i = 0; i < vehiculos.length; i++) {
 				if (vehiculos[i].getPosicion() < Pista.META) {
 					vehiculos[i].avanza();
-					VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
+					//VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getMensaje(), icono);
 					vehiculos[i].setMensaje(vehiculos[i].getNombre() + " posicion inicial: " + vehiculos[i].getPosicion());
 					if (vehiculos[i].getPosicion() >= Pista.META) {
 						vehiculos[i].setPosicion(Pista.META);
@@ -40,6 +45,7 @@ public class Carrera {
 						VentanaEmergente.muestraVentanaEmergente(vehiculos[i].getNombre() + " ha terminado la carrera", icono);
 						vehiculos[i].setPodium(getMayorPodio(vehiculos) + 1);
 					}
+					
 				}
 				ventana.repaint();
 			}
@@ -52,7 +58,7 @@ public class Carrera {
 			mensaje = mensaje.concat( "\n" + vehiculos[i].getNombre() + " podio: " + vehiculos[i].getPodium());
 			System.out.println(vehiculos[i].getNombre() + " podio: " + vehiculos[i].getPodium());
 		}
-		
+		sonidoFondo.playSound("podio.wav");
 		VentanaEmergente.muestraVentanaEmergente(mensaje, iconoPodio);
 	}
 	

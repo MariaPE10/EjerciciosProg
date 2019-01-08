@@ -60,24 +60,6 @@ public class Ventana extends Canvas {
 		ventana.setResizable(false);
 		
 	}
-
-//	/**
-//	 * @return 
-//	 * 
-//	 */
-//	public void VentanaPodio() {
-//		JFrame ventana = new JFrame("Podio");
-//		ventana.setBounds(0,0,WIDTH-50,HEIGHT);
-//		
-//		this.panel = (JPanel)ventana.getContentPane();
-//
-//		this.panel.add(this);
-//		this.setBounds(0,0,WIDTH-50,HEIGHT);
-//		ventana.setVisible(true);
-//		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		ventana.setResizable(false);
-//		
-//	}
 	
 	
 	/**
@@ -88,6 +70,13 @@ public class Ventana extends Canvas {
 		Vehiculo vehiculos[] = Carrera.getVehiculos();
 		
 		if (!Carrera.isCarreraTerminada(vehiculos)) {
+			g.setColor(Color.decode("#838487"));
+			g.fillRect(0, 0, WIDTH, HEIGHT);
+			g.setColor(Color.white);
+			g.fillRect(0, 55, WIDTH, 3);
+			g.fillRect(0, 105, WIDTH, 3);
+			g.fillRect(0, 160, WIDTH, 3);
+			g.fillRect(0, 205, WIDTH, 3);
 			for (int j = 0; j < vehiculos.length; j++) {
 				vehiculos[j].getPista().paint(g);
 				vehiculos[j].paint(g, vehiculos[j].getPista().getPosicionY());

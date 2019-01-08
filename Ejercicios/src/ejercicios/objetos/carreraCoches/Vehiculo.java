@@ -79,12 +79,14 @@ public abstract class Vehiculo {
 				if (this.pista.getObstaculos()[i] instanceof Rampa) {
 					int posicionesRampa = this.pista.getObstaculos()[i].inicializa();
 					posicionFinal += posicionesRampa;
+					Carrera.sonidoFondo.playSound("rampa.wav");
 					System.out.println( this.nombre + " ha pasado por una Rampa (posicion: " + this.pista.getObstaculos()[i].getPosicionObs() + ") y avanza: " + posicionesRampa);
 					this.mensaje = mensaje.concat("\n" + this.nombre + " ha pasado por una Rampa (posicion: " + this.pista.getObstaculos()[i].getPosicionObs() + ") y avanza: " + posicionesRampa);
 				}
 				if (this.pista.getObstaculos()[i] instanceof Mancha) {
 					int posicionesMancha = this.pista.getObstaculos()[i].inicializa();
 					posicionFinal += posicionesMancha;
+					Carrera.sonidoFondo.playSound("mancha.wav");
 					if (posicionFinal < 0) {
 						posicionFinal = 0;
 					}
