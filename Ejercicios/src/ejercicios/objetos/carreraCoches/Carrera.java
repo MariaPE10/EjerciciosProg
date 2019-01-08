@@ -11,7 +11,6 @@ public class Carrera {
 		ImageIcon iconoPodio =  new ImageIcon(CacheImagenes.getCache().getIconoPodio());
 		Ventana ventana = new Ventana();
 		
-		
 		vehiculos[0] = new Coche ("Ruben", "#ff0000"); //Rojo
 		vehiculos[1] = new Coche ("Maria", "#87006e"); //Morado
 		vehiculos[2] = new Coche ("Sandra", "#57e5a7"); //Verde
