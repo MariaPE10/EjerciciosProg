@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Ventana extends Canvas {
 
-	// Declaración de variables que nos permitirán introducir el ancho y el alto
+	// Declaraciï¿½n de variables que nos permitirï¿½n introducir el ancho y el alto
 	// de la ventana
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 600;
@@ -27,7 +27,7 @@ public class Ventana extends Canvas {
 	 */
 	public Ventana () {
 		JFrame ventana = new JFrame("3 en raya");
-		ventana.setBounds(0,0,WIDTH+10,HEIGHT+35);
+		ventana.setBounds(0,0,WIDTH+5,HEIGHT+35);
 		
 		JPanel panel = (JPanel)ventana.getContentPane();
 
@@ -74,7 +74,7 @@ public class Ventana extends Canvas {
 
 	
 	/**
-	 * Sobrescribimos el método "paint" que tienen todos los componentes gráficos en AWT-SWING
+	 * Sobrescribimos el mï¿½todo "paint" que tienen todos los componentes grï¿½ficos en AWT-SWING
 	 */
 	@Override
 	public void paint(Graphics g) {

@@ -15,11 +15,11 @@ public class Carrera {
 		Ventana ventana = new Ventana();
 		
 		sonidoFondo = new SoundCache();
-		vehiculos[0] = new Coche ("Ruben", "#ff0000"); //Rojo
-		vehiculos[1] = new Coche ("Maria", "#87006e"); //Morado
-		vehiculos[2] = new Coche ("Sandra", "#57e5a7"); //Verde
-		vehiculos[3] = new Moto ("Isa", "#0c96ff"); //Azul
-		vehiculos[4] = new Moto ("Juan", "#faff0c"); //Amarillo
+		vehiculos[0] = new Coche ("Mario", "#ff0000"); //Rojo
+		vehiculos[1] = new Coche ("Waluigi", "#87006e"); //Morado
+		vehiculos[2] = new Coche ("Luigi", "#57e5a7"); //Verde
+		vehiculos[3] = new Moto ("Rosalina", "#0c96ff"); //Azul
+		vehiculos[4] = new Moto ("Daisy", "#faff0c"); //Amarillo
 		sonidoFondo.loopSound("motor.wav");
 		
 		Pista pistas[] = Pista.generatePistas();
