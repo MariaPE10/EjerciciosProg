@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 public class RepasoArrays {
 
 	public static void main(String[] args) {
-		Ejercicio04();
+		Ejercicio01();
 	}
 	
 	/* Ejercicio 1: Realiza un programa que sume los valores de un array. El array se rellenara con valores aleatorios entre el 1 y el 25.

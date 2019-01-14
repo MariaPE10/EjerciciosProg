@@ -31,8 +31,9 @@ public class Pista {
 	public Pista() {
 		this.posicionY = 0;
 		for (int i = 0; i < obstaculos.length; i++) {
-			float porcentaje = (float) Math.random();
-			if (porcentaje > 0.5) {
+//			float porcentaje = (float) Math.random();
+//			if (porcentaje > 0.5) {
+			if (Math.random() > 0.5) {
 				obstaculos[i]= new Rampa();
 			} else {
 				obstaculos[i] = new Mancha();
@@ -95,7 +96,7 @@ public class Pista {
 	}
 	
 	/**
-	 *	Método que genera las 5 pistas asignando las posiciones Y a cada una de ellas.
+	 *	Mï¿½todo que genera las 5 pistas asignando las posiciones Y a cada una de ellas.
 	 * @return
 	 */	
 	public static Pista[] generatePistas()  {
