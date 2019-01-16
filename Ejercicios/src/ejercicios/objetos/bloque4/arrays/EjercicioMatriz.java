@@ -1,9 +1,9 @@
-package ejercicios.objetos.bloque4.ejercicios;
+package ejercicios.objetos.bloque4.arrays;
+
+import javax.swing.JOptionPane;
 
 /* Realiza un programa que cree un array bidimensional, una matriz, de 5 filas x 5 columnas. Una vez hecho el array,
-   realiza estos pasos: 
-    - Crea un Metodo que pida al usuario un numero de fila sobre la matriz. Debes crear una matriz igual a 
-    la original pero eliminando el numero de fila que el usuario ha especificado. */
+   realiza estos pasos: */
 public class EjercicioMatriz {
 	
 	public static void main(String[] args) {
@@ -58,6 +58,11 @@ public class EjercicioMatriz {
 		System.out.println("MATRIZ OPUESTA");
 		int matrizOp[][]= getMatrizOpuesta(matriz);
 		imprimeMatriz(matrizOp);
+		
+		//Apartado 11
+		System.out.println("MATRIZ CON UNA FILA MENOS");
+		int matrizFila[][] = eliminaFila(matriz);
+		imprimeMatriz(matrizFila);
 	}
 	
 	/**
@@ -65,21 +70,21 @@ public class EjercicioMatriz {
 	 * @return
 	 */
 	private static int[][] creaMatriz() {
-		int matriz[][] = new int [5][5];
+//		int matriz[][] = new int [5][5];
+//		
+//		for (int i = 0; i < matriz.length; i++) {
+//			for (int j = 0; j < matriz[0].length; j++) {
+//				matriz[i][j]=(int) Math.round(Math.random()*(10+10))-10;
+//			}
+//		}
 		
-		for (int i = 0; i < matriz.length; i++) {
-			for (int j = 0; j < matriz[0].length; j++) {
-				matriz[i][j]=(int) Math.round(Math.random()*(10+10))-10;
-			}
-		}
-		
-//		int matriz[][] = new int [][] {
-//			{1, 0, 0, 0, 0},
-//			{1, 0, 1, 1, 1},
-//			{1, 1, 0, 1, 1},
-//			{1, 1, 1, 0, 1},
-//			{1, 1, 1, 1, 0}
-//		};
+		int matriz[][] = new int [][] {
+			{0, 1, 1, 1, 1},
+			{1, 0, 1, 1, 1},
+			{1, 1, 0, 1, 1},
+			{1, 1, 1, 0, 1},
+			{1, 1, 1, 1, 0}
+		};
 		return matriz;
 	}
 	
@@ -158,14 +163,25 @@ public class EjercicioMatriz {
 	private static boolean isMatrizDispersa(int matriz[][]) {
 		
 		for (int i = 0; i < matriz.length; i++) {
-			int count = 0;
+			boolean existeCero = false;
 			for (int j = 0; j < matriz[0].length; j++) {
 				if( matriz[i][j] == 0) {
-					count += 1;
+					existeCero = true;
 				}
-				if ( j== matriz.length-1 && count == 0) {
-					return false;
+			}
+			if (!existeCero) {
+				return false;
+			}
+		}
+		for (int i = 0; i < matriz[0].length; i++) {
+			boolean existeCero = false;
+			for (int j = 0; j < matriz.length; j++) {
+				if( matriz[j][i] == 0) {
+					existeCero = true;
 				}
+			}
+			if (!existeCero) {
+				return false;
 			}
 		}
 		return true;
@@ -256,4 +272,30 @@ public class EjercicioMatriz {
 		
 		return matrizOp;
 	}
+	
+	/**
+	 * Metodo que pida al usuario un numero de fila sobre la matriz. Debes crear una matriz igual a 
+     * la original pero eliminando el numero de fila que el usuario ha especificado.
+	 * @param matriz
+	 * @return
+	 */
+	private static int[][] eliminaFila(int matriz[][]){
+		int newMatriz[][] = new int [4][5];
+		int opcionUsuario = Integer.parseInt(JOptionPane.showInputDialog("Introduzca el indice de la fila que quiere eliminar (0 - 4)"));
+		int a = 0;
+		
+		for (int i = 0; i < matriz.length; i++) {
+			if(i!=opcionUsuario) {
+				for (int j = 0; j < matriz[0].length; j++) {
+					newMatriz[a][j]= matriz[i][j];
+				}
+				a++;
+			}
+		}
+		return newMatriz;
+	}
+	
+	
+	
+	
 }

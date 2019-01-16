@@ -1,4 +1,4 @@
-package ejercicios.objetos.bloque4.ejercicios;
+package ejercicios.objetos.bloque4.arrays;
 
 import javax.swing.JOptionPane;
 
