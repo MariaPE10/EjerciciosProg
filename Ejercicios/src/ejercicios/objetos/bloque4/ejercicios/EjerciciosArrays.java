@@ -23,7 +23,7 @@ public class EjerciciosArrays {
 	
 	
 	/**
-	 * Crea un método que reciba un array de números enteros creados al azar entre 0 y 100.
+	 * Crea un Metodo que reciba un array de números enteros creados al azar entre 0 y 100.
 	 * @return
 	 */
 	private static int[] creaArray() {
@@ -43,7 +43,7 @@ public class EjerciciosArrays {
 	}
 	
 	/**
-	 * El método debe examinar la longitud del array, comprobar que la longitud es un valor
+	 * El metodo debe examinar la longitud del array, comprobar que la longitud es un valor
 	 * impar y devolver el valor que se encuentre en la posición media. En caso de que la longitud del
 	 * array sea un número par se debe devolver un valor -1.
 	 * @param array
@@ -61,7 +61,7 @@ public class EjerciciosArrays {
 	}
 	
 	/**
-	 * Crea un array de 200 números enteros generados al azar entre 0 y 10.
+	 * Crea un array de 200 numeros enteros generados al azar entre 0 y 10.
 	 * @return
 	 */
 	private static int[] creaArray200() {
@@ -85,7 +85,7 @@ public class EjerciciosArrays {
 		int contAprobados = 0, contSuspensos = 0;
 		
 		for (int i = 0; i < array.length; i++) {
-			if(array[i] > 5) { //aprobados
+			if(array[i] >= 5) { //aprobados
 				contAprobados += 1;
 			} else { //suspensos
 				contSuspensos += 1;
@@ -101,7 +101,7 @@ public class EjerciciosArrays {
 	}
 	
 	/**
-	 * Crea un array de 20 números enteros generados al azar entre 0 y 100. Para crear el número
+	 * Crea un array de 20 numeros enteros generados al azar entre 0 y 100. Para crear el número
 	 * decimal debes generar al azar la parte entera y la parte decimal por separado para después
 	 * unir las dos partes. A continuación debes examinar la cantidad de números cuya parte decimal
 	 * está comprendida entre .00 y .49
