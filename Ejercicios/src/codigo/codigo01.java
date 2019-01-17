@@ -11,7 +11,7 @@ public class codigo01 {
 	 * uno de tipo entero, otro de tipo flotante y otro de tipo doble.
      * A continuacion se tienen que mostrar en pantalla los tres numeros 
 	 * en una sola fila de la consola de salida
-	 */ 
+	 */  
 	public static void introduccionEj1 () {
 	
 		try {
