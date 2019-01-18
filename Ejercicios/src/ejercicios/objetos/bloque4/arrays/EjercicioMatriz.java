@@ -79,11 +79,11 @@ public class EjercicioMatriz {
 //		}
 		
 		int matriz[][] = new int [][] {
-			{0, 1, 1, 1, 1},
+			{1, 1, 1, 1, 1},
 			{1, 0, 1, 1, 1},
 			{1, 1, 0, 1, 1},
 			{1, 1, 1, 0, 1},
-			{1, 1, 1, 1, 0}
+			{1, 1, 1, 1, 2}
 		};
 		return matriz;
 	}
@@ -146,8 +146,12 @@ public class EjercicioMatriz {
 		
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[0].length; j++) {
-				if( j < i && matriz[i][j] != 0) {
-					return false;
+				if (j == i) {
+					break;
+				} else {
+					if(matriz[i][j] != 0) {
+						return false;
+					}
 				}
 			}
 		}
@@ -162,6 +166,7 @@ public class EjercicioMatriz {
 	 */
 	private static boolean isMatrizDispersa(int matriz[][]) {
 		
+		//Busqueda de un 0 en cada fila
 		for (int i = 0; i < matriz.length; i++) {
 			boolean existeCero = false;
 			for (int j = 0; j < matriz[0].length; j++) {
@@ -173,9 +178,11 @@ public class EjercicioMatriz {
 				return false;
 			}
 		}
-		for (int i = 0; i < matriz[0].length; i++) {
+		
+		//Busqueda de un 0 en cada columna
+		for (int i = 0; i < matriz.length; i++) {
 			boolean existeCero = false;
-			for (int j = 0; j < matriz.length; j++) {
+			for (int j = 0; j < matriz[0].length; j++) {
 				if( matriz[j][i] == 0) {
 					existeCero = true;
 				}
@@ -195,24 +202,10 @@ public class EjercicioMatriz {
 	private static void arrayUnidimensional(int matriz[][]) {
 		int array[] = new int[matriz.length*matriz[0].length];
 		
-		for (int j = 0; j < matriz[0].length; j++) {
-			array[j] = matriz[0][j];
-		}
-		
-		for (int j = 0; j < matriz[0].length; j++) {
-			array[j+5] = matriz[1][j];
-		}
-		
-		for (int j = 0; j < matriz[0].length; j++) {
-			array[j+10] = matriz[2][j];
-		}
-			
-		for (int j = 0; j < matriz[0].length; j++) {
-			array[j+15] = matriz[3][j];
-		}
-	
-		for (int j = 0; j < matriz[0].length; j++) {
-			array[j+20] = matriz[4][j];
+		for (int i = 0, cont = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++, cont++) {
+				array[cont] = matriz[i][j];
+			}
 		}
 	
 		

@@ -6,18 +6,18 @@ public class EjerciciosArrays {
 
 	public static void main(String[] args) {
 		//Ejercicio 1
-//		int array[]= creaArray();
-//		imprimeArray(array);
-//		System.out.println();
-//		System.out.println(getValorCentral(array));
+		int array[]= creaArray();
+		imprimeArray(array);
+		System.out.println();
+		System.out.println( "Valor central: " + getValorCentral(array));
 	
 		//Ejercicio2
-//		int array2[]= creaArray200();
+//		int array2[]= creaArray21();
 //		imprimeArray(array2);
 //		calculaPorcentajeAprobados(array2);
 		
 		//Ejercicio3
-		float array3[]= creaArray20();
+//		float array3[]= creaArray20();
 		
 	}
 	
@@ -36,6 +36,10 @@ public class EjerciciosArrays {
 		return array;
 	}
 	
+	/**
+	 * Metodo que recibe un array y lo imprime.
+	 * @param array
+	 */
 	private static void imprimeArray(int array[]) {
 		for (int i = 0; i < array.length; i++) {
 			System.out.print(array[i] + "  ");
@@ -51,9 +55,9 @@ public class EjerciciosArrays {
 	 */
 	private static int getValorCentral (int array[]) {
 		int valorCentral;
-		if(array.length%2==0){
+		if(array.length%2==0){ //Es par
 			return -1;
-		} else {
+		} else { //Es impar
 			int indice = Math.round(array.length/2);
 			valorCentral = array[indice];
 		}
@@ -61,11 +65,11 @@ public class EjerciciosArrays {
 	}
 	
 	/**
-	 * Crea un array de 200 numeros enteros generados al azar entre 0 y 10.
+	 * Crea un array de 21 numeros enteros generados al azar entre 0 y 10.
 	 * @return
 	 */
-	private static int[] creaArray200() {
-		int array[] = new int[200];
+	private static int[] creaArray21() {
+		int array[] = new int[21];
 		
 		for (int i = 0; i < array.length; i++) {
 			array[i]= (int)Math.round(Math.random()*10);
@@ -86,9 +90,9 @@ public class EjerciciosArrays {
 		
 		for (int i = 0; i < array.length; i++) {
 			if(array[i] >= 5) { //aprobados
-				contAprobados += 1;
+				contAprobados++;
 			} else { //suspensos
-				contSuspensos += 1;
+				contSuspensos++;
 				
 			}
 		}
@@ -115,14 +119,12 @@ public class EjerciciosArrays {
 			int entero = (int)Math.round(Math.random()*100);
 			float decimal = (float) Math.random();
 			array[i] = entero + decimal;
-			if(decimal <= 0.49) {
-				contador += 1;
+			System.out.print(array[i] + "  ");
+			if(decimal < 0.5) {
+				contador++;
 			}
 		}
 		
-		for (int i = 0; i < array.length; i++) {
-			System.out.print(array[i] + "  ");
-		}
 		System.out.println();
 		System.out.println("Hay " + contador + " numeros cuya parte decimal esta entre .00 y .49");
 		return array;
