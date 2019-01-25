@@ -18,7 +18,7 @@ public class Pelota extends Actores {
 			 vx = -vx;
 		}
 		 
-		if (y < 0 || y > Stage.ALTO-50) {
+		if (y < 0 || y > Stage.ALTO-22) {
 			 vy = -vy;
 		}
 	}

@@ -39,7 +39,7 @@ public class Arkanoid extends Canvas implements Stage {
 		panel.setPreferredSize(new Dimension(Stage.ANCHO,Stage.ALTO));
 		panel.setLayout(null);
 		panel.add(this);
-		ventana.setBounds(0,0,Stage.ANCHO+3,Stage.ALTO+28);
+		ventana.setBounds(0,0,Stage.ANCHO,Stage.ALTO+28);
 		ventana.setVisible(true);
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
