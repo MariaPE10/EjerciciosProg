@@ -1,20 +1,20 @@
 package arkanoid;
 
 
-public class Pelota extends Actores {
+public class Pelota extends Actor {
 	protected float vx;
 	protected float vy;
 	
 	public Pelota(Stage stage) {
 		super(stage);
-		setSpriteName("ball.png");
+		setSpriteName("pokeball.png");
 	}
 	
 	public void actua() {
 		x+=vx;
 		y+=vy;
 		
-		if (x < -5 || x > Stage.ANCHO-20) {
+		if (x < -3 || x > Stage.ANCHO-25) {
 			 vx = -vx;
 		}
 		 

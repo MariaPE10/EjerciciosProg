@@ -37,7 +37,7 @@ public class SpriteCache {
 	public BufferedImage getSprite(String nombre) {
 		BufferedImage img = (BufferedImage)sprites.get(nombre);
 		if (img == null) {
-			img = loadImage("/imagenes/"+nombre);
+			img = loadImage("/imagenes/pokenoid/"+nombre);
 			sprites.put(nombre,img);
 		}
 		return img;

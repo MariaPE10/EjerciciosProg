@@ -46,7 +46,7 @@ public class CacheImagenes {
 	public BufferedImage getImagen(String nombre) {
 		URL url=null;
 		try {
-			url = getClass().getResource("/Imagenes/" + nombre);
+			url = getClass().getResource("/imagenes/" + nombre);
 			return ImageIO.read(url);
 		} catch (Exception e) {
 			System.out.println("No se pudo cargar la imagen " + nombre +" de "+url);

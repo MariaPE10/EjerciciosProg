@@ -3,7 +3,7 @@ package arkanoid;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-public class Actores {
+public class Actor {
 
 		protected int x,y;
 		protected int ancho, alto;
@@ -15,7 +15,7 @@ public class Actores {
 		 * 
 		 * @param stage
 		 */
-		public Actores(Stage stage) {
+		public Actor(Stage stage) {
 			this.stage = stage;
 			spriteCache = stage.getSpriteCache();
 		}
