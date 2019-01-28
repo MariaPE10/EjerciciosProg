@@ -24,6 +24,19 @@ public class Pelota extends Actor {
 		//System.out.println("Vx: " + this.vx + " Vy: " + this.vy);
 	}
 	
+	public void collision(Actor actor) {
+		if (actor instanceof Ladrillo) {
+			vy= -vy;
+		}
+		if (actor instanceof Ladrillo) {
+			vx= -vx;
+		}
+		if (actor instanceof Nave) {
+			vy= -vy;
+			Arkanoid.soundCache.playSound("pika.wav");
+		}
+	}
+	
 	public float getVx() { return vx; }
 	public void setVx(float i) {vx = i;	}
 	

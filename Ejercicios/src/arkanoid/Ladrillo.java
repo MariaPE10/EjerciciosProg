@@ -2,14 +2,25 @@ package arkanoid;
 
 public class Ladrillo extends Actor {
 
-	public Ladrillo(Stage stage) {
+	public String ladrillos[]=new String[] {
+			"ladrilloRosa.png",
+			"ladrilloRojo.png",
+			"ladrilloNaranja.png",
+			"ladrilloAmarillo.png",
+			"ladrilloCeleste.png",
+			"ladrilloAzul.png",
+			"ladrilloVerde.png",
+			"ladrilloBlanco.png"
+	};
+	
+	public Ladrillo(Stage stage, int i) {
 		super(stage);
-		setSpriteName("ladrilloRosa.png");
+		setSpriteName(ladrillos[i]);
 	}
 	
 	public void collision(Actor actor) {
 		if (actor instanceof Pelota)
 			eliminar();
-			//Arkanoid.soundCache.playSound("pick.wav");
+			Arkanoid.soundCache.playSound("pick.wav");
 	}
 }
