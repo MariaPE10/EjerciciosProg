@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -24,14 +25,15 @@ public class Arkanoid extends Canvas implements Stage {
 	
 	private BufferStrategy strategy;
 	private long usedTime;
-	
 	private SpriteCache spriteCache = new SpriteCache();
 	private List<Actor>actores;
 	private Nave nave = new Nave(this);
-
+	public static SoundCache soundCache;
 	
 	public Arkanoid() {
-
+		
+		soundCache = new SoundCache();
+		
 		JFrame ventana = new JFrame("Pokenoid");
 		JPanel panel = (JPanel)ventana.getContentPane();
 		this.setBounds(0,0,Stage.ANCHO,Stage.ALTO);
@@ -73,7 +75,6 @@ public class Arkanoid extends Canvas implements Stage {
 		
 		actores = new ArrayList<Actor>();
 
-		
 		nave.setX(Stage.ANCHO/2);
 		nave.setY(Stage.ALTO-30);
 		actores.add(nave);
@@ -132,7 +133,26 @@ public class Arkanoid extends Canvas implements Stage {
 	
 	public void updateWorld() {
 		for (Actor actor : actores) {
-			actor.actua();
+			if (actor.isListoParaEliminar()) {
+				actor.eliminar();
+			} else {
+				actor.actua();
+			}
+		}
+	}
+	
+	public void checkCollisions() {
+		for (Actor actor1 : actores) {
+			Rectangle r1 = actor1.getBounds();
+			for (Actor actor2 : actores) {
+				Rectangle r2 = actor2.getBounds();
+				if (!actor1.equals(actor2)) {
+					if (r1.intersects(r2)) {
+				  		actor1.collision(actor2);
+				  		actor2.collision(actor1);
+					}
+				}
+			}
 		}
 	}
 	
@@ -141,7 +161,9 @@ public class Arkanoid extends Canvas implements Stage {
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
 		g.drawImage( spriteCache.getSprite("pikachuFondo.jpg"), 0, 0, this);
 		for (Actor actor : actores) {
+			if(!actor.isListoParaEliminar()) {
 			actor.paint(g);
+			}
 		}
 
 		g.setColor(Color.black);
@@ -164,6 +186,7 @@ public class Arkanoid extends Canvas implements Stage {
 		while (isVisible()) {
 			long startTime = System.currentTimeMillis();
 			updateWorld();
+			checkCollisions();
 			paintWorld();
 			usedTime = System.currentTimeMillis()-startTime;
 			try { 

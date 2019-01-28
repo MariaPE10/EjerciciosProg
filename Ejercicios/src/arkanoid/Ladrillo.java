@@ -7,4 +7,9 @@ public class Ladrillo extends Actor {
 		setSpriteName("ladrilloRosa.png");
 	}
 	
+	public void collision(Actor actor) {
+		if (actor instanceof Pelota)
+			eliminar();
+			//Arkanoid.soundCache.playSound("pick.wav");
+	}
 }

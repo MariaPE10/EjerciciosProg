@@ -18,11 +18,12 @@ public class Pelota extends Actor {
 			 vx = -vx;
 		}
 		 
-		if (y < 0 || y > Stage.ALTO-22) {
+		if (y < 0 || y > Stage.ALTO-getHeight()) {
 			 vy = -vy;
 		}
+		//System.out.println("Vx: " + this.vx + " Vy: " + this.vy);
 	}
-
+	
 	public float getVx() { return vx; }
 	public void setVx(float i) {vx = i;	}
 	

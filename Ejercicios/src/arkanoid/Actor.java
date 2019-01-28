@@ -2,6 +2,8 @@ package arkanoid;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.awt.Rectangle;
 
 public class Actor {
 
@@ -10,6 +12,11 @@ public class Actor {
 		protected String spriteName;
 		protected Stage stage;
 		protected SpriteCache spriteCache;
+		protected boolean listoParaEliminar;
+		protected int currentFrame;
+		protected int frameSpeed;
+		protected int t;
+		protected List<BufferedImage>spriteNames;
 		
 		/**
 		 * 
@@ -18,6 +25,9 @@ public class Actor {
 		public Actor(Stage stage) {
 			this.stage = stage;
 			spriteCache = stage.getSpriteCache();
+			currentFrame = 0;
+			frameSpeed = 1;
+			t=0;
 		}
 		
 		/**
@@ -77,6 +87,45 @@ public class Actor {
 		public void setWidth(int i) {
 			ancho = i;	}
 
-		public void actua() { }
+		/**
+		 * 
+		 */
+		public void eliminar() {
+			listoParaEliminar = true;
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		public int getFrameSpeed() {return frameSpeed;	}
+		public void setFrameSpeed(int i) {frameSpeed = i;	}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		public boolean isListoParaEliminar() {
+			return listoParaEliminar;
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		public Rectangle getBounds() {
+			return new Rectangle(x,y,ancho,alto);
+		}
+		
+		public void collision(Actor actor) { }
+		
+		public void actua() {
+			//System.out.println("this: " + this + " - spriteNames: " + this.spriteNames);
+			t++;
+			if (this.spriteNames != null && t % frameSpeed == 0){
+				t=0;
+				currentFrame = (currentFrame + 1) % spriteNames.size();
+			}
+		}
 	
 }
