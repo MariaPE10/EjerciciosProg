@@ -2,44 +2,47 @@ package arkanoid;
 
 
 public class Pelota extends Actor {
-	protected float vx;
-	protected float vy;
+	protected float velocidadX = 2f;
+	protected float velocidadY = -2f;
 	
-	public Pelota(Stage stage) {
-		super(stage);
-		setSpriteName("pokeball.png");
+	public Pelota() {
+		super();
+		this.setSpriteActual(SpriteCache.getInstancia().getSprite("pokeball.png"));
+		this.x = Arkanoid.ANCHO / 2;
+		this.y = Arkanoid.ALTO / 2;
 	}
 	
 	public void actua() {
-		x+=vx;
-		y+=vy;
+		x+=velocidadX;
+		y+=velocidadY;
 		
-		if (x < -3 || x > Stage.ANCHO-25) {
-			 vx = -vx;
+		if (x < -3 || x > Arkanoid.ANCHO-25) {
+			velocidadX = -velocidadX;
 		}
 		 
-		if (y < 0 || y > Stage.ALTO-getHeight()) {
-			 vy = -vy;
+		if (y < 0 || y > Arkanoid.ALTO-getHeight()) {
+			velocidadY = -velocidadY;
 		}
 		//System.out.println("Vx: " + this.vx + " Vy: " + this.vy);
 	}
 	
 	public void collision(Actor actor) {
-		if (actor instanceof Ladrillo) {
-			vy= -vy;
-		}
-		if (actor instanceof Ladrillo) {
-			vx= -vx;
-		}
+//		if (actor instanceof Ladrillo) {
+//			velocidadY= -velocidadY;
+//		}
+//		if (actor instanceof Ladrillo) {
+//			velocidadX= -velocidadX;
+//		}
 		if (actor instanceof Nave) {
-			vy= -vy;
+			velocidadY= -velocidadY;
+			System.out.println("Me he dado contra la nave");
 			Arkanoid.soundCache.playSound("pika.wav");
 		}
 	}
 	
-	public float getVx() { return vx; }
-	public void setVx(float i) {vx = i;	}
+	public float getvelocidadX() { return velocidadX; }
+	public void setVelocidadX(float i) {velocidadX = i;	}
 	
-	public float getVy() { return vy; }
-	public void setVy(float i) {vy = i;	}
+	public float getVelocidadY() { return velocidadY; }
+	public void setVelocidadY(float i) {velocidadY = i;	}
 }

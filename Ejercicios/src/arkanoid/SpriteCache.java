@@ -14,14 +14,27 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+
 public class SpriteCache {
-	private HashMap sprites;
+	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
+	private static SpriteCache instancia= null;
 	
 	public SpriteCache() {
 		sprites = new HashMap();
 	}
 	
-	private BufferedImage loadImage(String nombre) {
+	/**
+	 * Getter Singleton
+	 * @return
+	 */
+	public static SpriteCache getInstancia () {
+		if (instancia == null) {
+			instancia = new SpriteCache();
+		}
+		return instancia;
+	}
+	
+	private BufferedImage cargarImagen(String nombre) {
 		URL url=null;
 		try {
 			url = getClass().getResource(nombre);
@@ -37,7 +50,7 @@ public class SpriteCache {
 	public BufferedImage getSprite(String nombre) {
 		BufferedImage img = (BufferedImage)sprites.get(nombre);
 		if (img == null) {
-			img = loadImage("/imagenes/pokenoid/"+nombre);
+			img = cargarImagen("/imagenes/pokenoid/"+nombre);
 			sprites.put(nombre,img);
 		}
 		return img;

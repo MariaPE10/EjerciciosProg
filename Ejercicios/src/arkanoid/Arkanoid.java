@@ -21,30 +21,45 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-
-public class Arkanoid extends Canvas implements Stage {
+public class Arkanoid extends Canvas {
 	
+	public static final int ANCHO = 640;
+	public static final int ALTO = 700;
+	public static final int FPS = 60; // Frames por segundo
+	JFrame ventana = null;
 	private BufferStrategy strategy;
-	private long usedTime;
 	private SpriteCache spriteCache = new SpriteCache();
-	private List<Actor>actores;
-	private Nave nave = new Nave(this);
+	private List<Actor>actores = new ArrayList<Actor>();
+	Nave nave = new Nave();
+	Pelota pelota = new Pelota();
+	Fase faseActiva = null;
 	//private Adorno cola = new Adorno(this);
 	public static SoundCache soundCache;
-	//private List<Explosion> explosiones;
+	private List<Actor> actoresAInsertar = new ArrayList<Actor>();
+	private static Arkanoid instancia = null;
+	
+	/**
+	 * Getter Singleton
+	 * @return
+	 */
+	public static Arkanoid getInstancia () {
+		if (instancia == null) {
+			instancia = new Arkanoid();
+		}
+		return instancia;
+	}
 	
 	public Arkanoid() {
 		
 		soundCache = new SoundCache();
 		
-		JFrame ventana = new JFrame("Pokenoid");
+		ventana = new JFrame("Pokenoid");
 		JPanel panel = (JPanel)ventana.getContentPane();
-		this.setBounds(0,0,Stage.ANCHO,Stage.ALTO);
-		panel.setPreferredSize(new Dimension(Stage.ANCHO,Stage.ALTO));
+		this.setBounds(0,0,ANCHO,ALTO);
+		panel.setPreferredSize(new Dimension(ANCHO,ALTO));
 		panel.setLayout(null);
 		panel.add(this);
-		ventana.setBounds(0,0,Stage.ANCHO,Stage.ALTO+28);
+		ventana.setBounds(0,0,ANCHO,ALTO+28);
 		ventana.setVisible(true);
 		ventana.addWindowListener( new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -71,80 +86,28 @@ public class Arkanoid extends Canvas implements Stage {
 				//cola.keyPressed(e);
 			}
 		});
+		
+		this.createBufferStrategy(2);
+		strategy = this.getBufferStrategy();
 		ventana.setResizable(false);
-		createBufferStrategy(2);
-		strategy = getBufferStrategy();
-		requestFocus();
+		ventana.setIgnoreRepaint(true);
+		this.requestFocus();
 		
 	}
 	
 	public void initWorld() {
 		soundCache.loopSound("pokemon.wav");
-		actores = new ArrayList<Actor>();
+		
+		this.faseActiva = new Fase01();
+		this.faseActiva.inicializaFase();
 
-		nave.setX(Stage.ANCHO/2);
-		nave.setY(Stage.ALTO-30);
+		this.actores.clear();
+		this.actores.addAll(this.faseActiva.getActores());
+		
 		actores.add(nave);
+		actores.add(pelota);
 //		cola.setX(nave.getX());
 //		cola.setY(nave.getY()-cola.getHeight()+15);
-//		for(int i = 1, cont = 1; i <= 55; i++, cont++) {
-//			Ladrillo ladrillo = new Ladrillo(this);
-//			int anchoLadrillo = ladrillo.getWidth();
-//			if(i<=11) {
-//				ladrillo.setX((anchoLadrillo+1)*cont);
-//				ladrillo.setY(100);
-//				actores.add(ladrillo);
-//			} else if (i > 11 && i <= 22 ) {
-//				if(i == 12) {
-//					cont = 1;
-//				}
-//				ladrillo.setSpriteName("ladrilloAzul.png");
-//				ladrillo.setX((anchoLadrillo+1)*cont);
-//				ladrillo.setY(125);
-//				actores.add(ladrillo);
-//			} else if (i > 22 && i <= 33 ) {
-//				if(i == 23) {
-//					cont = 1;
-//				}
-//				ladrillo.setSpriteName("ladrilloBlanco.png");
-//				ladrillo.setX((anchoLadrillo+1)*cont);
-//				ladrillo.setY(150);
-//				actores.add(ladrillo);
-//			} else if (i > 33 && i <= 44 ) {
-//				if(i == 34) {
-//					cont = 1;
-//				}
-//				ladrillo.setSpriteName("ladrilloRojo.png");
-//				ladrillo.setX((anchoLadrillo+1)*cont);
-//				ladrillo.setY(175);
-//				actores.add(ladrillo);
-//			} else if (i > 44 && i <= 55 ) {
-//				if(i == 45) {
-//					cont = 1;
-//				}
-//				ladrillo.setSpriteName("ladrilloAmarillo.png");
-//				ladrillo.setX((anchoLadrillo+1)*cont);
-//				ladrillo.setY(200);
-//				actores.add(ladrillo);
-//			}
-//		}
-		
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 11; j++) {
-				Ladrillo ladrillo = new Ladrillo (this, i);
-				ladrillo.setX(45+j*(ladrillo.getWidth()+1));
-				ladrillo.setY(50+i*(ladrillo.getHeight()+1));
-				actores.add(ladrillo);
-			}
-		}
-		Pelota pelota = new Pelota(this);
-		pelota.setX(Stage.ANCHO/2);
-		pelota.setY(Stage.ALTO/2);
-		pelota.setVx(1.5f);
-		pelota.setVy(1.5f);
-		actores.add(pelota);
-		
-	
 	}
 	
 	public void updateWorld() {
@@ -152,26 +115,25 @@ public class Arkanoid extends Canvas implements Stage {
 		while (i < actores.size()) {
 			Actor actor = actores.get(i);
 			if (actor.isListoParaEliminar()) {
+				Explosion ex = new Explosion(actor.getX(), actor.getY());
+				actoresAInsertar.add(ex);
 				actores.remove(i);
+				
 			} else {
 				actor.actua();
 				i++;
 			}
 		}
+		
+		this.actores.addAll(this.actoresAInsertar);
+		this.actoresAInsertar.clear();
 	}
 	
 	public void checkCollisions() {
-//		Rectangle naveBounds = nave.getBounds();
-//		for (Actor actor1 : actores) {
-//			Rectangle r1 = actor1.getBounds();
-//			for (Actor actor2 : actores) {
-//				Rectangle r2 = actor2.getBounds();
-//				if (!actor1.equals(actor2)) {
-//					if (r1.intersects(r2)) {
-//				  		actor1.collision(actor2);
-//				  		actor2.collision(actor1);
-//					}
-//				}
+
+//		for (Actor actor : actores) {
+//			if(actor instanceof Ladrillo || actor instanceof Nave) {
+//				
 //			}
 //		}
 
@@ -196,38 +158,36 @@ public class Arkanoid extends Canvas implements Stage {
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
+		/*for (Actor actor : actoresAInsertar) {
+			actor.paint(g);
+		}*/
 		//cola.paint(g);
-		g.setColor(Color.black);
-		if (usedTime > 0) {
-			g.drawString(String.valueOf(1000/usedTime)+" fps",0,Stage.ALTO-50);
-		} else {
-			g.drawString("--- fps",0,Stage.ALTO-50);
-		}
 		strategy.show();
 	}
-	
-	
-	public SpriteCache getSpriteCache() {
-		return spriteCache;
-	}
+
 	
 	public void game() {
-		usedTime=1000;
 		initWorld();
 		while (isVisible()) {
-			long startTime = System.currentTimeMillis();
+			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
 			checkCollisions();
 			paintWorld();
-			usedTime = System.currentTimeMillis()-startTime;
+			int millisUsados = (int) (System.currentTimeMillis()-millisAntesDeConstruirEscena);
 			try { 
-				 Thread.sleep(SPEED);
+				int millisADetenerElJuego = 1000 / FPS - millisUsados;
+				if (millisADetenerElJuego >= 0) {
+					 Thread.sleep(millisADetenerElJuego);
+				}
 			} catch (InterruptedException e) {}
 		}
 	}
 	
+	// Getters
+	public Nave getNave() { return nave; }
+	public Pelota getPelota() { return pelota; }
+	
 	public static void main(String[] args) {
-		Arkanoid arka = new Arkanoid();
-		arka.game();
+		Arkanoid.getInstancia().game();
 	}
 }

@@ -2,29 +2,30 @@ package arkanoid;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
+
+
 import java.awt.Rectangle;
 
 public class Actor {
 
 		protected int x,y;
 		protected int ancho, alto;
-		protected String spriteName;
-		protected Stage stage;
+		protected BufferedImage spriteActual;
 		protected SpriteCache spriteCache;
 		protected boolean listoParaEliminar;
 		protected int currentFrame;
 		protected int frameSpeed;
 		protected int t;
-		protected List<BufferedImage>spriteNames;
+		protected List<BufferedImage>spriteNames = new ArrayList<BufferedImage>();
 		
 		/**
 		 * 
 		 * @param stage
 		 */
-		public Actor(Stage stage) {
-			this.stage = stage;
-			spriteCache = stage.getSpriteCache();
+		public Actor() {
+			spriteActual = SpriteCache.getInstancia().getSprite("sin-imagen.png");
 			currentFrame = 0;
 			frameSpeed = 1;
 			t=0;
@@ -35,7 +36,9 @@ public class Actor {
 		 * @param g
 		 */
 		public void paint(Graphics2D g){
-			g.drawImage( spriteCache.getSprite(spriteName), x,y, stage );
+			if (this.spriteActual != null) {
+				g.drawImage(this.spriteActual, this.x, this.y, null);
+			}
 		}
 		
 		/**
@@ -60,13 +63,12 @@ public class Actor {
 		 * 
 		 * @return
 		 */
-		public String getSpriteName(){
-			return spriteName; }
-		public void setSpriteName(String string){ 
-			spriteName = string;
-			BufferedImage image = spriteCache.getSprite(spriteName);
-			alto = image.getHeight();
-			ancho = image.getWidth();
+		public BufferedImage getSpriteActual(){
+			return spriteActual; }
+		public void setSpriteActual(BufferedImage spriteActual){ 
+			this.spriteActual = spriteActual;
+			alto = spriteActual.getHeight(); 
+			ancho = spriteActual.getWidth();
 		}
 		
 		/**
@@ -121,10 +123,16 @@ public class Actor {
 		
 		public void actua() {
 			//System.out.println("this: " + this + " - spriteNames: " + this.spriteNames);
+			if (this instanceof Explosion) {
+				System.out.println("actua en Explosión");
+			}
 			t++;
 			if (this.spriteNames != null && t % frameSpeed == 0){
 				t=0;
-				currentFrame = (currentFrame + 1) % spriteNames.size();
+				if (spriteNames.size() > 0) {
+					currentFrame = (currentFrame + 1) % spriteNames.size();
+					this.spriteActual = this.spriteNames.get(currentFrame);
+				}
 			}
 		}
 	
