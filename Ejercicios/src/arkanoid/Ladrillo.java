@@ -29,5 +29,7 @@ public class Ladrillo extends Actor {
 		if (actor instanceof Pelota)
 			this.eliminar();
 			Arkanoid.soundCache.playSound("pick.wav");
+			Explosion ex = new Explosion(this.x, this.y);
+			Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 	}
 }

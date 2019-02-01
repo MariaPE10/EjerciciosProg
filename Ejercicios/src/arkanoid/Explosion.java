@@ -8,7 +8,7 @@ public class Explosion extends Actor {
 		super();
 		this.y = y;
 		this.x = x;
-		setFrameSpeed(10);
+		setFrameSpeed(5);
 		this.spriteActual = null;
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex1.png"));
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex2.png"));
@@ -22,18 +22,14 @@ public class Explosion extends Actor {
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex10.png"));
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex11.png"));
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex12.png"));
+		this.spriteActual = this.spriteNames.get(0);
 	}
 
-	public void actuar() {
+	public void actua() {
 		super.actua();
 		if(this.spriteActual.equals(spriteNames.get(spriteNames.size()-1))) {
 			this.eliminar();
 		}
 	}
-	
-	
-	public void paint(Graphics2D g){
-		super.paint(g);
-		//System.out.println("Pinto la explosión - spriteActual: " + this.spriteActual);
-	}
+		
 }

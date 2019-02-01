@@ -122,10 +122,6 @@ public class Actor {
 		public void collision(Actor actor) { }
 		
 		public void actua() {
-			//System.out.println("this: " + this + " - spriteNames: " + this.spriteNames);
-			if (this instanceof Explosion) {
-				System.out.println("actua en Explosión");
-			}
 			t++;
 			if (this.spriteNames != null && t % frameSpeed == 0){
 				t=0;

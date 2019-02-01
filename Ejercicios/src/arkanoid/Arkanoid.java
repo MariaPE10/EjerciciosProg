@@ -36,6 +36,14 @@ public class Arkanoid extends Canvas {
 	//private Adorno cola = new Adorno(this);
 	public static SoundCache soundCache;
 	private List<Actor> actoresAInsertar = new ArrayList<Actor>();
+	
+	/**
+	 * @return the actoresAInsertar
+	 */
+	public List<Actor> getActoresAInsertar() {
+		return actoresAInsertar;
+	}
+
 	private static Arkanoid instancia = null;
 	
 	/**
@@ -73,6 +81,12 @@ public class Arkanoid extends Canvas {
 				//cola.mouseMoved(e);
 			}
 		});
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pelota.mouseClicked(e);
+			}
+		});
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -83,7 +97,7 @@ public class Arkanoid extends Canvas {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				nave.keyPressed(e);
-				//cola.keyPressed(e);
+				pelota.keyPressed(e);
 			}
 		});
 		
@@ -115,10 +129,7 @@ public class Arkanoid extends Canvas {
 		while (i < actores.size()) {
 			Actor actor = actores.get(i);
 			if (actor.isListoParaEliminar()) {
-				Explosion ex = new Explosion(actor.getX(), actor.getY());
-				actoresAInsertar.add(ex);
 				actores.remove(i);
-				
 			} else {
 				actor.actua();
 				i++;
@@ -158,9 +169,7 @@ public class Arkanoid extends Canvas {
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
-		/*for (Actor actor : actoresAInsertar) {
-			actor.paint(g);
-		}*/
+		
 		//cola.paint(g);
 		strategy.show();
 	}
