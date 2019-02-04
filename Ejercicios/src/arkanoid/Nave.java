@@ -51,7 +51,10 @@ public class Nave extends Actor {
 	  }
 	  
 	  public void mouseMoved (MouseEvent e) {
-		 x = e.getX() - (getWidth()/2);
+		  if (!e.isControlDown() && !e.isShiftDown()) {
+			  x = e.getX() - (getWidth()/2);  
+		  }
+		 
 	  }
 	  
 	  public float getVelocidad() { return velocidad; }

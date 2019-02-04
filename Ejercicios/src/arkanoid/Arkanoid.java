@@ -25,7 +25,7 @@ public class Arkanoid extends Canvas {
 	
 	public static final int ANCHO = 640;
 	public static final int ALTO = 700;
-	public static final int FPS = 60; // Frames por segundo
+	public static final int FPS = 101; // Frames por segundo
 	JFrame ventana = null;
 	private BufferStrategy strategy;
 	private SpriteCache spriteCache = new SpriteCache();

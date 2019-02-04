@@ -8,7 +8,7 @@ public class Explosion extends Actor {
 		super();
 		this.y = y;
 		this.x = x;
-		setFrameSpeed(5);
+		setFrameSpeed(8);
 		this.spriteActual = null;
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex1.png"));
 		spriteNames.add(SpriteCache.getInstancia().getSprite("ex2.png"));
