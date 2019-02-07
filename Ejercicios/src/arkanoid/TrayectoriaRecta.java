@@ -15,7 +15,7 @@ package arkanoid;
  */
 public class TrayectoriaRecta {
 	
-	private float m; // Pendiente
+	public float m; // Pendiente
 	private float o; // ordenada en el origen
 	private boolean direccionCreciente = false; // Direcci�n en la que se recorre la recta
 	
@@ -111,11 +111,60 @@ public class TrayectoriaRecta {
 		this.direccionCreciente = !this.direccionCreciente;
 	}
 	
+	
+	
+	public void reflejarHaciaAbajo (PuntoAltaPrecision p) {
+		this.modificarPendiente(-this.m, p);
+		this.direccionCreciente = (this.m < 0)? false : true;
+	}
+	
+	public void reflejarHaciaArriba (PuntoAltaPrecision p) {
+		this.modificarPendiente(-this.m, p);
+		this.direccionCreciente = (this.m < 0)? true : false;
+	}
+	
+	
+	/**
+	 * M�todo para modificar la pendiente por una nueva pendiente, adem�s tambi�n es necesario calcular
+	 * el nuevo punto de corte del eje de abcisas. Cuando se cambia la trayectoria siempre es necesario
+	 * hacerlo con un punto de pivote.
+	 * @param nuevaPendiente
+	 * @param puntoDePivote
+	 */
+	public void modificarPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote) {
+		modificarPendiente(nuevaPendiente, puntoDePivote, this.direccionCreciente);
+	}
+	
+	/**
+	 * M�todo para modificar la pendiente por una nueva pendiente, adem�s tambi�n es necesario calcular
+	 * el nuevo punto de corte del eje de abcisas. Cuando se cambia la trayectoria siempre es necesario
+	 * hacerlo con un punto de pivote.
+	 * @param nuevaPendiente
+	 * @param puntoDePivote
+	 */
+	public void modificarPendiente (float nuevaPendiente, PuntoAltaPrecision puntoDePivote, boolean direccionCreciente) {
+		this.m = nuevaPendiente;
+		this.o = puntoDePivote.y - this.m * puntoDePivote.x;
+		this.direccionCreciente = direccionCreciente;
+	}
+	
 	/**
 	 * T�pico toString
 	 */
 	@Override	
 	public String toString () {
 		return "y = " + this.m + "x + " + this.o;
+	}
+	
+	
+	
+	
+	public static void main (String args[]) {
+		PuntoAltaPrecision coordenadas = new PuntoAltaPrecision(200, 450);
+		TrayectoriaRecta trayectoria = new TrayectoriaRecta(-2.8f, coordenadas, false);
+		for (int i = 0; i < 100; i++) {
+			coordenadas = trayectoria.getPuntoADistanciaDePunto(coordenadas, 3);
+			System.out.println("x: " + coordenadas.x + " y: " + coordenadas.y);
+		}
 	}
 }

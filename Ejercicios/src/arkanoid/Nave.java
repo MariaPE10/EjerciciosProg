@@ -8,7 +8,7 @@ public class Nave extends Actor {
 
 	protected float velocidad;
 	private boolean derecha,izquierda;
-	protected static final int PLAYER_SPEED = 4;
+	protected static final int VELOCIDAD_NAVE = 4;
 	
 	public Nave() {
 		super();
@@ -30,8 +30,8 @@ public class Nave extends Actor {
 	
 	protected void updateSpeed() {
 		velocidad=0;
-	  	if (izquierda) velocidad = -PLAYER_SPEED;
-	  	if (derecha) velocidad = PLAYER_SPEED;
+	  	if (izquierda) velocidad = -VELOCIDAD_NAVE;
+	  	if (derecha) velocidad = VELOCIDAD_NAVE;
 	  }
 	  
 	  public void keyReleased(KeyEvent e) {
@@ -51,7 +51,7 @@ public class Nave extends Actor {
 	  }
 	  
 	  public void mouseMoved (MouseEvent e) {
-		  if (!e.isControlDown() && !e.isShiftDown()) {
+		  if (!e.isControlDown() || !e.isShiftDown()) {
 			  x = e.getX() - (getWidth()/2);  
 		  }
 		 

@@ -140,26 +140,31 @@ public class Arkanoid extends Canvas {
 		this.actoresAInsertar.clear();
 	}
 	
-	public void checkCollisions() {
+	public void compruebaColisiones() {
 
-//		for (Actor actor : actores) {
-//			if(actor instanceof Ladrillo || actor instanceof Nave) {
-//				
-//			}
-//		}
-
-		for (int i = 0; i < actores.size(); i++) {
-			Actor actor1 = actores.get(i);
-			Rectangle r1 = actor1.getBounds();
-		  for (int j = i+1; j < actores.size(); j++) {
-		  	Actor actor2 = actores.get(j);
-		  	Rectangle r2 = actor2.getBounds();
-		  	if (r1.intersects(r2)) {
-		  		actor1.collision(actor2);
-		  		actor2.collision(actor1);
-		  	}
-		  }
+		Rectangle rectPelota = pelota.getRectangulo();
+		for (Actor actor : actores) {
+			if(actor instanceof Ladrillo || actor instanceof Nave) {
+				if (actor.getRectangulo().intersects(rectPelota)) {
+					actor.collision(pelota);
+					pelota.collision(actor);
+					break;
+				}
+			}
 		}
+
+//		for (int i = 0; i < actores.size(); i++) {
+//			Actor actor1 = actores.get(i);
+//			Rectangle r1 = actor1.getBounds();
+//		  for (int j = i+1; j < actores.size(); j++) {
+//		  	Actor actor2 = actores.get(j);
+//		  	Rectangle r2 = actor2.getBounds();
+//		  	if (r1.intersects(r2)) {
+//		  		actor1.collision(actor2);
+//		  		actor2.collision(actor1);
+//		  	}
+//		  }
+//		}
 	}
 	
 	public void paintWorld() {
@@ -180,7 +185,7 @@ public class Arkanoid extends Canvas {
 		while (isVisible()) {
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
-			checkCollisions();
+			compruebaColisiones();
 			paintWorld();
 			int millisUsados = (int) (System.currentTimeMillis()-millisAntesDeConstruirEscena);
 			try { 

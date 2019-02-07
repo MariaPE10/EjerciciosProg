@@ -115,7 +115,7 @@ public class Actor {
 		 * 
 		 * @return
 		 */
-		public Rectangle getBounds() {
+		public Rectangle getRectangulo() {
 			return new Rectangle(x,y,ancho,alto);
 		}
 		
