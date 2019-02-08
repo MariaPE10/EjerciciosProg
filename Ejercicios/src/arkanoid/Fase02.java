@@ -1,11 +1,12 @@
 package arkanoid;
 
+
 /**
  * Clase que implementa la primera fase del juego
  * @author R
  *
  */
-public class Fase01 extends Fase {
+public class Fase02 extends Fase {
 	// Propiedades est�ticas de la fase
 	public static final int ESPACIO_SUPERIOR_SOBRE_LADRILLOS = 60;
 
@@ -19,14 +20,14 @@ public class Fase01 extends Fase {
 	    // Inicializamos los ladrillos
 	    int numLadrillosPosibles = Arkanoid.ANCHO / (Ladrillo.ANCHO + Ladrillo.ESPACIO_ENTRE_LADRILLOS);
 	    int margenIzquierdo = (Arkanoid.ANCHO % (Ladrillo.ANCHO + Ladrillo.ESPACIO_ENTRE_LADRILLOS)) / 2;
-	    this.actores.add(new Ladrillo (200, 200, 1, 0));
-//	    // Creamos las filas
-//	    for (int i = 0; i < 7; i++) {
-//	    	for (int j = 0; j < numLadrillosPosibles; j++) {
-//		    	this.actores.add(new Ladrillo(margenIzquierdo + j * (Ladrillo.ANCHO + Ladrillo.ESPACIO_ENTRE_LADRILLOS), 
-//		    			ESPACIO_SUPERIOR_SOBRE_LADRILLOS + i * (Ladrillo.ALTO + Ladrillo.ESPACIO_ENTRE_LADRILLOS), i, 0));
-//		    }
-//	    }
+	    
+	    // Creamos las filas
+	    for (int i = 0; i < 7; i++) {
+	    	for (int j = 0; j < numLadrillosPosibles; j++) {
+		    	this.actores.add(new Ladrillo(margenIzquierdo + j * (Ladrillo.ANCHO + Ladrillo.ESPACIO_ENTRE_LADRILLOS), 
+		    			ESPACIO_SUPERIOR_SOBRE_LADRILLOS + i * (Ladrillo.ALTO + Ladrillo.ESPACIO_ENTRE_LADRILLOS), i));
+		    }
+	    }
 	}
 
 }

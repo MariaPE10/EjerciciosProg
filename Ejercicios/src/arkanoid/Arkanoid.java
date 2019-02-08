@@ -21,6 +21,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 public class Arkanoid extends Canvas {
 	
 	public static final int ANCHO = 640;
@@ -36,6 +37,7 @@ public class Arkanoid extends Canvas {
 	//private Adorno cola = new Adorno(this);
 	public static SoundCache soundCache;
 	private List<Actor> actoresAInsertar = new ArrayList<Actor>();
+	private boolean  finDeJuego = false;
 	
 	/**
 	 * @return the actoresAInsertar
@@ -142,7 +144,7 @@ public class Arkanoid extends Canvas {
 	
 	public void compruebaColisiones() {
 
-		Rectangle rectPelota = pelota.getRectangulo();
+		Rectangle rectPelota = new Rectangle(pelota.getX()+5, pelota.getY()+5, pelota.getWidth()/2, pelota.getHeight()/2);
 		for (Actor actor : actores) {
 			if(actor instanceof Ladrillo || actor instanceof Nave) {
 				if (actor.getRectangulo().intersects(rectPelota)) {
@@ -174,7 +176,9 @@ public class Arkanoid extends Canvas {
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
-		
+		if(!isFaseActiva()) {
+			g.drawString(String.valueOf(1000)+" fps",0,300);//##################
+		}
 		//cola.paint(g);
 		strategy.show();
 	}
@@ -182,7 +186,18 @@ public class Arkanoid extends Canvas {
 	
 	public void game() {
 		initWorld();
-		while (isVisible()) {
+		while (isVisible() && !finDeJuego) {
+			if (!isFaseActiva()) {
+				pelota = null;
+				nave = null;
+				pelota = new Pelota();
+				nave = new Nave();
+				paintWorld();
+				try { 
+					Thread.sleep(pelota.SEGUNDOS_DE_ESPERA);
+				} catch (InterruptedException e) {}
+				initWorld();
+			}
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
 			compruebaColisiones();
@@ -195,6 +210,19 @@ public class Arkanoid extends Canvas {
 				}
 			} catch (InterruptedException e) {}
 		}
+	}
+	
+	public boolean isFaseActiva() {
+		for (Actor actor : actores) {
+			if (actor instanceof Ladrillo) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void gameOver() {
+		finDeJuego = true;
 	}
 	
 	// Getters
