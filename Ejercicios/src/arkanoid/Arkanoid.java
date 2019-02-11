@@ -16,6 +16,8 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -37,7 +39,8 @@ public class Arkanoid extends Canvas {
 	//private Adorno cola = new Adorno(this);
 	public static SoundCache soundCache;
 	private List<Actor> actoresAInsertar = new ArrayList<Actor>();
-	private boolean  finDeJuego = false;
+	private Enumeration<Fase> enumFases;
+	private boolean finDeJuego = false, activa = true; 
 	
 	/**
 	 * @return the actoresAInsertar
@@ -114,9 +117,14 @@ public class Arkanoid extends Canvas {
 	public void initWorld() {
 		soundCache.loopSound("pokemon.wav");
 		
+		List<Fase> fases = new ArrayList<Fase>();
+
 		this.faseActiva = new Fase01();
 		this.faseActiva.inicializaFase();
-
+		
+		fases.add(new Fase02());
+		enumFases = Collections.enumeration(fases);
+		
 		this.actores.clear();
 		this.actores.addAll(this.faseActiva.getActores());
 		
@@ -172,12 +180,16 @@ public class Arkanoid extends Canvas {
 	public void paintWorld() {
 		Toolkit.getDefaultToolkit().sync();
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
-		g.drawImage( spriteCache.getSprite("pikachuFondo.jpg"), 0, 0, this);
+		g.drawImage( spriteCache.getSprite(this.faseActiva.getFondo()), 0, 0, this);
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
-		if(!isFaseActiva()) {
-			g.drawString(String.valueOf(1000)+" fps",0,300);//##################
+		g.drawString("VIDAS: "+ String.valueOf(nave.getVidas()) ,15,ALTO-15);//##################
+		if(!activa && !finDeJuego) {
+			g.drawString("FASE COMPLETADA \n SEGUNDA FASE",220,320);//##################
+		}
+		if (finDeJuego) {
+			g.drawString("FIN DEL JUEGO",220,320);//##################
 		}
 		//cola.paint(g);
 		strategy.show();
@@ -187,16 +199,20 @@ public class Arkanoid extends Canvas {
 	public void game() {
 		initWorld();
 		while (isVisible() && !finDeJuego) {
-			if (!isFaseActiva()) {
-				pelota = null;
-				nave = null;
-				pelota = new Pelota();
-				nave = new Nave();
+			isFaseActiva();
+			if (!activa) {
 				paintWorld();
-				try { 
-					Thread.sleep(pelota.SEGUNDOS_DE_ESPERA);
-				} catch (InterruptedException e) {}
-				initWorld();
+//				try { 
+//					Thread.sleep(pelota.SEGUNDOS_DE_ESPERA);
+//				} catch (InterruptedException e) {}
+				if (enumFases.hasMoreElements()) {
+					pelota.reiniciaPelota();
+					this.faseActiva = enumFases.nextElement();
+					this.faseActiva.inicializaFase();
+					this.actores.addAll(0, this.faseActiva.getActores());
+					activa = true;
+
+				}
 			}
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
@@ -212,18 +228,21 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
-	public boolean isFaseActiva() {
+	public void isFaseActiva() {
 		for (Actor actor : actores) {
-			if (actor instanceof Ladrillo) {
-				return true;
+			if (actor instanceof Ladrillo && (((Ladrillo) actor).tipo == 0 || ((Ladrillo) actor).tipo == 1)) {
+				activa = true;
+				break;
+			} else {
+				activa = false;
+				if(!enumFases.hasMoreElements()) {
+					finDeJuego = true;
+				}
+				break;
 			}
 		}
-		return false;
 	}
 	
-	public void gameOver() {
-		finDeJuego = true;
-	}
 	
 	// Getters
 	public Nave getNave() { return nave; }

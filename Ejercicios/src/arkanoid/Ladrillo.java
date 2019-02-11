@@ -10,27 +10,19 @@ public class Ladrillo extends Actor {
 	public static int LADRILLO_IRROMPIBLE = 2;
 	
 	private int contador = 0;
-	private int tipo;
-	public String ladrillos[]=new String[] {
-			"ladrilloRosa.png",
-			"ladrilloRojo.png",
-			"ladrilloNaranja.png",
-			"ladrilloAmarillo.png",
-			"ladrilloCeleste.png",
-			"ladrilloAzul.png",
-			"ladrilloVerde.png",
-			"ladrilloBlanco.png"
-	};
+	public int tipo;
+	
 	//ladrillo normal
 	public Ladrillo(int x, int y, int i, int tipo) {
 		super();
 		this.x = x;
 		this.y = y;
-		this.setSpriteActual(SpriteCache.getInstancia().getSprite(ladrillos[i]));
+		this.setSpriteActual(SpriteCache.getInstancia().getSprite(escogeColor(i)));
 		this.tipo = tipo;
 		//this.ancho = this.spriteActual.getWidth();else 
 		//this.alto = this.spriteActual.getHeight();
 	}
+	
 	//ladrillo 2 toques
 	public Ladrillo(int x, int y) {
 		super();
@@ -72,10 +64,37 @@ public class Ladrillo extends Actor {
 					return;
 				}
 			}
+			
 			if (tipo == LADRILLO_IRROMPIBLE) {
 				Arkanoid.soundCache.playSound("metal.wav");
+				System.out.println("soy indestructible");
 				return;
 			}
 			
+	}
+	
+	public String escogeColor(int i) {
+		if (i == 1) {
+			return "ladrilloRosa.png";
+		}
+		if (i == 2) {
+			return "ladrilloRojo.png";
+		}
+		if (i == 3) {
+			return "ladrilloNaranja.png";
+		}
+		if (i == 4) {
+			return "ladrilloAmarillo.png";
+		}
+		if (i == 5) {
+			return "ladrilloCeleste.png";
+		}
+		if (i == 6) {
+			return "ladrilloAzul.png";
+		}
+		if (i == 7) {
+			return "ladrilloVerde.png";
+		} 
+		return "ladrilloBlanco.png";
 	}
 }

@@ -12,7 +12,14 @@ public abstract class Fase {
 	
 	// Lista de actores a colocar en cualquier fase
 	protected List<Actor> actores = new ArrayList<Actor>();
-	
+	protected String fondo = "pikachuFondo.jpg";
+	/**
+	 * @return the fondo
+	 */
+	public String getFondo() {
+		return fondo;
+	}
+
 	// M�todo que debe implementar cada Fase
 	public abstract void inicializaFase ();
 

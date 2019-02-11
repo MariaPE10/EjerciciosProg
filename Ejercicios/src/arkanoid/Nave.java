@@ -9,6 +9,7 @@ public class Nave extends Actor {
 	protected float velocidad;
 	private boolean derecha,izquierda;
 	protected static final int VELOCIDAD_NAVE = 4;
+	protected int vidas = 3;
 	
 	public Nave() {
 		super();
@@ -57,6 +58,8 @@ public class Nave extends Actor {
 		 
 	  }
 	  
+	  public int getVidas() {return vidas; }
+	  public void setVidas(int i) { vidas = i;}
 	  public float getVelocidad() { return velocidad; }
 	  public void setVelocidad(float i) {velocidad = i;}
 }

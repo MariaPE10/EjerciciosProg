@@ -11,7 +11,7 @@ public class Pelota extends Actor {
 	private boolean espacio= false;
 	private boolean click= false;
 	public static final long SEGUNDOS_DE_ESPERA = 5000;
-	public static final float VELOCIDAD_MAXIMA = 10f;
+	public static final float VELOCIDAD_MAXIMA = 9f;
 	protected TrayectoriaRecta trayectoria = null;
 	protected PuntoAltaPrecision coordenadas;
 	private float incrementoVelocidad = 1.00035f, velocidad = 2.5f;
@@ -56,8 +56,12 @@ public class Pelota extends Actor {
 				this.trayectoria.reflejarHorizontalmenteRespectoAPunto(coordenadas);
 			}
 			 
-			if (y < 0 || y > Arkanoid.ALTO-getHeight()) {
+			if (y < 0) {
 				this.trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+			}
+			if (y > Arkanoid.ALTO-getHeight()) {
+				y = Arkanoid.ALTO-getHeight();
+				Arkanoid.getInstancia().nave.setVidas(Arkanoid.getInstancia().nave.getVidas() - 1);
 			}
 		}
 		
@@ -165,4 +169,13 @@ public class Pelota extends Actor {
 		this.trayectoria.reflejarHaciaArriba(coordenadas);
 	}
 
+	public void reiniciaPelota() {
+		millisDesdeInicializacion = System.currentTimeMillis();
+		espacio= false;
+		click= false;
+		trayectoria = null;
+		incrementoVelocidad = 1.00035f;
+		velocidad = 2.5f;
+		
+	}
 }
