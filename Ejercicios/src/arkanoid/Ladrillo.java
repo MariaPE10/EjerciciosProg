@@ -45,7 +45,7 @@ public class Ladrillo extends Actor {
 		if (actor instanceof Pelota)
 			if(tipo == LADRILLO_NORMAL) {
 				this.eliminar();
-				Arkanoid.soundCache.playSound("pick.wav");
+				Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 				Explosion ex = new Explosion(this.x, this.y);
 				Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 				return;
@@ -58,7 +58,7 @@ public class Ladrillo extends Actor {
 					return;
 				} else {
 					this.eliminar();
-					Arkanoid.soundCache.playSound("pick.wav");
+					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 					Explosion ex = new Explosion(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 					return;
@@ -66,7 +66,7 @@ public class Ladrillo extends Actor {
 			}
 			
 			if (tipo == LADRILLO_IRROMPIBLE) {
-				Arkanoid.soundCache.playSound("metal.wav");
+				Arkanoid.soundCache.playSound("ladrilloOro.wav");
 				System.out.println("soy indestructible");
 				return;
 			}

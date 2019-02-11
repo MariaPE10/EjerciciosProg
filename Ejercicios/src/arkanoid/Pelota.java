@@ -60,7 +60,11 @@ public class Pelota extends Actor {
 				this.trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
 			}
 			if (y > Arkanoid.ALTO-getHeight()) {
-				y = Arkanoid.ALTO-getHeight();
+				Arkanoid.soundCache.playSound("muerto.wav");
+			try { 
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {}
+				reiniciaPelota();
 				Arkanoid.getInstancia().nave.setVidas(Arkanoid.getInstancia().nave.getVidas() - 1);
 			}
 		}

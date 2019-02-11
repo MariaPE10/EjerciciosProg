@@ -3,6 +3,7 @@ package arkanoid;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -29,6 +30,7 @@ public class Arkanoid extends Canvas {
 	public static final int ANCHO = 640;
 	public static final int ALTO = 700;
 	public static final int FPS = 101; // Frames por segundo
+	private static Font monoFont = new Font("Calibri", Font.BOLD, 20);
 	JFrame ventana = null;
 	private BufferStrategy strategy;
 	private SpriteCache spriteCache = new SpriteCache();
@@ -184,12 +186,19 @@ public class Arkanoid extends Canvas {
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
-		g.drawString("VIDAS: "+ String.valueOf(nave.getVidas()) ,15,ALTO-15);//##################
+		g.setFont(monoFont);
+		g.setColor(Color.decode("#00bbff"));
+		g.drawImage( spriteCache.getSprite("pocion.png"), 15, ALTO-45, this);
+		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,ALTO-18);//##################
 		if(!activa && !finDeJuego) {
-			g.drawString("FASE COMPLETADA \n SEGUNDA FASE",220,320);//##################
+			g.setColor(Color.black);
+			g.fillRect( 0, 0, getWidth(), getHeight());
+			g.drawImage( spriteCache.getSprite("Nextlvl.png"), 0, 0, this);
 		}
 		if (finDeJuego) {
-			g.drawString("FIN DEL JUEGO",220,320);//##################
+			g.setColor(Color.black);
+			g.fillRect( 0, 0, getWidth(), getHeight());
+			g.drawImage( spriteCache.getSprite("GameOver.png"), 0, 0, this);
 		}
 		//cola.paint(g);
 		strategy.show();
@@ -202,9 +211,9 @@ public class Arkanoid extends Canvas {
 			isFaseActiva();
 			if (!activa) {
 				paintWorld();
-//				try { 
-//					Thread.sleep(pelota.SEGUNDOS_DE_ESPERA);
-//				} catch (InterruptedException e) {}
+				try { 
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {}
 				if (enumFases.hasMoreElements()) {
 					pelota.reiniciaPelota();
 					this.faseActiva = enumFases.nextElement();
@@ -217,6 +226,7 @@ public class Arkanoid extends Canvas {
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
 			compruebaColisiones();
+			tieneVidas();
 			paintWorld();
 			int millisUsados = (int) (System.currentTimeMillis()-millisAntesDeConstruirEscena);
 			try { 
@@ -243,6 +253,11 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
+	public void tieneVidas() {
+		if (nave.getVidas() < 0) {
+			finDeJuego = true;
+		}
+	}
 	
 	// Getters
 	public Nave getNave() { return nave; }
