@@ -26,6 +26,7 @@ public class Pelota extends Actor {
 	}
 	
 	public void actua() {
+		
 		millisDespues = System.currentTimeMillis();
 		if(millisDespues - millisDesdeInicializacion < SEGUNDOS_DE_ESPERA
 				&& !espacio && !click) {
@@ -161,16 +162,20 @@ public class Pelota extends Actor {
 		if (recPelota.intersects(recCentro)) centro = true;
 		if (recPelota.intersects(recIzq)) izquierda = true;
 		if (recPelota.intersects(recDrcha)) derecha = true;
+		if (this.trayectoria == null) {
+			this.trayectoria = new TrayectoriaRecta(((float)Math.random()*4), this.coordenadas, false);
+		} else {
+			if (derecha) {
+				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), true);
+				return;
+			}
+			if (izquierda) {
+				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
+				return;
+			}
+			this.trayectoria.reflejarHaciaArriba(coordenadas);
+		}
 		
-		if (derecha) {
-			this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), true);
-			return;
-		}
-		if (izquierda) {
-			this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
-			return;
-		}
-		this.trayectoria.reflejarHaciaArriba(coordenadas);
 	}
 
 	public void reiniciaPelota() {

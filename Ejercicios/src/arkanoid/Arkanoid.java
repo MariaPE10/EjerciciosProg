@@ -189,7 +189,7 @@ public class Arkanoid extends Canvas {
 		g.setFont(monoFont);
 		g.setColor(Color.decode("#00bbff"));
 		g.drawImage( spriteCache.getSprite("pocion.png"), 15, ALTO-45, this);
-		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,ALTO-18);//##################
+		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,ALTO-18);
 		if(!activa && !finDeJuego) {
 			g.setColor(Color.black);
 			g.fillRect( 0, 0, getWidth(), getHeight());
@@ -220,9 +220,9 @@ public class Arkanoid extends Canvas {
 					this.faseActiva.inicializaFase();
 					this.actores.addAll(0, this.faseActiva.getActores());
 					activa = true;
-
 				}
 			}
+			
 			long millisAntesDeConstruirEscena = System.currentTimeMillis();
 			updateWorld();
 			compruebaColisiones();
@@ -254,7 +254,7 @@ public class Arkanoid extends Canvas {
 	}
 	
 	public void tieneVidas() {
-		if (nave.getVidas() < 0) {
+		if (nave.getVidas() < 1) {
 			finDeJuego = true;
 		}
 	}
