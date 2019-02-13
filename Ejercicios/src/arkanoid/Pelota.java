@@ -6,6 +6,12 @@ import java.awt.event.MouseEvent;
 
 public class Pelota extends Actor {
 	
+//	Reunificar código de inicio de trayectoria
+//	Fin de fase cuando quedan 2-3 ladrillos (alguno dorado)
+//	Muerte súbita
+//	Explosión cambio de fase
+//	Ladrillos dorados no suenan
+	
 	private long millisDesdeInicializacion = System.currentTimeMillis();
 	protected long millisDespues;
 	private boolean espacio= false;
@@ -16,7 +22,9 @@ public class Pelota extends Actor {
 	protected PuntoAltaPrecision coordenadas;
 	private float incrementoVelocidad = 1.00035f, velocidad = 2.5f;
 
-	
+	/**
+	 * 
+	 */
 	public Pelota() {
 		super();
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("pokeball.png"));
@@ -25,6 +33,9 @@ public class Pelota extends Actor {
 		this.coordenadas = new PuntoAltaPrecision(this.x, this.y);
 	}
 	
+	/**
+	 * 
+	 */
 	public void actua() {
 		
 		millisDespues = System.currentTimeMillis();
@@ -38,9 +49,11 @@ public class Pelota extends Actor {
 		} else { // La pelota se mueve
 			if (this.trayectoria == null) {
 				if (Math.random()>0.5) {
-					this.trayectoria = new TrayectoriaRecta(((float)Math.random()*4), this.coordenadas, false);
+					modificaTrayectoria(0.5f, 3, false);
+					//this.trayectoria = new TrayectoriaRecta(((float)Math.random()+4), this.coordenadas, false);
 				} else {
-					this.trayectoria = new TrayectoriaRecta(0f-((float)Math.random()*4), this.coordenadas, true);
+					modificaTrayectoria(-0.5f, -3, true);
+					//this.trayectoria = new TrayectoriaRecta(0f-((float)Math.random()+4), this.coordenadas, true);
 				}
 				Arkanoid.soundCache.playSound("pika.wav");
 			}
@@ -52,17 +65,27 @@ public class Pelota extends Actor {
 			if (this.velocidad < VELOCIDAD_MAXIMA) {
 				this.velocidad *= this.incrementoVelocidad;
 			}
+			if (x < -3) {
+				this.x = 0;
+				this.trayectoria.reflejarHaciaDerecha(coordenadas);
+				return;
+			}
 
-			if (x < -3 || x > Arkanoid.ANCHO-20) {
-				this.trayectoria.reflejarHorizontalmenteRespectoAPunto(coordenadas);
+			if (x > Arkanoid.ANCHO-20) {
+				this.x = Arkanoid.ANCHO-20;
+				this.trayectoria.reflejarHaciaIzquierda(coordenadas);
+				return;
 			}
 			 
 			if (y < 0) {
-				this.trayectoria.reflejarVerticalmenteRespectoAPunto(coordenadas);
+				this.trayectoria.reflejarHaciaAbajo(coordenadas);
+				return;
 			}
+			
 			if (y > Arkanoid.ALTO-getHeight()) {
 				Arkanoid.soundCache.playSound("muerto.wav");
 			try { 
+				this.y = Arkanoid.ALTO-getHeight();
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {}
 				reiniciaPelota();
@@ -73,6 +96,9 @@ public class Pelota extends Actor {
 		//System.out.println("Velocidad: " + this.velocidad);
 	}
 	
+	/**
+	 * 
+	 */
 	public void collision(Actor actor) {
 		if (actor instanceof Ladrillo) {
 			colisionConLadrillo ((Ladrillo) actor);
@@ -83,29 +109,41 @@ public class Pelota extends Actor {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void keyPressed(KeyEvent e) {
 	  	switch (e.getKeyCode()) {
 			  case KeyEvent.VK_SPACE : espacio = true; break;
 	  	}
 	  }
 	
+	/**
+	 * 
+	 * @param e
+	 */
 	public void mouseClicked (MouseEvent e) {
-		if (!click && this.trayectoria == null) {
-			if (e.getX()- this.x < 30 && e.getX()-this.x >= 0) {
-				this.trayectoria = new TrayectoriaRecta( 0f-(float)Math.random(),new PuntoAltaPrecision(this.x, this.y), true);
-				Arkanoid.soundCache.playSound("pick.wav");
-			} else if (e.getX()- this.x > -30 && e.getX()- this.x < 0) {
-				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
-				Arkanoid.soundCache.playSound("pick.wav");
-			} else {
-				PuntoAltaPrecision coordenadasRaton = new PuntoAltaPrecision(e.getX(), e.getY());
-				this.trayectoria = new TrayectoriaRecta(new PuntoAltaPrecision(this.x, this.y), coordenadasRaton, (e.getX() > (Arkanoid.getInstancia().getNave().x + Arkanoid.getInstancia().getNave().getWidth() / 2))? true : false);
-				Arkanoid.soundCache.playSound("pick.wav");
-			}
-		}
+//		if (!click && this.trayectoria == null) {
+//			if (e.getX()- this.x < 30 && e.getX()-this.x >= 0) {
+//				this.trayectoria = new TrayectoriaRecta( 0f-(float)Math.random(),new PuntoAltaPrecision(this.x, this.y), true);
+//				Arkanoid.soundCache.playSound("pick.wav");
+//			} else if (e.getX()- this.x > -30 && e.getX()- this.x < 0) {
+//				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
+//				Arkanoid.soundCache.playSound("pick.wav");
+//			} else {
+//				PuntoAltaPrecision coordenadasRaton = new PuntoAltaPrecision(e.getX(), e.getY());
+//				this.trayectoria = new TrayectoriaRecta(new PuntoAltaPrecision(this.x, this.y), coordenadasRaton, (e.getX() > (Arkanoid.getInstancia().getNave().x + Arkanoid.getInstancia().getNave().getWidth() / 2))? true : false);
+//				Arkanoid.soundCache.playSound("pick.wav");
+//			}
+//		}
 		click = true;
 	  }
 	
+	/**
+	 * 
+	 * @param ladrillo
+	 */
 	public void colisionConLadrillo (Ladrillo ladrillo) {
 		Rectangle recAbajo = new Rectangle(ladrillo.getX(), ladrillo.getY()+ ladrillo.getHeight()-2, ladrillo.getWidth(), 2);
 		Rectangle recArriba = new Rectangle(ladrillo.getX(), ladrillo.getY()+2, ladrillo.getWidth(), 2);
@@ -121,11 +159,11 @@ public class Pelota extends Actor {
 		if (recPelota.intersects(recDrcha)) derecha = true;
 		
 		if (arriba && izquierda) {
-			this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()), this.coordenadas, false);
+			this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, false);
 			return;
 		}
 		if (arriba && derecha) {
-			this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()), this.coordenadas, true);
+			this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, true);
 			return;
 		}
 		if (abajo && izquierda) {
@@ -151,10 +189,14 @@ public class Pelota extends Actor {
 		this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
 	}
 	
+	/**
+	 * 
+	 * @param nave
+	 */
 	public void colisionConNave(Nave nave) {
-		Rectangle recPelota = new Rectangle(this.x+5, this.y+5, this.getWidth()/2, this.getHeight()/2);
+		Rectangle recPelota = new Rectangle(this.x, this.y, this.getWidth(), this.getHeight());
 		Rectangle recCentro = new Rectangle(nave.getX()+15, nave.getY(), nave.getWidth()-30, 2);
-		Rectangle recDrcha = new Rectangle(nave.getWidth()-15, nave.getY(), 15, 2);
+		Rectangle recDrcha = new Rectangle(nave.x + nave.getWidth()-15, nave.getY(), 15, 2);
 		Rectangle recIzq = new Rectangle(nave.getX(), nave.getY(), 15, 2);
 		
 		boolean centro = false, izquierda = false, derecha = false;
@@ -162,22 +204,33 @@ public class Pelota extends Actor {
 		if (recPelota.intersects(recCentro)) centro = true;
 		if (recPelota.intersects(recIzq)) izquierda = true;
 		if (recPelota.intersects(recDrcha)) derecha = true;
-		if (this.trayectoria == null) {
-			this.trayectoria = new TrayectoriaRecta(((float)Math.random()*4), this.coordenadas, false);
-		} else {
-			if (derecha) {
-				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), true);
-				return;
-			}
-			if (izquierda) {
-				this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
-				return;
-			}
-			this.trayectoria.reflejarHaciaArriba(coordenadas);
+		
+		if (derecha) {
+			modificaTrayectoria(0.3f, 1, true);
+			System.out.println("derecha");
+			return;
 		}
+		if (izquierda) {
+			modificaTrayectoria(0.3f, 1, false);
+			System.out.println("izq");
+			return;
+		}
+		this.trayectoria.reflejarHaciaArriba(coordenadas);
+		System.out.println("Centro");
 		
 	}
+	
+	/**
+	 * 
+	 */
+	public void modificaTrayectoria (float minPendiente, float maxPendiente, boolean direccionCreciente) {
+		this.trayectoria = new TrayectoriaRecta( (float)(Math.random() * (maxPendiente - minPendiente)) + minPendiente ,new PuntoAltaPrecision(this.x, this.y), direccionCreciente);
+	}
+	
 
+	/**
+	 * 
+	 */
 	public void reiniciaPelota() {
 		millisDesdeInicializacion = System.currentTimeMillis();
 		espacio= false;
@@ -187,4 +240,6 @@ public class Pelota extends Actor {
 		velocidad = 2.5f;
 		
 	}
+	
+
 }

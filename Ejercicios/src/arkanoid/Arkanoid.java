@@ -124,7 +124,7 @@ public class Arkanoid extends Canvas {
 		this.faseActiva = new Fase01();
 		this.faseActiva.inicializaFase();
 		
-		fases.add(new Fase02());
+		fases.add(new Fase03());
 		enumFases = Collections.enumeration(fases);
 		
 		this.actores.clear();
