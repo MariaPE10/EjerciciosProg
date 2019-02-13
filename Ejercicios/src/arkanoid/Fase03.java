@@ -16,7 +16,7 @@ public class Fase03 extends Fase {
 	 */
 	@Override
 	public void inicializaFase() {
-		this.fondo = "quilavaFondo.png";
+		this.fondo = "snorlaxFondo.jpg";
 	    // Inicializamos los ladrillos
 		int matriz [][] = new int [][] {
 			{0,5,5,0,0,0,0,0,0,5,5,0}, //del 1 al 8 son colores de ladrillos
