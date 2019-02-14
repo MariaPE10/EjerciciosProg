@@ -43,6 +43,7 @@ public class Arkanoid extends Canvas {
 	private List<Actor> actoresAInsertar = new ArrayList<Actor>();
 	private Enumeration<Fase> enumFases;
 	private boolean finDeJuego = false, activa = true; 
+	private static Arkanoid instancia = null;
 	
 	/**
 	 * @return the actoresAInsertar
@@ -51,8 +52,6 @@ public class Arkanoid extends Canvas {
 		return actoresAInsertar;
 	}
 
-	private static Arkanoid instancia = null;
-	
 	/**
 	 * Getter Singleton
 	 * @return
@@ -64,6 +63,9 @@ public class Arkanoid extends Canvas {
 		return instancia;
 	}
 	
+	/**
+	 * 
+	 */
 	public Arkanoid() {
 		
 		soundCache = new SoundCache();
@@ -116,6 +118,9 @@ public class Arkanoid extends Canvas {
 		
 	}
 	
+	/**
+	 * 
+	 */
 	public void initWorld() {
 		soundCache.loopSound("pokemon.wav");
 		
@@ -136,6 +141,9 @@ public class Arkanoid extends Canvas {
 //		cola.setY(nave.getY()-cola.getHeight()+15);
 	}
 	
+	/**
+	 * 
+	 */
 	public void updateWorld() {
 		int i = 0;
 		while (i < actores.size()) {
@@ -152,6 +160,9 @@ public class Arkanoid extends Canvas {
 		this.actoresAInsertar.clear();
 	}
 	
+	/**
+	 * 
+	 */
 	public void compruebaColisiones() {
 
 		Rectangle rectPelota = new Rectangle(pelota.getX()+5, pelota.getY()+5, pelota.getWidth()/2, pelota.getHeight()/2);
@@ -179,6 +190,9 @@ public class Arkanoid extends Canvas {
 //		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void paintWorld() {
 		Toolkit.getDefaultToolkit().sync();
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
@@ -191,24 +205,31 @@ public class Arkanoid extends Canvas {
 		g.drawImage( spriteCache.getSprite("pocion.png"), 15, ALTO-45, this);
 		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,ALTO-18);
 		if(!activa && !finDeJuego) {
-			g.setColor(Color.black);
-			g.fillRect( 0, 0, getWidth(), getHeight());
+//			g.setColor(Color.black);
+//			g.fillRect( 0, 0, getWidth(), getHeight());
 			g.drawImage( spriteCache.getSprite("Nextlvl.png"), 0, 0, this);
 		}
 		if (finDeJuego) {
-			g.setColor(Color.black);
-			g.fillRect( 0, 0, getWidth(), getHeight());
+//			g.setColor(Color.black);
+//			g.fillRect( 0, 0, getWidth(), getHeight());
 			g.drawImage( spriteCache.getSprite("GameOver.png"), 0, 0, this);
 		}
 		//cola.paint(g);
 		strategy.show();
 	}
 
-	
+	/**
+	 * 
+	 */
 	public void game() {
 		initWorld();
 		while (isVisible() && !finDeJuego) {
 			isFaseActiva();
+			long millisAntesDeConstruirEscena = System.currentTimeMillis();
+			updateWorld();
+			compruebaColisiones();
+			tieneVidas();
+			paintWorld();
 			if (!activa) {
 				paintWorld();
 				try { 
@@ -216,18 +237,13 @@ public class Arkanoid extends Canvas {
 				} catch (InterruptedException e) {}
 				if (enumFases.hasMoreElements()) {
 					pelota.reiniciaPelota();
+					limpiaFase();
 					this.faseActiva = enumFases.nextElement();
 					this.faseActiva.inicializaFase();
 					this.actores.addAll(0, this.faseActiva.getActores());
 					activa = true;
 				}
 			}
-			
-			long millisAntesDeConstruirEscena = System.currentTimeMillis();
-			updateWorld();
-			compruebaColisiones();
-			tieneVidas();
-			paintWorld();
 			int millisUsados = (int) (System.currentTimeMillis()-millisAntesDeConstruirEscena);
 			try { 
 				int millisADetenerElJuego = 1000 / FPS - millisUsados;
@@ -238,24 +254,44 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	public void isFaseActiva() {
 		for (Actor actor : actores) {
 			if (actor instanceof Ladrillo && (((Ladrillo) actor).tipo == 0 || ((Ladrillo) actor).tipo == 1)) {
 				activa = true;
-				break;
-			} else {
-				activa = false;
-				if(!enumFases.hasMoreElements()) {
-					finDeJuego = true;
-				}
-				break;
+				return;
 			}
+		}
+		// La fase está acabada
+		activa = false;
+		if(!enumFases.hasMoreElements()) {
+			limpiaFase();
+			soundCache.playSound("win.wav");
+			finDeJuego = true;
+		}
+
+	}
+	
+	/**
+	 * 
+	 */
+	public void tieneVidas() {
+		if (nave.getVidas() < 1) {
+			limpiaFase();
+			finDeJuego = true;
 		}
 	}
 	
-	public void tieneVidas() {
-		if (nave.getVidas() < 1) {
-			finDeJuego = true;
+	/**
+	 * 
+	 */
+	public void limpiaFase() {
+		for(int i = actores.size()-1; i >= 0 ;i--) {
+			if (!(this.actores.get(i) instanceof Nave) && !(this.actores.get(i) instanceof Pelota)) {
+				this.actores.remove(i);
+			}
 		}
 	}
 	

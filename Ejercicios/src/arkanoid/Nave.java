@@ -11,6 +11,9 @@ public class Nave extends Actor {
 	protected static final int VELOCIDAD_NAVE = 4;
 	protected int vidas = 3;
 	
+	/**
+	 * 
+	 */
 	public Nave() {
 		super();
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("nave.png"));
@@ -18,6 +21,9 @@ public class Nave extends Actor {
 		this.y = Arkanoid.ALTO - 30;
 	}
 	
+	/**
+	 * 
+	 */
 	public void actua() {
 		super.actua();
 		x+=velocidad;
@@ -29,12 +35,19 @@ public class Nave extends Actor {
 		}
 	}
 	
+	/**
+	 * 
+	 */
 	protected void updateSpeed() {
 		velocidad=0;
 	  	if (izquierda) velocidad = -VELOCIDAD_NAVE;
 	  	if (derecha) velocidad = VELOCIDAD_NAVE;
 	  }
 	  
+	/**
+	 * 
+	 * @param e
+	 */
 	  public void keyReleased(KeyEvent e) {
 	   	switch (e.getKeyCode()) {
 			  case KeyEvent.VK_LEFT : izquierda = false; break; 
@@ -43,6 +56,10 @@ public class Nave extends Actor {
 	   	updateSpeed();
 	  }
 	  
+	  /**
+	   * 
+	   * @param e
+	   */
 	  public void keyPressed(KeyEvent e) {
 	  	switch (e.getKeyCode()) {
 			  case KeyEvent.VK_LEFT : izquierda = true; break;
@@ -51,11 +68,24 @@ public class Nave extends Actor {
 	  	updateSpeed();
 	  }
 	  
+	  /**
+	   * 
+	   * @param e
+	   */
 	  public void mouseMoved (MouseEvent e) {
 		  if (!e.isControlDown() || !e.isShiftDown()) {
 			  x = e.getX() - (getWidth()/2);  
 		  }
 		 
+	  }
+	  
+	  /**
+	   * 
+	   */
+	  public void collision(Actor actor) {
+		if (actor instanceof Pildora) {
+				
+		}
 	  }
 	  
 	  public int getVidas() {return vidas; }

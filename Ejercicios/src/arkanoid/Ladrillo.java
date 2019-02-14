@@ -38,7 +38,7 @@ public class Ladrillo extends Actor {
 			this.x = x;
 			this.y = y;
 			this.setSpriteActual(SpriteCache.getInstancia().getSprite("ladrilloEspecial2.png"));
-			this.tipo = 3;
+			this.tipo = 2;
 		}
 	
 	public void collision(Actor actor) {
@@ -48,6 +48,10 @@ public class Ladrillo extends Actor {
 				Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 				Explosion ex = new Explosion(this.x, this.y);
 				Arkanoid.getInstancia().getActoresAInsertar().add(ex);
+				if(Math.random() < 0.4) { //Probabilidad de 1%
+					Pildora master = new Pildora(this.x, this.y);
+					Arkanoid.getInstancia().getActoresAInsertar().add(master);
+				}
 				return;
 			}
 		
@@ -67,7 +71,7 @@ public class Ladrillo extends Actor {
 			
 			if (tipo == LADRILLO_IRROMPIBLE) {
 				Arkanoid.soundCache.playSound("ladrilloOro.wav");
-				System.out.println("soy indestructible");
+				//System.out.println("soy indestructible");
 				return;
 			}
 			
