@@ -1,5 +1,6 @@
 package arkanoid;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -48,43 +49,59 @@ public class Nave extends Actor {
 	 * 
 	 * @param e
 	 */
-	  public void keyReleased(KeyEvent e) {
+	 public void keyReleased(KeyEvent e) {
 	   	switch (e.getKeyCode()) {
 			  case KeyEvent.VK_LEFT : izquierda = false; break; 
 			  case KeyEvent.VK_RIGHT : derecha = false;break;
 	   	}
 	   	updateSpeed();
-	  }
+	 }
 	  
 	  /**
 	   * 
 	   * @param e
 	   */
-	  public void keyPressed(KeyEvent e) {
+	 public void keyPressed(KeyEvent e) {
 	  	switch (e.getKeyCode()) {
 			  case KeyEvent.VK_LEFT : izquierda = true; break;
 			  case KeyEvent.VK_RIGHT : derecha = true; break;
 	  	}
 	  	updateSpeed();
-	  }
+	 }
 	  
 	  /**
 	   * 
 	   * @param e
 	   */
-	  public void mouseMoved (MouseEvent e) {
-		  if (!e.isControlDown() || !e.isShiftDown()) {
+	 public void mouseMoved (MouseEvent e) {
+		 if (!e.isControlDown() || !e.isShiftDown()) {
 			  x = e.getX() - (getWidth()/2);  
-		  }
+		 }
 		 
-	  }
-	  
+	 }
+	 
 	  /**
 	   * 
 	   */
-	  public void collision(Actor actor) {
+	 public void collision(Actor actor) {
 		if (actor instanceof Pildora) {
-				
+			colisionConPildora((Pildora)actor);
+			
+		}
+	 }
+	 
+	 /**
+	  * 
+	  * @param nave
+	  */
+	 public void colisionConPildora(Pildora pildora) {
+		Rectangle recNave = new Rectangle(this.x, this.y, this.getWidth(), 2);
+		Rectangle  recPildora= new Rectangle(pildora.getX(), pildora.getY(), pildora.getWidth(), pildora.getHeight());
+		
+		if (recNave.intersects(recPildora)) {
+			if (pildora instanceof Pildora) {
+				this.vidas++;
+			}
 		}
 	  }
 	  

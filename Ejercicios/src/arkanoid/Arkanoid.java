@@ -164,13 +164,21 @@ public class Arkanoid extends Canvas {
 	 * 
 	 */
 	public void compruebaColisiones() {
-
+		
+		Rectangle recNave = new Rectangle(nave.getX(), nave.getY(), nave.getWidth(), 2);
 		Rectangle rectPelota = new Rectangle(pelota.getX()+5, pelota.getY()+5, pelota.getWidth()/2, pelota.getHeight()/2);
 		for (Actor actor : actores) {
 			if(actor instanceof Ladrillo || actor instanceof Nave) {
 				if (actor.getRectangulo().intersects(rectPelota)) {
 					actor.collision(pelota);
 					pelota.collision(actor);
+					break;
+				}
+			}
+			if(actor instanceof Pildora) {
+				if (actor.getRectangulo().intersects(recNave)) {
+					actor.collision(nave);
+					nave.collision(actor);
 					break;
 				}
 			}
