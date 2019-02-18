@@ -36,6 +36,17 @@ public class Pelota extends Actor {
 	/**
 	 * 
 	 */
+	public Pelota(String nombre) {
+		super();
+		this.setSpriteActual(SpriteCache.getInstancia().getSprite(nombre));
+		this.x = Arkanoid.ANCHO / 2;
+		this.y = Arkanoid.ALTO - 30;
+		this.coordenadas = new PuntoAltaPrecision(this.x, this.y);
+	}
+	
+	/**
+	 * 
+	 */
 	public void actua() {
 		
 		millisDespues = System.currentTimeMillis();
@@ -55,7 +66,7 @@ public class Pelota extends Actor {
 					modificaTrayectoria(-0.5f, -3, true);
 					//this.trayectoria = new TrayectoriaRecta(0f-((float)Math.random()+4), this.coordenadas, true);
 				}
-				//Arkanoid.soundCache.playSound("pika.wav");
+				Arkanoid.soundCache.playSound("pika.wav");
 			}
 			
 			this.coordenadas = this.trayectoria.getPuntoADistanciaDePunto(this.coordenadas, this.velocidad);
@@ -88,6 +99,10 @@ public class Pelota extends Actor {
 				this.y = Arkanoid.ALTO-getHeight();
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {}
+			if (this.spriteActual == SpriteCache.getInstancia().getSprite("master.png")) {
+				this.setSpriteActual(SpriteCache.getInstancia().getSprite("pokeball.png"));
+				Arkanoid.getInstancia().masterUsado = false;
+			}
 				reiniciaPelota();
 				Arkanoid.getInstancia().nave.setVidas(Arkanoid.getInstancia().nave.getVidas() - 1);
 			}
@@ -132,13 +147,13 @@ public class Pelota extends Actor {
 			} else if (e.getX()- this.x > -30 && e.getX()- this.x < 0) {
 				modificaTrayectoria(0.3f, 1, false);
 				//this.trayectoria = new TrayectoriaRecta( (float)Math.random(),new PuntoAltaPrecision(this.x, this.y), false);
-				//Arkanoid.soundCache.playSound("pick.wav");
+				
 			} else {
 				PuntoAltaPrecision coordenadasRaton = new PuntoAltaPrecision(e.getX(), e.getY());
 				this.trayectoria = new TrayectoriaRecta(new PuntoAltaPrecision(this.x, this.y), coordenadasRaton, (e.getX() > (Arkanoid.getInstancia().getNave().x + Arkanoid.getInstancia().getNave().getWidth() / 2))? true : false);
-				//Arkanoid.soundCache.playSound("pick.wav");
+				
 			}
-			Arkanoid.soundCache.playSound("pick.wav");
+			Arkanoid.soundCache.playSound("pika.wav");
 		}
 		click = true;
 	  }
@@ -148,48 +163,51 @@ public class Pelota extends Actor {
 	 * @param ladrillo
 	 */
 	public void colisionConLadrillo (Ladrillo ladrillo) {
-		Rectangle recAbajo = new Rectangle(ladrillo.getX(), ladrillo.getY()+ ladrillo.getHeight()-2, ladrillo.getWidth(), 2);
-		Rectangle recArriba = new Rectangle(ladrillo.getX(), ladrillo.getY()+2, ladrillo.getWidth(), 2);
-		Rectangle recIzq = new Rectangle(ladrillo.getX()+2, ladrillo.getY(), 2, ladrillo.getHeight());
-		Rectangle recDrcha = new Rectangle(ladrillo.getX()+ ladrillo.getWidth()-2, ladrillo.getY(), 2, ladrillo.getHeight());
-		Rectangle recPelota = new Rectangle(this.x+5, this.y+5, this.getWidth()/2, this.getHeight()/2);
+		if (this.spriteActual == SpriteCache.getInstancia().getSprite("pokeball.png")) {
+			Rectangle recAbajo = new Rectangle(ladrillo.getX(), ladrillo.getY()+ ladrillo.getHeight()-2, ladrillo.getWidth(), 2);
+			Rectangle recArriba = new Rectangle(ladrillo.getX(), ladrillo.getY()+2, ladrillo.getWidth(), 2);
+			Rectangle recIzq = new Rectangle(ladrillo.getX()+2, ladrillo.getY(), 2, ladrillo.getHeight());
+			Rectangle recDrcha = new Rectangle(ladrillo.getX()+ ladrillo.getWidth()-2, ladrillo.getY(), 2, ladrillo.getHeight());
+			Rectangle recPelota = new Rectangle(this.x+5, this.y+5, this.getWidth()/2, this.getHeight()/2);
+			
+			boolean arriba = false, abajo = false, izquierda = false, derecha = false;
+			
+			if (recPelota.intersects(recAbajo)) abajo = true;
+			if (recPelota.intersects(recArriba)) arriba = true;
+			if (recPelota.intersects(recIzq)) izquierda = true;
+			if (recPelota.intersects(recDrcha)) derecha = true;
+			
+			if (arriba && izquierda) {
+				this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, false);
+				return;
+			}
+			if (arriba && derecha) {
+				this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, true);
+				return;
+			}
+			if (abajo && izquierda) {
+				this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()), this.coordenadas, false);
+				return;
+			}
+			if (abajo && derecha) {
+				this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()), this.coordenadas, true);
+				return;
+			}
+			if (abajo) {
+				this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
+				return;
+			}
+			if (arriba) {
+				this.trayectoria.reflejarHaciaArriba(this.coordenadas);
+				return;
+			}
+			if (derecha) {
+				this.trayectoria.reflejarHaciaDerecha(this.coordenadas);
+				return;
+			}
+			this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
+		}
 		
-		boolean arriba = false, abajo = false, izquierda = false, derecha = false;
-		
-		if (recPelota.intersects(recAbajo)) abajo = true;
-		if (recPelota.intersects(recArriba)) arriba = true;
-		if (recPelota.intersects(recIzq)) izquierda = true;
-		if (recPelota.intersects(recDrcha)) derecha = true;
-		
-		if (arriba && izquierda) {
-			this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, false);
-			return;
-		}
-		if (arriba && derecha) {
-			this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()+0.1f), this.coordenadas, true);
-			return;
-		}
-		if (abajo && izquierda) {
-			this.trayectoria.setPendiente(0-Math.abs(this.trayectoria.getPendiente()), this.coordenadas, false);
-			return;
-		}
-		if (abajo && derecha) {
-			this.trayectoria.setPendiente(Math.abs(this.trayectoria.getPendiente()), this.coordenadas, true);
-			return;
-		}
-		if (abajo) {
-			this.trayectoria.reflejarHaciaAbajo(this.coordenadas);
-			return;
-		}
-		if (arriba) {
-			this.trayectoria.reflejarHaciaArriba(this.coordenadas);
-			return;
-		}
-		if (derecha) {
-			this.trayectoria.reflejarHaciaDerecha(this.coordenadas);
-			return;
-		}
-		this.trayectoria.reflejarHaciaIzquierda(this.coordenadas);
 	}
 	
 	/**
@@ -239,8 +257,8 @@ public class Pelota extends Actor {
 	 */
 	public void reiniciaPelota() {
 		millisDesdeInicializacion = System.currentTimeMillis();
-		espacio= false;
-		click= false;
+		espacio = false;
+		click = false;
 		trayectoria = null;
 		incrementoVelocidad = 1.00035f;
 		velocidad = 2.5f;

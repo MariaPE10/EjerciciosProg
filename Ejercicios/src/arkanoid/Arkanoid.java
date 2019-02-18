@@ -44,6 +44,8 @@ public class Arkanoid extends Canvas {
 	private Enumeration<Fase> enumFases;
 	private boolean finDeJuego = false, activa = true; 
 	private static Arkanoid instancia = null;
+	public boolean musicaUsado = false;
+	public boolean masterUsado = false;
 	
 	/**
 	 * @return the actoresAInsertar
@@ -122,13 +124,14 @@ public class Arkanoid extends Canvas {
 	 * 
 	 */
 	public void initWorld() {
-		soundCache.loopSound("pokemon.wav");
+		//soundCache.loopSound("pokemon.wav");
 		
 		List<Fase> fases = new ArrayList<Fase>();
 
 		this.faseActiva = new Fase01();
 		this.faseActiva.inicializaFase();
 		
+		fases.add(new Fase02());
 		fases.add(new Fase03());
 		enumFases = Collections.enumeration(fases);
 		
@@ -288,6 +291,7 @@ public class Arkanoid extends Canvas {
 	public void tieneVidas() {
 		if (nave.getVidas() < 1) {
 			limpiaFase();
+			soundCache.playSound("muerto.wav");
 			finDeJuego = true;
 		}
 	}
@@ -303,10 +307,17 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
+	
 	// Getters
 	public Nave getNave() { return nave; }
 	public Pelota getPelota() { return pelota; }
-	
+	/**
+	 * @param pelota the pelota to set
+	 */
+	public void setPelota(Pelota pelota) {
+		this.pelota = pelota;
+	}
+
 	public static void main(String[] args) {
 		Arkanoid.getInstancia().game();
 	}

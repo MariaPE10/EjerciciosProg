@@ -12,8 +12,6 @@ public class Pildora extends Actor {
 	public Pildora (int x, int y) {
 		this.y = y;
 		this.x = x;
-		this.setSpriteActual(SpriteCache.getInstancia().getSprite("vida.png"));
-		System.out.println("soy una pildora");
 	}
 	
 	/**

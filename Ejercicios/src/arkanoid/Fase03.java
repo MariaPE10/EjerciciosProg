@@ -17,6 +17,10 @@ public class Fase03 extends Fase {
 	@Override
 	public void inicializaFase() {
 		this.fondo = "snorlaxFondo.jpg";
+		Arkanoid.getInstancia().soundCache.stop("HazteConTodos.wav");
+		Arkanoid.getInstancia().soundCache.stop("AdvanceBattle.wav");
+		Arkanoid.getInstancia().soundCache.loopSound("NuestroMundo.wav");
+		Arkanoid.getInstancia().musicaUsado = false;
 	    // Inicializamos los ladrillos
 		int matriz [][] = new int [][] {
 			{0,5,5,0,0,0,0,0,0,5,5,0}, //del 1 al 8 son colores de ladrillos

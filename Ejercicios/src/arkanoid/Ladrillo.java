@@ -33,24 +33,34 @@ public class Ladrillo extends Actor {
 	}
 	
 	//ladrillo irrompible
-		public Ladrillo(int x, int y, int i) {
-			super();
-			this.x = x;
-			this.y = y;
-			this.setSpriteActual(SpriteCache.getInstancia().getSprite("ladrilloEspecial2.png"));
-			this.tipo = 2;
-		}
+	public Ladrillo(int x, int y, int i) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.setSpriteActual(SpriteCache.getInstancia().getSprite("ladrilloEspecial2.png"));
+		this.tipo = 2;
+	}
 	
 	public void collision(Actor actor) {
+		double random = Math.random();
+		System.out.println(random);
 		if (actor instanceof Pelota)
 			if(tipo == LADRILLO_NORMAL) {
 				this.eliminar();
 				Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 				Explosion ex = new Explosion(this.x, this.y);
 				Arkanoid.getInstancia().getActoresAInsertar().add(ex);
-				if(Math.random() < 0.4) { //Probabilidad de 1%
-					Pildora master = new Pildora(this.x, this.y);
-					Arkanoid.getInstancia().getActoresAInsertar().add(master);
+				if(random > 0.03 && random < 0.06) { //Probabilidad de 6% pildora Vida
+					Pildora pildoraV = new PildoraVida(this.x, this.y);
+					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraV);
+				}
+				if(random > 0.1 && random < 0.2 && !Arkanoid.getInstancia().musicaUsado) { //Probabilidad de 10% a 20% pildora Musica
+					Pildora pildoraM = new PildoraMusica(this.x, this.y);
+					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraM);
+				}
+				if(random < 0.02 && !Arkanoid.getInstancia().masterUsado) { //Probabilidad de 2% pildora Master
+					Pildora pildoraMas = new PildoraMaster(this.x, this.y);
+					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraMas);
 				}
 				return;
 			}
@@ -65,12 +75,24 @@ public class Ladrillo extends Actor {
 					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 					Explosion ex = new Explosion(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
+					if(random < 0.10) { //Probabilidad de 10% pildora Rev
+						Pildora pildoraR = new PildoraRev(this.x, this.y);
+						Arkanoid.getInstancia().getActoresAInsertar().add(pildoraR);
+					}
 					return;
 				}
 			}
 			
 			if (tipo == LADRILLO_IRROMPIBLE) {
-				Arkanoid.soundCache.playSound("ladrilloOro.wav");
+				if (Arkanoid.getInstancia().getPelota().getSpriteActual() == SpriteCache.getInstancia().getSprite("master.png")) {
+					this.eliminar();
+					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
+					Explosion ex = new Explosion(this.x, this.y);
+					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
+				} else {
+					Arkanoid.soundCache.playSound("ladrilloOro.wav");
+				}
+				
 				//System.out.println("soy indestructible");
 				return;
 			}

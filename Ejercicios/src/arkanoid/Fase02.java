@@ -17,6 +17,10 @@ public class Fase02 extends Fase {
 	@Override
 	public void inicializaFase() {
 		this.fondo = "quilavaFondo.png";
+		Arkanoid.getInstancia().soundCache.stop("pokemon.wav");
+		Arkanoid.getInstancia().soundCache.stop("AdvanceBattle.wav");
+		Arkanoid.getInstancia().soundCache.loopSound("HazteConTodos.wav");
+		Arkanoid.getInstancia().musicaUsado = false;
 	    // Inicializamos los ladrillos
 		int matriz [][] = new int [][] {
 			{0,0,0,0,0,0,0,0,0,0,0,0}, //del 1 al 8 son colores de ladrillos

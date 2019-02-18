@@ -31,5 +31,14 @@ public class SoundCache extends ResourceCache{
 	   }
 	  }
 		).start();	}
+	
+	public void stop(final String name) {
+		new Thread(
+	  new Runnable() {
+	   public void run() {
+			   getAudioClip(name).stop();
+	   }
+	  }
+		).start();	}
 
 }

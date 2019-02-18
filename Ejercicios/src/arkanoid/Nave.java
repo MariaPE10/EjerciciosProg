@@ -99,9 +99,19 @@ public class Nave extends Actor {
 		Rectangle  recPildora= new Rectangle(pildora.getX(), pildora.getY(), pildora.getWidth(), pildora.getHeight());
 		
 		if (recNave.intersects(recPildora)) {
-			if (pildora instanceof Pildora) {
-				this.vidas++;
+			if (pildora instanceof PildoraVida) {
+				((PildoraVida) pildora).efecto();
 			}
+			if (pildora instanceof PildoraRev) {
+				((PildoraRev) pildora).efecto();
+			}
+			if (pildora instanceof PildoraMusica) {
+				((PildoraMusica) pildora).efecto();
+			}
+			if (pildora instanceof PildoraMaster) {
+				((PildoraMaster) pildora).efecto();
+			}
+			Arkanoid.soundCache.playSound("sonido01.wav");
 		}
 	  }
 	  
