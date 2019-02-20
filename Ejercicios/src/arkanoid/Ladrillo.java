@@ -48,17 +48,18 @@ public class Ladrillo extends Actor {
 			if(tipo == LADRILLO_NORMAL) {
 				this.eliminar();
 				Arkanoid.soundCache.playSound("ladrilloRoto.wav");
+				Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+5);
 				Explosion ex = new Explosion(this.x, this.y);
 				Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 				if(random > 0.03 && random < 0.06) { //Probabilidad de 6% pildora Vida
 					Pildora pildoraV = new PildoraVida(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraV);
 				}
-				if(random > 0.1 && random < 0.2 && !Arkanoid.getInstancia().musicaUsado) { //Probabilidad de 10% a 20% pildora Musica
+				if(random > 0.15 && random < 0.2 && !Arkanoid.getInstancia().musicaUsado) { //Probabilidad de 15% a 20% pildora Musica
 					Pildora pildoraM = new PildoraMusica(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraM);
 				}
-				if(random < 0.02 && !Arkanoid.getInstancia().masterUsado) { //Probabilidad de 2% pildora Master
+				if(random < 0.4 && !Arkanoid.getInstancia().masterUsado) { //Probabilidad de 2% pildora Master
 					Pildora pildoraMas = new PildoraMaster(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraMas);
 				}
@@ -69,13 +70,15 @@ public class Ladrillo extends Actor {
 				if (this.contador == 0) {
 					this.contador++;
 					Arkanoid.soundCache.playSound("pick.wav");
+					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+10);
 					return;
 				} else {
 					this.eliminar();
 					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
+					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+15);
 					Explosion ex = new Explosion(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
-					if(random < 0.10) { //Probabilidad de 10% pildora Rev
+					if(random < 0.30) { //Probabilidad de 10% pildora Rev
 						Pildora pildoraR = new PildoraRev(this.x, this.y);
 						Arkanoid.getInstancia().getActoresAInsertar().add(pildoraR);
 					}
@@ -87,6 +90,7 @@ public class Ladrillo extends Actor {
 				if (Arkanoid.getInstancia().getPelota().getSpriteActual() == SpriteCache.getInstancia().getSprite("master.png")) {
 					this.eliminar();
 					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
+					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+50);
 					Explosion ex = new Explosion(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 				} else {

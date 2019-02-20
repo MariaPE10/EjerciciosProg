@@ -10,7 +10,7 @@ public class Nave extends Actor {
 	protected float velocidad;
 	private boolean derecha,izquierda;
 	protected static final int VELOCIDAD_NAVE = 4;
-	protected int vidas = 3;
+	protected int vidas = 3, puntuacion;
 	
 	/**
 	 * 
@@ -20,6 +20,7 @@ public class Nave extends Actor {
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("nave.png"));
 		this.x = Arkanoid.ANCHO / 2;
 		this.y = Arkanoid.ALTO - 30;
+		this.puntuacion = 0;
 	}
 	
 	/**
@@ -117,6 +118,8 @@ public class Nave extends Actor {
 	  
 	  public int getVidas() {return vidas; }
 	  public void setVidas(int i) { vidas = i;}
+	  public int getPuntuacion() {return puntuacion; }
+	  public void setPuntuacion(int i) { puntuacion = i;}
 	  public float getVelocidad() { return velocidad; }
 	  public void setVelocidad(float i) {velocidad = i;}
 }

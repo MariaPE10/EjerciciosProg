@@ -88,7 +88,7 @@ public class Pelota extends Actor {
 				return;
 			}
 			 
-			if (y < 0) {
+			if (y < 35) {
 				this.trayectoria.reflejarHaciaAbajo(coordenadas);
 				return;
 			}
@@ -105,6 +105,7 @@ public class Pelota extends Actor {
 			}
 				reiniciaPelota();
 				Arkanoid.getInstancia().nave.setVidas(Arkanoid.getInstancia().nave.getVidas() - 1);
+				Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()-5);
 			}
 		}
 		

@@ -19,6 +19,7 @@ public class PildoraVida extends Pildora{
 	public void efecto() {
 		if (Arkanoid.getInstancia().getNave().getVidas() < 5) {
 			Arkanoid.getInstancia().getNave().setVidas(Arkanoid.getInstancia().getNave().getVidas()+1);
+			Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+10);
 		}
 	}
 

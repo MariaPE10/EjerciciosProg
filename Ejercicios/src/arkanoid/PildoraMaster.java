@@ -21,5 +21,6 @@ public class PildoraMaster extends Pildora{
 		Arkanoid.getInstancia().getPelota().listoParaEliminar = true;
 		Arkanoid.getInstancia().setPelota(new Pelota("master.png"));
 		Arkanoid.getInstancia().getActoresAInsertar().add(Arkanoid.getInstancia().getPelota());
+		Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+25);
 	}
 }

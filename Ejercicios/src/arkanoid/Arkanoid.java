@@ -211,10 +211,12 @@ public class Arkanoid extends Canvas {
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
+		g.fillRect(0, 0, ANCHO, 35);
 		g.setFont(monoFont);
 		g.setColor(Color.decode("#00bbff"));
-		g.drawImage( spriteCache.getSprite("pocion.png"), 15, ALTO-45, this);
-		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,ALTO-18);
+		g.drawImage( spriteCache.getSprite("pocion.png"), 15, 3, this);
+		g.drawString(": " + String.valueOf(nave.getVidas()) ,40,30);
+		g.drawString("Puntuación: " +  String.valueOf(nave.getPuntuacion()), ANCHO-250, 30);
 		if(!activa && !finDeJuego) {
 //			g.setColor(Color.black);
 //			g.fillRect( 0, 0, getWidth(), getHeight());

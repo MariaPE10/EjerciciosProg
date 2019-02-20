@@ -26,6 +26,7 @@ public class PildoraMusica extends Pildora{
 		Arkanoid.getInstancia().soundCache.stop("HazteConTodos.wav");
 		Arkanoid.getInstancia().soundCache.stop("NuestroMundo.wav");
 		Arkanoid.getInstancia().soundCache.loopSound("AdvanceBattle.wav");
+		Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+20);
 		
 	}
 
