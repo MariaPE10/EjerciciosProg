@@ -1,4 +1,4 @@
-package ejercicios.listeners;
+package ejercicios.capitulo6.listeners;
 
 public class Maria extends PalabraSecretaAdapter{
 

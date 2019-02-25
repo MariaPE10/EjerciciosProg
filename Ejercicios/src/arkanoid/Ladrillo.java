@@ -3,12 +3,6 @@ package arkanoid;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
-import ejercicios.listeners.Maria;
-import ejercicios.listeners.PalabraSecretaEvent;
-import ejercicios.listeners.PalabraSecretaListener;
-
 public class Ladrillo extends Actor {
 	public static final int ANCHO = 48;
 	public static final int ALTO = 24;
@@ -78,7 +72,7 @@ public class Ladrillo extends Actor {
 				ExplosionEvent event = new ExplosionEvent(new Explosion(this.x, this.y));
 				fireExplosionListener(event);
 				Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+5);
-				if(random > 0.03 && random < 0.06) { //Probabilidad de 6% pildora Vida
+				if(random > 0.06 && random < 0.06) { //Probabilidad de 6% pildora Vida
 					Pildora pildoraV = new PildoraVida(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraV);
 				}
@@ -86,7 +80,7 @@ public class Ladrillo extends Actor {
 					Pildora pildoraM = new PildoraMusica(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraM);
 				}
-				if(random < 0.4 && !Arkanoid.getInstancia().masterUsado) { //Probabilidad de 2% pildora Master
+				if(random < 0.02 && !Arkanoid.getInstancia().masterUsado) { //Probabilidad de 2% pildora Master
 					Pildora pildoraMas = new PildoraMaster(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraMas);
 				}
@@ -104,7 +98,7 @@ public class Ladrillo extends Actor {
 					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+15);
 					ExplosionEvent event = new ExplosionEvent(new Explosion(this.x, this.y));
 					fireExplosionListener(event);
-					if(random < 0.30) { //Probabilidad de 10% pildora Rev
+					if(random < 0.10) { //Probabilidad de 10% pildora Rev
 						Pildora pildoraR = new PildoraRev(this.x, this.y);
 						Arkanoid.getInstancia().getActoresAInsertar().add(pildoraR);
 					}

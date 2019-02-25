@@ -229,17 +229,17 @@ public class Pelota extends Actor {
 		
 		if (derecha) {
 			modificaTrayectoria(-0.3f, -1, true);
-			System.out.println("derecha");
+			
 			return;
 		}
 		if (izquierda) {
 			modificaTrayectoria(0.3f, 1, false);
-			System.out.println("izq");
+			
 			return;
 		}
 		if (centro) {
 			this.trayectoria.reflejarHaciaArriba(coordenadas);
-			System.out.println("Centro");
+			
 			return;
 		}
 		
