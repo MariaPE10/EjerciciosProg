@@ -1,11 +1,3 @@
-/**
- * Curso B�sico de desarrollo de Juegos en Java - Invaders
- * 
- * (c) 2004 Planetalia S.L. - Todos los derechos reservados. Prohibida su reproducci�n
- * 
- * http://www.planetalia.com
- * 
- */
 package arkanoid;
 
 import java.awt.image.BufferedImage;
@@ -19,6 +11,9 @@ public class SpriteCache {
 	private HashMap<String, BufferedImage> sprites = new HashMap<String, BufferedImage>();
 	private static SpriteCache instancia= null;
 	
+	/**
+	 * 
+	 */
 	public SpriteCache() {
 		sprites = new HashMap();
 	}
@@ -34,6 +29,11 @@ public class SpriteCache {
 		return instancia;
 	}
 	
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
 	private BufferedImage cargarImagen(String nombre) {
 		URL url=null;
 		try {
@@ -47,6 +47,11 @@ public class SpriteCache {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param nombre
+	 * @return
+	 */
 	public BufferedImage getSprite(String nombre) {
 		BufferedImage img = (BufferedImage)sprites.get(nombre);
 		if (img == null) {

@@ -10,7 +10,6 @@ public class PildoraMaster extends Pildora{
 	public PildoraMaster(int x, int y) {
 		super(x, y);
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("pildora01.png"));
-		System.out.println("soy una pildora Master");
 	}
 
 	/**

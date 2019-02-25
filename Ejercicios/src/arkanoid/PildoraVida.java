@@ -10,7 +10,6 @@ public class PildoraVida extends Pildora{
 	public PildoraVida(int x, int y) {
 		super(x, y);
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("vida.png"));
-		System.out.println("soy una pildoraVida");
 	}
 	
 	/**

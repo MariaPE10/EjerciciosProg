@@ -309,10 +309,13 @@ public class Arkanoid extends Canvas {
 		}
 	}
 	
-	
-	// Getters
+	/**
+	 * Getters
+	 * @return
+	 */
 	public Nave getNave() { return nave; }
 	public Pelota getPelota() { return pelota; }
+	
 	/**
 	 * @param pelota the pelota to set
 	 */
@@ -320,6 +323,10 @@ public class Arkanoid extends Canvas {
 		this.pelota = pelota;
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Arkanoid.getInstancia().game();
 	}

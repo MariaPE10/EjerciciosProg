@@ -13,6 +13,7 @@ public abstract class Fase {
 	// Lista de actores a colocar en cualquier fase
 	protected List<Actor> actores = new ArrayList<Actor>();
 	protected String fondo = "pikachuFondo.jpg";
+	
 	/**
 	 * @return the fondo
 	 */
@@ -20,9 +21,14 @@ public abstract class Fase {
 		return fondo;
 	}
 
-	// M�todo que debe implementar cada Fase
+	/**
+	 * Metodo que debe implementar cada Fase
+	 */
 	public abstract void inicializaFase ();
 
-	// Getter de la lista de actores
+	/**
+	 * Getter de la lista de actores
+	 * @return
+	 */
 	public List<Actor> getActores() { return actores; }
 }

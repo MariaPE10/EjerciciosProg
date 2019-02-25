@@ -112,22 +112,37 @@ public class TrayectoriaRecta {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void reflejarHaciaAbajo (PuntoAltaPrecision p) {
 		this.setPendiente(-this.m, p);
 		this.direccionCreciente = (this.m < 0)? false : true;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void reflejarHaciaArriba (PuntoAltaPrecision p) {
 		this.setPendiente(-this.m, p);
 		this.direccionCreciente = (this.m < 0)? true : false;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void reflejarHaciaDerecha (PuntoAltaPrecision p) {
 		this.setPendiente(-this.m, p);
 		this.direccionCreciente = true;
 	}
 	
+	/**
+	 * 
+	 * @param p
+	 */
 	public void reflejarHaciaIzquierda (PuntoAltaPrecision p) {
 		this.setPendiente(-this.m, p);
 		this.direccionCreciente = false;

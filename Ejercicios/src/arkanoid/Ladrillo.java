@@ -1,5 +1,14 @@
 package arkanoid;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import ejercicios.listeners.Maria;
+import ejercicios.listeners.PalabraSecretaEvent;
+import ejercicios.listeners.PalabraSecretaListener;
+
 public class Ladrillo extends Actor {
 	public static final int ANCHO = 48;
 	public static final int ALTO = 24;
@@ -12,7 +21,15 @@ public class Ladrillo extends Actor {
 	private int contador = 0;
 	public int tipo;
 	
-	//ladrillo normal
+	static List<ExplosionListener> explosionListener = new ArrayList<ExplosionListener>();
+	
+	/**
+	 * ladrillo normal
+	 * @param x
+	 * @param y
+	 * @param i
+	 * @param tipo
+	 */
 	public Ladrillo(int x, int y, int i, int tipo) {
 		super();
 		this.x = x;
@@ -22,8 +39,11 @@ public class Ladrillo extends Actor {
 		//this.ancho = this.spriteActual.getWidth();else 
 		//this.alto = this.spriteActual.getHeight();
 	}
-	
-	//ladrillo 2 toques
+	/**
+	 * ladrillo 2 toques
+	 * @param x
+	 * @param y
+	 */
 	public Ladrillo(int x, int y) {
 		super();
 		this.x = x;
@@ -32,7 +52,12 @@ public class Ladrillo extends Actor {
 		this.tipo = 1;
 	}
 	
-	//ladrillo irrompible
+	/**
+	 * ladrillo irrompible
+	 * @param x
+	 * @param y
+	 * @param i
+	 */
 	public Ladrillo(int x, int y, int i) {
 		super();
 		this.x = x;
@@ -41,16 +66,18 @@ public class Ladrillo extends Actor {
 		this.tipo = 2;
 	}
 	
+	/**
+	 * 
+	 */
 	public void collision(Actor actor) {
+		addExplosionListener(new ControladorExplosion());
 		double random = Math.random();
-		System.out.println(random);
 		if (actor instanceof Pelota)
 			if(tipo == LADRILLO_NORMAL) {
 				this.eliminar();
-				Arkanoid.soundCache.playSound("ladrilloRoto.wav");
+				ExplosionEvent event = new ExplosionEvent(new Explosion(this.x, this.y));
+				fireExplosionListener(event);
 				Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+5);
-				Explosion ex = new Explosion(this.x, this.y);
-				Arkanoid.getInstancia().getActoresAInsertar().add(ex);
 				if(random > 0.03 && random < 0.06) { //Probabilidad de 6% pildora Vida
 					Pildora pildoraV = new PildoraVida(this.x, this.y);
 					Arkanoid.getInstancia().getActoresAInsertar().add(pildoraV);
@@ -74,10 +101,9 @@ public class Ladrillo extends Actor {
 					return;
 				} else {
 					this.eliminar();
-					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+15);
-					Explosion ex = new Explosion(this.x, this.y);
-					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
+					ExplosionEvent event = new ExplosionEvent(new Explosion(this.x, this.y));
+					fireExplosionListener(event);
 					if(random < 0.30) { //Probabilidad de 10% pildora Rev
 						Pildora pildoraR = new PildoraRev(this.x, this.y);
 						Arkanoid.getInstancia().getActoresAInsertar().add(pildoraR);
@@ -89,10 +115,9 @@ public class Ladrillo extends Actor {
 			if (tipo == LADRILLO_IRROMPIBLE) {
 				if (Arkanoid.getInstancia().getPelota().getSpriteActual() == SpriteCache.getInstancia().getSprite("master.png")) {
 					this.eliminar();
-					Arkanoid.soundCache.playSound("ladrilloRoto.wav");
 					Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+50);
-					Explosion ex = new Explosion(this.x, this.y);
-					Arkanoid.getInstancia().getActoresAInsertar().add(ex);
+					ExplosionEvent event = new ExplosionEvent(new Explosion(this.x, this.y));
+					fireExplosionListener(event);
 				} else {
 					Arkanoid.soundCache.playSound("ladrilloOro.wav");
 				}
@@ -103,6 +128,11 @@ public class Ladrillo extends Actor {
 			
 	}
 	
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public String escogeColor(int i) {
 		if (i == 1) {
 			return "ladrilloRosa.png";
@@ -126,5 +156,31 @@ public class Ladrillo extends Actor {
 			return "ladrilloVerde.png";
 		} 
 		return "ladrilloBlanco.png";
+	}
+	
+	/**
+	 * 
+	 * @param listener
+	 */
+	public static void addExplosionListener(ExplosionListener listener) {
+		explosionListener.add(listener);
+	}
+	
+	/**
+	 * 
+	 * @param listener
+	 */
+	public static void removeExplosionListener(ExplosionListener listener) {
+		explosionListener.remove(listener);
+	}
+	
+	/**
+	 * 
+	 * @param e
+	 */
+	public static void fireExplosionListener (ExplosionEvent e) {
+		for (ExplosionListener listener : explosionListener) {
+			listener.explosionProducida(e);
+		}
 	}
 }

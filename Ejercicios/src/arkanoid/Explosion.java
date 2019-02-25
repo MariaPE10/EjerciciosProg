@@ -4,6 +4,11 @@ import java.awt.Graphics2D;
 
 public class Explosion extends Actor {
 
+	/**
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Explosion(int x, int y) {
 		super();
 		this.y = y;
@@ -25,6 +30,9 @@ public class Explosion extends Actor {
 		this.spriteActual = this.spriteNames.get(0);
 	}
 
+	/**
+	 * 
+	 */
 	public void actua() {
 		super.actua();
 		if(this.spriteActual.equals(spriteNames.get(spriteNames.size()-1))) {

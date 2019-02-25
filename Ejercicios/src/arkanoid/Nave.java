@@ -116,6 +116,10 @@ public class Nave extends Actor {
 		}
 	  }
 	  
+	 /**
+	  * Getters y Setters
+	  * @return
+	  */
 	  public int getVidas() {return vidas; }
 	  public void setVidas(int i) { vidas = i;}
 	  public int getPuntuacion() {return puntuacion; }

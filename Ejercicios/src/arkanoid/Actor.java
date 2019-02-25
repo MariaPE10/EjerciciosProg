@@ -119,8 +119,15 @@ public class Actor {
 			return new Rectangle(x,y,ancho,alto);
 		}
 		
+		/**
+		 * 
+		 * @param actor
+		 */
 		public void collision(Actor actor) { }
 		
+		/**
+		 * 
+		 */
 		public void actua() {
 			t++;
 			if (this.spriteNames != null && t % frameSpeed == 0){

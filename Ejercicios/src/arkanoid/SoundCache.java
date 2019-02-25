@@ -9,10 +9,20 @@ public class SoundCache extends ResourceCache{
 		return Applet.newAudioClip(url);
 		
 	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public AudioClip getAudioClip(String name) {
 	  return (AudioClip)getResource(name);	
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 */
 	public void playSound(final String name) {
 		 new Thread(
        new Runnable() {
@@ -23,6 +33,10 @@ public class SoundCache extends ResourceCache{
 		 ).start();
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 */
 	public void loopSound(final String name) {
 		new Thread(
 	  new Runnable() {
@@ -32,6 +46,10 @@ public class SoundCache extends ResourceCache{
 	  }
 		).start();	}
 	
+	/**
+	 * 
+	 * @param name
+	 */
 	public void stop(final String name) {
 		new Thread(
 	  new Runnable() {

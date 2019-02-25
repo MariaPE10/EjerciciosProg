@@ -6,16 +6,29 @@ import java.util.HashMap;
 public abstract class ResourceCache {
 	protected HashMap resources;
 	
+	/**
+	 * 
+	 */
 	public ResourceCache() {
 	  resources = new HashMap();
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	protected Object loadResource(String name) {
 		URL url=null;
 		url = getClass().getClassLoader().getResource(name);
 		return loadResource(url);
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	protected Object getResource(String name) {
 		Object res = resources.get(name);
 		if (res == null) {
@@ -25,6 +38,11 @@ public abstract class ResourceCache {
 		return res;
 	}
 	
+	/**
+	 * 
+	 * @param url
+	 * @return
+	 */
 	protected abstract Object loadResource(URL url);
 
 }

@@ -2,7 +2,6 @@ package arkanoid;
 
 public class PildoraMusica extends Pildora{
 
-	public long millisDesdeImpacto;
 
 	/**
 	 * 
@@ -12,8 +11,6 @@ public class PildoraMusica extends Pildora{
 	public PildoraMusica(int x, int y) {
 		super(x, y);
 		this.setSpriteActual(SpriteCache.getInstancia().getSprite("Advance.png"));
-		System.out.println("soy una pildoraMusica");
-		millisDesdeImpacto = System.currentTimeMillis();
 	}
 	
 	/**
@@ -29,10 +26,4 @@ public class PildoraMusica extends Pildora{
 		Arkanoid.getInstancia().getNave().setPuntuacion(Arkanoid.getInstancia().getNave().getPuntuacion()+20);
 		
 	}
-
-//	public void isTerminado() {
-//		if (this.millisDesdeImpacto > 60000) {
-//			Arkanoid.getInstancia().soundCache.loopSound("pokemon.wav");
-//		}
-//	}
 }
