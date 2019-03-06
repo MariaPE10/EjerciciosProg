@@ -1,8 +1,6 @@
 package examenMvS;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.JOptionPane;
 
 public class Main {
 	
@@ -29,6 +27,7 @@ public class Main {
 	public void iniciaJuego() {
 		personajes[0] = new Ahri(1, "Ahri", 500, 20);
 		personajes[1] = new Akali(2, "Akali", 600, 15);
+		JOptionPane.showMessageDialog(null, "Pelea: " + personajes[0].getNombre() + " vs " + personajes[1].getNombre(), "Ahri vs Akali", 1);
 		System.out.println("Pelea: " + personajes[0].getNombre() + " vs " + personajes[1].getNombre());
 		int random = ((int) Math.round(Math.random()));
 		if (random == 1) {
