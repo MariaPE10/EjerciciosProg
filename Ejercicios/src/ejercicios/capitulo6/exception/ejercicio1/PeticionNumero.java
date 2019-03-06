@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class PeticionNumero {
 
-	public static int pedirNumeroPar() throws NumeroImparException{
+	public static int pedirNumeroPar() throws NumeroImparException {
 		Scanner sc = new Scanner(System.in);
 		
 		int numUsuario = sc.nextInt();
