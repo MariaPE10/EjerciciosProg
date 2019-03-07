@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
     - La frase introducida no tiene caracteres distintos al espacio en blanco.
     - La cantidad de palabras de la frase introducida es inferior a 3.
     - En la frase no aparece la palabra "bombilla".
-    - En la frase aparece una palabra ofensiva de la siguiente relación: "tonto", "tonta", "idiota".
-   Cada uno de los supuestos anteriores provocará un tipo diferente de excepción. Tú debes controlar todos los tipos y responder al usuario con un	mensaje adecuado.*/
-public class peticionFrase {
+    - En la frase aparece una palabra ofensiva de la siguiente relaciï¿½n: "tonto", "tonta", "idiota".
+   Cada uno de los supuestos anteriores provocarï¿½ un tipo diferente de excepciï¿½n. Tï¿½ debes controlar todos los tipos y responder al usuario con un	mensaje adecuado.*/
+public class PeticionFrase {
 
 	public static String pedirFraseBombilla() throws EspacioBlancoException, MenosDeTresPalabrasException, NoApareceBombillaException, PalabraOfensivaException {
 		String fraseUsuario = JOptionPane.showInputDialog("Introduzca una frase");
