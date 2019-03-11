@@ -5,11 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class EjemploFicheroPropiedades {
+/* Ejercicio 1: Crea un programa en Java que utilice un fichero de propiedades 
+ * para leer un nombre de usuario ficticio y su correspondiente contraseña.
+ */
+public class EjercicioProperties {
 
 	private static Properties propiedades = null;
 
-	public EjemploFicheroPropiedades () {
+	public EjercicioProperties () {
 		super();
 	}
 	
@@ -69,9 +72,9 @@ public class EjemploFicheroPropiedades {
 	 * @param args
 	 */
 	public static void main (String args[]) {
-		String usuario = EjemploFicheroPropiedades.getProperty("USUARIO");
-		String password = EjemploFicheroPropiedades.getProperty("PASSWORD");
-		int id = EjemploFicheroPropiedades.getIntProperty("ID_USUARIO");
+		String usuario = EjercicioProperties.getProperty("USUARIO");
+		String password = EjercicioProperties.getProperty("PASSWORD");
+		int id = EjercicioProperties.getIntProperty("ID_USUARIO");
 		
 		System.out.println("Usuario leido del fichero de propiedades: " + usuario);
 		System.out.println("Password leido del fichero de propiedades: " + password);

@@ -20,9 +20,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import ejercicios.capitulo6.EjercicioProperties;
 
 
 public class Arkanoid extends Canvas {
@@ -207,7 +210,8 @@ public class Arkanoid extends Canvas {
 	public void paintWorld() {
 		Toolkit.getDefaultToolkit().sync();
 		Graphics2D g = (Graphics2D)strategy.getDrawGraphics();
-		g.drawImage( spriteCache.getSprite(this.faseActiva.getFondo()), 0, 0, this);
+		//g.drawImage( spriteCache.getSprite(this.faseActiva.getFondo()), 0, 0, this);
+		g.drawImage( spriteCache.getSprite(EjercicioProperties.getProperty("IMAGEN")), 0, 0, this);
 		for (Actor actor : actores) {
 			actor.paint(g);
 		}
