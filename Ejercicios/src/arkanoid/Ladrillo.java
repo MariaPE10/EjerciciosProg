@@ -64,7 +64,6 @@ public class Ladrillo extends Actor {
 	 * 
 	 */
 	public void collision(Actor actor) {
-		addExplosionListener(new ControladorExplosion());
 		double random = Math.random();
 		if (actor instanceof Pelota)
 			if(tipo == LADRILLO_NORMAL) {

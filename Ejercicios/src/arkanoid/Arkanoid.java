@@ -332,6 +332,8 @@ public class Arkanoid extends Canvas {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Ladrillo.addExplosionListener(new ControladorExplosion());
 		Arkanoid.getInstancia().game();
+		
 	}
 }
