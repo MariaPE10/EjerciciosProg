@@ -18,22 +18,22 @@ public class Main {
 	/**
 	 * 
 	 */
-	public static void pidePalabra () {
+	private static void pidePalabra () {
 		String palabra;
 		
 		do {
-			int contador = 0;
+			List<Integer> digitosEncontrados = new ArrayList<Integer>();
 			palabra = JOptionPane.showInputDialog("Introduzca una palabra");
 
 			for (int i = 0; i < palabra.length(); i++){
 			    char letra = palabra.charAt(i);
 			    if(Character.isDigit(letra)) {
-			    	contador++;
+			    	digitosEncontrados.add(Character.getNumericValue(letra));
 			    }
 			}
 			
-			if (contador >= 3) {
-				DigitoEncontradoEvent event = new DigitoEncontradoEvent(palabra);
+			if (digitosEncontrados.size() > 2) {
+				DigitoEncontradoEvent event = new DigitoEncontradoEvent(palabra, digitosEncontrados);
 				fireDigitoEncontradoListener(event);
 			}
 			
@@ -69,7 +69,7 @@ public class Main {
 	 * 
 	 * @param event
 	 */
-	public static void fireDigitoEncontradoListener(DigitoEncontradoEvent event) {
+	private static void fireDigitoEncontradoListener(DigitoEncontradoEvent event) {
 		for(DigitoEncontradoListener listener : listeners) {
 			listener.digitoEncontradoListener(event);
 		}
