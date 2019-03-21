@@ -1,10 +1,10 @@
-package MySQL.ciclistas;
+package MySQL.properties;
 
 import java.sql.SQLException;
 
 import com.mysql.jdbc.Connection;
 
-import MySQL.properties.JDBCPropiedades;
+import MySQL.ciclistas.ImposibleConectarException;
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
 

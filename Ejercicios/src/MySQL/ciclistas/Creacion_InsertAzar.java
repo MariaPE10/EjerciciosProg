@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import com.mysql.jdbc.Statement;
 
+import MySQL.properties.ConnectionManagerV2;
+
 public class Creacion_InsertAzar {
 
 	private static String tablas[] = new String[] {"etapa", "ciclista"};

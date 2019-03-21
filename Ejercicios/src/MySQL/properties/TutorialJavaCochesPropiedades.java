@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class JDBCPropiedades {
+public class TutorialJavaCochesPropiedades {
 
 	private static Properties propiedades = null;
 
-	public JDBCPropiedades () {
+	public TutorialJavaCochesPropiedades () {
 		super();
 	}
 	
@@ -22,7 +22,7 @@ public class JDBCPropiedades {
 			propiedades = new Properties();
 		    
 			try {
-				propiedades.load(propiedades.getClass().getResourceAsStream("/MySQL/properties/ciclistas.properties"));
+				propiedades.load(propiedades.getClass().getResourceAsStream("/MySQL/properties/tutorialjavacoches.properties"));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
