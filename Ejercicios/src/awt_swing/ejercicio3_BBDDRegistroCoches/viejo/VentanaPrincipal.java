@@ -1,4 +1,4 @@
-package awt_swing.ejercicio3_BBDDRegistroCoches;
+package awt_swing.ejercicio3_BBDDRegistroCoches.viejo;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -40,9 +40,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import awt_swing.ejercicio3_BBDDRegistroCoches.utils.Apariencia;
-
-
+import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.Apariencia;
 
 public class VentanaPrincipal extends JFrame {
 

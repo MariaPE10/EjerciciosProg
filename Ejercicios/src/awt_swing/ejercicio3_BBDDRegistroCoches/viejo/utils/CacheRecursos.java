@@ -1,4 +1,4 @@
-package awt_swing.ejercicio3_BBDDRegistroCoches.utils;
+package awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public abstract class CacheRecursos {
 	protected Object getResource(String name) {
 		Object res = resources.get(name);
 		if (res == null) {
-			res = loadResource("tutorialJava/capitulo8_AWT_SWING/res/" + name);
+			res = loadResource("imagenes/botones/" + name);
 			resources.put (name,res);
 		}
 		return res;

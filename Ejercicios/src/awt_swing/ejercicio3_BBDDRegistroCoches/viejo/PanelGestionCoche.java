@@ -1,4 +1,4 @@
-package awt_swing.ejercicio3_BBDDRegistroCoches;
+package awt_swing.ejercicio3_BBDDRegistroCoches.viejo;
 
 import java.awt.Component;
 import java.awt.FlowLayout;
@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import awt_swing.ejercicio3_BBDDRegistroCoches.utils.CacheImagenes;
+import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.CacheImagenes;
 
 public class PanelGestionCoche extends JPanel {
 
@@ -86,7 +86,7 @@ public class PanelGestionCoche extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 		
-		
+		configuraBoton(btnAnterior, "gotostart.png");
 		
 		panel.add(btnAnterior);
 		panel.add(btnPrimero);

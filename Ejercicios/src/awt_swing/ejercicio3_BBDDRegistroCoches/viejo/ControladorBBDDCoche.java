@@ -1,4 +1,4 @@
-package awt_swing.ejercicio3_BBDDRegistroCoches;
+package awt_swing.ejercicio3_BBDDRegistroCoches.viejo;
 
 public class ControladorBBDDCoche {
 
