@@ -9,22 +9,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDFabricante;
-import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Fabricante;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDCliente;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Cliente;
 import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.*;
 
-public class PanelGestionFabricante extends JPanel {
+public class PanelGestionCliente extends JPanel {
 
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	JTextField jtfId = new JTextField();
-	JTextField jtfCif = new JTextField();
 	JTextField jtfNombre = new JTextField();
+	JTextField jtfApellidos = new JTextField();
+	JTextField jtfLocalidad = new JTextField();
+	JTextField jtfDni = new JTextField();
+	JTextField jtfFechaNac = new JTextField();
 	
 	JButton jbtNavPrimero = new JButton();
 	JButton jbtNavUltimo = new JButton();
@@ -34,12 +42,15 @@ public class PanelGestionFabricante extends JPanel {
 	JButton jbtNuevo = new JButton();
 	JButton jbtEliminar = new JButton();
 	
-	Fabricante fabricante = new Fabricante(); // Coche mostrado en pantalla
+	Cliente cliente = new Cliente(); // Coche mostrado en pantalla
+	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private Date fechaParseada = null;
 	
 	/**
 	 * 
 	 */
-	public PanelGestionFabricante () {
+	public PanelGestionCliente () {
 		
 		this.maquetarVentana();
 		
@@ -59,12 +70,12 @@ public class PanelGestionFabricante extends JPanel {
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				if (e.getUnitsToScroll() < 0) {
-					if (ControladorBBDDFabricante.getSiguienteFabricante(fabricante) != null) {
+					if (ControladorBBDDCliente.getSiguienteCliente(cliente) != null) {
 						navegaASiguiente();
 					}
 				}
 				else {
-					if (ControladorBBDDFabricante.getAnteriorFabricante(fabricante) != null) {
+					if (ControladorBBDDCliente.getAnteriorCliente(cliente) != null) {
 						navegaAAnterior();
 					}
 				}
@@ -89,22 +100,43 @@ public class PanelGestionFabricante extends JPanel {
 		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfId, gridBagConstraints);
 		
-		// Incorporamos el Cif
-		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Cif:"), gridBagConstraints);
-		
-		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfCif, gridBagConstraints);
-		
 		// Incorporamos el Nombre
-		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
 		this.add(new JLabel("Nombre:"), gridBagConstraints);
 		
-		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 		this.add(jtfNombre, gridBagConstraints);
 		
+		// Incorporamos el Apellidos
+		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Apellidos:"), gridBagConstraints);
+		
+		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfApellidos, gridBagConstraints);
+		
+		// Incorporamos el Localidad
+		colocaComponente(0, 3, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Localidad:"), gridBagConstraints);
+		
+		colocaComponente(1, 3, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfLocalidad, gridBagConstraints);
+		
+		// Incorporamos el Dni
+		colocaComponente(0, 4, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Dni:"), gridBagConstraints);
+		
+		colocaComponente(1, 4, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfDni, gridBagConstraints);
+		
+		// Incorporamos el FechaNac
+		colocaComponente(0, 5, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Fecha Nacimiento:"), gridBagConstraints);
+		
+		colocaComponente(1, 5, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfFechaNac, gridBagConstraints);
+				
 		// Incorporamos fila botones
-		colocaComponente(0, 3, GridBagConstraints.NORTH, 1, 1, GridBagConstraints.BOTH);
+		colocaComponente(0, 6, GridBagConstraints.NORTH, 1, 1, GridBagConstraints.BOTH);
 		gridBagConstraints.gridwidth = 2;
 		this.add(getBotonera(), gridBagConstraints);		
 	}
@@ -181,10 +213,10 @@ public class PanelGestionFabricante extends JPanel {
 	private void eliminar() {
 		// Por regla general, siempre que eliminemos un coche navegaremos al siguiente
 		// registro
-		Fabricante fabricanteAEliminar = this.fabricante;
+		Cliente clienteAEliminar = this.cliente;
 		
 		// Compruebo si el coche actual es el �ltimo coche
-		if (ControladorBBDDFabricante.getUltimoFabricante().getId() == this.fabricante.getId()) {
+		if (ControladorBBDDCliente.getUltimoCliente().getId() == this.cliente.getId()) {
 			navegaAAnterior();
 		}
 		else {
@@ -192,7 +224,7 @@ public class PanelGestionFabricante extends JPanel {
 		}
 		
 		// Finalmente elimino el coche
-		ControladorBBDDFabricante.eliminarFabricante(fabricanteAEliminar);
+		ControladorBBDDCliente.eliminarCliente(clienteAEliminar);
 		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
@@ -203,12 +235,15 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void nuevo () {
-		this.fabricante = new Fabricante();
-		this.fabricante.setId(-1);
+		this.cliente = new Cliente();
+		this.cliente.setId(-1);
 		this.jtfId.setText("" + -1);
-		this.jtfCif.setText("");
 		this.jtfNombre.setText("");
-
+		this.jtfApellidos.setText("");
+		this.jtfLocalidad.setText("");
+		this.jtfDni.setText("");
+		this.jtfFechaNac.setText("");
+		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
 	}
@@ -227,13 +262,13 @@ public class PanelGestionFabricante extends JPanel {
 	
 	private void guardar() {
 		// Es un alta nueva o una modificaci�n
-		cargaFabricanteDesdeComponentesVisuales();
-		if (this.fabricante.getId() == -1) { // Alta
-			ControladorBBDDFabricante.guardarNuevoFabricante(this.fabricante);
+		cargaClienteDesdeComponentesVisuales();
+		if (this.cliente.getId() == -1) { // Alta
+			ControladorBBDDCliente.guardarNuevoCliente(this.cliente);
 			this.navegaAUltimo();
 		}
 		else { // Modificaci�n
-			ControladorBBDDFabricante.modificarFabricante(this.fabricante);
+			ControladorBBDDCliente.modificarCliente(this.cliente);
 		}
 
 		// Actualizo la botonera
@@ -245,8 +280,8 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAPrimero () {
-		fabricante = ControladorBBDDFabricante.getPrimerFabricante();
-		cargaFabricanteEnComponentesVisuales();
+		cliente = ControladorBBDDCliente.getPrimerCliente();
+		cargaClienteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -254,8 +289,8 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAUltimo () {
-		fabricante = ControladorBBDDFabricante.getUltimoFabricante();
-		cargaFabricanteEnComponentesVisuales();
+		cliente = ControladorBBDDCliente.getUltimoCliente();
+		cargaClienteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -263,8 +298,8 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaASiguiente () {
-		fabricante = ControladorBBDDFabricante.getSiguienteFabricante(this.fabricante);
-		cargaFabricanteEnComponentesVisuales();
+		cliente = ControladorBBDDCliente.getSiguienteCliente(this.cliente);
+		cargaClienteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -272,8 +307,8 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAAnterior () {
-		fabricante = ControladorBBDDFabricante.getAnteriorFabricante(this.fabricante);
-		cargaFabricanteEnComponentesVisuales();
+		cliente = ControladorBBDDCliente.getAnteriorCliente(this.cliente);
+		cargaClienteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -283,7 +318,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void actualizaEstadoBotonera () {
-		if (ControladorBBDDFabricante.getAnteriorFabricante(this.fabricante) == null) {
+		if (ControladorBBDDCliente.getAnteriorCliente(this.cliente) == null) {
 			jbtNavPrimero.setEnabled(false);
 			jbtNavAnterior.setEnabled(false);
 		}
@@ -291,7 +326,7 @@ public class PanelGestionFabricante extends JPanel {
 			jbtNavPrimero.setEnabled(true);
 			jbtNavAnterior.setEnabled(true);
 		}
-		if (ControladorBBDDFabricante.getSiguienteFabricante(this.fabricante) == null) {
+		if (ControladorBBDDCliente.getSiguienteCliente(this.cliente) == null) {
 			jbtNavSiguiente.setEnabled(false);
 			jbtNavUltimo.setEnabled(false);
 		}
@@ -304,19 +339,31 @@ public class PanelGestionFabricante extends JPanel {
 	/**
 	 * 
 	 */
-	private void cargaFabricanteEnComponentesVisuales () {
-		this.jtfId.setText("" + fabricante.getId());
-		this.jtfCif.setText(fabricante.getCif());
-		this.jtfNombre.setText(fabricante.getNombre());
+	private void cargaClienteEnComponentesVisuales () {
+		this.jtfId.setText("" + cliente.getId());
+		this.jtfNombre.setText(cliente.getNombre());
+		this.jtfApellidos.setText(cliente.getApellidos());
+		this.jtfLocalidad.setText(cliente.getLocalidad());
+		this.jtfDni.setText(cliente.getDni());
+		this.jtfFechaNac.setText(sdf.format(cliente.getFechaNacimiento()));
 				
 	}
 	
 	/**
 	 * 
 	 */
-	private void cargaFabricanteDesdeComponentesVisuales () {
-		this.fabricante.setCif(this.jtfCif.getText());
-		this.fabricante.setNombre(this.jtfNombre.getText());
+	private void cargaClienteDesdeComponentesVisuales () {
+		this.cliente.setNombre(this.jtfNombre.getText());
+		this.cliente.setApellidos(this.jtfApellidos.getText());
+		this.cliente.setLocalidad(this.jtfLocalidad.getText());
+		this.cliente.setDni(this.jtfDni.getText());
+		try {
+			fechaParseada = sdf.parse(this.jtfFechaNac.getText());
+		} catch (ParseException e) {
+			System.out.println ("Error en el parseo de la fecha");
+			e.printStackTrace();
+		}
+		this.cliente.setFechaNacimiento(fechaParseada);
 	}
 	
 	/**

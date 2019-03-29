@@ -7,24 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Fabricante;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Concesionario;
 
-public class ControladorBBDDFabricante {
+public class ControladorBBDDConcesionario {
 
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static List<Fabricante> getTodosFabricantes () {
-		List<Fabricante> resultado = new ArrayList<Fabricante>();
+	public static List<Concesionario> getTodosFabricantes () {
+		List<Concesionario> resultado = new ArrayList<Concesionario>();
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by nombre");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.concesionario order by nombre");
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				resultado.add(getFabricanteFromResultSet(rs));
+				resultado.add(getConcesionarioFromResultSet(rs));
 			}
 			rs.close();
 			ps.close();
@@ -42,34 +42,35 @@ public class ControladorBBDDFabricante {
 	 * @param rs
 	 * @return
 	 */
-	private static Fabricante getFabricanteFromResultSet (ResultSet rs) {
-		Fabricante fabricante = new Fabricante();
+	private static Concesionario getConcesionarioFromResultSet (ResultSet rs) {
+		Concesionario concesionario = new Concesionario();
 		
 		try {
-			fabricante.setId(rs.getInt("id"));
-			fabricante.setCif(rs.getString("cif"));
-			fabricante.setNombre(rs.getString("nombre"));
+			concesionario.setId(rs.getInt("id"));
+			concesionario.setCif(rs.getString("cif"));
+			concesionario.setNombre(rs.getString("nombre"));
+			concesionario.setLocalidad(rs.getString("localidad"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return concesionario;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getPrimerFabricante () {
-		Fabricante fabricante = null;
+	public static Concesionario getPrimerConcesionario () {
+		Concesionario concesionario = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by id limit 1");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.concesionario order by id limit 1");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricante = getFabricanteFromResultSet(rs);		
+				concesionario = getConcesionarioFromResultSet(rs);		
 			}
 			rs.close();
 			ps.close();
@@ -79,22 +80,22 @@ public class ControladorBBDDFabricante {
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return concesionario;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getUltimoFabricante () {
-		Fabricante fabricante = null;
+	public static Concesionario getUltimoConcesionario () {
+		Concesionario concesionario = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante order by id desc limit 1");
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.concesionario order by id desc limit 1");
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricante = getFabricanteFromResultSet(rs);		
+				concesionario = getConcesionarioFromResultSet(rs);		
 			}
 			rs.close();
 			ps.close();
@@ -104,23 +105,23 @@ public class ControladorBBDDFabricante {
 			e.printStackTrace();
 		}
 		
-		return fabricante;
+		return concesionario;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getSiguienteFabricante (Fabricante fabricanteActual) {
-		Fabricante fabricanteResultado = null;
+	public static Concesionario getSiguienteConcesionario (Concesionario concesionarioActual) {
+		Concesionario concesionarioResultado = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante where id > ? order by id limit 1");
-			ps.setInt(1, fabricanteActual.getId());
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.concesionario where id > ? order by id limit 1");
+			ps.setInt(1, concesionarioActual.getId());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricanteResultado = getFabricanteFromResultSet(rs);		
+				concesionarioResultado = getConcesionarioFromResultSet(rs);		
 			}
 			rs.close();
 			ps.close();
@@ -130,23 +131,23 @@ public class ControladorBBDDFabricante {
 			e.printStackTrace();
 		}
 		
-		return fabricanteResultado;
+		return concesionarioResultado;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static Fabricante getAnteriorFabricante (Fabricante fabricanteActual) {
-		Fabricante fabricanteResultado = null;
+	public static Concesionario getAnteriorConcesionario (Concesionario concesionarioActual) {
+		Concesionario concesionarioResultado = null;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
-			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.fabricante where id < ? order by id desc limit 1");
-			ps.setInt(1, fabricanteActual.getId());
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.concesionario where id < ? order by id desc limit 1");
+			ps.setInt(1, concesionarioActual.getId());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				fabricanteResultado = getFabricanteFromResultSet(rs);		
+				concesionarioResultado = getConcesionarioFromResultSet(rs);		
 			}
 			rs.close();
 			ps.close();
@@ -156,21 +157,21 @@ public class ControladorBBDDFabricante {
 			e.printStackTrace();
 		}
 		
-		return fabricanteResultado;
+		return concesionarioResultado;
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public static boolean eliminarFabricante (Fabricante fabricante) {
+	public static boolean eliminarConcesionario (Concesionario concesionario) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "DELETE FROM tutorialjavacoches.fabricante where id = ?");
-			ps.setInt(1, fabricante.getId());
+					+ "DELETE FROM tutorialjavacoches.concesionario where id = ?");
+			ps.setInt(1, concesionario.getId());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
@@ -190,16 +191,17 @@ public class ControladorBBDDFabricante {
 	 * 
 	 * @return
 	 */
-	public static boolean guardarNuevoFabricante (Fabricante fabricante) {
+	public static boolean guardarNuevoConcesionario (Concesionario concesionario) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "INSERT INTO tutorialjavacoches.fabricante values (?, ?, ?)");
-			ps.setInt(1, getUltimoFabricante().getId() + 1);
-			ps.setString(2, fabricante.getCif());
-			ps.setString(3, fabricante.getNombre());
+					+ "INSERT INTO tutorialjavacoches.concesionario values (?, ?, ?, ?)");
+			ps.setInt(1, getUltimoConcesionario().getId() + 1);
+			ps.setString(2, concesionario.getCif());
+			ps.setString(3, concesionario.getNombre());
+			ps.setString(4, concesionario.getLocalidad());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
@@ -219,16 +221,17 @@ public class ControladorBBDDFabricante {
 	 * 
 	 * @return
 	 */
-	public static boolean modificarFabricante (Fabricante fabricante) {
+	public static boolean modificarConcesionario (Concesionario concesionario) {
 		boolean resultado = true;
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();
 			
 			PreparedStatement ps = conn.prepareStatement(""
-					+ "UPDATE tutorialjavacoches.fabricante SET cif = ?, nombre = ? where id = ?");
-			ps.setString(1, fabricante.getCif());
-			ps.setString(2, fabricante.getNombre());
-			ps.setInt(3, fabricante.getId());
+					+ "UPDATE tutorialjavacoches.concesionario SET cif = ?, nombre = ?, localidad = ? where id = ?");
+			ps.setString(1, concesionario.getCif());
+			ps.setString(2, concesionario.getNombre());
+			ps.setString(3, concesionario.getLocalidad());
+			ps.setInt(4, concesionario.getId());
 			int registrosAfectados = ps.executeUpdate();
 			if (registrosAfectados != 1) {
 				resultado = false;		
