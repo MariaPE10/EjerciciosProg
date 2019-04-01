@@ -15,7 +15,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDCoche;
 import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDFabricante;
@@ -26,11 +30,14 @@ import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.*;
 public class PanelGestionCoche extends JPanel {
 
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
-	JTextField jtfId = new JTextField();
+	//JTextField jtfId = new JTextField();
+	private int id;
 	JComboBox<Fabricante> jcbFabricante = new JComboBox<Fabricante>();
 	JTextField jtfBastidor = new JTextField();
 	JTextField jtfModelo = new JTextField();
 	JTextField jtfColor = new JTextField();
+	JPanel panelBotones;
+	
 	JButton jbtNavPrimero = new JButton();
 	JButton jbtNavUltimo = new JButton();
 	JButton jbtNavAnterior = new JButton();
@@ -88,11 +95,11 @@ public class PanelGestionCoche extends JPanel {
 		gridBagConstraints.insets = new Insets(5, 5, 5, 5);
 
 		// Incorporamos los components del Id
-		colocaComponente(0, 0, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Id:"), gridBagConstraints);
+//		colocaComponente(0, 0, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+//		this.add(new JLabel("Id:"), gridBagConstraints);
 		
-		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfId, gridBagConstraints);
+//		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+//		this.add(jtfId, gridBagConstraints);
 		
 		// Incorporamos el fabricante
 		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
@@ -126,7 +133,8 @@ public class PanelGestionCoche extends JPanel {
 		// Incorporamos fila botones
 		colocaComponente(0, 5, GridBagConstraints.NORTH, 1, 1, GridBagConstraints.BOTH);
 		gridBagConstraints.gridwidth = 2;
-		this.add(getBotonera(), gridBagConstraints);		
+		this.add(getBotonera(), gridBagConstraints);
+		
 	}
 	
 	
@@ -144,10 +152,10 @@ public class PanelGestionCoche extends JPanel {
 	 * 
 	 */
 	private JPanel getBotonera() {
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
+		panelBotones = new JPanel();
+		panelBotones.setLayout(new FlowLayout());
 		
-		panel.setBackground(Color.yellow);
+		panelBotones.setBackground(Color.white);
 		
 		// Configuramos los botones
 		configuraBoton(jbtNavPrimero, "gotostart.png", new ActionListener() {
@@ -194,17 +202,17 @@ public class PanelGestionCoche extends JPanel {
 		});
 		
 		//Inclu�mos los botones
-		panel.add(jbtNavPrimero);
-		panel.add(jbtNavAnterior);
-		panel.add(jbtNavSiguiente);
-		panel.add(jbtNavUltimo);
-		panel.add(jbtGuardar);
-		panel.add(jbtNuevo);
-		panel.add(jbtEliminar);
+		panelBotones.add(jbtNavPrimero);
+		panelBotones.add(jbtNavAnterior);
+		panelBotones.add(jbtNavSiguiente);
+		panelBotones.add(jbtNavUltimo);
+		panelBotones.add(jbtGuardar);
+		panelBotones.add(jbtNuevo);
+		panelBotones.add(jbtEliminar);
 		
-		return panel;
+		
+		return panelBotones;
 	}
-
 	
 	/**
 	 * 
@@ -236,7 +244,7 @@ public class PanelGestionCoche extends JPanel {
 	private void nuevo () {
 		this.coche = new Coche();
 		this.coche.setId(-1);
-		this.jtfId.setText("" + -1);
+		this.id = -1;
 		this.jcbFabricante.setSelectedIndex(0);
 		this.jtfBastidor.setText("");
 		this.jtfModelo.setText("");
@@ -257,7 +265,9 @@ public class PanelGestionCoche extends JPanel {
 	}
 	
 	
-	
+	/**
+	 * 
+	 */
 	private void guardar() {
 		// Es un alta nueva o una modificaci�n
 		cargaCocheDesdeComponentesVisuales();
@@ -281,6 +291,7 @@ public class PanelGestionCoche extends JPanel {
 		coche = ControladorBBDDCoche.getPrimerCoche();
 		cargaCocheEnComponentesVisuales();
 		actualizaEstadoBotonera();
+		panelBotones.setBackground(Color.decode(coche.getColor()));
 	}
 	
 	/**
@@ -290,6 +301,7 @@ public class PanelGestionCoche extends JPanel {
 		coche = ControladorBBDDCoche.getUltimoCoche();
 		cargaCocheEnComponentesVisuales();
 		actualizaEstadoBotonera();
+		panelBotones.setBackground(Color.decode(coche.getColor()));
 	}
 	
 	/**
@@ -299,6 +311,7 @@ public class PanelGestionCoche extends JPanel {
 		coche = ControladorBBDDCoche.getSiguienteCoche(this.coche);
 		cargaCocheEnComponentesVisuales();
 		actualizaEstadoBotonera();
+		panelBotones.setBackground(Color.decode(coche.getColor()));
 	}
 	
 	/**
@@ -308,6 +321,7 @@ public class PanelGestionCoche extends JPanel {
 		coche = ControladorBBDDCoche.getAnteriorCoche(this.coche);
 		cargaCocheEnComponentesVisuales();
 		actualizaEstadoBotonera();
+		panelBotones.setBackground(Color.decode(coche.getColor()));
 	}
 	
 	
@@ -338,7 +352,7 @@ public class PanelGestionCoche extends JPanel {
 	 * 
 	 */
 	private void cargaCocheEnComponentesVisuales () {
-		this.jtfId.setText("" + coche.getId());
+//		this.jtfId.setText("" + coche.getId());
 		this.jtfBastidor.setText(coche.getBastidor());
 		this.jtfModelo.setText(coche.getModelo());
 		this.jtfColor.setText(coche.getColor());

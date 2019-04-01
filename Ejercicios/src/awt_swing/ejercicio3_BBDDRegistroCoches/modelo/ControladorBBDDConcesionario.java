@@ -16,7 +16,7 @@ public class ControladorBBDDConcesionario {
 	 * 
 	 * @return
 	 */
-	public static List<Concesionario> getTodosFabricantes () {
+	public static List<Concesionario> getTodosConcesionarios () {
 		List<Concesionario> resultado = new ArrayList<Concesionario>();
 		try {
 			Connection conn = ConnectionManagerV2.getConexion();

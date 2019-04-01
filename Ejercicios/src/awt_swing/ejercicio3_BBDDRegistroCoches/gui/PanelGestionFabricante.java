@@ -22,7 +22,8 @@ import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.*;
 public class PanelGestionFabricante extends JPanel {
 
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
-	JTextField jtfId = new JTextField();
+	//JTextField jtfId = new JTextField();
+	private int id;
 	JTextField jtfCif = new JTextField();
 	JTextField jtfNombre = new JTextField();
 	
@@ -83,11 +84,11 @@ public class PanelGestionFabricante extends JPanel {
 		gridBagConstraints.insets = new Insets(5, 5, 5, 5);
 
 		// Incorporamos los components del Id
-		colocaComponente(0, 0, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Id:"), gridBagConstraints);
-		
-		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfId, gridBagConstraints);
+//		colocaComponente(0, 0, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+//		this.add(new JLabel("Id:"), gridBagConstraints);
+//		
+//		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+//		this.add(jtfId, gridBagConstraints);
 		
 		// Incorporamos el Cif
 		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
@@ -205,7 +206,7 @@ public class PanelGestionFabricante extends JPanel {
 	private void nuevo () {
 		this.fabricante = new Fabricante();
 		this.fabricante.setId(-1);
-		this.jtfId.setText("" + -1);
+		this.id = -1;
 		this.jtfCif.setText("");
 		this.jtfNombre.setText("");
 
@@ -305,7 +306,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void cargaFabricanteEnComponentesVisuales () {
-		this.jtfId.setText("" + fabricante.getId());
+		//this.jtfId.setText("" + fabricante.getId());
 		this.jtfCif.setText(fabricante.getCif());
 		this.jtfNombre.setText(fabricante.getNombre());
 				

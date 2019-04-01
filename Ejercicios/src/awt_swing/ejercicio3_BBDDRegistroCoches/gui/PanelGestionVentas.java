@@ -9,24 +9,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDCliente;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDCoche;
 import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDConcesionario;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDFabricante;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.ControladorBBDDVentas;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Coche;
 import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Concesionario;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Venta;
+import awt_swing.ejercicio3_BBDDRegistroCoches.modelo.entidades.Cliente;
 import awt_swing.ejercicio3_BBDDRegistroCoches.viejo.utils.*;
 
-public class PanelGestionConcesionario extends JPanel {
+public class PanelGestionVentas extends JPanel {
 
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	//JTextField jtfId = new JTextField();
 	private int id;
-	JTextField jtfCif = new JTextField();
-	JTextField jtfNombre = new JTextField();
-	JTextField jtfLocalidad = new JTextField();
+	JComboBox<Cliente> jcbCliente = new JComboBox<Cliente>();
+	JComboBox<Concesionario> jcbConcesionario = new JComboBox<Concesionario>();
+	JComboBox<Coche> jcbCoche = new JComboBox<Coche>();
+	JTextField jtfFecha = new JTextField();
+	JTextField jtfPrecioVenta = new JTextField();
 	
 	JButton jbtNavPrimero = new JButton();
 	JButton jbtNavUltimo = new JButton();
@@ -36,12 +51,14 @@ public class PanelGestionConcesionario extends JPanel {
 	JButton jbtNuevo = new JButton();
 	JButton jbtEliminar = new JButton();
 	
-	Concesionario concesionario = new Concesionario(); // Coche mostrado en pantalla
+	Venta venta = new Venta(); // Coche mostrado en pantalla
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private Date fechaParseada = null;
 	
 	/**
 	 * 
 	 */
-	public PanelGestionConcesionario () {
+	public PanelGestionVentas () {
 		
 		this.maquetarVentana();
 		
@@ -61,12 +78,12 @@ public class PanelGestionConcesionario extends JPanel {
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				if (e.getUnitsToScroll() < 0) {
-					if (ControladorBBDDConcesionario.getSiguienteConcesionario(concesionario) != null) {
+					if (ControladorBBDDVentas.getSiguienteVenta(venta) != null) {
 						navegaASiguiente();
 					}
 				}
 				else {
-					if (ControladorBBDDConcesionario.getAnteriorConcesionario(concesionario) != null) {
+					if (ControladorBBDDVentas.getAnteriorVenta(venta) != null) {
 						navegaAAnterior();
 					}
 				}
@@ -91,33 +108,79 @@ public class PanelGestionConcesionario extends JPanel {
 //		colocaComponente(1, 0, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
 //		this.add(jtfId, gridBagConstraints);
 		
-		
-		// Incorporamos el Cif
+		// Incorporamos el cliente
 		colocaComponente(0, 1, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Cif:"), gridBagConstraints);
+		this.add(new JLabel("Cliente:"), gridBagConstraints);
 		
 		colocaComponente(1, 1, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfCif, gridBagConstraints);
+		inicializaComboBoxCliente();
+		this.add(jcbCliente, gridBagConstraints);
 		
-		// Incorporamos el Nombre
+		// Incorporamos el concesionario
 		colocaComponente(0, 2, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Nombre:"), gridBagConstraints);
+		this.add(new JLabel("Concesionario:"), gridBagConstraints);
 		
 		colocaComponente(1, 2, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfNombre, gridBagConstraints);
+		inicializaComboBoxConcesionario();
+		this.add(jcbConcesionario, gridBagConstraints);
 		
-		// Incorporamos el Localidad
+		// Incorporamos el Coche
 		colocaComponente(0, 3, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
-		this.add(new JLabel("Localidad:"), gridBagConstraints);
+		this.add(new JLabel("Coche:"), gridBagConstraints);
 		
 		colocaComponente(1, 3, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
-		this.add(jtfLocalidad, gridBagConstraints);
+		inicializaComboBoxCoche();
+		this.add(jcbCoche, gridBagConstraints);
 		
+		// Incorporamos el Fecha
+		colocaComponente(0, 4, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Fecha:"), gridBagConstraints);
+		
+		colocaComponente(1, 4, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfFecha, gridBagConstraints);
+		
+		// Incorporamos el Precio Venta
+		colocaComponente(0, 5, GridBagConstraints.EAST, pesoCol1, 0, GridBagConstraints.NONE);
+		this.add(new JLabel("Precio Venta:"), gridBagConstraints);
+		
+		colocaComponente(1, 5, GridBagConstraints.EAST, pesoCol2, 0, GridBagConstraints.HORIZONTAL);
+		this.add(jtfPrecioVenta, gridBagConstraints);
 		
 		// Incorporamos fila botones
-		colocaComponente(0, 4, GridBagConstraints.NORTH, 1, 1, GridBagConstraints.BOTH);
+		colocaComponente(0, 6, GridBagConstraints.NORTH, 1, 1, GridBagConstraints.BOTH);
 		gridBagConstraints.gridwidth = 2;
 		this.add(getBotonera(), gridBagConstraints);		
+	}
+	
+	
+	/**
+	 * 
+	 */
+	private void inicializaComboBoxCliente () {
+		List<Cliente> clientes = ControladorBBDDCliente.getTodosClientes();
+		for (Cliente cliente : clientes) {
+			jcbCliente.addItem(cliente);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private void inicializaComboBoxCoche () {
+		List<Coche> coches = ControladorBBDDCoche.getTodosCoches();
+		for (Coche coche : coches) {
+			jcbCoche.addItem(coche);
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private void inicializaComboBoxConcesionario () {
+		List<Concesionario> concesionarios = ControladorBBDDConcesionario.getTodosConcesionarios();
+		for (Concesionario concesionario : concesionarios) {
+			jcbConcesionario.addItem(concesionario);
+		}
 	}
 	
 	/**
@@ -192,10 +255,10 @@ public class PanelGestionConcesionario extends JPanel {
 	private void eliminar() {
 		// Por regla general, siempre que eliminemos un coche navegaremos al siguiente
 		// registro
-		Concesionario concesionarioAEliminar = this.concesionario;
+		Venta ventaAEliminar = this.venta;
 		
 		// Compruebo si el coche actual es el �ltimo coche
-		if (ControladorBBDDConcesionario.getUltimoConcesionario().getId() == this.concesionario.getId()) {
+		if (ControladorBBDDVentas.getUltimaVenta().getId() == this.venta.getId()) {
 			navegaAAnterior();
 		}
 		else {
@@ -203,7 +266,7 @@ public class PanelGestionConcesionario extends JPanel {
 		}
 		
 		// Finalmente elimino el coche
-		ControladorBBDDConcesionario.eliminarConcesionario(concesionarioAEliminar);
+		ControladorBBDDVentas.eliminarVenta(ventaAEliminar);
 		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
@@ -214,12 +277,14 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void nuevo () {
-		this.concesionario = new Concesionario();
-		this.concesionario.setId(-1);
+		this.venta = new Venta();
+		this.venta.setId(-1);
 		this.id = -1;
-		this.jtfCif.setText("");
-		this.jtfNombre.setText("");
-		this.jtfLocalidad.setText("");
+		this.jcbCliente.setSelectedIndex(0);
+		this.jcbConcesionario.setSelectedIndex(0);
+		this.jcbCoche.setSelectedIndex(0);
+		this.jtfFecha.setText("");
+		this.jtfPrecioVenta.setText("");
 
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
@@ -239,13 +304,13 @@ public class PanelGestionConcesionario extends JPanel {
 	
 	private void guardar() {
 		// Es un alta nueva o una modificaci�n
-		cargaConcesionarioDesdeComponentesVisuales();
-		if (this.concesionario.getId() == -1) { // Alta
-			ControladorBBDDConcesionario.guardarNuevoConcesionario(this.concesionario);
+		cargaVentaDesdeComponentesVisuales();
+		if (this.venta.getId() == -1) { // Alta
+			ControladorBBDDVentas.guardarNuevaVenta(this.venta);
 			this.navegaAUltimo();
 		}
 		else { // Modificaci�n
-			ControladorBBDDConcesionario.modificarConcesionario(this.concesionario);
+			ControladorBBDDVentas.modificarVenta(this.venta);
 		}
 
 		// Actualizo la botonera
@@ -257,8 +322,8 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void navegaAPrimero () {
-		concesionario = ControladorBBDDConcesionario.getPrimerConcesionario();
-		cargaConcesionarioEnComponentesVisuales();
+		venta = ControladorBBDDVentas.getPrimeraVenta();
+		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -266,8 +331,8 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void navegaAUltimo () {
-		concesionario = ControladorBBDDConcesionario.getUltimoConcesionario();
-		cargaConcesionarioEnComponentesVisuales();
+		venta = ControladorBBDDVentas.getUltimaVenta();
+		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -275,8 +340,8 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void navegaASiguiente () {
-		concesionario = ControladorBBDDConcesionario.getSiguienteConcesionario(this.concesionario);
-		cargaConcesionarioEnComponentesVisuales();
+		venta = ControladorBBDDVentas.getSiguienteVenta(this.venta);
+		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -284,8 +349,8 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void navegaAAnterior () {
-		concesionario = ControladorBBDDConcesionario.getAnteriorConcesionario(this.concesionario);
-		cargaConcesionarioEnComponentesVisuales();
+		venta = ControladorBBDDVentas.getAnteriorVenta(this.venta);
+		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
 	
@@ -295,7 +360,7 @@ public class PanelGestionConcesionario extends JPanel {
 	 * 
 	 */
 	private void actualizaEstadoBotonera () {
-		if (ControladorBBDDConcesionario.getAnteriorConcesionario(this.concesionario) == null) {
+		if (ControladorBBDDVentas.getAnteriorVenta(this.venta) == null) {
 			jbtNavPrimero.setEnabled(false);
 			jbtNavAnterior.setEnabled(false);
 		}
@@ -303,7 +368,7 @@ public class PanelGestionConcesionario extends JPanel {
 			jbtNavPrimero.setEnabled(true);
 			jbtNavAnterior.setEnabled(true);
 		}
-		if (ControladorBBDDConcesionario.getSiguienteConcesionario(this.concesionario) == null) {
+		if (ControladorBBDDVentas.getSiguienteVenta(this.venta) == null) {
 			jbtNavSiguiente.setEnabled(false);
 			jbtNavUltimo.setEnabled(false);
 		}
@@ -316,20 +381,55 @@ public class PanelGestionConcesionario extends JPanel {
 	/**
 	 * 
 	 */
-	private void cargaConcesionarioEnComponentesVisuales () {
-		//this.jtfId.setText("" + concesionario.getId());
-		this.jtfCif.setText(concesionario.getCif());
-		this.jtfNombre.setText(concesionario.getNombre());
-		this.jtfLocalidad.setText(concesionario.getLocalidad());
+	private void cargaVentaEnComponentesVisuales () {
+		//this.jtfId.setText("" + venta.getId());
+		this.jtfFecha.setText(sdf.format(venta.getFecha()));
+		this.jtfPrecioVenta.setText("" + venta.getPrecioVenta());
+
+		// Cargo el valor del JComboBox del cliente
+		for (int i = 0; i < this.jcbCliente.getItemCount(); i++) {
+			if (venta.getIdCliente() == this.jcbCliente.getItemAt(i).getId()) {
+				this.jcbCliente.setSelectedIndex(i);
+				break;
+			}
+		}
+		
+		// Cargo el valor del JComboBox del concesionario
+		for (int i = 0; i < this.jcbConcesionario.getItemCount(); i++) {
+			if (venta.getIdConcesionario() == this.jcbConcesionario.getItemAt(i).getId()) {
+				this.jcbConcesionario.setSelectedIndex(i);
+				break;
+			}
+		}
+		
+		// Cargo el valor del JComboBox del coche
+		for (int i = 0; i < this.jcbCoche.getItemCount(); i++) {
+			if (venta.getIdCoche() == this.jcbCoche.getItemAt(i).getId()) {
+				this.jcbCoche.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 	
 	/**
 	 * 
 	 */
-	private void cargaConcesionarioDesdeComponentesVisuales () {
-		this.concesionario.setCif(this.jtfCif.getText());
-		this.concesionario.setNombre(this.jtfNombre.getText());
-		this.concesionario.setLocalidad(this.jtfLocalidad.getText());
+	private void cargaVentaDesdeComponentesVisuales () {
+		try {
+			fechaParseada = sdf.parse(this.jtfFecha.getText());
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Error en la introduccion de fecha \nLa fecha"
+					+ " debe ser del formato: dd/mm/aaaa hh:mm:ss");
+			System.out.println ("Error en el parseo de la fecha");
+		}
+		this.venta.setFecha(fechaParseada);
+		
+		this.venta.setPrecioVenta(Float.parseFloat(this.jtfPrecioVenta.getText()));
+	
+		this.venta.setIdCliente(((Cliente) this.jcbCliente.getSelectedItem()).getId());
+		this.venta.setIdConcesionario(((Concesionario) this.jcbConcesionario.getSelectedItem()).getId());
+		this.venta.setIdCliente(((Coche) this.jcbCoche.getSelectedItem()).getId());
+		
 	}
 	
 	/**

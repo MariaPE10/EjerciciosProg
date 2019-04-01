@@ -106,7 +106,7 @@ public class Concesionario {
 
 	@Override
 	public String toString() {
-		return cif + " - " + nombre + " - " + localidad;
+		return cif + " - " + nombre;
 	}
 	
 	

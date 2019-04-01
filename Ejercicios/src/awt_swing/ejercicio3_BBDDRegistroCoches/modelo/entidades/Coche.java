@@ -20,7 +20,7 @@ public class Coche {
 	 * @param id
 	 * @param idFabricante
 	 * @param bastidor
-	 * @param nombre
+	 * @param modelo
 	 * @param color
 	 */
 	public Coche(int id, int idFabricante, String bastidor, String modelo, String color) {
@@ -64,6 +64,9 @@ public class Coche {
 		this.color = color;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return bastidor + " - " + modelo;
+	}
 	
 }

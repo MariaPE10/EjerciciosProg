@@ -120,6 +120,9 @@ public class Cliente {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-
+	@Override
+	public String toString() {
+		return dni + " - " + nombre + " " + apellidos;
+	}
 	
 }
