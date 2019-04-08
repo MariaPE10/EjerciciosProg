@@ -85,5 +85,10 @@ public class Concesionario implements Serializable {
 
 		return venta;
 	}
+	
+	@Override
+	public String toString() {
+		return cif + " - " + nombre;
+	}
 
 }

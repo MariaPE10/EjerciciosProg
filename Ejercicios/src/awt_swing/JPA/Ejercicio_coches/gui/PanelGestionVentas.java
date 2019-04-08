@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 
 import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDCliente;
 import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDCoche;
+import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDConcesionario;
 import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDFabricante;
 import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDVentas;
 import awt_swing.JPA.Ejercicio_coches.modelo.entidades.Cliente;
@@ -175,7 +176,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void inicializaComboBoxConcesionario () {
-		List<Concesionario> concesionarios = ControladorBBDDConcesionario.getTodosConcesionarios();
+		List<Concesionario> concesionarios = ControladorBBDDConcesionario.findAll();
 		for (Concesionario concesionario : concesionarios) {
 			jcbConcesionario.addItem(concesionario);
 		}
@@ -191,43 +192,43 @@ public class PanelGestionVentas extends JPanel {
 		panel.setBackground(Color.yellow);
 		
 		// Configuramos los botones
-		configuraBoton(jbtNavPrimero, "gotostart.png", new ActionListener() {
+		configuraBoton(jbtNavPrimero, "Primero", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				navegaAPrimero();
 			}
 		});
-		configuraBoton(jbtNavAnterior, "previous.png", new ActionListener() {
+		configuraBoton(jbtNavAnterior, "Anterior", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				navegaAAnterior();
 			}
 		});
-		configuraBoton(jbtNavSiguiente, "next.png", new ActionListener() {
+		configuraBoton(jbtNavSiguiente, "Siguiente", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				navegaASiguiente();
 			}
 		});
-		configuraBoton(jbtNavUltimo, "gotoend.png", new ActionListener() {
+		configuraBoton(jbtNavUltimo, "Ultimo", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				navegaAUltimo();
 			}
 		});
-		configuraBoton(jbtGuardar, "guardar.png", new ActionListener() {
+		configuraBoton(jbtGuardar, "Guardar", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				guardar();
 			}
 		});
-		configuraBoton(jbtNuevo, "nuevo.png", new ActionListener() {
+		configuraBoton(jbtNuevo, "Nuevo", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				nuevo();
 			}
 		});
-		configuraBoton(jbtEliminar, "eliminar.png", new ActionListener() {
+		configuraBoton(jbtEliminar, "Eliminar", new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				eliminar();
@@ -256,7 +257,7 @@ public class PanelGestionVentas extends JPanel {
 		Venta ventaAEliminar = this.venta;
 		
 		// Compruebo si el coche actual es el �ltimo coche
-		if (ControladorBBDDVentas.getUltimaVenta().getId() == this.venta.getId()) {
+		if (ControladorBBDDVentas.findLast().getId() == this.venta.getId()) {
 			navegaAAnterior();
 		}
 		else {
@@ -264,7 +265,7 @@ public class PanelGestionVentas extends JPanel {
 		}
 		
 		// Finalmente elimino el coche
-		ControladorBBDDVentas.eliminarVenta(ventaAEliminar);
+		ControladorBBDDVentas.remove(ventaAEliminar);
 		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
@@ -276,8 +277,8 @@ public class PanelGestionVentas extends JPanel {
 	 */
 	private void nuevo () {
 		this.venta = new Venta();
-		this.venta.setId(-1);
-		this.id = -1;
+		//this.venta.setId(-1);
+		//this.id = -1;
 		this.jcbCliente.setSelectedIndex(0);
 		this.jcbConcesionario.setSelectedIndex(0);
 		this.jcbCoche.setSelectedIndex(0);
@@ -293,8 +294,8 @@ public class PanelGestionVentas extends JPanel {
 	 * @param jbt
 	 * @param icono
 	 */
-	private void configuraBoton (JButton jbt, String icono, ActionListener actionListener) {
-		jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));
+	private void configuraBoton (JButton jbt, String texto, ActionListener actionListener) {
+		jbt.setText(texto);
 		jbt.addActionListener(actionListener);
 	}
 	
@@ -303,12 +304,9 @@ public class PanelGestionVentas extends JPanel {
 	private void guardar() {
 		// Es un alta nueva o una modificaci�n
 		cargaVentaDesdeComponentesVisuales();
-		if (this.venta.getId() == -1) { // Alta
-			ControladorBBDDVentas.guardarNuevaVenta(this.venta);
+		ControladorBBDDVentas.persist(this.venta);
+		if (!ControladorBBDDVentas.exists(this.venta)) {
 			this.navegaAUltimo();
-		}
-		else { // Modificaci�n
-			ControladorBBDDVentas.modificarVenta(this.venta);
 		}
 
 		// Actualizo la botonera
@@ -320,7 +318,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void navegaAPrimero () {
-		venta = ControladorBBDDVentas.getPrimeraVenta();
+		venta = ControladorBBDDVentas.findFirst();
 		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -329,7 +327,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void navegaAUltimo () {
-		venta = ControladorBBDDVentas.getUltimaVenta();
+		venta = ControladorBBDDVentas.findLast();
 		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -338,7 +336,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void navegaASiguiente () {
-		venta = ControladorBBDDVentas.getSiguienteVenta(this.venta);
+		venta = ControladorBBDDVentas.findNext(this.venta);
 		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -347,7 +345,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void navegaAAnterior () {
-		venta = ControladorBBDDVentas.getAnteriorVenta(this.venta);
+		venta = ControladorBBDDVentas.findPrevious(this.venta);
 		cargaVentaEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -358,7 +356,7 @@ public class PanelGestionVentas extends JPanel {
 	 * 
 	 */
 	private void actualizaEstadoBotonera () {
-		if (ControladorBBDDVentas.getAnteriorVenta(this.venta) == null) {
+		if (ControladorBBDDVentas.findPrevious(this.venta) == null) {
 			jbtNavPrimero.setEnabled(false);
 			jbtNavAnterior.setEnabled(false);
 		}
@@ -366,13 +364,19 @@ public class PanelGestionVentas extends JPanel {
 			jbtNavPrimero.setEnabled(true);
 			jbtNavAnterior.setEnabled(true);
 		}
-		if (ControladorBBDDVentas.getSiguienteVenta(this.venta) == null) {
+		if (ControladorBBDDVentas.findNext(this.venta) == null) {
 			jbtNavSiguiente.setEnabled(false);
 			jbtNavUltimo.setEnabled(false);
 		}
 		else {
 			jbtNavSiguiente.setEnabled(true);
 			jbtNavUltimo.setEnabled(true);
+		}
+		if (this.venta.getId() != -1) {
+			jbtEliminar.setEnabled(true);
+		}
+		else {
+			jbtEliminar.setEnabled(false);
 		}
 	}
 	
@@ -386,7 +390,7 @@ public class PanelGestionVentas extends JPanel {
 
 		// Cargo el valor del JComboBox del cliente
 		for (int i = 0; i < this.jcbCliente.getItemCount(); i++) {
-			if (venta.getIdCliente() == this.jcbCliente.getItemAt(i).getId()) {
+			if (venta.getCliente().getId() == this.jcbCliente.getItemAt(i).getId()) {
 				this.jcbCliente.setSelectedIndex(i);
 				break;
 			}
@@ -394,7 +398,7 @@ public class PanelGestionVentas extends JPanel {
 		
 		// Cargo el valor del JComboBox del concesionario
 		for (int i = 0; i < this.jcbConcesionario.getItemCount(); i++) {
-			if (venta.getIdConcesionario() == this.jcbConcesionario.getItemAt(i).getId()) {
+			if (venta.getConcesionario().getId() == this.jcbConcesionario.getItemAt(i).getId()) {
 				this.jcbConcesionario.setSelectedIndex(i);
 				break;
 			}
@@ -402,7 +406,7 @@ public class PanelGestionVentas extends JPanel {
 		
 		// Cargo el valor del JComboBox del coche
 		for (int i = 0; i < this.jcbCoche.getItemCount(); i++) {
-			if (venta.getIdCoche() == this.jcbCoche.getItemAt(i).getId()) {
+			if (venta.getCoche().getId() == this.jcbCoche.getItemAt(i).getId()) {
 				this.jcbCoche.setSelectedIndex(i);
 				break;
 			}
@@ -424,9 +428,9 @@ public class PanelGestionVentas extends JPanel {
 		
 		this.venta.setPrecioVenta(Float.parseFloat(this.jtfPrecioVenta.getText()));
 	
-		this.venta.setIdCliente(((Cliente) this.jcbCliente.getSelectedItem()).getId());
-		this.venta.setIdConcesionario(((Concesionario) this.jcbConcesionario.getSelectedItem()).getId());
-		this.venta.setIdCliente(((Coche) this.jcbCoche.getSelectedItem()).getId());
+		this.venta.setCliente(((Cliente) this.jcbCliente.getSelectedItem()));
+		this.venta.setConcesionario(((Concesionario) this.jcbConcesionario.getSelectedItem()));
+		this.venta.setCoche(((Coche) this.jcbCoche.getSelectedItem()));
 		
 	}
 	
