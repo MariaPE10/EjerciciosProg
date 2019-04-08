@@ -1,4 +1,4 @@
-package awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.gui;
+package awt_swing.JPA.Ejercicio_coches.gui;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -15,9 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.modelo.ControladorBBDDFabricante;
-import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.modelo.entidades.Fabricante;
-import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.*;
+import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDFabricante;
+import awt_swing.JPA.Ejercicio_coches.modelo.entidades.Fabricante;
+
 
 public class PanelGestionFabricante extends JPanel {
 
@@ -60,12 +60,12 @@ public class PanelGestionFabricante extends JPanel {
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				if (e.getUnitsToScroll() < 0) {
-					if (ControladorBBDDFabricante.getSiguienteFabricante(fabricante) != null) {
+					if (ControladorBBDDFabricante.findNext(fabricante) != null) {
 						navegaASiguiente();
 					}
 				}
 				else {
-					if (ControladorBBDDFabricante.getAnteriorFabricante(fabricante) != null) {
+					if (ControladorBBDDFabricante.findPrevious(fabricante) != null) {
 						navegaAAnterior();
 					}
 				}
@@ -185,7 +185,7 @@ public class PanelGestionFabricante extends JPanel {
 		Fabricante fabricanteAEliminar = this.fabricante;
 		
 		// Compruebo si el coche actual es el �ltimo coche
-		if (ControladorBBDDFabricante.getUltimoFabricante().getId() == this.fabricante.getId()) {
+		if (ControladorBBDDFabricante.findLast().getId() == this.fabricante.getId()) {
 			navegaAAnterior();
 		}
 		else {
@@ -193,7 +193,7 @@ public class PanelGestionFabricante extends JPanel {
 		}
 		
 		// Finalmente elimino el coche
-		ControladorBBDDFabricante.eliminarFabricante(fabricanteAEliminar);
+		ControladorBBDDFabricante.remove(fabricanteAEliminar);
 		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
@@ -205,8 +205,8 @@ public class PanelGestionFabricante extends JPanel {
 	 */
 	private void nuevo () {
 		this.fabricante = new Fabricante();
-		this.fabricante.setId(-1);
-		this.id = -1;
+		//this.fabricante.setId(-1);
+		//this.id = -1;
 		this.jtfCif.setText("");
 		this.jtfNombre.setText("");
 
@@ -229,14 +229,11 @@ public class PanelGestionFabricante extends JPanel {
 	private void guardar() {
 		// Es un alta nueva o una modificaci�n
 		cargaFabricanteDesdeComponentesVisuales();
-		if (this.fabricante.getId() == -1) { // Alta
-			ControladorBBDDFabricante.guardarNuevoFabricante(this.fabricante);
+		ControladorBBDDFabricante.persist(this.fabricante);
+		if (!ControladorBBDDFabricante.exists(this.fabricante)) { // Alta
 			this.navegaAUltimo();
 		}
-		else { // Modificaci�n
-			ControladorBBDDFabricante.modificarFabricante(this.fabricante);
-		}
-
+		
 		// Actualizo la botonera
 		this.actualizaEstadoBotonera();
 	}
@@ -246,7 +243,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAPrimero () {
-		fabricante = ControladorBBDDFabricante.getPrimerFabricante();
+		fabricante = ControladorBBDDFabricante.findFirst();
 		cargaFabricanteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -255,7 +252,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAUltimo () {
-		fabricante = ControladorBBDDFabricante.getUltimoFabricante();
+		fabricante = ControladorBBDDFabricante.findLast();
 		cargaFabricanteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -264,7 +261,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaASiguiente () {
-		fabricante = ControladorBBDDFabricante.getSiguienteFabricante(this.fabricante);
+		fabricante = ControladorBBDDFabricante.findNext(this.fabricante);
 		cargaFabricanteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -273,7 +270,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void navegaAAnterior () {
-		fabricante = ControladorBBDDFabricante.getAnteriorFabricante(this.fabricante);
+		fabricante = ControladorBBDDFabricante.findPrevious(this.fabricante);
 		cargaFabricanteEnComponentesVisuales();
 		actualizaEstadoBotonera();
 	}
@@ -284,7 +281,7 @@ public class PanelGestionFabricante extends JPanel {
 	 * 
 	 */
 	private void actualizaEstadoBotonera () {
-		if (ControladorBBDDFabricante.getAnteriorFabricante(this.fabricante) == null) {
+		if (ControladorBBDDFabricante.findPrevious(this.fabricante) == null) {
 			jbtNavPrimero.setEnabled(false);
 			jbtNavAnterior.setEnabled(false);
 		}
@@ -292,13 +289,19 @@ public class PanelGestionFabricante extends JPanel {
 			jbtNavPrimero.setEnabled(true);
 			jbtNavAnterior.setEnabled(true);
 		}
-		if (ControladorBBDDFabricante.getSiguienteFabricante(this.fabricante) == null) {
+		if (ControladorBBDDFabricante.findNext(this.fabricante) == null) {
 			jbtNavSiguiente.setEnabled(false);
 			jbtNavUltimo.setEnabled(false);
 		}
 		else {
 			jbtNavSiguiente.setEnabled(true);
 			jbtNavUltimo.setEnabled(true);
+		}
+		if (this.fabricante.getId() != -1) {
+			jbtEliminar.setEnabled(true);
+		}
+		else {
+			jbtEliminar.setEnabled(false);
 		}
 	}
 	

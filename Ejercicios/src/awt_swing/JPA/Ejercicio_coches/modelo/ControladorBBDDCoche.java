@@ -1,9 +1,6 @@
 package awt_swing.JPA.Ejercicio_coches.modelo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,37 +8,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import awt_swing.JPA.Ejercicio_coches.modelo.entidades.Cliente;
 import awt_swing.JPA.Ejercicio_coches.modelo.entidades.Coche;
 
 
 public class ControladorBBDDCoche extends Controlador{
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static List<Coche> findAll () {
+		
+		EntityManager em = getEntityManager();
+		
+		Query q = em.createNativeQuery("SELECT * FROM coche;", Coche.class);
+		
+		List<Coche> entidades = new ArrayList<Coche>();
+		
+		try {
+			entidades = (List<Coche>) q.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public static List<Coche> getTodosCoches () {
-//		List<Coche> resultado = new ArrayList<Coche>();
-//		try {
-//			Connection conn = ConnectionManagerV2.getConexion();
-//			
-//			PreparedStatement ps = conn.prepareStatement("SELECT * FROM tutorialjavacoches.coche order by modelo");
-//			ResultSet rs = ps.executeQuery();
-//			while (rs.next()) {
-//				resultado.add(getCocheFromResultSet(rs));
-//			}
-//			rs.close();
-//			ps.close();
-//			conn.close();
-//		} catch (SQLException | ImposibleConectarException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return resultado;
-//	}
-	
+		
+		em.close();
+		
+		return entidades;
+	}
 	
 	/**
 	 * 
@@ -60,8 +55,6 @@ public class ControladorBBDDCoche extends Controlador{
 		
 		return coche;
 	}
-	
-	
 	
 	/**
 	 * 
@@ -83,8 +76,6 @@ public class ControladorBBDDCoche extends Controlador{
 		return coche;
 	}
 	
-	
-	
 	/**
 	 * 
 	 * @return
@@ -105,7 +96,6 @@ public class ControladorBBDDCoche extends Controlador{
 		return coche;
 		
 	}
-	
 	
 	/**
 	 * 
@@ -197,121 +187,5 @@ public class ControladorBBDDCoche extends Controlador{
 		em.close();
 		return ok;
 	}
-	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public static boolean guardarNuevoCoche (Coche coche) {
-//		boolean resultado = true;
-//		try {
-//			Connection conn = ConnectionManagerV2.getConexion();
-//			
-//			PreparedStatement ps = conn.prepareStatement(""
-//					+ "INSERT INTO tutorialjavacoches.coche values (?, ?, ?, ?, ?)");
-//			ps.setInt(1, getUltimoCoche().getId() + 1);
-//			ps.setInt(2, coche.getIdFabricante());
-//			ps.setString(3, coche.getBastidor());
-//			ps.setString(4, coche.getModelo());
-//			ps.setString(5, coche.getColor());
-//			int registrosAfectados = ps.executeUpdate();
-//			if (registrosAfectados != 1) {
-//				resultado = false;		
-//			}
-//			ps.close();
-//			conn.close();
-//		} catch (SQLException | ImposibleConectarException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			resultado = false;
-//		}
-//		
-//		return resultado;
-//	}
-	
-	
-	
-	
-	
-	/**
-	 * 
-	 * @return
-	 */
-//	public static boolean modificarCoche (Coche coche) {
-//		boolean resultado = true;
-//		try {
-//			Connection conn = ConnectionManagerV2.getConexion();
-//			
-//			PreparedStatement ps = conn.prepareStatement(""
-//					+ "UPDATE tutorialjavacoches.coche SET idFabricante = ?, bastidor = ?, modelo = ?, color = ? where id = ?");
-//			ps.setInt(1, coche.getIdFabricante());
-//			ps.setString(2, coche.getBastidor());
-//			ps.setString(3, coche.getModelo());
-//			ps.setString(4, coche.getColor());
-//			ps.setInt(5, coche.getId());
-//			int registrosAfectados = ps.executeUpdate();
-//			if (registrosAfectados != 1) {
-//				resultado = false;		
-//			}
-//			ps.close();
-//			conn.close();
-//		} catch (SQLException | ImposibleConectarException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			resultado = false;
-//		}
-//		
-//		return resultado;
-//	}
-//	
-//	
-//	
-//	
-//	/**
-//	 * 
-//	 * @return
-//	 */
-//	public static boolean eliminarCoche (Coche coche) {
-//		boolean resultado = true;
-//		try {
-//			Connection conn = ConnectionManagerV2.getConexion();
-//			
-//			PreparedStatement ps = conn.prepareStatement(""
-//					+ "DELETE FROM tutorialjavacoches.coche where id = ?");
-//			ps.setInt(1, coche.getId());
-//			int registrosAfectados = ps.executeUpdate();
-//			if (registrosAfectados != 1) {
-//				resultado = false;		
-//			}
-//			ps.close();
-//			conn.close();
-//		} catch (SQLException | ImposibleConectarException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			resultado = false;
-//		}
-//		
-//		return resultado;
-//	}
-//	
-//	
-//	
-//	
-//	
-//	private static Coche getCocheFromResultSet (ResultSet rs) {
-//		Coche coche = new Coche();
-//		
-//		try {
-//			coche.setId(rs.getInt("id"));
-//			coche.setIdFabricante(rs.getInt("idFabricante"));
-//			coche.setBastidor(rs.getString("bastidor"));
-//			coche.setModelo(rs.getString("modelo"));
-//			coche.setColor(rs.getString("color"));
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		return coche;
-//	}
+
 }

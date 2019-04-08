@@ -16,6 +16,7 @@ public class Fabricante implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String cif;
@@ -74,13 +75,9 @@ public class Fabricante implements Serializable {
 
 		return coch;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return cif + " - " + nombre;
 	}
-
 }

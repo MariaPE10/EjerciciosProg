@@ -27,7 +27,7 @@ public class PanelGestionCoche extends JPanel {
 
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	//JTextField jtfId = new JTextField();
-	private int id;
+	//private int id;
 	JComboBox<Fabricante> jcbFabricante = new JComboBox<Fabricante>();
 	JTextField jtfBastidor = new JTextField();
 	JTextField jtfModelo = new JTextField();
