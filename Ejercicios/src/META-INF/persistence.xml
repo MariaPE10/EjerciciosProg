@@ -14,4 +14,18 @@
             <property name="javax.persistence.jdbc.password" value="1234"/>
         </properties>
 	</persistence-unit>
+	<persistence-unit name="Ejercicio_curso">
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Sequence</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Curso</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Estudiante</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Materia</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Profesor</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.Valoracionmateria</class>
+		<properties>
+           <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/centroeducativo"/>
+            <property name="javax.persistence.jdbc.user" value="java"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+        </properties>
+	</persistence-unit>
 </persistence>
