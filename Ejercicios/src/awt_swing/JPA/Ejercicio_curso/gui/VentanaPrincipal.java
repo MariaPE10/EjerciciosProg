@@ -18,7 +18,7 @@ public class VentanaPrincipal extends JFrame {
 	 * 
 	 */
 	public VentanaPrincipal () {
-		super ("JComponents Avanzados");
+		super ("Gestion Centro Educativo");
 		this.setBounds(0, 0, 500, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

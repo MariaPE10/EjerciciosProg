@@ -16,12 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-import awt_swing.JPA.Ejercicio_curso.modelo.Curso;
+import awt_swing.JPA.Ejercicio_curso.modelo.Profesor;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.CursoControlador;
 import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
 
 
-public class PanelGestionCursosAcademicos extends JPanel {
+public class PanelGestionProfesor extends JPanel {
 
 	
 	public static int LOAD_FIRST = 0;
@@ -32,18 +32,25 @@ public class PanelGestionCursosAcademicos extends JPanel {
 	public static int SAVE = 5;
 	public static int REMOVE = 6;
 	
-	Curso actual = null;
+	Profesor actual = null;
 	
 	//Dimension minimaDimensionJTextField = new Dimension(150, 20);
 	
 	JTextField jtfId = new JTextField(5);
-	JTextField jtfDescripcion = new JTextField(20);
+	JTextField jtfNombre = new JTextField(20);
+	JTextField jtfPrimerApellido = new JTextField(20);
+	JTextField jtfSegundoApellido = new JTextField(20);
+	JTextField jtfDni = new JTextField(20);
+	JTextField jtfDireccion = new JTextField(20);
+	JTextField jtfEmail = new JTextField(20);
+	JTextField jtfTelefono = new JTextField(20);
+	
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	
 		/**
 		 * 
 		 */
-		public PanelGestionCursosAcademicos() {
+		public PanelGestionProfesor() {
 			super();
 			this.setLayout(new BorderLayout());
 			
@@ -92,7 +99,7 @@ public class PanelGestionCursosAcademicos extends JPanel {
 			jbt.addActionListener(new ActionListener () {
 				public void actionPerformed(ActionEvent arg0) {
 					
-					Curso obtenido = null;
+					Profesor obtenido = null;
 					if (funcion == LOAD_FIRST)
 						obtenido = CursoControlador.getControlador().findFirst();
 					if (funcion == LOAD_PREV) 
@@ -137,16 +144,75 @@ public class PanelGestionCursosAcademicos extends JPanel {
 		    //jtfId.setMinimumSize(minimaDimensionJTextField);
 		    panelGestion.add(jtfId, c);
 
-			// Inclusion del JTextField para la descripcion
+			// Inclusion del JTextField para el nombre
 			c.gridx = 0;
 		    c.gridy = 1;
 		    c.anchor = GridBagConstraints.EAST;
-		    panelGestion.add(new JLabel("Descripcion: "), c);
+		    panelGestion.add(new JLabel("Nombre: "), c);
 			
 			c.gridx = 1;
 		    c.anchor = GridBagConstraints.WEST;
-		    //jtfDescripcion.setMinimumSize(minimaDimensionJTextField);
-		    panelGestion.add(jtfDescripcion, c);
+		    panelGestion.add(jtfNombre, c);
+		    
+		    // Inclusion del JTextField para el primer apellid0
+ 			c.gridx = 0;
+ 		    c.gridy = 2;
+ 		    c.anchor = GridBagConstraints.EAST;
+ 		    panelGestion.add(new JLabel("Primer Apellido: "), c);
+ 			
+ 			c.gridx = 1;
+ 		    c.anchor = GridBagConstraints.WEST;
+ 		    panelGestion.add(jtfPrimerApellido, c);
+ 		    
+ 		    // Inclusion del JTextField para el segundo apellido
+			c.gridx = 0;
+		    c.gridy = 3;
+		    c.anchor = GridBagConstraints.EAST;
+		    panelGestion.add(new JLabel("Segundo Apellido: "), c);
+			
+			c.gridx = 1;
+		    c.anchor = GridBagConstraints.WEST;
+		    panelGestion.add(jtfSegundoApellido, c);
+		    
+		    // Inclusion del JTextField para el dni
+			c.gridx = 0;
+		    c.gridy = 4;
+		    c.anchor = GridBagConstraints.EAST;
+		    panelGestion.add(new JLabel("DNI: "), c);
+			
+			c.gridx = 1;
+		    c.anchor = GridBagConstraints.WEST;
+		    panelGestion.add(jtfDni, c);
+		    
+		    // Inclusion del JTextField para el direccion
+ 			c.gridx = 0;
+ 		    c.gridy = 5;
+ 		    c.anchor = GridBagConstraints.EAST;
+ 		    panelGestion.add(new JLabel("Direccion: "), c);
+ 			
+ 			c.gridx = 1;
+ 		    c.anchor = GridBagConstraints.WEST;
+ 		    panelGestion.add(jtfDireccion, c);
+		 		    
+		    // Inclusion del JTextField para el email
+			c.gridx = 0;
+		    c.gridy = 6;
+		    c.anchor = GridBagConstraints.EAST;
+		    panelGestion.add(new JLabel("Email: "), c);
+			
+			c.gridx = 1;
+		    c.anchor = GridBagConstraints.WEST;
+		    panelGestion.add(jtfEmail, c);
+		    
+		    // Inclusion del JTextField para el tlf
+			c.gridx = 0;
+		    c.gridy = 7;
+		    c.anchor = GridBagConstraints.EAST;
+		    panelGestion.add(new JLabel("Telefono: "), c);
+			
+			c.gridx = 1;
+		    c.anchor = GridBagConstraints.WEST;
+		    panelGestion.add(jtfTelefono, c);
 
 		    return panelGestion;
 		}

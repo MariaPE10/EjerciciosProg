@@ -15,7 +15,6 @@
         </properties>
 	</persistence-unit>
 	<persistence-unit name="Ejercicio_curso">
-		<class>awt_swing.JPA.Ejercicio_curso.modelo.Sequence</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Curso</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Estudiante</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Materia</class>

@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 
@@ -28,26 +29,30 @@ public class Menu extends JMenuBar {
 		// Men� Archivo de la aplicaci�n
         JMenu menuArchivo = new JMenu("Entidades");
         
-        JMenuItem miCursoAcademico = new JMenuItem("Cursos Academicos");
-        miCursoAcademico.addActionListener(new ActionListener() {
+        menuArchivo.add(getItem("Cursos Academicos", "Gestion de Cursos Academicos", new PanelGestionCursosAcademicos()));
+        menuArchivo.add(getItem("Materias", "Gestion de Materias", new PanelGestionMaterias()));
+
+        this.add(menuArchivo);        
+        
+	}
+
+	private JMenuItem getItem(String nombreItem, String titulo, JPanel panel) {
+		JMenuItem item = new JMenuItem(nombreItem);
+		item.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JDialog dialogo = new JDialog();
 				dialogo.setResizable(false);
-				dialogo.setTitle("Gestion de Cursos Academicos");
-				dialogo.setBounds(100, 100, 450, 229);
+				dialogo.setTitle(titulo);
+				dialogo.setBounds(100, 100, 450, 230);
 				dialogo.setModal(true);
-				dialogo.setContentPane(new PanelGestionCursosAcademicos());
+				dialogo.setContentPane(panel);
 				dialogo.setVisible(true);
 			}
 		});
         
-        menuArchivo.add(miCursoAcademico);
-        this.add(menuArchivo);
-        
-        
+        return item;
 	}
-
 
 }

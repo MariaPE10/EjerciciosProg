@@ -28,6 +28,19 @@ public class ToolBar extends JToolBar {
 				
 			}
 		});
+		
+		JButton jbtMaterias = new JButton();
+		jbtMaterias.setIcon(CacheImagenes.getCacheImagenes().getIcono("ruedadentada.png"));
+		jbtMaterias.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("El usuario quiere abrir el panel de materias");
+				
+			}
+		});
+		
         this.add(jbtCursosAcademicos);
+        this.add(jbtMaterias);
     }
 }
