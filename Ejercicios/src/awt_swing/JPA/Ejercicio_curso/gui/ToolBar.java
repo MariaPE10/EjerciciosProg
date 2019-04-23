@@ -40,7 +40,31 @@ public class ToolBar extends JToolBar {
 			}
 		});
 		
+		JButton jbtProfesores = new JButton();
+		jbtProfesores.setIcon(CacheImagenes.getCacheImagenes().getIcono("ruedadentada.png"));
+		jbtProfesores.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("El usuario quiere abrir el panel de profesores");
+				
+			}
+		});
+		
+		JButton jbtAlumnos = new JButton();
+		jbtAlumnos.setIcon(CacheImagenes.getCacheImagenes().getIcono("ruedadentada.png"));
+		jbtAlumnos.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("El usuario quiere abrir el panel de estudiantes");
+				
+			}
+		});
+		
         this.add(jbtCursosAcademicos);
         this.add(jbtMaterias);
+        this.add(jbtProfesores);
+        this.add(jbtAlumnos);
     }
 }

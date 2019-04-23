@@ -33,6 +33,8 @@ public class Estudiante extends Entidad implements Serializable {
 
 	private String nombre;
 
+	private String sexo;
+
 	private String telefono;
 
 	//bi-directional many-to-one association to Valoracionmateria
@@ -96,6 +98,14 @@ public class Estudiante extends Entidad implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getSexo() {
+		return this.sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getTelefono() {

@@ -1,6 +1,11 @@
 package awt_swing.JPA.Ejercicio_curso.modelo.controladores;
 
 import awt_swing.JPA.Ejercicio_curso.modelo.Materia;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import awt_swing.JPA.Ejercicio_curso.modelo.Curso;
 import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
 
 public class MateriaControlador extends Controlador {
@@ -47,6 +52,14 @@ public class MateriaControlador extends Controlador {
 	@Override
 	public Materia findPrevious(Entidad e) {
 		return (Materia) super.findPrevious(e);
+	}
+	
+	public List<Materia> findAllMaterias() {
+		List<Materia> resultado = new ArrayList<Materia>();
+		for (Entidad e : super.findAll()) {
+			resultado.add((Materia)e);
+		}
+		return resultado;
 	}
 	
 }

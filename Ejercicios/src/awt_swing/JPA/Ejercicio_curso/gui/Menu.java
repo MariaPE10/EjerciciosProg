@@ -31,7 +31,9 @@ public class Menu extends JMenuBar {
         
         menuArchivo.add(getItem("Cursos Academicos", "Gestion de Cursos Academicos", new PanelGestionCursosAcademicos()));
         menuArchivo.add(getItem("Materias", "Gestion de Materias", new PanelGestionMaterias()));
-
+        menuArchivo.add(getItem("Profesores", "Gestion de Profesores", new PanelGestionProfesores()));
+        menuArchivo.add(getItem("Estudiantes", "Gestion de Estudiante", new PanelGestionEstudiantes()));
+        
         this.add(menuArchivo);        
         
 	}
@@ -46,6 +48,9 @@ public class Menu extends JMenuBar {
 				dialogo.setResizable(false);
 				dialogo.setTitle(titulo);
 				dialogo.setBounds(100, 100, 450, 230);
+				if (panel instanceof PanelGestionProfesores || panel instanceof PanelGestionEstudiantes ) {
+					dialogo.setBounds(100, 100, 400, 350);
+				}
 				dialogo.setModal(true);
 				dialogo.setContentPane(panel);
 				dialogo.setVisible(true);
