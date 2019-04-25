@@ -119,7 +119,8 @@ public class PanelGestionProfesores extends JPanel {
 				panelDatosPersonales.setDireccion(this.actual.getDireccion());
 				panelDatosPersonales.setEmail(this.actual.getEmail());
 				panelDatosPersonales.setTelefono(this.actual.getTelefono());
-				panelDatosPersonales.setSexo(this.actual.getSexo());
+				panelDatosPersonales.setTipologiaSexo(this.actual.getTipologiaSexo());
+				panelDatosPersonales.setImagen(this.actual.getImagen());
 			}
 		}
 		
@@ -144,7 +145,8 @@ public class PanelGestionProfesores extends JPanel {
 			panelDatosPersonales.setDireccion("");
 			panelDatosPersonales.setEmail("");
 			panelDatosPersonales.setTelefono("");
-			panelDatosPersonales.setSexo(panelDatosPersonales.SEXO_TIPOS[0]);
+			panelDatosPersonales.setTipologiaSexo(panelDatosPersonales.jcbSexo.getItemAt(0));
+			panelDatosPersonales.setImagen(panelDatosPersonales.getImagenEnBlanco());
 		}
 		
 		/**
@@ -165,8 +167,9 @@ public class PanelGestionProfesores extends JPanel {
 			nuevoRegistro.setDireccion(panelDatosPersonales.getDireccion());
 			nuevoRegistro.setEmail(panelDatosPersonales.getEmail());
 			nuevoRegistro.setTelefono(panelDatosPersonales.getTelefono());
-			nuevoRegistro.setSexo(panelDatosPersonales.getSexo());
-			
+			nuevoRegistro.setTipologiaSexo(panelDatosPersonales.getTipologiaSexo());
+			nuevoRegistro.setImagen(panelDatosPersonales.getImagen());
+
 			if (nuevoRegistro.getId() == 0) {
 				ProfesorControlador.getControlador().persist(nuevoRegistro);
 			}

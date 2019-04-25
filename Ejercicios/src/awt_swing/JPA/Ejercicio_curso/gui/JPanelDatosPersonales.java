@@ -1,16 +1,34 @@
 package awt_swing.JPA.Ejercicio_curso.gui;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileFilter;
 
+import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDFabricante;
+import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
+import awt_swing.JPA.Ejercicio_curso.modelo.TipologiaSexo;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.Controlador;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.TipologiaSexoControlador;
 import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.modelo.entidades.Fabricante;
 
 public class JPanelDatosPersonales extends JPanel {
@@ -23,11 +41,13 @@ public class JPanelDatosPersonales extends JPanel {
 	JTextField jtfDireccion = new JTextField(20);
 	JTextField jtfEmail = new JTextField(20);
 	JTextField jtfTelefono = new JTextField(20);
-	JComboBox<String> jcbSexo = new JComboBox<>();
-	
-	public static final String[] SEXO_TIPOS = {"Mujer", "Hombre", "Otro"};
-	
-	
+	JComboBox<TipologiaSexo> jcbSexo = new JComboBox<>();
+	JButton jbtImagen = new JButton("Cambiar Imagen");
+	JButton jbtColor = new JButton("Elegir Color");
+	JScrollPane panelScroll = new JScrollPane();
+	JFileChooser jfileChooser;
+	private byte[] imagen = new byte[0];
+	private byte[] imagenEnBlanco = new byte[0];
 	/**
 	 * 
 	 */
@@ -47,12 +67,19 @@ public class JPanelDatosPersonales extends JPanel {
 		c.gridx = 1;
 	    jtfId.setEnabled(false);
 	    c.anchor = GridBagConstraints.WEST;
-	    //jtfId.setMinimumSize(minimaDimensionJTextField);
 	    this.add(jtfId, c);
+	    
+	    // Inclusion del JScrollPane para la imagen
+	    c.gridx = 2;
+	    c.gridheight = 5;
+	    c.fill = GridBagConstraints.BOTH;
+	    this.panelScroll.setPreferredSize(new Dimension(200, 200));
+	    this.add(panelScroll, c);
 
 		// Inclusion del JTextField para el nombre
 		c.gridx = 0;
 	    c.gridy = 1;
+	    c.gridheight = 1;
 	    c.anchor = GridBagConstraints.EAST;
 	    this.add(new JLabel("Nombre: "), c);
 		
@@ -60,7 +87,12 @@ public class JPanelDatosPersonales extends JPanel {
 	    c.anchor = GridBagConstraints.WEST;
 	    this.add(jtfNombre, c);
 	    
-	    // Inclusion del JTextField para el primer apellid0
+	    // Inclusion del JButton para la imagen
+	    c.gridx = 2;
+	    c.gridy = 5;
+	    this.add(jbtImagen, c);
+	    
+	    // Inclusion del JTextField para el primer apellido
 		c.gridx = 0;
 	    c.gridy = 2;
 	    c.anchor = GridBagConstraints.EAST;
@@ -130,6 +162,20 @@ public class JPanelDatosPersonales extends JPanel {
 		c.gridx = 1;
 	    c.anchor = GridBagConstraints.WEST;
 	    this.add(jtfTelefono, c);
+	    
+	    // Inclusion del JButton para cambiar el color
+	    c.gridy = 9;
+	    c.anchor = GridBagConstraints.WEST;
+	    this.add(jbtColor, c);
+	    
+	    // Funcionalidad de los botones
+	    jbtImagen.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				seleccionaImagen();
+				}
+		});
 	}
 
 	/**
@@ -246,17 +292,17 @@ public class JPanelDatosPersonales extends JPanel {
 	/**
 	 * 
 	 */
-	public String getSexo() {
-		return (String) jcbSexo.getSelectedItem();
+	public TipologiaSexo getTipologiaSexo() {
+		return (TipologiaSexo) jcbSexo.getSelectedItem();
 	}
 
 	/**
 	 * 
 	 */
-	public void setSexo(String newSexo) {
-		for (int i = 0; i < SEXO_TIPOS.length; i++) {
-			if (SEXO_TIPOS[i].equals(newSexo)) {
-				jcbSexo.setSelectedIndex(i);
+	public void setTipologiaSexo(TipologiaSexo tipoSex) {
+		for (int i = 0; i < this.jcbSexo.getItemCount(); i++) {
+			if (tipoSex.getId() == this.jcbSexo.getItemAt(i).getId()) {
+				this.jcbSexo.setSelectedIndex(i);
 			}
 		}
 	}
@@ -265,8 +311,89 @@ public class JPanelDatosPersonales extends JPanel {
 	 * 
 	 */
 	private void inicializaComboBoxSexo () {
-		for (String sexo : SEXO_TIPOS) {
-			jcbSexo.addItem(sexo);
+		List<TipologiaSexo> opciones = TipologiaSexoControlador.getControlador().findAllTipologiaSexos();
+		for (TipologiaSexo opcion : opciones) {
+			jcbSexo.addItem(opcion);
 		}
+	}
+
+	/**
+	 * @return the imagen
+	 */
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
+		ImageIcon icono = new ImageIcon(imagen);
+		JLabel lbl = new JLabel (icono);
+		this.panelScroll.setViewportView(lbl);
+	}
+	
+	/**
+	 * 
+	 */
+	private void seleccionaImagen () {
+		this.jfileChooser = new JFileChooser();
+		
+		//this.jfileChooser.setCurrentDirectory(new File("C:\\"));
+		this.jfileChooser.setCurrentDirectory(new File("/home/diurno/Escritorio"));
+		
+		// Tipo de selecci�n que se hace en el di�logo
+		this.jfileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		
+		// Filtro del tipo de ficheros que puede abrir
+		this.jfileChooser.setFileFilter(new FileFilter() {
+			
+			@Override
+			public boolean accept(File f) {
+				if (f.isFile() && f.getAbsolutePath().endsWith(".png") || f.getAbsolutePath().endsWith(".jpg")) 
+					return true;
+				return false;
+			}
+
+			@Override
+			public String getDescription() {
+				return "Archivos de imagen *.png *.jpg";
+			}
+		});
+		
+		int seleccionUsuario = jfileChooser.showOpenDialog(null);
+		
+		if (seleccionUsuario == JFileChooser.APPROVE_OPTION) {
+			File archivoImagen = this.jfileChooser.getSelectedFile();
+			
+			if (archivoImagen != null && archivoImagen.isFile()) {
+				try {
+					byte[] imagenEnBytes = Files.readAllBytes(archivoImagen.toPath());
+					
+					if (imagenEnBytes.length > 0) {
+						setImagen(imagenEnBytes);
+					}
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return the imagenEnBlanco
+	 */
+	public byte[] getImagenEnBlanco() {
+		return imagenEnBlanco;
+	}
+
+	/**
+	 * @param imagenEnBlanco the imagenEnBlanco to set
+	 */
+	public void setImagenEnBlanco(byte[] imagenEnBlanco) {
+		this.imagenEnBlanco = imagenEnBlanco;
 	}
 }

@@ -18,6 +18,7 @@
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Estudiante</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Materia</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Profesor</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.TipologiaSexo</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Valoracionmateria</class>
 		<properties>
            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
