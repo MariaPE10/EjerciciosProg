@@ -96,5 +96,4 @@ public class TipologiaSexo extends Entidad implements Serializable {
 	public String toString() {
 		return descripcion;
 	}
-
 }

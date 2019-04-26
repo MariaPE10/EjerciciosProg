@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -20,11 +21,13 @@ import javax.swing.JToolBar;
 
 import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDFabricante;
 import awt_swing.JPA.Ejercicio_coches.modelo.entidades.Fabricante;
-import awt_swing.JPA.Ejercicio_curso.modelo.Curso;
 import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
+import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
 import awt_swing.JPA.Ejercicio_curso.modelo.Materia;
 import awt_swing.JPA.Ejercicio_curso.modelo.Profesor;
+import awt_swing.JPA.Ejercicio_curso.modelo.Valoracionmateria;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.CursoControlador;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.MateriaControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.ProfesorControlador;
 import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
@@ -41,14 +44,17 @@ public class PanelGestionValoracionMaterias extends JPanel {
 	public static int SAVE = 5;
 	public static int REMOVE = 6;
 	
-	Curso actual = null;
+	Valoracionmateria actual = null;
 	
 	//Dimension minimaDimensionJTextField = new Dimension(150, 20);
 	
+	JButton jbtGuardarNotas = new JButton("Guardar las notas de todos los estudiantes");
 	JComboBox<Materia> jcbMaterias = new JComboBox<>();
 	JComboBox<Profesor> jcbProfesores = new JComboBox<>();
+	JButton jbtrefrescarEst = new JButton("Refrescar Estudiantes");
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
-	
+	List<EstudianteJTextField> textFieldValoraciones = new ArrayList<EstudianteJTextField>();
+
 		/**
 		 * 
 		 */
@@ -56,10 +62,10 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			super();
 			this.setLayout(new BorderLayout());
 			
-			this.add(getBarraHerramientas(), BorderLayout.NORTH);
+			this.add(getPanelNorte(), BorderLayout.NORTH);
 			this.add(getPanelGestion(), BorderLayout.CENTER);
+			this.add(getPanelSur(), BorderLayout.SOUTH);
 			
-			this.actual = CursoControlador.getControlador().findFirst();
 			cargarDatosActual();
 		}
 
@@ -91,6 +97,19 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		    c.anchor = GridBagConstraints.WEST;
 		    inicializaComboBoxProfesores();
 		    panel.add(jcbProfesores, c);
+		    
+		    c.gridx = 2;
+		    c.anchor = GridBagConstraints.WEST;
+		    panel.add(jbtrefrescarEst, c);
+		    
+		    jbtrefrescarEst.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			return panel;
 		}
 		
@@ -121,67 +140,41 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			JPanel panelGestion = new JPanel();
 			panelGestion.setLayout(new GridBagLayout());
 			GridBagConstraints c = new GridBagConstraints();
-
-			// Inclusion del JTextField para el Id
-			c.gridx = 0;
-		    c.gridy = 0;
-		    c.insets = new Insets(5, 5, 5, 5);
-		    c.anchor = GridBagConstraints.EAST;
-		    panelGestion.add(new JLabel("Identificador: "), c);
-			
-			c.gridx = 1;
-		    jtfId.setEnabled(false);
-		    c.anchor = GridBagConstraints.WEST;
-		    //jtfId.setMinimumSize(minimaDimensionJTextField);
-		    panelGestion.add(jtfId, c);
-
-			// Inclusion del JTextField para la descripcion
-			c.gridx = 0;
-		    c.gridy = 1;
-		    c.anchor = GridBagConstraints.EAST;
-		    panelGestion.add(new JLabel("Descripcion: "), c);
-			
-			c.gridx = 1;
-		    c.anchor = GridBagConstraints.WEST;
-		    //jtfDescripcion.setMinimumSize(minimaDimensionJTextField);
-		    panelGestion.add(jtfDescripcion, c);
+			c.insets = new Insets(5, 5, 5, 5);
+			List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
+			for (int i = 0; i < estudiantes.size(); i++) {
+				Estudiante estudiante = estudiantes.get(i);
+				// Inclusion del JTextField para el Nombre
+				c.gridx = 0;
+			    c.gridy = i;
+			    c.anchor = GridBagConstraints.EAST;
+			    panelGestion.add(new JLabel(estudiante.getNombre() + " " + estudiante.getPrimerApellido() + " " + estudiante.getSegundoApellido()), c);
+			    
+			    // Inclusion de JTextfield para la valoracion;
+			    c.gridx = 1;
+			    c.anchor = GridBagConstraints.WEST;
+			    EstudianteJTextField textField = new EstudianteJTextField(estudiante);
+			    panelGestion.add(textField, c);
+			}
 
 		    return panelGestion;
-		}
-
-
-		/**
-		 * 
-		 */
-		private void cargarDatosActual () {
-			if (this.actual != null) {
-				this.jtfId.setText("" + this.actual.getId());
-				this.jtfDescripcion.setText(this.actual.getDescripcion());
-			}
-		}
-		
-		/**
-		 * 
-		 */
-		private void nuevo () {
-			limpiarPantalla();
-			JOptionPane.showMessageDialog(this, "Por favor, introduzca los datos del nuevo registro");
-		}
-		
-
-		/**
-		 * 
-		 */
-		private void limpiarPantalla() {
-			this.jtfId.setText("");
-			this.jtfDescripcion.setText("");
 		}
 		
 		/**
 		 * 
 		 */
 		private void guardar () {
-			Curso nuevoRegistro = new Curso();
+			
+			for (EstudianteJTextField textField : this.textFieldValoraciones) {
+				Valoracionmateria valoracion = new Valoracionmateria();
+				
+				valoracion.setEstudiante(textField.getEstudiante());
+				
+				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
+				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
+				valoracion.setValoracion(Float.parseFloat(textField.getText()));
+				
+			}
 			
 			if (this.jtfId.getText().trim().equals("")) 
 				nuevoRegistro.setId(0);
@@ -203,34 +196,11 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			this.actual = nuevoRegistro;
 		}
 		
-		/**
-		 * 
-		 * @return
-		 */
-		private Curso eliminar () {
-			String respuestas[] = new String[] {"Si", "No"};
-			int opcionElegida = JOptionPane.showOptionDialog(null, 
-					"Realmente desea eliminar el registro?", "Eliminacion del registro", 
-			        JOptionPane.OK_CANCEL_OPTION, 
-			        JOptionPane.OK_CANCEL_OPTION, 
-			        CacheImagenes.getCacheImagenes().getIcono("confirm.png"), 
-			        respuestas, respuestas[1]);
-
-		    if(opcionElegida == 0) {
-		    	Curso nuevoAMostrar = CursoControlador.getControlador().findPrevious(actual);
-		    	if (nuevoAMostrar == null) {
-		    		nuevoAMostrar = CursoControlador.getControlador().findNext(actual);
-		    	}
-		    	CursoControlador.getControlador().remove(actual);
-				JOptionPane.showMessageDialog(this, "Eliminacion correcta");
-
-		    	if (nuevoAMostrar != null) {
-		    		actual = nuevoAMostrar;
-		    	}
-		    	else {
-		    		limpiarPantalla();
-		    	} 
-		    }
-		    return actual;
+		private JPanel getPanelSur() {
+			JPanel panel = new JPanel();
+			
+			panel.add(jbtGuardarNotas);
+			
+			return panel;
 		}
 }

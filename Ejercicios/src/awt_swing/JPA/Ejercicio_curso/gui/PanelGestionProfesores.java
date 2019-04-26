@@ -1,6 +1,7 @@
 package awt_swing.JPA.Ejercicio_curso.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,6 +43,7 @@ public class PanelGestionProfesores extends JPanel {
 			
 			this.actual = ProfesorControlador.getControlador().findFirst();
 			cargarDatosActual();
+			
 		}
 		
 		private JToolBar getBarraHerramientas() {
@@ -103,6 +105,7 @@ public class PanelGestionProfesores extends JPanel {
 						cargarDatosActual();
 					}
 				}});
+			
 		}
 
 
@@ -121,6 +124,8 @@ public class PanelGestionProfesores extends JPanel {
 				panelDatosPersonales.setTelefono(this.actual.getTelefono());
 				panelDatosPersonales.setTipologiaSexo(this.actual.getTipologiaSexo());
 				panelDatosPersonales.setImagen(this.actual.getImagen());
+				panelDatosPersonales.setColorPreferido(this.actual.getColorPreferido());
+				panelDatosPersonales.setBackground(Color.decode(this.actual.getColorPreferido()));
 			}
 		}
 		
@@ -147,6 +152,8 @@ public class PanelGestionProfesores extends JPanel {
 			panelDatosPersonales.setTelefono("");
 			panelDatosPersonales.setTipologiaSexo(panelDatosPersonales.jcbSexo.getItemAt(0));
 			panelDatosPersonales.setImagen(panelDatosPersonales.getImagenEnBlanco());
+			panelDatosPersonales.setColorPreferido(panelDatosPersonales.getColor());
+			panelDatosPersonales.setBackground(Color.decode(panelDatosPersonales.getColor()));
 		}
 		
 		/**
@@ -169,6 +176,7 @@ public class PanelGestionProfesores extends JPanel {
 			nuevoRegistro.setTelefono(panelDatosPersonales.getTelefono());
 			nuevoRegistro.setTipologiaSexo(panelDatosPersonales.getTipologiaSexo());
 			nuevoRegistro.setImagen(panelDatosPersonales.getImagen());
+			nuevoRegistro.setColorPreferido(panelDatosPersonales.getColorPreferido());
 
 			if (nuevoRegistro.getId() == 0) {
 				ProfesorControlador.getControlador().persist(nuevoRegistro);
@@ -213,4 +221,5 @@ public class PanelGestionProfesores extends JPanel {
 		    }
 		    return actual;
 		}
+		
 }

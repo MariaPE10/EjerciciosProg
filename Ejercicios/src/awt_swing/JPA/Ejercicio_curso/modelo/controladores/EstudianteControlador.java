@@ -1,6 +1,10 @@
 package awt_swing.JPA.Ejercicio_curso.modelo.controladores;
 
 import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
 
 public class EstudianteControlador extends Controlador {
@@ -49,4 +53,11 @@ public class EstudianteControlador extends Controlador {
 		return (Estudiante) super.findPrevious(e);
 	}
 	
+	public List<Estudiante> findAllEstudiantes() {
+		List<Estudiante> resultado = new ArrayList<Estudiante>();
+		for (Entidad e : super.findAll()) {
+			resultado.add((Estudiante)e);
+		}
+		return resultado;
+	}
 }

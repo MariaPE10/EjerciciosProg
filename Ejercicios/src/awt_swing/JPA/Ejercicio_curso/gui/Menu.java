@@ -3,21 +3,12 @@ package awt_swing.JPA.Ejercicio_curso.gui;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.KeyStroke;
-
-import awt_swing.JPA.Ejercicio_curso.gui.utils.CacheImagenes;
-
-
 
 
 public class Menu extends JMenuBar {
@@ -33,6 +24,7 @@ public class Menu extends JMenuBar {
         menuArchivo.add(getItem("Materias", "Gestion de Materias", new PanelGestionMaterias()));
         menuArchivo.add(getItem("Profesores", "Gestion de Profesores", new PanelGestionProfesores()));
         menuArchivo.add(getItem("Estudiantes", "Gestion de Estudiante", new PanelGestionEstudiantes()));
+        menuArchivo.add(getItem("Valoracion de Materia", "Gestipn de Valoracion de Materias", new PanelGestionValoracionMaterias()));
         
         this.add(menuArchivo);        
         

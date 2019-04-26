@@ -65,10 +65,9 @@ public class Curso extends Entidad implements Serializable {
 
 		return materia;
 	}
-	
+
 	@Override
 	public String toString() {
 		return descripcion;
 	}
-
 }

@@ -25,6 +25,8 @@ public class Profesor extends Entidad implements Serializable {
 	@Column(name="apellido2")
 	private String segundoApellido;
 
+	private String colorPreferido;
+
 	private String direccion;
 
 	private String dni;
@@ -71,6 +73,14 @@ public class Profesor extends Entidad implements Serializable {
 
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
+	}
+
+	public String getColorPreferido() {
+		return this.colorPreferido;
+	}
+
+	public void setColorPreferido(String colorPreferido) {
+		this.colorPreferido = colorPreferido;
 	}
 
 	public String getDireccion() {
@@ -149,6 +159,11 @@ public class Profesor extends Entidad implements Serializable {
 		valoracionMateria.setProfesor(null);
 
 		return valoracionMateria;
+	}
+	
+	@Override
+	public String toString() {
+		return nombre + " " + primerApellido + " " + segundoApellido;
 	}
 
 }

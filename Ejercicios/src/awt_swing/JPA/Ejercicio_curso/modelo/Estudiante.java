@@ -25,12 +25,15 @@ public class Estudiante extends Entidad implements Serializable {
 	@Column(name="apellido2")
 	private String segundoApellido;
 
+	private String colorPreferido;
+
 	private String direccion;
 
 	private String dni;
 
 	private String email;
 
+	@Lob
 	private byte[] imagen;
 
 	private String nombre;
@@ -70,6 +73,14 @@ public class Estudiante extends Entidad implements Serializable {
 
 	public void setSegundoApellido(String segundoApellido) {
 		this.segundoApellido = segundoApellido;
+	}
+
+	public String getColorPreferido() {
+		return this.colorPreferido;
+	}
+
+	public void setColorPreferido(String colorPreferido) {
+		this.colorPreferido = colorPreferido;
 	}
 
 	public String getDireccion() {

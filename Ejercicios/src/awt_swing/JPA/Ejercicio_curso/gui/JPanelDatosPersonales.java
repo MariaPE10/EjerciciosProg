@@ -1,35 +1,37 @@
 package awt_swing.JPA.Ejercicio_curso.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 
-import awt_swing.JPA.Ejercicio_coches.modelo.ControladorBBDDFabricante;
-import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
 import awt_swing.JPA.Ejercicio_curso.modelo.TipologiaSexo;
-import awt_swing.JPA.Ejercicio_curso.modelo.controladores.Controlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.TipologiaSexoControlador;
-import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.modelo.entidades.Fabricante;
 
 public class JPanelDatosPersonales extends JPanel {
 
@@ -41,13 +43,18 @@ public class JPanelDatosPersonales extends JPanel {
 	JTextField jtfDireccion = new JTextField(20);
 	JTextField jtfEmail = new JTextField(20);
 	JTextField jtfTelefono = new JTextField(20);
+	JTextField jtfColor = new JTextField(20); 
 	JComboBox<TipologiaSexo> jcbSexo = new JComboBox<>();
 	JButton jbtImagen = new JButton("Cambiar Imagen");
 	JButton jbtColor = new JButton("Elegir Color");
 	JScrollPane panelScroll = new JScrollPane();
 	JFileChooser jfileChooser;
+	JColorChooser jColorChooser;
+	JPopupMenu popup;
 	private byte[] imagen = new byte[0];
 	private byte[] imagenEnBlanco = new byte[0];
+	private String color = "#FFFFFF";
+	
 	/**
 	 * 
 	 */
@@ -80,6 +87,7 @@ public class JPanelDatosPersonales extends JPanel {
 		c.gridx = 0;
 	    c.gridy = 1;
 	    c.gridheight = 1;
+	    c.fill = GridBagConstraints.NONE;
 	    c.anchor = GridBagConstraints.EAST;
 	    this.add(new JLabel("Nombre: "), c);
 		
@@ -164,7 +172,17 @@ public class JPanelDatosPersonales extends JPanel {
 	    this.add(jtfTelefono, c);
 	    
 	    // Inclusion del JButton para cambiar el color
+	    c.gridx = 0;
 	    c.gridy = 9;
+	    c.anchor = GridBagConstraints.EAST;
+	    this.add(new JLabel("Color Preferido: "), c);
+		
+		c.gridx = 1;
+	    c.anchor = GridBagConstraints.WEST;
+	    jtfColor.setEnabled(false);
+	    this.add(jtfColor, c);
+	    
+	    c.gridx = 2;
 	    c.anchor = GridBagConstraints.WEST;
 	    this.add(jbtColor, c);
 	    
@@ -176,6 +194,23 @@ public class JPanelDatosPersonales extends JPanel {
 				seleccionaImagen();
 				}
 		});
+	    
+	    jbtColor.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				seleccionaColor();
+			}
+		});
+	    
+	    creaPopup();
+	    panelScroll.addMouseListener(new MouseAdapter() {
+	    	@Override
+			public void mousePressed(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	    
 	}
 
 	/**
@@ -310,6 +345,20 @@ public class JPanelDatosPersonales extends JPanel {
 	/**
 	 * 
 	 */
+	public String getColorPreferido() {
+		return jtfColor.getText();
+	}
+
+	/**
+	 * 
+	 */
+	public void setColorPreferido(String texto) {
+		this.jtfColor.setText(texto);
+	}
+	
+	/**
+	 * 
+	 */
 	private void inicializaComboBoxSexo () {
 		List<TipologiaSexo> opciones = TipologiaSexoControlador.getControlador().findAllTipologiaSexos();
 		for (TipologiaSexo opcion : opciones) {
@@ -367,19 +416,32 @@ public class JPanelDatosPersonales extends JPanel {
 		if (seleccionUsuario == JFileChooser.APPROVE_OPTION) {
 			File archivoImagen = this.jfileChooser.getSelectedFile();
 			
-			if (archivoImagen != null && archivoImagen.isFile()) {
-				try {
-					byte[] imagenEnBytes = Files.readAllBytes(archivoImagen.toPath());
-					
-					if (imagenEnBytes.length > 0) {
-						setImagen(imagenEnBytes);
+			try {
+				BufferedImage imagenUsu = ImageIO.read(archivoImagen);
+				int ancho = imagenUsu.getWidth();
+				int alto = imagenUsu.getHeight();
+				
+				if (archivoImagen != null && archivoImagen.isFile() && alto==300 && ancho == 300) {
+					try {
+						byte[] imagenEnBytes = Files.readAllBytes(archivoImagen.toPath());
+						
+						if (imagenEnBytes.length > 0) {
+							setImagen(imagenEnBytes);
+						}
+						
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-					
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				} else {
+					JOptionPane.showMessageDialog(null, "La imagen seleccionada no tiene las dimensiones requeridas (300x300)", "Error", 0);
 				}
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+		
 		}
 	}
 
@@ -391,9 +453,55 @@ public class JPanelDatosPersonales extends JPanel {
 	}
 
 	/**
-	 * @param imagenEnBlanco the imagenEnBlanco to set
+	 * @return the color
 	 */
-	public void setImagenEnBlanco(byte[] imagenEnBlanco) {
-		this.imagenEnBlanco = imagenEnBlanco;
+	public String getColor() {
+		return color;
 	}
+	
+	/**
+	 * 
+	 */
+	private void seleccionaColor () {
+		Color color = jColorChooser.showDialog(null, "Seleccione un Color", Color.gray);
+		// Si el usuario pulsa sobre aceptar, el color elegido no ser� nulo
+		if (color != null) {
+			String strColor = "#"+Integer.toHexString(color.getRGB()).substring(2);
+			this.jtfColor.setText(strColor);
+			this.setBackground(Color.decode(strColor));
+		}
+	}
+	
+	/**
+	 * 
+	 */
+	private void creaPopup () {
+		popup = new JPopupMenu();
+		JMenuItem opcion1 = new JMenuItem("Dimensiones");
+		JMenuItem opcion2 = new JMenuItem("Cambiar Imagen");
+		
+		opcion1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ImageIcon icono = new ImageIcon(imagen);
+				int ancho = icono.getIconWidth();
+				int alto = icono.getIconHeight();
+				
+				JOptionPane.showMessageDialog(null, "Tamaño: " + ancho + "x" + alto, "Dimensiones", 1);
+			}
+		});
+		
+		opcion2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				seleccionaImagen();
+			}
+		});
+		
+		popup.add(opcion1);
+		popup.add(opcion2);
+	}
+	
 }
