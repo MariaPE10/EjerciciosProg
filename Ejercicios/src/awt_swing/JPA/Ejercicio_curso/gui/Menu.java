@@ -24,7 +24,7 @@ public class Menu extends JMenuBar {
         menuArchivo.add(getItem("Materias", "Gestion de Materias", new PanelGestionMaterias()));
         menuArchivo.add(getItem("Profesores", "Gestion de Profesores", new PanelGestionProfesores()));
         menuArchivo.add(getItem("Estudiantes", "Gestion de Estudiante", new PanelGestionEstudiantes()));
-        menuArchivo.add(getItem("Valoracion de Materia", "Gestipn de Valoracion de Materias", new PanelGestionValoracionMaterias()));
+        menuArchivo.add(getItem("Valoracion de Materia", "Gestion de Valoracion de Materias", new PanelGestionValoracionMaterias()));
         
         this.add(menuArchivo);        
         

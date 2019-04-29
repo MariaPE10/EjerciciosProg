@@ -29,7 +29,7 @@ public class Materia extends Entidad implements Serializable {
 
 	//bi-directional many-to-one association to Valoracionmateria
 	@OneToMany(mappedBy="materia")
-	private List<Valoracionmateria> valoracionMaterias;
+	private List<ValoracionMateria> valoracionMaterias;
 
 	public Materia() {
 	}
@@ -66,22 +66,22 @@ public class Materia extends Entidad implements Serializable {
 		this.curso = curso;
 	}
 
-	public List<Valoracionmateria> getValoracionMaterias() {
+	public List<ValoracionMateria> getValoracionMaterias() {
 		return this.valoracionMaterias;
 	}
 
-	public void setValoracionMaterias(List<Valoracionmateria> valoracionMaterias) {
+	public void setValoracionMaterias(List<ValoracionMateria> valoracionMaterias) {
 		this.valoracionMaterias = valoracionMaterias;
 	}
 
-	public Valoracionmateria addValoracionMateria(Valoracionmateria valoracionMateria) {
+	public ValoracionMateria addValoracionMateria(ValoracionMateria valoracionMateria) {
 		getValoracionMaterias().add(valoracionMateria);
 		valoracionMateria.setMateria(this);
 
 		return valoracionMateria;
 	}
 
-	public Valoracionmateria removeValoracionMateria(Valoracionmateria valoracionMateria) {
+	public ValoracionMateria removeValoracionMateria(ValoracionMateria valoracionMateria) {
 		getValoracionMaterias().remove(valoracionMateria);
 		valoracionMateria.setMateria(null);
 

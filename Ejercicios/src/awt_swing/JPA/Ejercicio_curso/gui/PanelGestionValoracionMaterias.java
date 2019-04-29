@@ -25,11 +25,12 @@ import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
 import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
 import awt_swing.JPA.Ejercicio_curso.modelo.Materia;
 import awt_swing.JPA.Ejercicio_curso.modelo.Profesor;
-import awt_swing.JPA.Ejercicio_curso.modelo.Valoracionmateria;
+import awt_swing.JPA.Ejercicio_curso.modelo.ValoracionMateria;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.CursoControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.MateriaControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.ProfesorControlador;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.ValoracionMateriaControlador;
 import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
 
 
@@ -43,18 +44,15 @@ public class PanelGestionValoracionMaterias extends JPanel {
 	public static int NEW = 4;
 	public static int SAVE = 5;
 	public static int REMOVE = 6;
-	
-	Valoracionmateria actual = null;
-	
-	//Dimension minimaDimensionJTextField = new Dimension(150, 20);
-	
+			
 	JButton jbtGuardarNotas = new JButton("Guardar las notas de todos los estudiantes");
 	JComboBox<Materia> jcbMaterias = new JComboBox<>();
 	JComboBox<Profesor> jcbProfesores = new JComboBox<>();
 	JButton jbtrefrescarEst = new JButton("Refrescar Estudiantes");
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	List<EstudianteJTextField> textFieldValoraciones = new ArrayList<EstudianteJTextField>();
-
+	JPanel panelCentro = null;
+	
 		/**
 		 * 
 		 */
@@ -63,10 +61,23 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			this.setLayout(new BorderLayout());
 			
 			this.add(getPanelNorte(), BorderLayout.NORTH);
-			this.add(getPanelGestion(), BorderLayout.CENTER);
+			panelCentro = getPanelGestion();
+			this.add(panelCentro, BorderLayout.CENTER);
 			this.add(getPanelSur(), BorderLayout.SOUTH);
 			
-			cargarDatosActual();
+			JPanel panel = this;
+			jbtrefrescarEst.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					panel.remove(panelCentro);
+					panelCentro = getPanelGestion();
+					panel.add(panelCentro);
+					panel.revalidate();
+					panel.repaint();
+				}
+			});
+			
 		}
 
 		private JPanel getPanelNorte () {
@@ -102,14 +113,6 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		    c.anchor = GridBagConstraints.WEST;
 		    panel.add(jbtrefrescarEst, c);
 		    
-		    jbtrefrescarEst.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
 			return panel;
 		}
 		
@@ -154,9 +157,17 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			    c.gridx = 1;
 			    c.anchor = GridBagConstraints.WEST;
 			    EstudianteJTextField textField = new EstudianteJTextField(estudiante);
+			    ValoracionMateria valoracion = new ValoracionMateria();
+			    valoracion.setMateria((Materia) jcbMaterias.getSelectedItem());
+			    valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
+			    valoracion.setEstudiante(estudiante);
+		    	if (ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion) != null) {
+				    	textField.setText("" + ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion).getValoracion());
+				}
+			    this.textFieldValoraciones.add(textField);
 			    panelGestion.add(textField, c);
 			}
-
+			
 		    return panelGestion;
 		}
 		
@@ -166,40 +177,43 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		private void guardar () {
 			
 			for (EstudianteJTextField textField : this.textFieldValoraciones) {
-				Valoracionmateria valoracion = new Valoracionmateria();
+				ValoracionMateria valoracion = new ValoracionMateria();
 				
 				valoracion.setEstudiante(textField.getEstudiante());
-				
 				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
 				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
 				valoracion.setValoracion(Float.parseFloat(textField.getText()));
 				
+				if (ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion) != null) {
+					//valoracion.setId(valoracion.getId());
+					ValoracionMateriaControlador.getControlador().merge(valoracion);
+				}
+				else {
+					valoracion.setId(0);
+					ValoracionMateriaControlador.getControlador().persist(valoracion);
+				}
+								
 			}
-			
-			if (this.jtfId.getText().trim().equals("")) 
-				nuevoRegistro.setId(0);
-			else 
-				nuevoRegistro.setId(Integer.parseInt(this.jtfId.getText()));
-			
-			nuevoRegistro.setDescripcion(this.jtfDescripcion.getText());
-			
-			if (nuevoRegistro.getId() == 0) {
-				CursoControlador.getControlador().persist(nuevoRegistro);
-			}
-			else {
-				CursoControlador.getControlador().merge(nuevoRegistro);
-			}
-			
-			this.jtfId.setText("" + nuevoRegistro.getId());
 			JOptionPane.showMessageDialog(this, "Guardado correctamente");
-			
-			this.actual = nuevoRegistro;
+		
 		}
 		
+		/**
+		 * 
+		 * @return
+		 */
 		private JPanel getPanelSur() {
 			JPanel panel = new JPanel();
 			
 			panel.add(jbtGuardarNotas);
+			
+			jbtGuardarNotas.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					guardar();
+				}
+			});
 			
 			return panel;
 		}

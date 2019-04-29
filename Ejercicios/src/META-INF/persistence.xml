@@ -19,7 +19,7 @@
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Materia</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.Profesor</class>
 		<class>awt_swing.JPA.Ejercicio_curso.modelo.TipologiaSexo</class>
-		<class>awt_swing.JPA.Ejercicio_curso.modelo.Valoracionmateria</class>
+		<class>awt_swing.JPA.Ejercicio_curso.modelo.ValoracionMateria</class>
 		<properties>
            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/centroeducativo"/>

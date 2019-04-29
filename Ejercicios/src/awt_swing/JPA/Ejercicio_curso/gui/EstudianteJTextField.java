@@ -14,6 +14,7 @@ public class EstudianteJTextField extends JTextField {
 	public EstudianteJTextField(Estudiante estudiante) {
 		super();
 		this.estudiante = estudiante;
+		this.setColumns(5);
 	}
 
 	/**

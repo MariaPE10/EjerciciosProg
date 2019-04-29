@@ -10,8 +10,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="valoracionmateria")
-@NamedQuery(name="Valoracionmateria.findAll", query="SELECT v FROM Valoracionmateria v")
-public class Valoracionmateria extends Entidad implements Serializable {
+@NamedQuery(name="Valoracionmateria.findAll", query="SELECT v FROM ValoracionMateria v")
+public class ValoracionMateria extends Entidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,7 +35,7 @@ public class Valoracionmateria extends Entidad implements Serializable {
 	@JoinColumn(name="idProfesor")
 	private Profesor profesor;
 
-	public Valoracionmateria() {
+	public ValoracionMateria() {
 	}
 
 	public int getId() {
