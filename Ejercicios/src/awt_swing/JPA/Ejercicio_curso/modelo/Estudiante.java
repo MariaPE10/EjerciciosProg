@@ -44,7 +44,7 @@ public class Estudiante extends Entidad implements Serializable {
 	@ManyToOne
 	private TipologiaSexo tipologiaSexo;
 
-	//bi-directional many-to-one association to Valoracionmateria
+	//bi-directional many-to-one association to ValoracionMateria
 	@OneToMany(mappedBy="estudiante")
 	private List<ValoracionMateria> valoracionMaterias;
 

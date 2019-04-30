@@ -203,11 +203,13 @@ public class JPanelDatosPersonales extends JPanel {
 			}
 		});
 	    
-	    creaPopup();
 	    panelScroll.addMouseListener(new MouseAdapter() {
 	    	@Override
 			public void mousePressed(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
+	    		if (e.isPopupTrigger()) {
+	    		    creaPopup();
+	    			popup.show(e.getComponent(), e.getX(), e.getY());
+	    		}
 			}
 		});
 	    
@@ -354,18 +356,27 @@ public class JPanelDatosPersonales extends JPanel {
 	 */
 	public void setColorPreferido(String texto) {
 		this.jtfColor.setText(texto);
+		try {
+			this.setBackground(Color.decode(texto));
+		} catch (Exception e) {
+			this.setBackground(Color.decode(color));
+		}
 	}
 	
 	/**
-	 * 
+	 * @return the imagenEnBlanco
 	 */
-	private void inicializaComboBoxSexo () {
-		List<TipologiaSexo> opciones = TipologiaSexoControlador.getControlador().findAllTipologiaSexos();
-		for (TipologiaSexo opcion : opciones) {
-			jcbSexo.addItem(opcion);
-		}
+	public byte[] getImagenEnBlanco() {
+		return imagenEnBlanco;
 	}
 
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+	
 	/**
 	 * @return the imagen
 	 */
@@ -386,6 +397,16 @@ public class JPanelDatosPersonales extends JPanel {
 	/**
 	 * 
 	 */
+	private void inicializaComboBoxSexo () {
+		List<TipologiaSexo> opciones = TipologiaSexoControlador.getControlador().findAllTipologiaSexos();
+		for (TipologiaSexo opcion : opciones) {
+			jcbSexo.addItem(opcion);
+		}
+	}
+
+	/**
+	 * 
+	 */
 	private void seleccionaImagen () {
 		this.jfileChooser = new JFileChooser();
 		
@@ -400,14 +421,14 @@ public class JPanelDatosPersonales extends JPanel {
 			
 			@Override
 			public boolean accept(File f) {
-				if (f.isFile() && f.getAbsolutePath().endsWith(".png") || f.getAbsolutePath().endsWith(".jpg")) 
+				if (f.isFile() && (f.getAbsolutePath().endsWith(".png") || f.getAbsolutePath().endsWith(".jpg") || f.getAbsolutePath().endsWith(".jpeg") || f.getAbsolutePath().endsWith(".gif"))) 
 					return true;
 				return false;
 			}
 
 			@Override
 			public String getDescription() {
-				return "Archivos de imagen *.png *.jpg";
+				return "Archivos de imagen *.png *.jpg *.gif";
 			}
 		});
 		
@@ -421,7 +442,7 @@ public class JPanelDatosPersonales extends JPanel {
 				int ancho = imagenUsu.getWidth();
 				int alto = imagenUsu.getHeight();
 				
-				if (archivoImagen != null && archivoImagen.isFile() && alto==300 && ancho == 300) {
+				if (archivoImagen != null && archivoImagen.isFile() && alto <= 300 && ancho <= 300) {
 					try {
 						byte[] imagenEnBytes = Files.readAllBytes(archivoImagen.toPath());
 						
@@ -444,20 +465,6 @@ public class JPanelDatosPersonales extends JPanel {
 		
 		}
 	}
-
-	/**
-	 * @return the imagenEnBlanco
-	 */
-	public byte[] getImagenEnBlanco() {
-		return imagenEnBlanco;
-	}
-
-	/**
-	 * @return the color
-	 */
-	public String getColor() {
-		return color;
-	}
 	
 	/**
 	 * 
@@ -468,7 +475,7 @@ public class JPanelDatosPersonales extends JPanel {
 		if (color != null) {
 			String strColor = "#"+Integer.toHexString(color.getRGB()).substring(2);
 			this.jtfColor.setText(strColor);
-			this.setBackground(Color.decode(strColor));
+			this.setColorPreferido(strColor);
 		}
 	}
 	
@@ -486,7 +493,7 @@ public class JPanelDatosPersonales extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ImageIcon icono = new ImageIcon(imagen);
 				int ancho = icono.getIconWidth();
-				int alto = icono.getIconHeight();
+				int alto = icono.getIconHeight(); 
 				
 				JOptionPane.showMessageDialog(null, "Tamaño: " + ancho + "x" + alto, "Dimensiones", 1);
 			}

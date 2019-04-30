@@ -27,7 +27,7 @@ public class Materia extends Entidad implements Serializable {
 	@ManyToOne
 	private Curso curso;
 
-	//bi-directional many-to-one association to Valoracionmateria
+	//bi-directional many-to-one association to ValoracionMateria
 	@OneToMany(mappedBy="materia")
 	private List<ValoracionMateria> valoracionMaterias;
 

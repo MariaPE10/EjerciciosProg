@@ -14,6 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
 import awt_swing.JPA.Ejercicio_curso.modelo.Materia;
@@ -23,14 +27,21 @@ import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.MateriaControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.ProfesorControlador;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.ValoracionMateriaControlador;
+import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
 
 
-public class PanelGestionValoracionMaterias extends JPanel {
+public class PanelGestionValoracionMateriasSlider extends JPanel {
 
 			
 	JButton jbtGuardarNotas = new JButton("Guardar las notas de todos los estudiantes");
+	JButton jbtDerecha = new JButton();
+	JButton jbtIzqda = new JButton();
+	JButton jbtIzqdaTodos = new JButton();
+	JButton jbtDerechaTodos = new JButton();
+	JButton derecha = new JButton();
 	JComboBox<Materia> jcbMaterias = new JComboBox<>();
 	JComboBox<Profesor> jcbProfesores = new JComboBox<>();
+	JSlider jsNotas;
 	JButton jbtrefrescarEst = new JButton("Refrescar Estudiantes");
 	GridBagConstraints gridBagConstraints = new GridBagConstraints();
 	List<JPanleNotaEstudiante> panelesNotasEstudiantes = new ArrayList<JPanleNotaEstudiante>();
@@ -39,7 +50,7 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		/**
 		 * 
 		 */
-		public PanelGestionValoracionMaterias() {
+		public PanelGestionValoracionMateriasSlider() {
 			super();
 			this.setLayout(new BorderLayout());
 			
@@ -63,6 +74,10 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			
 		}
 
+		/**
+		 * 
+		 * @return
+		 */
 		private JPanel getPanelNorte () {
 			JPanel panel = new JPanel();
 			
@@ -91,6 +106,26 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		    c.anchor = GridBagConstraints.WEST;
 		    inicializaComboBoxProfesores();
 		    panel.add(jcbProfesores, c);
+		    
+		    // Inclusion del JTextField para la nota
+		    c.gridx = 0;
+ 		    c.gridy = 2;
+ 		    c.anchor = GridBagConstraints.EAST;
+ 		    panel.add(new JLabel("Notas: "), c);
+ 			
+ 			c.gridx = 1;
+ 		    c.anchor = GridBagConstraints.WEST;
+ 		    getJSlider();
+ 		    panel.add(jsNotas, c);
+ 		    
+ 		    jsNotas.addChangeListener(new ChangeListener() {
+				
+				@Override
+				public void stateChanged(ChangeEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		    
 		    c.gridx = 2;
 		    c.anchor = GridBagConstraints.WEST;
@@ -124,7 +159,11 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		 */
 		private JPanel getPanelGestion () {
 			JPanel panelGestion = new JPanel();
-			panelGestion.setLayout(new GridBagLayout());
+			panelGestion.setLayout(new BorderLayout());
+			
+			// Creacion del panel izquierda
+			JPanel panelIzqda = new JPanel();
+			panelIzqda.setLayout(new GridBagLayout());
 			GridBagConstraints c = new GridBagConstraints();
 			c.insets = new Insets(5, 5, 5, 5);
 			List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
@@ -134,18 +173,34 @@ public class PanelGestionValoracionMaterias extends JPanel {
 				c.gridx = 0;
 			    c.gridy = i;
 			    c.anchor = GridBagConstraints.EAST;
-			    JPanleNotaEstudiante panelNota = new JPanleNotaEstudiante(estudiante);
-			    panelGestion.add(panelNota, c);
-			 
-			    ValoracionMateria valoracion = new ValoracionMateria();
-			    valoracion.setMateria((Materia) jcbMaterias.getSelectedItem());
-			    valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
-			    valoracion.setEstudiante(estudiante);
-		    	if (ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion) != null) {
-		    		panelNota.getJtfNota().setText("" + ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion).getValoracion());
-				}
-			    this.panelesNotasEstudiantes.add(panelNota);
+			    
+			    panelIzqda.add(new JLabel(estudiante.getNombre() + " " + estudiante.getPrimerApellido() + " " + estudiante.getSegundoApellido()), c);
 			}
+			
+			// Creacion del panel botonera
+			JPanel panelBotonera = new JPanel();
+			panelBotonera.setLayout(new GridBagLayout());
+			c.gridy = 0;
+			c.anchor = GridBagConstraints.WEST;
+			panelBotonera.add(jbtIzqdaTodos,c);
+			configuraBoton(jbtIzqdaTodos, "gotostart.png");
+			c.gridy = 1;
+			panelBotonera.add(jbtIzqda,c);
+			configuraBoton(jbtIzqda, "previous.png");
+			c.gridy = 2;
+			panelBotonera.add(jbtDerecha, c);
+			configuraBoton(jbtDerecha, "next.png");
+			c.gridy = 3;
+			panelBotonera.add(jbtDerechaTodos,c);
+			configuraBoton(jbtDerechaTodos, "gotoend.png");
+			
+			// Creacion del panel derecho
+			JPanel panelDrcha = new JPanel();
+			panelDrcha.setLayout(new GridBagLayout());
+			
+			panelGestion.add(panelIzqda, BorderLayout.WEST);
+			panelGestion.add(panelBotonera, BorderLayout.CENTER);
+			panelGestion.add(panelDrcha, BorderLayout.EAST);
 			
 		    return panelGestion;
 		}
@@ -210,5 +265,26 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			});
 			
 			return panel;
+		}
+		
+		/**
+		 * 
+		 */
+		private void getJSlider() {			
+			jsNotas = new JSlider(0, 10, 0);
+			jsNotas.setMinorTickSpacing(1);
+			jsNotas.setMajorTickSpacing(1);
+			jsNotas.setPaintTicks(true);
+			jsNotas.setPaintLabels(true);
+			
+		}
+		
+		/**
+		 * 
+		 * @param jbt
+		 * @param icono
+		 */
+		private void configuraBoton (JButton jbt, String icono) {
+			jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));
 		}
 }
