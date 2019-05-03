@@ -9,12 +9,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -32,20 +36,22 @@ import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
 
 public class PanelGestionValoracionMateriasSlider extends JPanel {
 
-			
+	
 	JButton jbtGuardarNotas = new JButton("Guardar las notas de todos los estudiantes");
 	JButton jbtDerecha = new JButton();
 	JButton jbtIzqda = new JButton();
 	JButton jbtIzqdaTodos = new JButton();
 	JButton jbtDerechaTodos = new JButton();
-	JButton derecha = new JButton();
 	JComboBox<Materia> jcbMaterias = new JComboBox<>();
 	JComboBox<Profesor> jcbProfesores = new JComboBox<>();
 	JSlider jsNotas;
 	JButton jbtrefrescarEst = new JButton("Refrescar Estudiantes");
-	GridBagConstraints gridBagConstraints = new GridBagConstraints();
-	List<JPanleNotaEstudiante> panelesNotasEstudiantes = new ArrayList<JPanleNotaEstudiante>();
 	JPanel panelCentro = null;
+	DefaultListModel<Estudiante> modelEstudiantesNoSeleccionados = new DefaultListModel<Estudiante>();
+	JList<Estudiante> jlNoSeleccionados = new JList<Estudiante>(modelEstudiantesNoSeleccionados);
+	DefaultListModel<Estudiante> modelEstudiantesSeleccionados = new DefaultListModel<Estudiante>();
+	JList<Estudiante> jlSeleccionados = new JList<Estudiante>(modelEstudiantesSeleccionados);
+	List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
 	
 		/**
 		 * 
@@ -59,6 +65,13 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 			this.add(panelCentro, BorderLayout.CENTER);
 			this.add(getPanelSur(), BorderLayout.SOUTH);
 			
+			jlNoSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			jlNoSeleccionados.setLayoutOrientation(JList.VERTICAL);
+			jlNoSeleccionados.setVisibleRowCount(5);
+			jlSeleccionados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			jlSeleccionados.setLayoutOrientation(JList.VERTICAL);
+			jlSeleccionados.setVisibleRowCount(5);
+			
 			JPanel panel = this;
 			jbtrefrescarEst.addActionListener(new ActionListener() {
 				
@@ -69,6 +82,10 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 					panel.add(panelCentro);
 					panel.revalidate();
 					panel.repaint();
+					jbtDerechaTodos.setEnabled(true);
+					jbtDerecha.setEnabled(true);
+					jbtIzqdaTodos.setEnabled(false);
+					jbtIzqda.setEnabled(false);
 				}
 			});
 			
@@ -162,42 +179,15 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 			panelGestion.setLayout(new BorderLayout());
 			
 			// Creacion del panel izquierda
-			JPanel panelIzqda = new JPanel();
-			panelIzqda.setLayout(new GridBagLayout());
-			GridBagConstraints c = new GridBagConstraints();
-			c.insets = new Insets(5, 5, 5, 5);
-			List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
-			for (int i = 0; i < estudiantes.size(); i++) {
-				Estudiante estudiante = estudiantes.get(i);
-				// Inclusion de JPanelNotasEstudiante
-				c.gridx = 0;
-			    c.gridy = i;
-			    c.anchor = GridBagConstraints.EAST;
-			    
-			    panelIzqda.add(new JLabel(estudiante.getNombre() + " " + estudiante.getPrimerApellido() + " " + estudiante.getSegundoApellido()), c);
-			}
-			
+			JPanel panelIzqda = getPanelTodosEstudiantes();
 			// Creacion del panel botonera
-			JPanel panelBotonera = new JPanel();
-			panelBotonera.setLayout(new GridBagLayout());
-			c.gridy = 0;
-			c.anchor = GridBagConstraints.WEST;
-			panelBotonera.add(jbtIzqdaTodos,c);
-			configuraBoton(jbtIzqdaTodos, "gotostart.png");
-			c.gridy = 1;
-			panelBotonera.add(jbtIzqda,c);
-			configuraBoton(jbtIzqda, "previous.png");
-			c.gridy = 2;
-			panelBotonera.add(jbtDerecha, c);
-			configuraBoton(jbtDerecha, "next.png");
-			c.gridy = 3;
-			panelBotonera.add(jbtDerechaTodos,c);
-			configuraBoton(jbtDerechaTodos, "gotoend.png");
-			
+			JPanel panelBotonera = getPanelBotonera();
 			// Creacion del panel derecho
 			JPanel panelDrcha = new JPanel();
 			panelDrcha.setLayout(new GridBagLayout());
-			
+			modelEstudiantesSeleccionados.removeAllElements();
+			panelDrcha.add(jlSeleccionados);
+					
 			panelGestion.add(panelIzqda, BorderLayout.WEST);
 			panelGestion.add(panelBotonera, BorderLayout.CENTER);
 			panelGestion.add(panelDrcha, BorderLayout.EAST);
@@ -207,30 +197,165 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 		
 		/**
 		 * 
+		 * @return
+		 */
+		private JPanel getPanelTodosEstudiantes() {
+			JPanel panelIzqda = new JPanel();
+			panelIzqda.setLayout(new GridBagLayout());
+			modelEstudiantesNoSeleccionados.removeAllElements();
+			for (Estudiante estudiante : estudiantes) {
+				modelEstudiantesNoSeleccionados.addElement(estudiante);
+			}
+			panelIzqda.add(jlNoSeleccionados);
+			return panelIzqda;
+		}
+		
+		
+		/**
+		 * 
+		 * @return
+		 */
+		private JPanel getPanelBotonera() {
+			JPanel panelBotonera = new JPanel();
+			panelBotonera.setLayout(new GridBagLayout());
+			GridBagConstraints c = new GridBagConstraints();
+			c.insets = new Insets(5, 5, 5, 5);
+			c.gridy = 0;
+			c.anchor = GridBagConstraints.WEST;
+			panelBotonera.add(jbtIzqdaTodos,c);
+			configuraBoton(jbtIzqdaTodos, "gotostart.png");
+			
+			jbtIzqdaTodos.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					quitaTodosEstudiantes();
+					
+				}
+			});
+			c.gridy = 1;
+			panelBotonera.add(jbtIzqda,c);
+			configuraBoton(jbtIzqda, "previous.png");
+			
+			jbtIzqda.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					quitaUnEstudiante();
+					
+				}
+			});
+			c.gridy = 2;
+			panelBotonera.add(jbtDerecha, c);
+			configuraBoton(jbtDerecha, "next.png");
+			
+			jbtDerecha.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					agregaUnEstudiante();
+					
+				}
+			});
+			c.gridy = 3;
+			panelBotonera.add(jbtDerechaTodos,c);
+			configuraBoton(jbtDerechaTodos, "gotoend.png");
+
+			jbtDerechaTodos.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					agregaTodosEstudiantes();
+					
+				}
+			});
+			
+			return panelBotonera;
+		}
+		
+		/**
+		 * 
+		 */
+		private void quitaTodosEstudiantes() {
+			modelEstudiantesSeleccionados.removeAllElements();
+			modelEstudiantesNoSeleccionados.removeAllElements();
+			for (Estudiante estudiante : estudiantes) {
+				modelEstudiantesNoSeleccionados.addElement(estudiante);
+			}
+			jbtDerechaTodos.setEnabled(true);
+			jbtDerecha.setEnabled(true);
+			jbtIzqdaTodos.setEnabled(false);
+			jbtIzqda.setEnabled(false);
+		}
+		
+		/**
+		 * 
+		 */
+		private void agregaTodosEstudiantes() {
+			modelEstudiantesSeleccionados.removeAllElements();
+			modelEstudiantesNoSeleccionados.removeAllElements();
+			for (Estudiante estudiante : estudiantes) {
+				modelEstudiantesSeleccionados.addElement(estudiante);
+			}
+			jbtDerechaTodos.setEnabled(false);
+			jbtDerecha.setEnabled(false);
+			jbtIzqdaTodos.setEnabled(true);
+			jbtIzqda.setEnabled(true);
+		}
+		
+		/**
+		 * 
+		 */
+		private void quitaUnEstudiante() {
+			if (!jlSeleccionados.isSelectionEmpty()) {
+				modelEstudiantesNoSeleccionados.addElement(jlSeleccionados.getSelectedValue());
+				modelEstudiantesSeleccionados.removeElementAt(jlSeleccionados.getSelectedIndex());
+				jbtDerechaTodos.setEnabled(true);
+				jbtDerecha.setEnabled(true);
+				jbtIzqdaTodos.setEnabled(true);
+				jbtIzqda.setEnabled(true);
+			}
+		}
+		
+		/**
+		 * 
+		 */
+		private void agregaUnEstudiante() {
+			if (!jlNoSeleccionados.isSelectionEmpty()) {
+				modelEstudiantesSeleccionados.addElement(jlNoSeleccionados.getSelectedValue());
+				modelEstudiantesNoSeleccionados.removeElementAt(jlNoSeleccionados.getSelectedIndex());
+				jbtDerechaTodos.setEnabled(true);
+				jbtDerecha.setEnabled(true);
+				jbtIzqdaTodos.setEnabled(true);
+				jbtIzqda.setEnabled(true);
+			}
+		}
+		/**
+		 * 
 		 */
 		private void guardar () {
-			
-			for (JPanleNotaEstudiante panelNotas : this.panelesNotasEstudiantes) {
-				ValoracionMateria valoracion = new ValoracionMateria();
-				
-				valoracion.setEstudiante(panelNotas.getEstudiante());
-				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
-				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
-				valoracion.setValoracion(getNota(panelNotas));
-				
-				ValoracionMateria valoracionAlmacenada = ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion);
-				if (valoracionAlmacenada != null) {
-					//valoracion.setId(valoracion.getId());
-					valoracionAlmacenada.setValoracion(valoracion.getValoracion());
-					ValoracionMateriaControlador.getControlador().merge(valoracionAlmacenada);
-				}
-				else {
-					valoracion.setId(0);
-					ValoracionMateriaControlador.getControlador().persist(valoracion);
-				}
-								
-			}
-			JOptionPane.showMessageDialog(this, "Guardado correctamente");
+//			
+//			for (JPanleNotaEstudiante panelNotas : this.panelesNotasEstudiantes) {
+//				ValoracionMateria valoracion = new ValoracionMateria();
+//				
+//				valoracion.setEstudiante(panelNotas.getEstudiante());
+//				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
+//				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
+//				valoracion.setValoracion(getNota(panelNotas));
+//				
+//				ValoracionMateria valoracionAlmacenada = ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion);
+//				if (valoracionAlmacenada != null) {
+//					//valoracion.setId(valoracion.getId());
+//					valoracionAlmacenada.setValoracion(valoracion.getValoracion());
+//					ValoracionMateriaControlador.getControlador().merge(valoracionAlmacenada);
+//				}
+//				else {
+//					valoracion.setId(0);
+//					ValoracionMateriaControlador.getControlador().persist(valoracion);
+//				}
+//								
+//			}
+//			JOptionPane.showMessageDialog(this, "Guardado correctamente");
 		
 		}
 		
