@@ -2,14 +2,15 @@ package awt_swing.JPA.Ejercicio_curso.modelo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
- * The persistent class for the valoracionmateria database table.
+ * The persistent class for the valoracionMateria database table.
  * 
  */
 @Entity
-@Table(name="valoracionmateria")
+@Table(name="valoracionMateria")
 @NamedQuery(name="ValoracionMateria.findAll", query="SELECT v FROM ValoracionMateria v")
 public class ValoracionMateria extends Entidad implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,17 +19,20 @@ public class ValoracionMateria extends Entidad implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
-	private float valoracion;
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 
-	//bi-directional many-to-one association to Estudiante
-	@ManyToOne
-	@JoinColumn(name="idEstudiante")
-	private Estudiante estudiante;
+	private float valoracion;
 
 	//bi-directional many-to-one association to Materia
 	@ManyToOne
 	@JoinColumn(name="idMateria")
 	private Materia materia;
+
+	//bi-directional many-to-one association to Estudiante
+	@ManyToOne
+	@JoinColumn(name="idEstudiante")
+	private Estudiante estudiante;
 
 	//bi-directional many-to-one association to Profesor
 	@ManyToOne
@@ -46,6 +50,14 @@ public class ValoracionMateria extends Entidad implements Serializable {
 		this.id = id;
 	}
 
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
 	public float getValoracion() {
 		return this.valoracion;
 	}
@@ -54,20 +66,20 @@ public class ValoracionMateria extends Entidad implements Serializable {
 		this.valoracion = valoracion;
 	}
 
-	public Estudiante getEstudiante() {
-		return this.estudiante;
-	}
-
-	public void setEstudiante(Estudiante estudiante) {
-		this.estudiante = estudiante;
-	}
-
 	public Materia getMateria() {
 		return this.materia;
 	}
 
 	public void setMateria(Materia materia) {
 		this.materia = materia;
+	}
+
+	public Estudiante getEstudiante() {
+		return this.estudiante;
+	}
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 
 	public Profesor getProfesor() {

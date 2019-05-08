@@ -1,27 +1,30 @@
 package awt_swing.JPA.Ejercicio_curso.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+
+import org.eclipse.persistence.sdo.helper.SDODataFactory;
 
 import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
 import awt_swing.JPA.Ejercicio_curso.modelo.Materia;
@@ -52,6 +55,9 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 	DefaultListModel<Estudiante> modelEstudiantesSeleccionados = new DefaultListModel<Estudiante>();
 	JList<Estudiante> jlSeleccionados = new JList<Estudiante>(modelEstudiantesSeleccionados);
 	List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
+	JFormattedTextField jftfFecha;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 	
 		/**
 		 * 
@@ -77,11 +83,16 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					panel.remove(panelCentro);
-					panelCentro = getPanelGestion();
-					panel.add(panelCentro);
-					panel.revalidate();
-					panel.repaint();
+//					panel.remove(panelCentro);
+//					panelCentro = getPanelGestion();
+//					panel.add(panelCentro);
+//					panel.revalidate();
+//					panel.repaint();
+					modelEstudiantesSeleccionados.removeAllElements();
+					modelEstudiantesNoSeleccionados.removeAllElements();
+					for (Estudiante estudiante : estudiantes) {
+						modelEstudiantesNoSeleccionados.addElement(estudiante);
+					}
 					jbtDerechaTodos.setEnabled(true);
 					jbtDerecha.setEnabled(true);
 					jbtIzqdaTodos.setEnabled(false);
@@ -124,7 +135,7 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 		    inicializaComboBoxProfesores();
 		    panel.add(jcbProfesores, c);
 		    
-		    // Inclusion del JTextField para la nota
+		    // Inclusion del Jslider para la nota
 		    c.gridx = 0;
  		    c.gridy = 2;
  		    c.anchor = GridBagConstraints.EAST;
@@ -135,15 +146,18 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
  		    getJSlider();
  		    panel.add(jsNotas, c);
  		    
- 		    jsNotas.addChangeListener(new ChangeListener() {
-				
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+ 		   // Inclusion del JFormatText para la fecha
+		    c.gridx = 0;
+ 		    c.gridy = 3;
+ 		    c.anchor = GridBagConstraints.EAST;
+ 		    panel.add(new JLabel("Fecha: "), c);
+ 			
+ 			c.gridx = 1;
+ 		    c.anchor = GridBagConstraints.WEST;
+ 		    getJFormattedTextFieldFecha();
+ 		    panel.add(jftfFecha, c);
 		    
+ 		    // Inclusion del JButton para refrescar los estudiantes
 		    c.gridx = 2;
 		    c.anchor = GridBagConstraints.WEST;
 		    panel.add(jbtrefrescarEst, c);
@@ -334,42 +348,40 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 		 * 
 		 */
 		private void guardar () {
-//			
-//			for (JPanleNotaEstudiante panelNotas : this.panelesNotasEstudiantes) {
-//				ValoracionMateria valoracion = new ValoracionMateria();
-//				
-//				valoracion.setEstudiante(panelNotas.getEstudiante());
-//				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
-//				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
-//				valoracion.setValoracion(getNota(panelNotas));
-//				
-//				ValoracionMateria valoracionAlmacenada = ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion);
-//				if (valoracionAlmacenada != null) {
-//					//valoracion.setId(valoracion.getId());
-//					valoracionAlmacenada.setValoracion(valoracion.getValoracion());
-//					ValoracionMateriaControlador.getControlador().merge(valoracionAlmacenada);
-//				}
-//				else {
-//					valoracion.setId(0);
-//					ValoracionMateriaControlador.getControlador().persist(valoracion);
-//				}
-//								
-//			}
-//			JOptionPane.showMessageDialog(this, "Guardado correctamente");
-		
-		}
-		
-		/**
-		 * 
-		 * @param panelNotas
-		 * @return
-		 */
-		private float getNota(JPanleNotaEstudiante panelNotas) {
+			Date fechaEvaluacion = null;
+			
 			try {
-				 return Float.parseFloat(panelNotas.getJtfNota().getText());
-			} catch (Exception e) {
-				return 0f;
+				fechaEvaluacion = sdf.parse(jftfFecha.getText());
+			} catch (ParseException e1) {
+				JOptionPane.showMessageDialog(null, "El formato de la fecha es erroneo. \n El formato requerido es dd/mm/aaaa", "Error en el campo fecha", 0);
+				return;
 			}
+			
+			for (int i = 0 ; i<jlSeleccionados.getModel().getSize(); i++) {
+				Estudiante estudiante = jlSeleccionados.getModel().getElementAt(i);				
+				ValoracionMateria valoracion = new ValoracionMateria();
+				
+				valoracion.setEstudiante(estudiante);
+				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
+				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
+				valoracion.setValoracion(jsNotas.getValue());
+				valoracion.setFecha(fechaEvaluacion);
+				
+				ValoracionMateria valoracionAlmacenada = ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion);
+				if (valoracionAlmacenada != null) {
+					valoracionAlmacenada.setValoracion(valoracion.getValoracion());
+					valoracionAlmacenada.setFecha(valoracion.getFecha());
+					ValoracionMateriaControlador.getControlador().merge(valoracionAlmacenada);
+				}
+				else {
+					valoracion.setId(0);
+					ValoracionMateriaControlador.getControlador().persist(valoracion);
+				}
+								
+			}
+			
+			JOptionPane.showMessageDialog(this, "Guardado correctamente");
+		
 		}
 		
 		/**
@@ -411,5 +423,34 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 		 */
 		private void configuraBoton (JButton jbt, String icono) {
 			jbt.setIcon(CacheImagenes.getCacheImagenes().getIcono(icono));
+		}
+		
+		/**
+		 * 
+		 * @return
+		 */
+		private void getJFormattedTextFieldFecha() {
+
+			 jftfFecha = new JFormattedTextField(new JFormattedTextField.AbstractFormatter() {
+				 
+				@Override
+				public String valueToString(Object value) throws ParseException {
+					if (value != null && value instanceof Date) {
+						return sdf.format(((Date) value));
+					}
+					return "";
+				}
+
+				@Override
+				public Object stringToValue(String text) throws ParseException {
+					try {
+						return sdf.parse(text);
+					} catch (Exception e) {
+						return null;
+					}
+				}
+			});
+			 jftfFecha.setColumns(7);
+			 jftfFecha.setValue(new Date());
 		}
 }

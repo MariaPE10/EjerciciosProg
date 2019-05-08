@@ -165,4 +165,5 @@ public class Profesor extends Entidad implements Serializable {
 	public String toString() {
 		return nombre + " " + primerApellido + " " + segundoApellido;
 	}
+
 }

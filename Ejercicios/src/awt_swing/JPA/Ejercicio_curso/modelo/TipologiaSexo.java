@@ -90,8 +90,8 @@ public class TipologiaSexo extends Entidad implements Serializable {
 		profesor.setTipologiaSexo(null);
 
 		return profesor;
-	}
-
+	}	
+	
 	@Override
 	public String toString() {
 		return descripcion;

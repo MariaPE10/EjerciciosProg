@@ -77,7 +77,7 @@ public class ValoracionMateriaControlador extends Controlador {
 		EntityManager em = null;
 		try {
 			em = getEntityManagerFactory().createEntityManager();
-			Query q = em.createNativeQuery("SELECT * from valoracionmateria where idProfesor = ? and idEstudiante = ? and idMateria = ?", ValoracionMateria.class);
+			Query q = em.createNativeQuery("SELECT * from valoracionMateria where idProfesor = ? and idEstudiante = ? and idMateria = ?", ValoracionMateria.class);
 			q.setParameter(1, vm.getProfesor().getId());
 			q.setParameter(2, vm.getEstudiante().getId());
 			q.setParameter(3, vm.getMateria().getId());

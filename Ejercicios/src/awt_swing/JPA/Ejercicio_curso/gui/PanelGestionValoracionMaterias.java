@@ -142,7 +142,7 @@ public class PanelGestionValoracionMaterias extends JPanel {
 			    valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
 			    valoracion.setEstudiante(estudiante);
 		    	if (ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion) != null) {
-		    		panelNota.getJtfNota().setText("" + ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion).getValoracion());
+		    		panelNota.setNota((int) ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion).getValoracion());
 				}
 			    this.panelesNotasEstudiantes.add(panelNota);
 			}
@@ -161,11 +161,10 @@ public class PanelGestionValoracionMaterias extends JPanel {
 				valoracion.setEstudiante(panelNotas.getEstudiante());
 				valoracion.setProfesor((Profesor) jcbProfesores.getSelectedItem());
 				valoracion.setMateria((Materia) jcbMaterias.getSelectedItem()); 
-				valoracion.setValoracion(getNota(panelNotas));
+				valoracion.setValoracion(panelNotas.getNota());
 				
 				ValoracionMateria valoracionAlmacenada = ValoracionMateriaControlador.getControlador().findByProfesorAndMateriaAndEstudiante(valoracion);
 				if (valoracionAlmacenada != null) {
-					//valoracion.setId(valoracion.getId());
 					valoracionAlmacenada.setValoracion(valoracion.getValoracion());
 					ValoracionMateriaControlador.getControlador().merge(valoracionAlmacenada);
 				}
@@ -179,18 +178,15 @@ public class PanelGestionValoracionMaterias extends JPanel {
 		
 		}
 		
-		/**
-		 * 
-		 * @param panelNotas
-		 * @return
-		 */
-		private float getNota(JPanleNotaEstudiante panelNotas) {
-			try {
-				 return Float.parseFloat(panelNotas.getJtfNota().getText());
-			} catch (Exception e) {
-				return 0f;
-			}
-		}
+//		/**
+//		 * 
+//		 * @param panelNotas
+//		 * @return
+//		 */
+//		private int getNota(JPanleNotaEstudiante panelNotas) {
+//			
+//			return Integer.parseInt(panelNotas.getJspNota().getValue());
+//		}
 		
 		/**
 		 * 
