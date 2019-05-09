@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 
 public class Menu extends JMenuBar {
@@ -26,6 +27,8 @@ public class Menu extends JMenuBar {
         menuArchivo.add(getItem("Estudiantes", "Gestion de Estudiante", new PanelGestionEstudiantes()));
         menuArchivo.add(getItem("Valoracion de Materia", "Gestion de Valoracion de Materias", new PanelGestionValoracionMaterias()));
         menuArchivo.add(getItem("Valoracion Materias 2", "Gestion de Valoracion de Materias", new PanelGestionValoracionMateriasSlider()));
+        menuArchivo.add(getItem("Tabla Html", "Tabla de alumnos", new JEditorPaneHTML()));
+        menuArchivo.add(getItem("SplitPane Estudiantes", "Tabla Estudiantes", new JSplitPaneTabla()));
         this.add(menuArchivo);        
         
 	}
@@ -50,5 +53,25 @@ public class Menu extends JMenuBar {
         
         return item;
 	}
-
+	
+	private JMenuItem getItem(String nombreItem, String titulo, JSplitPane panel) {
+		JMenuItem item = new JMenuItem(nombreItem);
+		item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialogo = new JDialog();
+				dialogo.setResizable(true);
+				dialogo.setTitle(titulo);
+				dialogo.setContentPane(panel);
+				dialogo.pack();
+				dialogo.setModal(true);
+				dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2, 
+						(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - dialogo.getHeight()/2);
+				dialogo.setVisible(true);
+			}
+		});
+        
+        return item;
+	}
 }

@@ -91,4 +91,24 @@ public class ValoracionMateriaControlador extends Controlador {
 	}
 	
 
+	/**
+	 * 
+	 * @return
+	 */
+	public List<ValoracionMateria>findByMateriaAndEstudiante (ValoracionMateria vm) {
+		List<ValoracionMateria> resultado = new ArrayList<ValoracionMateria>();
+		EntityManager em = null;
+		try {
+			em = getEntityManagerFactory().createEntityManager();
+			Query q = em.createNativeQuery("SELECT * from valoracionMateria where idEstudiante = ? and idMateria = ?", ValoracionMateria.class);
+			q.setParameter(1, vm.getEstudiante().getId());
+			q.setParameter(2, vm.getMateria().getId());
+			resultado.addAll((List<ValoracionMateria>) q.getResultList());
+		}
+		catch (NoResultException nrEx) {
+			return null;
+		}
+		em.close();
+		return resultado;
+	}
 }

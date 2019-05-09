@@ -408,7 +408,7 @@ public class PanelGestionValoracionMateriasSlider extends JPanel {
 		 * 
 		 */
 		private void getJSlider() {			
-			jsNotas = new JSlider(0, 10, 0);
+			jsNotas = new JSlider(0, 10, 5);
 			jsNotas.setMinorTickSpacing(1);
 			jsNotas.setMajorTickSpacing(1);
 			jsNotas.setPaintTicks(true);
