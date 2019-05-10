@@ -12,8 +12,8 @@ public class MiTableModel  extends AbstractTableModel {
 	 */
 	public MiTableModel() {
 		// Datos a presentar en la tabla
-		datos = DatosDeTabla.getDatosDeTabla();
-		titulos = DatosDeTabla.getTitulosColumnas();
+		datos = DatosTabla.getDatosDeTabla();
+		titulos = DatosTabla.getTitulosColumnas();
 	}
 	
 	// Los tres siguientes m�todos son los m�nimos necesarios para representar la tabla

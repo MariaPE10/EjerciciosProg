@@ -221,4 +221,13 @@ public class PanelGestionEstudiantes extends JPanel {
 		    }
 		    return actual;
 		}
+
+		/**
+		 * @param actual the actual to set
+		 */
+		public void setActual(Estudiante actual) {
+			this.actual = actual;
+		}
+		
+		
 }

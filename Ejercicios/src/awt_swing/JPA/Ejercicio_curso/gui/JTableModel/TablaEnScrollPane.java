@@ -3,19 +3,23 @@ package awt_swing.JPA.Ejercicio_curso.gui.JTableModel;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import java.util.List;
 
-import tutorialJava.modelosBasesDeDatosComunesJPA.poblacionPorProvincias.Provincia;
+import awt_swing.JPA.Ejercicio_curso.gui.JSplitPaneTabla;
+import awt_swing.JPA.Ejercicio_curso.gui.PanelGestionEstudiantes;
+import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 
 public class TablaEnScrollPane extends JPanel {
 
 	MiTableModel tableModel = null;
+	private List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
+	private PanelGestionEstudiantes panelEstudiante = new PanelGestionEstudiantes();
 	
 	public TablaEnScrollPane () {
 		// Construyo el tableModel y la tabla
@@ -25,9 +29,6 @@ public class TablaEnScrollPane extends JPanel {
 		jTable.setDefaultRenderer(Object.class, new MiDefaultTableCellRenderer());
 		jTable.setDefaultRenderer(Integer.class, new MiDefaultTableCellRenderer());
 		jTable.setDefaultRenderer(Boolean.class, new MiBooleanTableCellRenderer());
-		jTable.setDefaultRenderer(Date.class, new MiDateTableCellRenderer());
-		jTable.setDefaultEditor(Date.class, new MiDateTableCellEditor(new SimpleDateFormat("dd/MM/yyyy")));
-		jTable.setDefaultEditor(Provincia.class, new MiProvinciaTableCellEditor());
 		
 		MiTableHeaderCellRenderer tableHeaderCellRenderer = new MiTableHeaderCellRenderer();
 		for (int i = 0; i < jTable.getColumnCount(); i++) {
@@ -40,7 +41,13 @@ public class TablaEnScrollPane extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				int idSeleccionado = ((Integer) tableModel.getValueAt(jTable.getSelectedRow(), 0)).intValue();
-				System.out.println("Clic en la fila con identificador: " + idSeleccionado);
+				for (int i = 0; i<estudiantes.size(); i++) {
+					Estudiante estudiante = estudiantes.get(i);
+					if(estudiante.getId() == idSeleccionado) {
+						JSplitPaneTabla
+					}
+				}
+				System.out.println(idSeleccionado);
 			}
 		});
 		
@@ -52,5 +59,12 @@ public class TablaEnScrollPane extends JPanel {
 		this.add(scrollPane, BorderLayout.CENTER);
 		this.add(new JTextArea("JTable construida con AbstractTableModel y CellRenderer personalizado.\n"
 				+ "Gracias a esto podemos controlar la forma en la que los datos se muestran al usuario"), BorderLayout.SOUTH);
+	}
+	
+	/**
+	 * @return the panelEstudiante
+	 */
+	public PanelGestionEstudiantes getPanelEstudiante() {
+		return panelEstudiante;
 	}
 }
