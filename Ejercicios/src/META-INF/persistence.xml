@@ -27,4 +27,14 @@
             <property name="javax.persistence.jdbc.password" value="1234"/>
         </properties>
 	</persistence-unit>
+	<persistence-unit name="Ejercicio_provincias">
+		<class>awt_swing.JPA.Ejercicio_Provincias.modelo.Persona</class>
+		<class>awt_swing.JPA.Ejercicio_Provincias.modelo.Provincia</class>
+		<properties>
+           <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/poblacionprovincia"/>
+            <property name="javax.persistence.jdbc.user" value="java"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+        </properties>
+	</persistence-unit>
 </persistence>
