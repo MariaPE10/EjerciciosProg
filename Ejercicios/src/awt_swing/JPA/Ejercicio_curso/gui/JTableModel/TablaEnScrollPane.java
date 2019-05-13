@@ -69,7 +69,7 @@ public class TablaEnScrollPane extends JPanel {
 	// Crear la BBDD con el fichero sql
 	// Ventana de menú con 3 paneles
 	// JPanelGestionEstudiantes (parecido), WindowBuilder
-	// GridBagLayout, 
+	// GridBagLayout
 	// JList, JTable, JCombo, JSlider, JSpinner (int y float), JFotmated con Fecha
 	// JCheckbox, JRadioButton
 	// Consulta sql mas elaborada (tipo fin por prof, materia y estudiante)

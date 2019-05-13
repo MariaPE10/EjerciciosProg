@@ -19,6 +19,9 @@ public class Estudiante extends Entidad implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
+	@Column(name="Activo")
+	private boolean activo;
+
 	@Column(name="apellido1")
 	private String primerApellido;
 
@@ -57,6 +60,14 @@ public class Estudiante extends Entidad implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public boolean getActivo() {
+		return this.activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 	public String getPrimerApellido() {
@@ -161,7 +172,7 @@ public class Estudiante extends Entidad implements Serializable {
 		return valoracionMateria;
 	}
 
-	
+
 	@Override
 	public String toString() {
 		return nombre + " " + primerApellido + " " + segundoApellido;

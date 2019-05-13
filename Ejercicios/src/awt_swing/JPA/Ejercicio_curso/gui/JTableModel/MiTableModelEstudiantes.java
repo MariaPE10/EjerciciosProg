@@ -24,7 +24,7 @@ public class MiTableModelEstudiantes  extends MiTableModelAbstract {
 	 * @return
 	 */
 	public String[] getTitulosColumnas() {
-		return new String[] {"Id", "Nombre", "1er apellido", "2do apellido","DNI","Direccion", "Email", "Telefono", "Sexo", "Imagen", "Color Preferido"};
+		return new String[] {"Id", "Nombre", "1er apellido", "2do apellido","DNI","Direccion", "Email", "Telefono", "Sexo", "Imagen", "Color Preferido", "Activo"};
 	}
 
 	/**
@@ -35,7 +35,7 @@ public class MiTableModelEstudiantes  extends MiTableModelAbstract {
 		// Obtengo todas las personas
 		List<Estudiante> estudiantes = EstudianteControlador.getControlador().findAllEstudiantes();
 		// Preparo una estructura para pasar al constructor de la JTable
-		Object[][] datos = new Object[estudiantes.size()][11];
+		Object[][] datos = new Object[estudiantes.size()][12];
 		// Cargo los datos de la lista de personas en la matriz de los datos
 		for (int i = 0; i < estudiantes.size(); i++) {
 			Estudiante estudiante = estudiantes.get(i);
@@ -50,6 +50,7 @@ public class MiTableModelEstudiantes  extends MiTableModelAbstract {
 			datos[i][8] = estudiante.getTipologiaSexo();
 			datos[i][9] = estudiante.getImagen();
 			datos[i][10] = estudiante.getColorPreferido();
+			datos[i][11] = estudiante.getActivo();
 		}
 		
 		return datos;

@@ -160,10 +160,9 @@ public class Profesor extends Entidad implements Serializable {
 
 		return valoracionMateria;
 	}
-	
+
 	@Override
 	public String toString() {
 		return nombre + " " + primerApellido + " " + segundoApellido;
 	}
-
 }
