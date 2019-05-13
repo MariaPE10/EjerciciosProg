@@ -10,7 +10,6 @@ import java.util.Date;
  * 
  */
 @Entity
-@Table(name="persona")
 @NamedQuery(name="Persona.findAll", query="SELECT p FROM Persona p")
 public class Persona extends Entidad implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +19,8 @@ public class Persona extends Entidad implements Serializable {
 	private int id;
 
 	private boolean activo;
+
+	private float altura;
 
 	@Column(name="apellido1")
 	private String primerApellido;
@@ -56,6 +57,14 @@ public class Persona extends Entidad implements Serializable {
 
 	public void setActivo(boolean activo) {
 		this.activo = activo;
+	}
+
+	public float getAltura() {
+		return this.altura;
+	}
+
+	public void setAltura(float altura) {
+		this.altura = altura;
 	}
 
 	public String getPrimerApellido() {

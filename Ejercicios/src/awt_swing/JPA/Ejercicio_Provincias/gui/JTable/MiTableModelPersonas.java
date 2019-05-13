@@ -27,7 +27,7 @@ public class MiTableModelPersonas  extends MiTableModelAbstract {
 	 * @return
 	 */
 	public String[] getTitulosColumnas() {
-		return new String[] {"Id", "Nombre", "1er apellido", "2do apellido","Fecha Nacimiento","Edad", "Activo", "Provincia"};
+		return new String[] {"Id", "Nombre", "1er apellido", "2do apellido","Fecha Nacimiento","Edad", "Activo", "Provincia", "Altura"};
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class MiTableModelPersonas  extends MiTableModelAbstract {
 		// Obtengo todas las personas
 		List<Persona> personas = PersonaControlador.getControlador().findAllPersonas();
 		// Preparo una estructura para pasar al constructor de la JTable
-		Object[][] datos = new Object[personas.size()][8];
+		Object[][] datos = new Object[personas.size()][9];
 		// Cargo los datos de la lista de personas en la matriz de los datos
 		for (int i = 0; i < personas.size(); i++) {
 			Persona persona = personas.get(i);
@@ -50,6 +50,7 @@ public class MiTableModelPersonas  extends MiTableModelAbstract {
 			datos[i][5] = persona.getEdad();
 			datos[i][6] = persona.getActivo();
 			datos[i][7] = persona.getProvincia();
+			datos[i][8] = persona.getAltura();
 		}
 		
 		return datos;

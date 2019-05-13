@@ -1,6 +1,7 @@
 package awt_swing.JPA.Ejercicio_Provincias.gui.JTable;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,13 +23,14 @@ public class TablaEnScrollPane extends JPanel {
 	JTable jTable = new JTable(tableModel);
 	
 	public TablaEnScrollPane () {
-		// Construyo el tableModel y la tabla
-		
 		// Configuro la tabla para que utilice un renderizador particular en diferentes tipos de objetos
 		jTable.setDefaultRenderer(Object.class, new MiDefaultTableCellRenderer());
 		jTable.setDefaultRenderer(Integer.class, new MiDefaultTableCellRenderer());
+		jTable.setDefaultRenderer(Float.class, new MiDefaultTableCellRenderer());
 		jTable.setDefaultRenderer(Boolean.class, new MiBooleanTableCellRenderer());
+		
 		jTable.setDefaultEditor(Provincia.class, new MiProvinciaTableCellEditor());
+		
 		jTable.setRowSelectionInterval(0, 0);
 		MiTableHeaderCellRenderer tableHeaderCellRenderer = new MiTableHeaderCellRenderer();
 		for (int i = 0; i < jTable.getColumnCount(); i++) {
@@ -53,6 +55,7 @@ public class TablaEnScrollPane extends JPanel {
 		
 		//Creamos un JscrollPane y le agregamos la JTable
 		JScrollPane scrollPane = new JScrollPane(jTable);
+		scrollPane.setPreferredSize(new Dimension(700, 700));
 		//Agregamos el JScrollPane al contenedor
 		this.setLayout(new BorderLayout());
 //		this.add(getBarraHerramientas(), BorderLayout.NORTH);
@@ -64,16 +67,16 @@ public class TablaEnScrollPane extends JPanel {
 	// Crear los controladores y entidades JPA X
 	// Crear la BBDD con el fichero sql X
 	// Ventana de menú con 3 paneles 
-	// JPanelGestionEstudiantes (parecido), WindowBuilder
-	// GridBagLayout
-	// JList, JTable, JCombo, JSlider, JSpinner (int y float), JFotmated con Fecha
-	// JCheckbox, JRadioButton
+	// JPanelGestionEstudiantes (parecido) X, WindowBuilder
+	// GridBagLayout X
+	// JList, JTable X, JCombo X, JSlider, JSpinner (int y float) X, JFotmated con Fecha X
+	// JCheckbox X, JRadioButton X
 	// Consulta sql mas elaborada (tipo fin por prof, materia y estudiante)
 	
 	/**
-	 * @return the panelEstudiante
+	 * @return the panelPersonas
 	 */
-	public PanelGestionPersonas getPanelEstudiante() {
+	public PanelGestionPersonas getPanelPersonas() {
 		return panelPersona;
 	}
 
@@ -84,18 +87,18 @@ public class TablaEnScrollPane extends JPanel {
 		return tableModel;
 	}
 	
-	/**
-	 * 
-	 * @param estudiante
-	 */
-	public void actualizaFila(Persona persona) {
-		int idEstudianteSelec = persona.getId();
-	
-		for (int i = 0; i<jTable.getRowCount() ; i++) {
-			int idTabla = (int) tableModel.getValueAt(i, 0);
-			if(idEstudianteSelec == idTabla) {
-				jTable.setRowSelectionInterval(i, i);
-			}
-		}
-	}
+//	/**
+//	 * 
+//	 * @param estudiante
+//	 */
+//	public void actualizaFila(Persona persona) {
+//		int idEstudianteSelec = persona.getId();
+//	
+//		for (int i = 0; i<jTable.getRowCount() ; i++) {
+//			int idTabla = (int) tableModel.getValueAt(i, 0);
+//			if(idEstudianteSelec == idTabla) {
+//				jTable.setRowSelectionInterval(i, i);
+//			}
+//		}
+//	}
 }

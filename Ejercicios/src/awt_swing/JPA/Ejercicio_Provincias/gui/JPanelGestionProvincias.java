@@ -26,16 +26,23 @@ public class JPanelGestionProvincias extends JPanel {
 	 * @return
 	 */
 	public JPanelGestionProvincias () {
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+		
 		ButtonGroup grupoOpciones = new ButtonGroup();
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		for (int i = 0; i < provincias.size(); i++) {
 			Provincia provincia = provincias.get(i);
 			JRadioButton jrb = new JRadioButton (provincia.toString());
 			jrb.setSelected(true);
 			grupoOpciones.add(jrb);
-			this.add(jrb);
+			panel.add(jrb);
 		}
+		
+		JScrollPane scroll = new JScrollPane(panel);
+		scroll.setPreferredSize(dimension);
+		this.setLayout(new BorderLayout());
+		this.add(scroll,BorderLayout.CENTER );
 	}
+	
 }

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 import awt_swing.JPA.Ejercicio_Provincias.modelo.Provincia;
 import awt_swing.JPA.Ejercicio_Provincias.modelo.controladores.ProvinciaControlador;
@@ -29,9 +30,10 @@ public class JPanelDatosPersonales extends JPanel {
 	JFormattedTextField jftfFecha = null;
 	JSpinner jspEdad = new JSpinner();
 	JCheckBox jcheckActivo = new JCheckBox();
+	JSpinner jspAltura = new JSpinner();
 	JComboBox<Provincia> jcbProvincia = new JComboBox<>();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	private Dimension dimension = new Dimension(40, 20);
+	private Dimension dimension = new Dimension(45, 20);
 
 	/**
 	 * 
@@ -130,6 +132,17 @@ public class JPanelDatosPersonales extends JPanel {
 	    c.anchor = GridBagConstraints.WEST;
 	    this.add(jcheckActivo, c);
 	    
+	    c.gridx = 0;
+	    c.gridy = 8;
+	    c.anchor = GridBagConstraints.EAST;
+	    this.add(new JLabel("Altura: "), c);
+		
+		c.gridx = 1;
+	    c.anchor = GridBagConstraints.WEST;
+	    jspAltura.setModel(new SpinnerNumberModel(1,0,3,0.01f));
+	    jspAltura.setPreferredSize(dimension);
+	    this.add(jspAltura, c);
+	    
 	}
 	
 	/**
@@ -202,6 +215,23 @@ public class JPanelDatosPersonales extends JPanel {
 	 */
 	public void setEdad(int valor) {
 		this.jspEdad.setValue(valor);;
+	}
+	
+	/**
+	 * 
+	 */
+	public float getAltura() {
+		try {
+			jspAltura.commitEdit();
+		} catch ( java.text.ParseException e ) {}
+		return Float.parseFloat(""+jspAltura.getValue());
+	}
+
+	/**
+	 * 
+	 */
+	public void setAltura(float valor) {
+		this.jspAltura.setValue(valor);;
 	}
 	
 	/**

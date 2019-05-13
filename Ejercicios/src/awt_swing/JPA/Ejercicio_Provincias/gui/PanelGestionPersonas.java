@@ -130,6 +130,7 @@ public class PanelGestionPersonas extends JPanel {
 				panelDatosPersonales.setEdad(this.actual.getEdad());
 				panelDatosPersonales.setActivo(this.actual.getActivo());
 				panelDatosPersonales.setProvincia(this.actual.getProvincia());
+				panelDatosPersonales.setAltura(this.actual.getAltura());
 			}
 		}
 		
@@ -153,7 +154,7 @@ public class PanelGestionPersonas extends JPanel {
 			panelDatosPersonales.setEdad(0);
 			panelDatosPersonales.setActivo(false);
 			panelDatosPersonales.setProvincia(panelDatosPersonales.jcbProvincia.getItemAt(0));
-	
+			panelDatosPersonales.setAltura(0);
 		}
 		
 		/**
@@ -182,7 +183,8 @@ public class PanelGestionPersonas extends JPanel {
 			nuevoRegistro.setEdad(panelDatosPersonales.getEdad());
 			nuevoRegistro.setActivo(panelDatosPersonales.getActivo());
 			nuevoRegistro.setProvincia(panelDatosPersonales.getProvincia());
-
+			nuevoRegistro.setAltura(panelDatosPersonales.getAltura());
+			
 			PersonaControlador.getControlador().save(nuevoRegistro);
 			
 			panelDatosPersonales.setId("" + nuevoRegistro.getId());
