@@ -1,20 +1,48 @@
 package awt_swing.JPA.Ejercicio_curso.gui.JTableModel;
 
+import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 import awt_swing.JPA.Ejercicio_curso.gui.JTableModel.DatosTabla;
+import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
+import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 
-public class MiTableModel  extends AbstractTableModel {
+public abstract class MiTableModelAbstract  extends AbstractTableModel {
 	Object datos[][] = null;
 	String titulos[] = null;
 
 	/**
 	 * 
 	 */
-	public MiTableModel() {
+	public MiTableModelAbstract() {
 		// Datos a presentar en la tabla
-//		datos = DatosTabla.getDatosDeTabla();
-//		titulos = DatosTabla.getTitulosColumnas();
+		actualizaDatosEnTabla();
 	}
+	
+	
+	public void actualizaDatosEnTabla () {
+		datos = getDatosDeTabla();
+		titulos = getTitulosColumnas();
+		fireTableDataChanged();
+	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract String[] getTitulosColumnas();
+
+	/**
+	 * 
+	 * @return
+	 */
+	public abstract Object[][] getDatosDeTabla();
+	
+	
+	
+	
+	
 	
 	// Los tres siguientes m�todos son los m�nimos necesarios para representar la tabla
 	/**

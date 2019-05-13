@@ -6,22 +6,13 @@ import awt_swing.JPA.Ejercicio_curso.gui.JTableModel.TablaEnScrollPane;
 
 public class JSplitPaneTabla extends JSplitPane {
 
+	TablaEnScrollPane panelTabla = new TablaEnScrollPane();
 	
 	public JSplitPaneTabla() {
 		super();
 		this.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		this.setLeftComponent(getJTable());
-		this.setRightComponent(panelGestionEstudiantes);
-	}
-	
-	/**
-	 * s
-	 * @return
-	 */
-	private JScrollPane getJTable() {
-		TablaEnScrollPane panelTabla = new TablaEnScrollPane();
-		JScrollPane panelScroll = new JScrollPane(panelTabla);
-		return panelScroll;
+		this.setLeftComponent(panelTabla);
+		this.setRightComponent(panelTabla.getPanelEstudiante());
 	}
 
 	

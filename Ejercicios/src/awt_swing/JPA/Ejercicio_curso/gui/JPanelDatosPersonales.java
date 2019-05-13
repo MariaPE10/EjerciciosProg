@@ -212,7 +212,6 @@ public class JPanelDatosPersonales extends JPanel {
 	    		}
 			}
 		});
-	    
 	}
 
 	/**

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import awt_swing.JPA.Ejercicio_curso.gui.JTableModel.TablaEnScrollPane;
 import awt_swing.JPA.Ejercicio_curso.modelo.Estudiante;
 import awt_swing.JPA.Ejercicio_curso.modelo.controladores.EstudianteControlador;
 import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
@@ -17,6 +18,7 @@ import awt_swing.ejercicio3_BBDDRegistroCoches_JDBC.viejo.utils.CacheImagenes;
 
 public class PanelGestionEstudiantes extends JPanel {
 
+	TablaEnScrollPane tablaEnScrollPane = null;
 	
 	public static int LOAD_FIRST = 0;
 	public static int LOAD_PREV = 1;
@@ -34,8 +36,10 @@ public class PanelGestionEstudiantes extends JPanel {
 		/**
 		 * 
 		 */
-		public PanelGestionEstudiantes() {
+		public PanelGestionEstudiantes(TablaEnScrollPane tablaEnScrollPane ) {
 			super();
+			this.tablaEnScrollPane = tablaEnScrollPane;
+			
 			this.setLayout(new BorderLayout());
 			
 			this.add(getBarraHerramientas(), BorderLayout.NORTH);
@@ -103,6 +107,10 @@ public class PanelGestionEstudiantes extends JPanel {
 						actual = obtenido;
 						cargarDatosActual();
 					}
+					if (tablaEnScrollPane != null) {
+						tablaEnScrollPane.getTableModel().actualizaDatosEnTabla();
+						tablaEnScrollPane.actualizaFila(actual);
+					}
 				}});
 		}
 
@@ -110,7 +118,7 @@ public class PanelGestionEstudiantes extends JPanel {
 		/**
 		 * 
 		 */
-		private void cargarDatosActual () {
+		public void cargarDatosActual () {
 			if (this.actual != null) {
 				panelDatosPersonales.setId("" + this.actual.getId());
 				panelDatosPersonales.setNombre(this.actual.getNombre());
