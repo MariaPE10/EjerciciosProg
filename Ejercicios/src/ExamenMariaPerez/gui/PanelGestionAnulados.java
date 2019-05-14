@@ -81,9 +81,8 @@ public class PanelGestionAnulados extends JPanel {
 				public void stateChanged(ChangeEvent e) {
 					if (jrbActivas.isSelected()) {
 						modelo.setAnulada(true);
+						modelo.actualizaDatosEnTabla();
 						modelo.fireTableDataChanged();
-						scroll.revalidate();
-						scroll.repaint();
 					}
 				}
 			});
@@ -94,9 +93,8 @@ public class PanelGestionAnulados extends JPanel {
 				public void stateChanged(ChangeEvent e) {
 					if (jrbAnuladas.isSelected()) {
 						modelo.setAnulada(false);
+						modelo.actualizaDatosEnTabla();
 						modelo.fireTableDataChanged();
-						scroll.revalidate();
-						scroll.repaint();
 					}
 				}
 			});
