@@ -26,7 +26,8 @@ public class Menu extends JMenuBar {
        menuArchivo.add(getItem("Panel Personas", "Gestion de Personas", new PanelGestionPersonas(null)));
        menuArchivo.add(getItem("Panel Tabla", "Tabla Personas", new TablaEnScrollPane()));
        menuArchivo.add(getItem("Panel Provincias", "Gestion de Provincias", new JPanelGestionProvincias()));
-       
+       menuArchivo.add(getItem("Panel Provincias Check", "Gestion de Provincias", new JPanelGestionProvinciasCheckBox()));
+
         this.add(menuArchivo);        
         
 	}

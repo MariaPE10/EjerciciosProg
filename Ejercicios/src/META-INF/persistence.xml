@@ -37,4 +37,19 @@
             <property name="javax.persistence.jdbc.password" value="1234"/>
         </properties>
 	</persistence-unit>
+	<persistence-unit name="Examen_papeleria">
+		<class>ExamenMariaPerez.modelo.Cliente</class>
+		<class>ExamenMariaPerez.modelo.Distribuidor</class>
+		<class>ExamenMariaPerez.modelo.Lote</class>
+		<class>ExamenMariaPerez.modelo.Metodopago</class>
+		<class>ExamenMariaPerez.modelo.Provincia</class>
+		<class>ExamenMariaPerez.modelo.Tipoarticulo</class>
+		<class>ExamenMariaPerez.modelo.Venta</class>
+		<properties>
+           <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/papeleria"/>
+            <property name="javax.persistence.jdbc.user" value="java"/>
+            <property name="javax.persistence.jdbc.password" value="1234"/>
+        </properties>
+	</persistence-unit>
 </persistence>
