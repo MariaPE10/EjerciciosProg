@@ -5,7 +5,6 @@ import awt_swing.JPA.Ejercicio_curso.modelo.Profesor;
 import java.util.ArrayList;
 import java.util.List;
 
-import awt_swing.JPA.Ejercicio_curso.modelo.Curso;
 import awt_swing.JPA.Ejercicio_curso.modelo.Entidad;
 
 public class ProfesorControlador extends Controlador {
