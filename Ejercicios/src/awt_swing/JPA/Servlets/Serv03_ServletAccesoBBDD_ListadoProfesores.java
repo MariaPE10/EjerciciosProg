@@ -73,6 +73,7 @@ public class Serv03_ServletAccesoBBDD_ListadoProfesores extends HttpServlet {
 		// Al finalizar de exponer la lista de profesores termino la tabla y cierro el fichero HTML
 		response.getWriter().append("" + 
 		"</table>\r\n" + 
+		"<p/><input type=\"submit\"  name=\"nuevo\" value=\"Nuevo\"  onclick=\"window.location='Serv04_FichaProfesor?idProfesor=0'\"/>" + 
 		"</body>\r\n" + 
 		"</html>\r\n" + 
 		"");

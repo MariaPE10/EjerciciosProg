@@ -57,6 +57,19 @@ public class Controlador {
 		em.close();
 	}
 	
+	/**
+	 * 
+	 * @param e
+	 */
+	public void save(Entidad e) {
+		EntityManager em = getEntityManagerFactory().createEntityManager();
+		if (e.getId() != 0) {
+			merge(e);
+		}
+		else {
+			persist(e);
+		}
+	}
 	
 	/**
 	 * 
